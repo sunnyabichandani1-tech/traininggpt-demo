@@ -818,11 +818,18 @@ html,body{font-family:var(--font);background:var(--gray-100);color:var(--gray-90
 <div class="toast" id="toast"><span id="t-icon">✓</span> <span id="t-msg">Done</span></div>
 
 <script>
+// ── VAPI Configuration ───────────────────────
+const VAPI_API_KEY       = 'f02a541f-31db-4ec8-bbe1-3f6bee1afa73';
+const VAPI_PHONE_ID      = 'f01d8cfa-efd9-4c5f-87e5-836bd84cb187';
+const VAPI_CUSTOMER_AGENT = 'd5f7bbb8-7c0a-46cb-a922-5bf94d9101ef';
+const VAPI_COACH_AGENT   = 'fb3b7682-5602-454c-b3f6-1dfce9949fdd';
+
 // ── State ───────────────────────────────────
 let currentUser = { id: '', name: '', number: '' };
 let callTimerInterval = null;
 let callSecs = 0;
 let activeTask = null;
+let activeCallId = null;
 
 // ── LOGIN ────────────────────────────────────
 function doLogin(){
@@ -1001,33 +1008,81 @@ function closeCallModal(){
   clearInterval(callTimerInterval);
 }
 
-function confirmCall(){
+async function confirmCall(){
   if(!activeTask) return;
 
-  // Switch to calling state
+  // Switch to calling UI state
   document.getElementById('pre-call-state').style.display = 'none';
   const cs = document.getElementById('calling-state');
   cs.classList.add('show');
 
-  // Set initials
+  // Set avatar initials and name
   const initials = activeTask.customer.split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase();
   document.getElementById('call-avatar-initials').textContent = initials;
   document.getElementById('calling-name').textContent = activeTask.customer;
-  document.getElementById('calling-status').textContent = 'Calling your number first…';
+  document.getElementById('calling-status').textContent = 'Calling your number…';
   document.getElementById('call-timer-display').textContent = '00:00';
 
-  toast('📞', 'Calling your number — ' + (currentUser.number || '9810XXXXXX'));
+  // Format agent number — ensure +91 prefix
+  const rawNumber = currentUser.number.replace(/\D/g, '');
+  const agentNumber = rawNumber.startsWith('91')
+    ? '+' + rawNumber
+    : '+91' + rawNumber.slice(-10);
 
-  // Simulate: agent answers → customer dialled
-  setTimeout(()=>{
-    document.getElementById('calling-status').textContent = 'Connecting to customer…';
-  }, 2500);
+  toast('📞', 'Calling ' + agentNumber + ' — answer to connect to customer');
 
-  setTimeout(()=>{
-    document.getElementById('calling-status').textContent = 'Connected · AI customer active';
-    startCallTimer();
-    toast('✓', 'Call connected to ' + activeTask.customer);
-  }, 5000);
+  // ── Fire VAPI outbound call ──────────────────
+  try {
+    const resp = await fetch('https://api.vapi.ai/call', {
+      method: 'POST',
+      headers: {
+        'Authorization': 'Bearer ' + VAPI_API_KEY,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        assistantId: VAPI_CUSTOMER_AGENT,
+        phoneNumberId: VAPI_PHONE_ID,
+        customer: {
+          number: agentNumber,
+          name: currentUser.name
+        },
+        assistantOverrides: {
+          variableValues: {
+            customerName: activeTask.customer,
+            planInterest:  activeTask.plan,
+            agentName:     currentUser.name
+          }
+        }
+      })
+    });
+
+    const data = await resp.json();
+
+    if(data.id){
+      activeCallId = data.id;
+      document.getElementById('calling-status').textContent = 'Ringing your number — please answer';
+      toast('✓', 'VAPI call initiated · Answer your phone');
+
+      // After 8s assume connected
+      setTimeout(()=>{
+        document.getElementById('calling-status').textContent = 'Connected · AI customer active';
+        startCallTimer();
+        toast('📱', activeTask.customer + ' (AI) is now on the line');
+      }, 8000);
+
+    } else {
+      // VAPI returned error
+      const errMsg = data.message || data.error || 'Check VAPI config';
+      document.getElementById('calling-status').textContent = 'Error: ' + errMsg;
+      toast('⚠', 'VAPI error: ' + errMsg);
+      console.error('VAPI error response:', data);
+    }
+
+  } catch(e) {
+    document.getElementById('calling-status').textContent = 'Network error — check console';
+    toast('⚠', 'Call failed: ' + e.message);
+    console.error('VAPI fetch error:', e);
+  }
 }
 
 function startCallTimer(){
@@ -1041,10 +1096,107 @@ function startCallTimer(){
   }, 1000);
 }
 
-function endCall(){
+async function endCall(){
   clearInterval(callTimerInterval);
+
+  // ── End call on VAPI if active ───────────────
+  if(activeCallId){
+    try{
+      await fetch('https://api.vapi.ai/call/' + activeCallId, {
+        method: 'PATCH',
+        headers: {
+          'Authorization': 'Bearer ' + VAPI_API_KEY,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ status: 'ended' })
+      });
+    } catch(e){ console.warn('Could not end VAPI call:', e); }
+    activeCallId = null;
+  }
+
   closeCallModal();
-  toast('📊', 'Call ended · Scorecard evaluating…');
+  toast('📊', 'Call ended · Preparing your coaching session…');
+
+  // Show coach call prompt after 2 seconds
+  setTimeout(()=> showCoachPrompt(), 2000);
+}
+
+function showCoachPrompt(){
+  // Find the active task card and inject coach CTA below it
+  if(!activeTask) return;
+  const card = document.getElementById('card-' + activeTask.id);
+  if(!card) return;
+
+  // Remove existing coach prompt if any
+  const existing = document.getElementById('coach-prompt');
+  if(existing) existing.remove();
+
+  const div = document.createElement('div');
+  div.id = 'coach-prompt';
+  div.style.cssText = 'background:#EEF0FD;border:1.5px solid #5065EA;border-radius:14px;padding:16px;margin-bottom:12px;animation:cardIn 0.4s ease;';
+  div.innerHTML = \`
+    <div style="font-size:13px;font-weight:800;color:#2A3A9A;margin-bottom:4px;display:flex;align-items:center;gap:6px;">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 10v6M2 10l10-7 10 7M6 10v8a2 2 0 002 2h8a2 2 0 002-2v-8"/></svg>
+      TrainingGPT Coach is ready
+    </div>
+    <div style="font-size:12px;color:#3D52A0;margin-bottom:12px;line-height:1.5;">
+      Your call has been evaluated. Speak to your AI coach to review gaps and practise before your next lead.
+    </div>
+    <button onclick="callCoach()" style="width:100%;height:44px;background:#5065EA;color:white;border:none;border-radius:10px;font-size:13px;font-weight:700;font-family:inherit;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8a19.79 19.79 0 01-3.07-8.63A2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92v2z"/></svg>
+      Call Coach Now
+    </button>
+  \`;
+  card.after(div);
+  div.scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+
+async function callCoach(){
+  const rawNumber = currentUser.number.replace(/\D/g, '');
+  const agentNumber = rawNumber.startsWith('91')
+    ? '+' + rawNumber
+    : '+91' + rawNumber.slice(-10);
+
+  toast('🎓', 'Connecting you to TrainingGPT Coach…');
+
+  // Remove coach prompt
+  const prompt = document.getElementById('coach-prompt');
+  if(prompt) prompt.remove();
+
+  try{
+    const resp = await fetch('https://api.vapi.ai/call', {
+      method: 'POST',
+      headers: {
+        'Authorization': 'Bearer ' + VAPI_API_KEY,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        assistantId: VAPI_COACH_AGENT,
+        phoneNumberId: VAPI_PHONE_ID,
+        customer: {
+          number: agentNumber,
+          name: currentUser.name
+        },
+        assistantOverrides: {
+          variableValues: {
+            agentName:    currentUser.name,
+            customerName: activeTask ? activeTask.customer : 'the customer',
+            planInterest: activeTask ? activeTask.plan : ''
+          }
+        }
+      })
+    });
+
+    const data = await resp.json();
+    if(data.id){
+      toast('✓', 'Coach calling you now — answer your phone');
+    } else {
+      toast('⚠', 'Coach call error: ' + (data.message || 'Check VAPI config'));
+    }
+  } catch(e){
+    toast('⚠', 'Coach call failed: ' + e.message);
+    console.error('Coach VAPI error:', e);
+  }
 }
 
 // ── NAVIGATE ──────────────────────────────────

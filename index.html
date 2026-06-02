@@ -141,7 +141,7 @@ body{min-height:100vh;}
   font-size:15px;font-weight:600;color:var(--gray-700);
   display:flex;align-items:center;gap:6px;
 }
-.phone-prefix::after{content:'|';color:var(--gray-300);margin-left:4px;}
+.phone-prefix::after{content:'';}
 .phone-input{
   width:100%;height:52px;border:1.5px solid var(--border);border-radius:10px;
   padding:0 16px 0 60px;font-size:16px;font-family:var(--font);font-weight:600;
@@ -236,143 +236,6 @@ body{min-height:100vh;}
   cursor:pointer;
 }
 
-/* ─── XFE DASHBOARD ───────────────────── */
-#page-xfe{background:#F2F3F5;}
-.xfe-nav{
-  background:var(--gray-900);height:56px;padding:0 24px;
-  display:flex;align-items:center;justify-content:space-between;
-}
-.xfe-nav-left{display:flex;align-items:center;gap:10px;}
-.xfe-title{color:white;font-size:15px;font-weight:700;}
-.xfe-tag{background:var(--red);color:white;font-size:10px;font-weight:700;padding:2px 8px;border-radius:4px;letter-spacing:0.5px;}
-.xfe-agent{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,0.1);border-radius:20px;padding:5px 14px 5px 6px;}
-.xfe-av{width:30px;height:30px;background:var(--red);border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;font-size:11px;font-weight:700;}
-.xfe-agent-name{color:white;font-size:13px;}
-
-.xfe-content{flex:1;padding:20px 24px;max-width:900px;margin:0 auto;width:100%;}
-
-/* LEAD ALERT */
-.lead-alert{
-  background:white;border-radius:var(--radius-lg);overflow:hidden;
-  border:1px solid var(--border);margin-bottom:18px;
-  box-shadow:0 4px 20px rgba(228,0,43,0.12);
-  display:none;
-  animation:alertIn 0.5s cubic-bezier(0.16,1,0.3,1);
-}
-.lead-alert.show{display:block;}
-@keyframes alertIn{from{opacity:0;transform:translateY(-10px);}to{opacity:1;transform:none;}}
-.la-header{
-  background:var(--red);padding:14px 20px;
-  display:flex;align-items:center;justify-content:space-between;
-}
-.la-header-left{display:flex;align-items:center;gap:10px;color:white;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;}
-.pulse{width:10px;height:10px;border-radius:50%;background:white;position:relative;}
-.pulse::after{content:'';position:absolute;inset:-4px;border:2px solid rgba(255,255,255,0.5);border-radius:50%;animation:pulseRing 1.2s ease-out infinite;}
-@keyframes pulseRing{0%{transform:scale(1);opacity:1;}100%{transform:scale(2.2);opacity:0;}}
-.la-time{background:rgba(255,255,255,0.2);color:white;font-size:11px;padding:3px 10px;border-radius:20px;display:flex;align-items:center;gap:4px;}
-.la-body{padding:18px 20px;}
-.la-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:18px;}
-.la-field-label{font-size:11px;color:var(--gray-500);text-transform:uppercase;letter-spacing:0.4px;font-weight:600;margin-bottom:4px;}
-.la-field-val{font-size:15px;font-weight:700;color:var(--gray-900);}
-.la-field-val.red{color:var(--red);}
-.plan-pill{display:inline-block;background:var(--red-light);color:var(--red);font-size:12px;font-weight:700;padding:3px 10px;border-radius:6px;}
-.la-divider{height:1px;background:#F0F0F0;margin:0 0 18px;}
-.la-action{display:flex;align-items:center;justify-content:space-between;gap:16px;}
-.la-action-info{}
-.la-action-title{font-size:14px;font-weight:700;color:var(--gray-900);margin-bottom:3px;}
-.la-action-sub{font-size:13px;color:var(--gray-500);}
-.scenario-chip{
-  display:inline-flex;align-items:center;gap:5px;
-  background:#FFF8E1;color:#92400E;font-size:11px;font-weight:600;
-  padding:3px 9px;border-radius:5px;margin-top:6px;
-}
-
-/* CALL BUTTON */
-.call-btn{
-  background:var(--green);color:white;border:none;border-radius:12px;
-  height:54px;padding:0 28px;font-size:15px;font-weight:700;
-  font-family:var(--font);cursor:pointer;display:flex;align-items:center;gap:10px;
-  flex-shrink:0;transition:background 0.15s;
-}
-.call-btn:hover{background:#2E8B42;}
-.call-btn.ringing{background:#F59E0B;animation:ringPulse 0.7s ease-in-out infinite alternate;cursor:not-allowed;}
-.call-btn.live{background:var(--gray-700);cursor:not-allowed;}
-@keyframes ringPulse{from{background:#F59E0B;}to{background:#D97706;}}
-.call-btn-circle{width:32px;height:32px;background:rgba(255,255,255,0.2);border-radius:50%;display:flex;align-items:center;justify-content:center;}
-
-/* LIVE CALL PANEL */
-.call-panel{
-  background:white;border-radius:var(--radius-lg);border:1px solid var(--border);
-  padding:18px 20px;margin-bottom:18px;display:none;
-  animation:alertIn 0.3s ease;
-}
-.call-panel.show{display:block;}
-.cp-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;}
-.cp-live{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:700;color:var(--gray-900);}
-.live-dot{width:8px;height:8px;background:var(--green);border-radius:50%;animation:liveBlink 1s ease-in-out infinite;}
-@keyframes liveBlink{0%,100%{opacity:1;}50%{opacity:0.25;}}
-.cp-timer{font-size:24px;font-weight:300;color:var(--gray-700);letter-spacing:3px;font-variant-numeric:tabular-nums;}
-.cp-wave{display:flex;align-items:center;gap:3px;height:28px;margin-bottom:12px;}
-.wbar{width:3px;background:var(--red);border-radius:2px;animation:waveAnim 0.8s ease-in-out infinite;}
-.wbar:nth-child(2){animation-delay:0.1s;}
-.wbar:nth-child(3){animation-delay:0.2s;}
-.wbar:nth-child(4){animation-delay:0.15s;}
-.wbar:nth-child(5){animation-delay:0.05s;}
-.wbar:nth-child(6){animation-delay:0.25s;}
-.wbar:nth-child(7){animation-delay:0.1s;}
-.wbar:nth-child(8){animation-delay:0.2s;}
-.wbar:nth-child(9){animation-delay:0.3s;}
-.wbar:nth-child(10){animation-delay:0.05s;}
-@keyframes waveAnim{0%,100%{height:6px;}50%{height:26px;}}
-.cp-scenario{background:var(--gray-100);border-radius:8px;padding:10px 14px;font-size:13px;color:var(--gray-500);}
-.cp-scenario strong{color:var(--gray-700);}
-
-/* STATS ROW */
-.stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:18px;}
-.stat-card{background:white;border-radius:var(--radius);border:1px solid var(--border);padding:16px;}
-.stat-label{font-size:11px;color:var(--gray-500);text-transform:uppercase;letter-spacing:0.5px;font-weight:600;margin-bottom:6px;}
-.stat-num{font-size:28px;font-weight:700;color:var(--gray-900);line-height:1;margin-bottom:4px;}
-.stat-sub{font-size:12px;color:var(--gray-500);}
-.badge-up{background:var(--green-light);color:var(--green);font-size:11px;font-weight:700;padding:1px 6px;border-radius:4px;}
-.badge-down{background:#FEE2E2;color:#B91C1C;font-size:11px;font-weight:700;padding:1px 6px;border-radius:4px;}
-
-/* LEADS TABLE */
-.leads-card{background:white;border-radius:var(--radius-lg);border:1px solid var(--border);overflow:hidden;}
-.leads-card-header{padding:14px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;}
-.leads-card-title{font-size:14px;font-weight:700;color:var(--gray-900);}
-.leads-count-badge{background:var(--gray-100);color:var(--gray-700);font-size:12px;font-weight:600;padding:2px 9px;border-radius:6px;}
-table{width:100%;border-collapse:collapse;}
-th{font-size:11px;font-weight:700;color:var(--gray-500);text-transform:uppercase;letter-spacing:0.4px;padding:10px 16px;text-align:left;background:#FAFAFA;border-bottom:1px solid var(--border);}
-td{padding:12px 16px;font-size:13px;color:var(--gray-700);border-bottom:1px solid #F5F5F5;}
-tr:last-child td{border-bottom:none;}
-tr.new-row td{background:#FFF8F9;}
-.s-pill{display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:700;padding:3px 9px;border-radius:20px;}
-.s-new{background:var(--red-light);color:var(--red);}
-.s-called{background:var(--green-light);color:var(--green);}
-.s-pending{background:#FFF8E1;color:#92400E;}
-
-/* VAPI CONFIG */
-.vapi-panel{background:white;border-radius:var(--radius-lg);border:1px solid var(--border);padding:18px 20px;margin-bottom:18px;}
-.vapi-panel-title{font-size:12px;font-weight:700;color:var(--gray-500);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:14px;}
-.config-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
-.cfg-label{font-size:11px;color:var(--gray-500);font-weight:600;display:block;margin-bottom:4px;}
-.cfg-input{width:100%;height:36px;border:1.5px solid var(--border);border-radius:8px;padding:0 12px;font-size:13px;font-family:var(--font);color:var(--gray-900);outline:none;}
-.cfg-input:focus{border-color:var(--red);}
-.cfg-save{background:var(--gray-900);color:white;border:none;border-radius:8px;padding:8px 18px;font-size:12px;font-weight:700;font-family:var(--font);cursor:pointer;margin-top:12px;}
-
-/* TOAST */
-.toast{
-  position:fixed;bottom:24px;right:24px;
-  background:var(--gray-900);color:white;
-  padding:12px 18px;border-radius:10px;
-  font-size:13px;font-weight:600;
-  display:flex;align-items:center;gap:8px;
-  transform:translateY(80px);opacity:0;
-  transition:all 0.3s cubic-bezier(0.16,1,0.3,1);
-  z-index:9999;max-width:320px;
-  box-shadow:var(--shadow-lg);
-}
-.toast.show{transform:translateY(0);opacity:1;}
 </style>
 </head>
 <body>
@@ -617,7 +480,7 @@ tr.new-row td{background:#FFF8F9;}
           <div class="map-addr-sub">Sector 42, Faridabad</div>
         </div>
       </div>
-      <button class="proceed-btn" onclick="goToStep3()">Proceed To Select Plan</button>
+      <button class="proceed-btn" onclick="goToStep3()">Submit Request</button>
     </div>
   </div>
 </div>
@@ -654,258 +517,51 @@ tr.new-row td{background:#FFF8F9;}
           <div class="benefit-text">Priority Resolution</div>
         </div>
       </div>
-      <button class="go-home-btn" onclick="goToXFE()">Go To Home</button>
+      <p style="font-size:13px;color:var(--gray-500);text-align:center;padding:4px 0;">Our team will call you within 30 minutes.</p>
     </div>
   </div>
 </div>
 
 
-<!-- ══════════════════════════════════════
-     PAGE 2 — XFE AGENT DASHBOARD
-═══════════════════════════════════════ -->
-<div class="page" id="page-xfe">
-  <nav class="xfe-nav">
-    <div class="xfe-nav-left">
-      <span class="xfe-title">TrainingGPT</span>
-      <span class="xfe-tag">XFE LIVE</span>
-    </div>
-    <div class="xfe-agent">
-      <div class="xfe-av">RS</div>
-      <span class="xfe-agent-name">Rohan Sharma · Faridabad South</span>
-    </div>
-  </nav>
-
-  <div class="xfe-content">
-
-    <!-- VAPI CONFIG PANEL -->
-    <div class="vapi-panel">
-      <div class="vapi-panel-title">VAPI Configuration</div>
-      <div class="config-grid">
-        <div><label class="cfg-label">VAPI API Key</label><input class="cfg-input" type="password" id="cfg-key" placeholder="vapi_xxxxxxxxxxxx"/></div>
-        <div><label class="cfg-label">Assistant ID (AI Customer)</label><input class="cfg-input" type="text" id="cfg-asst" placeholder="asst_xxxxxxxxx"/></div>
-        <div><label class="cfg-label">Phone Number ID</label><input class="cfg-input" type="text" id="cfg-phone" placeholder="phone_xxxxxxxx"/></div>
-        <div><label class="cfg-label">Make.com Webhook (Lead Push)</label><input class="cfg-input" type="text" id="cfg-hook" value="https://hook.us2.make.com/qs5qbpdpel7bleks8zocao9ji6wb11zr" readonly/></div>
-        <div><label class="cfg-label">Google Sheet ID</label><input class="cfg-input" type="text" id="cfg-sheet-id" placeholder="1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgVE2upms"/></div>
-        <div><label class="cfg-label">Google Sheets API Key</label><input class="cfg-input" type="password" id="cfg-gapi-key" placeholder="AIzaSy_xxxxxxxxxxxx"/></div>
-      </div>
-      <div style="display:flex;align-items:center;gap:10px;margin-top:12px;">
-        <button class="cfg-save" onclick="saveVapi()">Save configuration</button>
-        <span style="font-size:11px;color:var(--gray-500);">Leads will push to Make.com webhook + Google Sheets on submission</span>
-      </div>
-    </div>
-
-    <!-- STATS -->
-    <div class="stats-row">
-      <div class="stat-card">
-        <div class="stat-label">Leads today</div>
-        <div class="stat-num" id="s-leads">4</div>
-        <div class="stat-sub"><span class="badge-up">↑ 2</span> vs yesterday</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-label">Calls made</div>
-        <div class="stat-num" id="s-calls">2</div>
-        <div class="stat-sub">2 pending callback</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-label">L2A this week</div>
-        <div class="stat-num">18%</div>
-        <div class="stat-sub"><span class="badge-down">↓ 16pt</span> vs team avg</div>
-      </div>
-    </div>
-
-    <!-- NEW LEAD ALERT -->
-    <div class="lead-alert" id="lead-alert">
-      <div class="la-header">
-        <div class="la-header-left"><div class="pulse"></div>New lead received</div>
-        <div class="la-time">
-          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
-          Just now
-        </div>
-      </div>
-      <div class="la-body">
-        <div class="la-grid">
-          <div>
-            <div class="la-field-label">Customer name</div>
-            <div class="la-field-val" id="lv-name">—</div>
-          </div>
-          <div>
-            <div class="la-field-label">Mobile</div>
-            <div class="la-field-val red" id="lv-phone">—</div>
-          </div>
-          <div>
-            <div class="la-field-label">Address</div>
-            <div class="la-field-val" id="lv-addr">RPS Green Valley, Sec 42</div>
-          </div>
-          <div>
-            <div class="la-field-label">Plan interest</div>
-            <div class="la-field-val"><span class="plan-pill" id="lv-plan">—</span></div>
-          </div>
-        </div>
-        <div class="la-divider"></div>
-        <div class="la-action">
-          <div class="la-action-info">
-            <div class="la-action-title">Ready to call this lead</div>
-            <div class="la-action-sub">AI customer agent (VAPI) will answer · Roleplay active</div>
-            <div class="scenario-chip" id="lv-scenario">
-              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
-              Scenario: Jio customer — price objection
-            </div>
-          </div>
-          <button class="call-btn" id="call-btn" onclick="startCall()">
-            <div class="call-btn-circle">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8 19.79 19.79 0 01.0 1.17 2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92v2z"/></svg>
-            </div>
-            Call lead now
-          </button>
-        </div>
-      </div>
-    </div>
-
-    <!-- LIVE CALL PANEL -->
-    <div class="call-panel" id="call-panel">
-      <div class="cp-top">
-        <div class="cp-live"><div class="live-dot"></div> Call in progress — AI customer connected</div>
-        <div class="cp-timer" id="cp-timer">00:00</div>
-      </div>
-      <div class="cp-wave">
-        <div class="wbar"></div><div class="wbar"></div><div class="wbar"></div>
-        <div class="wbar"></div><div class="wbar"></div><div class="wbar"></div>
-        <div class="wbar"></div><div class="wbar"></div><div class="wbar"></div>
-        <div class="wbar"></div>
-      </div>
-      <div class="cp-scenario">
-        Scenario active: <strong>"I'm happy with Jio, not interested."</strong> — Practice your pitch and objection handling. Call is being evaluated in real time.
-      </div>
-    </div>
-
-    <!-- TODAY'S LEADS TABLE -->
-    <div class="leads-card">
-      <div class="leads-card-header">
-        <div class="leads-card-title">Today's leads</div>
-        <div class="leads-count-badge" id="leads-count-badge">4 leads</div>
-      </div>
-      <table>
-        <thead>
-          <tr>
-            <th>Customer</th><th>Mobile</th><th>Plan</th><th>Address</th><th>Current provider</th><th>Status</th>
-          </tr>
-        </thead>
-        <tbody id="leads-tbody">
-          <tr><td>Anita Verma</td><td>98110XXXXX</td><td>₹1499 — 300 Mbps</td><td>Sector 15, Faridabad</td><td>Jio Fiber</td><td><span class="s-pill s-called">● Called</span></td></tr>
-          <tr><td>Sanjay Gupta</td><td>99100XXXXX</td><td>₹799 — 100 Mbps</td><td>NIT, Faridabad</td><td>ACT Fibernet</td><td><span class="s-pill s-called">● Called</span></td></tr>
-          <tr><td>Priya Malhotra</td><td>97110XXXXX</td><td>₹499 — 40 Mbps</td><td>Old Faridabad</td><td>BSNL</td><td><span class="s-pill s-pending">◌ Pending</span></td></tr>
-          <tr><td>Deepak Nair</td><td>96760XXXXX</td><td>₹3999 — 1 Gbps</td><td>Surajkund, Faridabad</td><td>Hathway</td><td><span class="s-pill s-pending">◌ Pending</span></td></tr>
-        </tbody>
-      </table>
-    </div>
-
-  </div>
-</div><!-- end page-xfe -->
-
 <div class="toast" id="toast"><span id="t-icon">✓</span><span id="t-msg">Done</span></div>
 
 <script>
-// ── Captured lead data ─────────────────────
 let leadData = {};
 let vapiCfg = {};
-let callSecs = 0, callInterval = null;
 
-// ── Modal helpers ──────────────────────────
 function openModal(id){ document.getElementById(id).classList.add('open'); }
 function closeModal(id){ document.getElementById(id).classList.remove('open'); }
 
-// ── Step 1: open from plan select ─────────
 function openStep1(){
   openModal('modal-step1');
-  document.getElementById('inp-phone').focus();
+  setTimeout(()=>document.getElementById('inp-phone').focus(), 100);
 }
 
-// ── Step 1: phone validation ───────────────
 function checkPhone(){
   const v = document.getElementById('inp-phone').value.replace(/\D/g,'');
   document.getElementById('step1-next').disabled = v.length < 10;
 }
 
-// ── Step 1: allow location (simulate) ─────
 function allowLocation(){
   toast('📍','Location detected: RPS Green Valley, Sector 42, Faridabad');
 }
 
-// ── Step 1 → Step 2 ────────────────────────
 function goToStep2(){
-  const phone = document.getElementById('inp-phone').value.trim() || '9XXXXXXXXX';
+  const phone = document.getElementById('inp-phone').value.trim();
   leadData.phone = phone;
   closeModal('modal-step1');
-  openModal('modal-step2');
-  // Auto fill map search
   document.getElementById('map-search-inp').value = 'RPS Green Valley, Sector 42';
+  openModal('modal-step2');
 }
 
-// ── Step 2 → Step 3 ────────────────────────
 function goToStep3(){
   leadData.address = 'RPS Green Valley, Sector 42, Faridabad';
+  leadData.plan = '₹799 — 100 Mbps';
   closeModal('modal-step2');
+  pushLeadData(leadData);
   openModal('modal-step3');
 }
 
-// ── Step 3: Go to XFE (submit lead) ───────
-function goToXFE(){
-  closeModal('modal-step3');
-
-  const lead = {
-    name: leadData.name || 'Rahul Sharma',
-    phone: leadData.phone || '9XXXXXXXXX',
-    address: leadData.address || 'RPS Green Valley, Sector 42, Faridabad',
-    plan: '₹799 — 100 Mbps',
-    currentProvider: 'Jio Fiber',
-    scenario: 'Jio customer — price objection',
-    city: 'Faridabad'
-  };
-  leadData = { ...leadData, ...lead };
-
-  // Push to Google Sheets + Make.com
-  pushLeadData(lead);
-
-  // Switch pages
-  document.getElementById('page-airtel').classList.remove('active');
-  document.getElementById('page-xfe').classList.add('active');
-
-  // Populate lead alert
-  document.getElementById('lv-name').textContent = lead.name;
-  document.getElementById('lv-phone').textContent = lead.phone;
-  document.getElementById('lv-plan').textContent = lead.plan;
-  document.getElementById('lv-scenario').innerHTML = `
-    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
-    Scenario: ${lead.scenario}`;
-  document.getElementById('lead-alert').classList.add('show');
-
-  // Update stats
-  const cur = parseInt(document.getElementById('s-leads').textContent);
-  document.getElementById('s-leads').textContent = cur + 1;
-  document.getElementById('leads-count-badge').textContent = (cur + 1) + ' leads';
-
-  // Add to table
-  const tbody = document.getElementById('leads-tbody');
-  const tr = document.createElement('tr');
-  tr.className = 'new-row';
-  tr.innerHTML = `<td><strong>${lead.name}</strong></td><td style="color:var(--red);font-weight:700">${lead.phone}</td><td>${lead.plan}</td><td>${lead.address}</td><td>${lead.currentProvider}</td><td><span class="s-pill s-new">● New</span></td>`;
-  tbody.insertBefore(tr, tbody.firstChild);
-
-  toast('🔔', `New lead from ${lead.name} assigned to you`);
-}
-
-// ── Save VAPI config ───────────────────────
-function saveVapi(){
-  vapiCfg.key = document.getElementById('cfg-key').value.trim();
-  vapiCfg.asst = document.getElementById('cfg-asst').value.trim();
-  vapiCfg.phone = document.getElementById('cfg-phone').value.trim();
-  vapiCfg.hook = document.getElementById('cfg-hook').value.trim();
-  vapiCfg.sheetId = document.getElementById('cfg-sheet-id').value.trim();
-  vapiCfg.gapiKey = document.getElementById('cfg-gapi-key').value.trim();
-  toast('✓','Configuration saved — lead push active');
-}
-
-// ── Push lead to Make.com + Google Sheets ──
 async function pushLeadData(lead){
   const WEBHOOK = 'https://hook.us2.make.com/qs5qbpdpel7bleks8zocao9ji6wb11zr';
   try{
@@ -926,83 +582,6 @@ async function pushLeadData(lead){
   }
 }
 
-// ── Start call ─────────────────────────────
-async function startCall(){
-  const btn = document.getElementById('call-btn');
-  btn.className = 'call-btn ringing';
-  btn.innerHTML = `<div class="call-btn-circle"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8 19.79 19.79 0 01.0 1.17 2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92v2z"/></svg></div>Connecting…`;
-  btn.disabled = true;
-  toast('📞','Connecting to VAPI AI customer agent…');
-
-  // Fire real VAPI call if configured
-  if(vapiCfg.key && vapiCfg.asst && vapiCfg.phone){
-    try{
-      const r = await fetch('https://api.vapi.ai/call',{
-        method:'POST',
-        headers:{'Authorization':'Bearer '+vapiCfg.key,'Content-Type':'application/json'},
-        body:JSON.stringify({
-          assistantId: vapiCfg.asst,
-          phoneNumberId: vapiCfg.phone,
-          customer:{
-            number: '+91'+document.getElementById('lv-phone').textContent.replace(/\D/g,''),
-            name: document.getElementById('lv-name').textContent
-          },
-          assistantOverrides:{
-            variableValues:{
-              customerName: document.getElementById('lv-name').textContent,
-              planInterest: '₹799 — 100 Mbps',
-              currentProvider: 'Jio Fiber'
-            }
-          }
-        })
-      });
-      const d = await r.json();
-      if(d.id) toast('✓','VAPI call created: '+d.id.slice(0,14)+'…');
-      else toast('⚠','VAPI: '+(d.message||'Check config'));
-    }catch(e){ toast('⚠','VAPI error: '+e.message); }
-  }
-
-  // Simulate connect after 2.5s
-  setTimeout(()=>{
-    btn.className = 'call-btn live';
-    btn.innerHTML = `<div class="call-btn-circle"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8 19.79 19.79 0 01.0 1.17 2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92v2z"/></svg></div>Live — tap to end`;
-    btn.disabled = false;
-    btn.onclick = endCall;
-    document.getElementById('call-panel').classList.add('show');
-    startTimer();
-
-    // Update lead row status
-    const newRow = document.querySelector('.new-row td:last-child');
-    if(newRow) newRow.innerHTML = '<span class="s-pill s-called">● Called</span>';
-    const cur = parseInt(document.getElementById('s-calls').textContent);
-    document.getElementById('s-calls').textContent = cur + 1;
-    toast('📱','AI customer connected — roleplay active. TrainingGPT is evaluating your call.');
-  }, 2500);
-}
-
-// ── End call ───────────────────────────────
-function endCall(){
-  clearInterval(callInterval);
-  const btn = document.getElementById('call-btn');
-  btn.className = 'call-btn';
-  btn.innerHTML = `<div class="call-btn-circle"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8 19.79 19.79 0 01.0 1.17 2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92v2z"/></svg></div>Call ended`;
-  btn.disabled = true;
-  document.getElementById('call-panel').classList.remove('show');
-  toast('📊','Call ended. Evaluating transcript… Scorecard will appear shortly.');
-}
-
-// ── Timer ──────────────────────────────────
-function startTimer(){
-  callSecs = 0;
-  callInterval = setInterval(()=>{
-    callSecs++;
-    const m = String(Math.floor(callSecs/60)).padStart(2,'0');
-    const s = String(callSecs%60).padStart(2,'0');
-    document.getElementById('cp-timer').textContent = m+':'+s;
-  }, 1000);
-}
-
-// ── Toast ──────────────────────────────────
 function toast(icon, msg){
   const t = document.getElementById('toast');
   document.getElementById('t-icon').textContent = icon;

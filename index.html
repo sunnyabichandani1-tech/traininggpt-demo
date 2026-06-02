@@ -679,12 +679,12 @@ tr.new-row td{background:#FFF8F9;}
 
     <!-- VAPI CONFIG PANEL -->
     <div class="vapi-panel">
-      <div class="vapi-panel-title">VAPI + Google Sheets Configuration</div>
+      <div class="vapi-panel-title">VAPI Configuration</div>
       <div class="config-grid">
         <div><label class="cfg-label">VAPI API Key</label><input class="cfg-input" type="password" id="cfg-key" placeholder="vapi_xxxxxxxxxxxx"/></div>
         <div><label class="cfg-label">Assistant ID (AI Customer)</label><input class="cfg-input" type="text" id="cfg-asst" placeholder="asst_xxxxxxxxx"/></div>
         <div><label class="cfg-label">Phone Number ID</label><input class="cfg-input" type="text" id="cfg-phone" placeholder="phone_xxxxxxxx"/></div>
-        <div><label class="cfg-label">Make.com Webhook (Lead Push)</label><input class="cfg-input" type="text" id="cfg-hook" placeholder="placeholder="https://hook.us2.make.com/qs5qbpdpel7bleks8zocao9ji6wb11zr"/></div>
+        <div><label class="cfg-label">Make.com Webhook (Lead Push)</label><input class="cfg-input" type="text" id="cfg-hook" value="https://hook.us2.make.com/qs5qbpdpel7bleks8zocao9ji6wb11zr" readonly/></div>
         <div><label class="cfg-label">Google Sheet ID</label><input class="cfg-input" type="text" id="cfg-sheet-id" placeholder="1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgVE2upms"/></div>
         <div><label class="cfg-label">Google Sheets API Key</label><input class="cfg-input" type="password" id="cfg-gapi-key" placeholder="AIzaSy_xxxxxxxxxxxx"/></div>
       </div>
@@ -907,51 +907,23 @@ function saveVapi(){
 
 // ── Push lead to Make.com + Google Sheets ──
 async function pushLeadData(lead){
-  const results = [];
-
-  // 1. Make.com webhook
-  if(vapiCfg.hook){
-    try{
-      await fetch(vapiCfg.hook, {
-        method:'POST',
-        headers:{'Content-Type':'application/json'},
-        body: JSON.stringify({
-          event: 'lead_submitted',
-          timestamp: new Date().toISOString(),
-          lead
-        })
-      });
-      results.push('Make.com ✓');
-    }catch(e){ results.push('Make.com ✗ ('+e.message+')'); }
+  const WEBHOOK = 'https://hook.us2.make.com/qs5qbpdpel7bleks8zocao9ji6wb11zr';
+  try{
+    const resp = await fetch(WEBHOOK, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        timestamp: new Date().toLocaleString('en-IN'),
+        phone:     lead.phone,
+        address:   lead.address,
+        plan:      lead.plan
+      })
+    });
+    if(resp.ok) toast('📊', 'Lead saved to Google Sheet ✓');
+    else toast('⚠', 'Webhook error: ' + resp.status);
+  } catch(e){
+    toast('⚠', 'Sheet push failed: ' + e.message);
   }
-
-  // 2. Google Sheets API — append row
-  if(vapiCfg.sheetId && vapiCfg.gapiKey){
-    try{
-      const range = 'Leads!A:H';
-      const url = `https://sheets.googleapis.com/v4/spreadsheets/${vapiCfg.sheetId}/values/${range}:append?valueInputOption=USER_ENTERED&key=${vapiCfg.gapiKey}`;
-      const row = [
-        new Date().toLocaleString('en-IN'),
-        lead.name,
-        lead.phone,
-        lead.address,
-        lead.plan,
-        lead.currentProvider,
-        lead.scenario,
-        'New'
-      ];
-      const resp = await fetch(url, {
-        method:'POST',
-        headers:{'Content-Type':'application/json'},
-        body: JSON.stringify({ values:[row] })
-      });
-      const d = await resp.json();
-      if(d.updates) results.push('Google Sheets ✓ (row '+ d.updates.updatedRange +')');
-      else results.push('Sheets ✗: '+(d.error?.message||'Check Sheet ID & API Key'));
-    }catch(e){ results.push('Sheets ✗ ('+e.message+')'); }
-  }
-
-  if(results.length) toast('📊', results.join(' · '));
 }
 
 // ── Start call ─────────────────────────────

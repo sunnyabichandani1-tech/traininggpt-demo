@@ -144,7 +144,7 @@ body{min-height:100vh;}
 .phone-prefix::after{content:'';}
 .phone-input{
   width:100%;height:52px;border:1.5px solid var(--border);border-radius:10px;
-  padding:0 16px 0 60px;font-size:16px;font-family:var(--font);font-weight:600;
+  padding:0 16px 0 76px;font-size:16px;font-family:var(--font);font-weight:600;
   color:var(--gray-900);outline:none;transition:border-color 0.15s;
 }
 .phone-input:focus{border-color:var(--blue);}
@@ -380,6 +380,9 @@ body{min-height:100vh;}
       <p>Unlock the best <a href="#">plans &amp; offers</a> in your area</p>
     </div>
     <div class="step-body">
+      <label class="field-label">Full name</label>
+      <input class="phone-input" type="text" id="inp-name" placeholder="Enter your full name" autofocus oninput="checkPhone()" style="padding:0 16px; margin-bottom:18px;"/>
+
       <label class="field-label">Mobile Number</label>
       <div class="phone-input-wrap">
         <div class="phone-prefix">
@@ -495,7 +498,7 @@ body{min-height:100vh;}
       <div class="success-check">
         <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
       </div>
-      <div class="success-title">Thank you for choosing Airtel</div>
+      <div class="success-title" id="success-title">Thank you for choosing Airtel</div>
       <div class="success-sub">Our representative will call you shortly. Once installed, your savings will start reflecting from next bill onwards.</div>
       <div class="view-more">View More
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
@@ -534,12 +537,13 @@ function closeModal(id){ document.getElementById(id).classList.remove('open'); }
 
 function openStep1(){
   openModal('modal-step1');
-  setTimeout(()=>document.getElementById('inp-phone').focus(), 100);
+  setTimeout(()=>document.getElementById('inp-name').focus(), 100);
 }
 
 function checkPhone(){
-  const v = document.getElementById('inp-phone').value.replace(/\D/g,'');
-  document.getElementById('step1-next').disabled = v.length < 10;
+  const name  = document.getElementById('inp-name').value.trim();
+  const phone = document.getElementById('inp-phone').value.replace(/\D/g,'');
+  document.getElementById('step1-next').disabled = (name.length < 2 || phone.length < 10);
 }
 
 function allowLocation(){
@@ -547,7 +551,9 @@ function allowLocation(){
 }
 
 function goToStep2(){
+  const name  = document.getElementById('inp-name').value.trim();
   const phone = document.getElementById('inp-phone').value.trim();
+  leadData.name  = name;
   leadData.phone = phone;
   closeModal('modal-step1');
   document.getElementById('map-search-inp').value = 'RPS Green Valley, Sector 42';
@@ -559,6 +565,9 @@ function goToStep3(){
   leadData.plan = '₹799 — 100 Mbps';
   closeModal('modal-step2');
   pushLeadData(leadData);
+  // Personalise success screen with name
+  const first = (leadData.name || '').split(' ')[0];
+  if(first) document.getElementById('success-title').textContent = 'Thank you, ' + first + '!';
   openModal('modal-step3');
 }
 
@@ -570,6 +579,7 @@ async function pushLeadData(lead){
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         timestamp: new Date().toLocaleString('en-IN'),
+        name:      lead.name,
         phone:     lead.phone,
         address:   lead.address,
         plan:      lead.plan

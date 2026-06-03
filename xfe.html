@@ -595,8 +595,12 @@ html,body{font-family:var(--font);background:var(--gray-100);color:var(--gray-90
       <div class="login-error" id="login-error">Incorrect password. Please try again.</div>
 
       <div class="field-group">
-        <label class="field-label">User ID <sup>*</sup></label>
-        <input class="field-input" type="text" id="login-userid" placeholder="Your mobile number or OLM ID" autofocus/>
+        <label class="field-label">Full Name <sup>*</sup></label>
+        <input class="field-input" type="text" id="login-name" placeholder="Enter your full name" autofocus/>
+      </div>
+      <div class="field-group">
+        <label class="field-label">Mobile Number <sup>*</sup></label>
+        <input class="field-input" type="tel" id="login-userid" placeholder="10-digit mobile number" maxlength="10"/>
       </div>
       <div class="field-group">
         <label class="field-label">Password <sup>*</sup></label>
@@ -836,8 +840,11 @@ function doLogin(){
   const uid = document.getElementById('login-userid').value.trim();
   const pwd = document.getElementById('login-password').value.trim();
   const err = document.getElementById('login-error');
+  const digitsOnly = uid.replace(/\D/g, '');
+  const agentName = document.getElementById('login-name').value.trim();
 
-  if(!uid){ toast('⚠','Please enter your User ID'); return; }
+  if(!agentName){ toast('⚠','Please enter your name'); return; }
+  if(digitsOnly.length < 10){ toast('⚠','Please enter a valid 10-digit mobile number'); return; }
   if(pwd.toLowerCase() !== 'airtel'){
     err.style.display = 'block';
     setTimeout(()=> err.style.display = 'none', 3000);
@@ -845,22 +852,19 @@ function doLogin(){
   }
   err.style.display = 'none';
 
-  // Parse name from user ID or use default
-  const nameMap = {
-    'rohan': 'Rohan Sharma',
-    'sunny': 'Sunny Abichandani',
-    'rahul': 'Rahul Verma',
-    'amit':  'Amit Singh',
-    'priya': 'Priya Nair',
-  };
-  const key = uid.toLowerCase().split(/[\s@0-9]/)[0];
-  currentUser.name   = nameMap[key] || 'XFE Agent';
+  // Extract number
+  const isMobileLogin = digitsOnly.length >= 10;
+
   currentUser.id     = uid;
-  currentUser.number = uid.replace(/\D/g,'').slice(-10) || '9810XXXXXX';
+  currentUser.number = digitsOnly.slice(-10);
+
+  // Get name from name field
+  const nameField = document.getElementById('login-name').value.trim();
+  currentUser.name = nameField || 'XFE Agent';
 
   document.getElementById('welcome-name').textContent = currentUser.name + ',';
   showPage('page-dashboard');
-  toast('👋', 'Welcome back, ' + currentUser.name.split(' ')[0] + '!');
+  toast('👋', 'Welcome! Logged in as ' + currentUser.number);
 }
 
 function togglePwd(){

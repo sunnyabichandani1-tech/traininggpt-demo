@@ -822,9 +822,8 @@ html,body{font-family:var(--font);background:var(--gray-100);color:var(--gray-90
 <div class="toast" id="toast"><span id="t-icon">✓</span> <span id="t-msg">Done</span></div>
 
 <script>
-// ── VAPI Configuration ───────────────────────
-const VAPI_API_KEY       = 'f02a541f-31db-4ec8-bbe1-3f6bee1afa73';
-const VAPI_PHONE_ID      = 'f01d8cfa-efd9-4c5f-87e5-836bd84cb187';
+// ── Configuration ────────────────────────────
+const MAKE_VAPI_WEBHOOK  = 'https://hook.us2.make.com/yothya289tp28u5unatyrqp1kiqn6u3v';
 const VAPI_CUSTOMER_AGENT = 'd5f7bbb8-7c0a-46cb-a922-5bf94d9101ef';
 const VAPI_COACH_AGENT   = 'fb3b7682-5602-454c-b3f6-1dfce9949fdd';
 
@@ -1035,37 +1034,24 @@ async function confirmCall(){
 
   toast('📞', 'Calling ' + agentNumber + ' — answer to connect to customer');
 
-  // ── Fire VAPI outbound call ──────────────────
+  // ── Fire call via Make.com → VAPI ────────────
   try {
-    const resp = await fetch('https://api.vapi.ai/call', {
+    const resp = await fetch(MAKE_VAPI_WEBHOOK, {
       method: 'POST',
-      headers: {
-        'Authorization': 'Bearer ' + VAPI_API_KEY,
-        'Content-Type': 'application/json'
-      },
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        assistantId: VAPI_CUSTOMER_AGENT,
-        phoneNumberId: VAPI_PHONE_ID,
-        customer: {
-          number: agentNumber,
-          name: currentUser.name
-        },
-        assistantOverrides: {
-          variableValues: {
-            customerName: activeTask.customer,
-            planInterest:  activeTask.plan,
-            agentName:     currentUser.name
-          }
-        }
+        assistantId:  VAPI_CUSTOMER_AGENT,
+        agentNumber:  agentNumber,
+        agentName:    currentUser.name,
+        customerName: activeTask.customer,
+        planInterest: activeTask.plan
       })
     });
 
-    const data = await resp.json();
-
-    if(data.id){
-      activeCallId = data.id;
+    if(resp.ok){
+      activeCallId = 'via-make';
       document.getElementById('calling-status').textContent = 'Ringing your number — please answer';
-      toast('✓', 'VAPI call initiated · Answer your phone');
+      toast('✓', 'Call triggered · Answer your phone now');
 
       // After 8s assume connected
       setTimeout(()=>{
@@ -1075,17 +1061,14 @@ async function confirmCall(){
       }, 8000);
 
     } else {
-      // VAPI returned error
-      const errMsg = data.message || data.error || 'Check VAPI config';
-      document.getElementById('calling-status').textContent = 'Error: ' + errMsg;
-      toast('⚠', 'VAPI error: ' + errMsg);
-      console.error('VAPI error response:', data);
+      document.getElementById('calling-status').textContent = 'Webhook error — try again';
+      toast('⚠', 'Make.com error: ' + resp.status);
     }
 
   } catch(e) {
-    document.getElementById('calling-status').textContent = 'Network error — check console';
+    document.getElementById('calling-status').textContent = 'Network error — check connection';
     toast('⚠', 'Call failed: ' + e.message);
-    console.error('VAPI fetch error:', e);
+    console.error('Call error:', e);
   }
 }
 
@@ -1103,20 +1086,8 @@ function startCallTimer(){
 async function endCall(){
   clearInterval(callTimerInterval);
 
-  // ── End call on VAPI if active ───────────────
-  if(activeCallId){
-    try{
-      await fetch('https://api.vapi.ai/call/' + activeCallId, {
-        method: 'PATCH',
-        headers: {
-          'Authorization': 'Bearer ' + VAPI_API_KEY,
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ status: 'ended' })
-      });
-    } catch(e){ console.warn('Could not end VAPI call:', e); }
-    activeCallId = null;
-  }
+  // Reset call state
+  activeCallId = null;
 
   closeCallModal();
   toast('📊', 'Call ended · Preparing your coaching session…');
@@ -1168,38 +1139,26 @@ async function callCoach(){
   if(prompt) prompt.remove();
 
   try{
-    const resp = await fetch('https://api.vapi.ai/call', {
+    const resp = await fetch(MAKE_VAPI_WEBHOOK, {
       method: 'POST',
-      headers: {
-        'Authorization': 'Bearer ' + VAPI_API_KEY,
-        'Content-Type': 'application/json'
-      },
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        assistantId: VAPI_COACH_AGENT,
-        phoneNumberId: VAPI_PHONE_ID,
-        customer: {
-          number: agentNumber,
-          name: currentUser.name
-        },
-        assistantOverrides: {
-          variableValues: {
-            agentName:    currentUser.name,
-            customerName: activeTask ? activeTask.customer : 'the customer',
-            planInterest: activeTask ? activeTask.plan : ''
-          }
-        }
+        assistantId:  VAPI_COACH_AGENT,
+        agentNumber:  agentNumber,
+        agentName:    currentUser.name,
+        customerName: activeTask ? activeTask.customer : 'the customer',
+        planInterest: activeTask ? activeTask.plan : ''
       })
     });
 
-    const data = await resp.json();
-    if(data.id){
+    if(resp.ok){
       toast('✓', 'Coach calling you now — answer your phone');
     } else {
-      toast('⚠', 'Coach call error: ' + (data.message || 'Check VAPI config'));
+      toast('⚠', 'Coach webhook error: ' + resp.status);
     }
   } catch(e){
     toast('⚠', 'Coach call failed: ' + e.message);
-    console.error('Coach VAPI error:', e);
+    console.error('Coach call error:', e);
   }
 }
 

@@ -595,12 +595,8 @@ html,body{font-family:var(--font);background:var(--gray-100);color:var(--gray-90
       <div class="login-error" id="login-error">Incorrect password. Please try again.</div>
 
       <div class="field-group">
-        <label class="field-label">Full Name <sup>*</sup></label>
-        <input class="field-input" type="text" id="login-name" placeholder="Enter your full name" autofocus/>
-      </div>
-      <div class="field-group">
         <label class="field-label">Mobile Number <sup>*</sup></label>
-        <input class="field-input" type="tel" id="login-userid" placeholder="10-digit mobile number" maxlength="10"/>
+        <input class="field-input" type="tel" id="login-userid" placeholder="10-digit mobile number" maxlength="10" autofocus/>
       </div>
       <div class="field-group">
         <label class="field-label">Password <sup>*</sup></label>
@@ -622,6 +618,11 @@ html,body{font-family:var(--font);background:var(--gray-100);color:var(--gray-90
 
       <button class="sso-btn">Login with SSO</button>
       <button class="sso-btn">Login with SSO-OAM</button>
+      <div style="text-align:center;margin-top:16px;padding-top:14px;border-top:1px solid var(--border);">
+        <span style="font-size:11px;color:var(--gray-300);font-weight:600;">
+          v1.5 &nbsp;·&nbsp; Built 03 Jun 2026, 06:08 AM IST
+        </span>
+      </div>
     </div>
   </div>
 </div>
@@ -840,26 +841,14 @@ function doLogin(){
   const pwd = document.getElementById('login-password').value.trim();
   const err = document.getElementById('login-error');
   const digitsOnly = uid.replace(/\D/g, '');
-  const agentName = document.getElementById('login-name').value.trim();
 
-  if(!agentName){ toast('⚠','Please enter your name'); return; }
   if(digitsOnly.length < 10){ toast('⚠','Please enter a valid 10-digit mobile number'); return; }
-  if(pwd.toLowerCase() !== 'airtel'){
-    err.style.display = 'block';
-    setTimeout(()=> err.style.display = 'none', 3000);
-    return;
-  }
   err.style.display = 'none';
 
   // Extract number
-  const isMobileLogin = digitsOnly.length >= 10;
-
   currentUser.id     = uid;
   currentUser.number = digitsOnly.slice(-10);
-
-  // Get name from name field
-  const nameField = document.getElementById('login-name').value.trim();
-  currentUser.name = nameField || 'XFE Agent';
+  currentUser.name   = 'XFE Agent';
 
   document.getElementById('welcome-name').textContent = currentUser.name + ',';
   showPage('page-dashboard');
@@ -1097,34 +1086,37 @@ async function endCall(){
 }
 
 function showCoachPrompt(){
-  // Find the active task card and inject coach CTA below it
   if(!activeTask) return;
   const card = document.getElementById('card-' + activeTask.id);
   if(!card) return;
 
-  // Remove existing coach prompt if any
   const existing = document.getElementById('coach-prompt');
   if(existing) existing.remove();
 
   const div = document.createElement('div');
   div.id = 'coach-prompt';
   div.style.cssText = 'background:#EEF0FD;border:1.5px solid #5065EA;border-radius:14px;padding:16px;margin-bottom:12px;animation:cardIn 0.4s ease;';
-  div.innerHTML = \`
-    <div style="font-size:13px;font-weight:800;color:#2A3A9A;margin-bottom:4px;display:flex;align-items:center;gap:6px;">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 10v6M2 10l10-7 10 7M6 10v8a2 2 0 002 2h8a2 2 0 002-2v-8"/></svg>
-      TrainingGPT Coach is ready
-    </div>
-    <div style="font-size:12px;color:#3D52A0;margin-bottom:12px;line-height:1.5;">
-      Your call has been evaluated. Speak to your AI coach to review gaps and practise before your next lead.
-    </div>
-    <button onclick="callCoach()" style="width:100%;height:44px;background:#5065EA;color:white;border:none;border-radius:10px;font-size:13px;font-weight:700;font-family:inherit;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8a19.79 19.79 0 01-3.07-8.63A2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92v2z"/></svg>
-      Call Coach Now
-    </button>
-  \`;
+
+  const title = document.createElement('div');
+  title.style.cssText = 'font-size:13px;font-weight:800;color:#2A3A9A;margin-bottom:4px;';
+  title.textContent = 'TrainingGPT Coach is ready';
+
+  const desc = document.createElement('div');
+  desc.style.cssText = 'font-size:12px;color:#3D52A0;margin-bottom:12px;line-height:1.5;';
+  desc.textContent = 'Your call has been evaluated. Speak to your AI coach to review gaps and practise before your next lead.';
+
+  const btn = document.createElement('button');
+  btn.style.cssText = 'width:100%;height:44px;background:#5065EA;color:white;border:none;border-radius:10px;font-size:13px;font-weight:700;font-family:inherit;cursor:pointer;';
+  btn.textContent = 'Call Coach Now';
+  btn.onclick = callCoach;
+
+  div.appendChild(title);
+  div.appendChild(desc);
+  div.appendChild(btn);
   card.after(div);
   div.scrollIntoView({ behavior: 'smooth', block: 'center' });
 }
+
 
 async function callCoach(){
   const rawNumber = currentUser.number.replace(/\D/g, '');

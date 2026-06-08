@@ -3,49 +3,302 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TrainingGPT — Trainer Dashboard</title>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<title>TrainerGPT — Airtel Work</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root {
   --red: #E4002B;
-  --red-dark: #B8001F;
-  --red-soft: #FEF0F2;
-  --navy: #0A0F2E;
-  --navy-2: #111640;
-  --navy-3: #1A1F4A;
+  --red-dark: #C2001F;
+  --red-soft: #FFF0F2;
+  --navy: #2C3E6B;
+  --navy-light: #3D4F7C;
+  --sidebar-bg: #2C3E6B;
+  --sidebar-hover: #3D4F7C;
+  --sidebar-active: #1E2E55;
   --white: #FFFFFF;
-  --gray-50: #F8F9FC;
-  --gray-100: #F0F2F8;
-  --gray-200: #E2E6F0;
-  --gray-400: #9BA3BF;
-  --gray-600: #5A6280;
-  --gray-900: #0D1117;
-  --green: #00C48C;
+  --gray-50: #F5F6F8;
+  --gray-100: #ECEEF2;
+  --gray-200: #DDE0E8;
+  --gray-300: #C8CCDA;
+  --gray-400: #9BA3BE;
+  --gray-600: #6B7594;
+  --gray-900: #1A2035;
+  --green: #00A870;
   --amber: #F59E0B;
-  --blue: #3B6FEA;
-  --font-display: 'Syne', sans-serif;
-  --font-body: 'DM Sans', sans-serif;
-  --shadow-sm: 0 1px 3px rgba(10,15,46,0.08);
-  --shadow-md: 0 4px 16px rgba(10,15,46,0.12);
-  --shadow-lg: 0 12px 40px rgba(10,15,46,0.18);
-  --radius: 14px;
-  --radius-sm: 8px;
+  --blue: #1565C0;
+  --font: 'Inter', sans-serif;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
+  --shadow-md: 0 4px 12px rgba(0,0,0,0.1);
+  --radius: 8px;
+  --radius-sm: 6px;
 }
 
 * { margin:0; padding:0; box-sizing:border-box; }
 
 body {
-  font-family: var(--font-body);
+  font-family: var(--font);
   background: var(--gray-50);
-  color: var(--navy);
+  color: var(--gray-900);
   min-height: 100vh;
-  display: flex;
 }
 
-/* ── SIDEBAR ─────────────────────────── */
+/* ─── LOGIN PAGE ─────────────────────── */
+.login-page {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #EEF2FF 0%, #E8EDF8 50%, #EEF2FF 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.login-card {
+  background: white;
+  border-radius: 16px;
+  width: 900px;
+  max-width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(44,62,107,0.15);
+}
+
+.login-left {
+  background: linear-gradient(160deg, #EEF2FF 0%, #DDE3F5 100%);
+  padding: 48px 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.login-illustration {
+  width: 260px;
+  height: 200px;
+  margin-bottom: 24px;
+  position: relative;
+}
+
+.illus-phone {
+  width: 120px;
+  height: 200px;
+  background: linear-gradient(145deg, #fff, #f0f0f0);
+  border-radius: 16px;
+  position: absolute;
+  left: 50%;
+  top: 0;
+  transform: translateX(-50%);
+  box-shadow: 0 8px 24px rgba(44,62,107,0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.illus-phone::before {
+  content: '';
+  width: 80px;
+  height: 120px;
+  background: linear-gradient(135deg, #EEF2FF, #DDE3F5);
+  border-radius: 8px;
+  display: block;
+}
+
+.illus-card {
+  position: absolute;
+  background: white;
+  border-radius: 8px;
+  padding: 8px 10px;
+  box-shadow: 0 4px 12px rgba(44,62,107,0.15);
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--navy);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.illus-card.top-left { top: 20px; left: 0; }
+.illus-card.top-right { top: 10px; right: 0; }
+.illus-card.bottom { bottom: 10px; right: 10px; }
+
+.illus-bar {
+  width: 80px;
+  height: 60px;
+  position: absolute;
+  bottom: 0;
+  left: 10px;
+  display: flex;
+  align-items: flex-end;
+  gap: 6px;
+}
+
+.bar {
+  flex: 1;
+  background: linear-gradient(to top, var(--red), #FF6B8A);
+  border-radius: 3px 3px 0 0;
+  opacity: 0.7;
+}
+
+.login-tagline {
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--navy);
+  text-align: center;
+  margin-bottom: 6px;
+}
+
+.login-tagline-sub {
+  font-size: 12.5px;
+  color: var(--gray-600);
+  text-align: center;
+  line-height: 1.6;
+}
+
+.login-right {
+  padding: 48px 44px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.login-logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 28px;
+}
+
+.airtel-logo-svg {
+  width: 32px;
+  height: 32px;
+}
+
+.login-title {
+  font-size: 22px;
+  font-weight: 400;
+  color: var(--gray-900);
+  letter-spacing: -0.3px;
+}
+
+.login-title strong { font-weight: 700; }
+
+.login-subtitle {
+  font-size: 13px;
+  color: var(--gray-400);
+  margin-bottom: 28px;
+  margin-top: -20px;
+}
+
+.form-group {
+  margin-bottom: 16px;
+}
+
+.form-label {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--gray-900);
+  margin-bottom: 6px;
+  display: block;
+}
+
+.form-label span { color: var(--red); }
+
+.form-input {
+  width: 100%;
+  height: 44px;
+  border: 1.5px solid var(--gray-200);
+  border-radius: var(--radius-sm);
+  padding: 0 14px;
+  font-size: 14px;
+  font-family: var(--font);
+  color: var(--gray-900);
+  outline: none;
+  transition: border-color 0.15s;
+  background: white;
+}
+
+.form-input:focus { border-color: var(--navy); }
+
+.form-input-wrap {
+  position: relative;
+}
+
+.form-input-wrap .eye-icon {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--gray-400);
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.login-btn {
+  width: 100%;
+  height: 44px;
+  background: var(--gray-900);
+  color: white;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  font-weight: 600;
+  font-family: var(--font);
+  cursor: pointer;
+  margin-bottom: 16px;
+  transition: background 0.15s;
+}
+
+.login-btn:hover { background: var(--navy); }
+
+.login-links {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.login-link {
+  font-size: 13px;
+  color: var(--blue);
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.login-link-sub {
+  font-size: 12px;
+  color: var(--gray-400);
+  margin-bottom: 4px;
+}
+
+.login-divider {
+  height: 1px;
+  background: var(--gray-100);
+  margin: 16px 0;
+}
+
+.sso-btn {
+  width: 100%;
+  height: 44px;
+  background: white;
+  color: var(--gray-900);
+  border: 1.5px solid var(--gray-200);
+  border-radius: var(--radius-sm);
+  font-size: 13.5px;
+  font-weight: 600;
+  font-family: var(--font);
+  cursor: pointer;
+  margin-bottom: 10px;
+  transition: border-color 0.15s;
+}
+
+.sso-btn:hover { border-color: var(--gray-400); }
+
+/* ─── APP SHELL ──────────────────────── */
+.app { display: none; }
+.app.visible { display: flex; min-height: 100vh; }
+
+/* ─── SIDEBAR ────────────────────────── */
 .sidebar {
-  width: 240px;
-  background: var(--navy);
+  width: 220px;
+  background: var(--sidebar-bg);
   min-height: 100vh;
   position: fixed;
   left: 0; top: 0;
@@ -55,67 +308,57 @@ body {
 }
 
 .sidebar-logo {
-  padding: 24px 20px 20px;
+  padding: 16px 18px;
   border-bottom: 1px solid rgba(255,255,255,0.08);
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
-.sidebar-logo .brand {
-  font-family: var(--font-display);
-  font-size: 18px;
-  font-weight: 800;
+.sidebar-logo-text {
+  font-size: 13px;
+  font-weight: 600;
   color: white;
-  letter-spacing: -0.3px;
+  line-height: 1.3;
 }
 
-.sidebar-logo .brand span { color: var(--red); }
-
-.sidebar-logo .sub {
-  font-size: 11px;
-  color: var(--gray-400);
-  margin-top: 2px;
+.sidebar-logo-text span {
+  font-size: 10px;
   font-weight: 400;
+  color: rgba(255,255,255,0.5);
+  display: block;
 }
 
 .sidebar-nav {
-  padding: 16px 12px;
+  padding: 10px 0;
   flex: 1;
 }
 
 .nav-section-label {
   font-size: 10px;
-  font-weight: 700;
-  color: var(--gray-400);
+  font-weight: 600;
+  color: rgba(255,255,255,0.35);
   text-transform: uppercase;
-  letter-spacing: 1px;
-  padding: 12px 8px 6px;
+  letter-spacing: 0.8px;
+  padding: 10px 18px 5px;
 }
 
 .nav-item {
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 10px 12px;
-  border-radius: var(--radius-sm);
+  gap: 9px;
+  padding: 9px 18px;
   cursor: pointer;
-  color: rgba(255,255,255,0.6);
-  font-size: 13.5px;
-  font-weight: 500;
-  transition: all 0.15s;
-  margin-bottom: 2px;
+  color: rgba(255,255,255,0.65);
+  font-size: 13px;
+  font-weight: 400;
+  transition: all 0.12s;
 }
 
-.nav-item:hover { background: rgba(255,255,255,0.07); color: white; }
-.nav-item.active { background: var(--red); color: white; }
+.nav-item:hover { background: var(--sidebar-hover); color: white; }
+.nav-item.active { background: var(--sidebar-active); color: white; font-weight: 500; border-left: 3px solid var(--red); padding-left: 15px; }
 
-.nav-item .icon {
-  width: 18px;
-  height: 18px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 14px;
-  flex-shrink: 0;
-}
+.nav-icon { font-size: 14px; width: 18px; text-align: center; }
 
 .nav-badge {
   margin-left: auto;
@@ -123,64 +366,44 @@ body {
   color: white;
   font-size: 10px;
   font-weight: 700;
-  padding: 2px 6px;
-  border-radius: 20px;
+  padding: 1px 6px;
+  border-radius: 10px;
 }
 
-.nav-item.active .nav-badge { background: rgba(255,255,255,0.25); }
-
-.sidebar-bottom {
-  padding: 16px 12px;
+.sidebar-user {
+  padding: 14px 18px;
   border-top: 1px solid rgba(255,255,255,0.08);
-}
-
-.trainer-info {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 9px;
 }
 
-.trainer-avatar {
-  width: 34px;
-  height: 34px;
+.user-avatar {
+  width: 30px;
+  height: 30px;
   border-radius: 50%;
-  background: linear-gradient(135deg, var(--red), #FF4D6D);
+  background: var(--red);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: var(--font-display);
-  font-weight: 800;
-  font-size: 13px;
+  font-size: 11px;
+  font-weight: 700;
   color: white;
   flex-shrink: 0;
 }
 
-.trainer-name {
-  font-size: 13px;
-  font-weight: 600;
-  color: white;
-}
+.user-name { font-size: 12.5px; font-weight: 500; color: white; }
+.user-role { font-size: 11px; color: rgba(255,255,255,0.45); }
 
-.trainer-role {
-  font-size: 11px;
-  color: var(--gray-400);
-}
+/* ─── MAIN ───────────────────────────── */
+.main { margin-left: 220px; flex: 1; display: flex; flex-direction: column; }
 
-/* ── MAIN ────────────────────────────── */
-.main {
-  margin-left: 240px;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-}
-
-/* ── TOPBAR ──────────────────────────── */
+/* ─── TOPBAR ─────────────────────────── */
 .topbar {
   background: white;
   border-bottom: 1px solid var(--gray-200);
-  padding: 0 28px;
-  height: 60px;
+  height: 52px;
+  padding: 0 24px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -189,11 +412,20 @@ body {
   z-index: 50;
 }
 
-.page-title {
-  font-family: var(--font-display);
-  font-size: 16px;
-  font-weight: 700;
-  color: var(--navy);
+.topbar-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.topbar-homes {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--gray-900);
+  cursor: pointer;
 }
 
 .topbar-right {
@@ -202,242 +434,186 @@ body {
   gap: 12px;
 }
 
-.live-badge {
+.topbar-icon-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--gray-100);
+  border: none;
+  cursor: pointer;
   display: flex;
   align-items: center;
-  gap: 6px;
-  background: #E8FFF5;
-  color: #00875A;
-  font-size: 11px;
-  font-weight: 700;
-  padding: 5px 10px;
-  border-radius: 20px;
+  justify-content: center;
+  font-size: 14px;
+  color: var(--gray-600);
+  transition: background 0.12s;
 }
 
-.live-dot {
-  width: 6px;
-  height: 6px;
-  background: var(--green);
-  border-radius: 50%;
-  animation: pulse 1.5s infinite;
-}
+.topbar-icon-btn:hover { background: var(--gray-200); }
 
-@keyframes pulse {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.5; transform: scale(0.8); }
-}
-
-.topbar-btn {
-  height: 34px;
+.topbar-push-btn {
+  height: 32px;
   padding: 0 14px;
+  background: var(--red);
+  color: white;
+  border: none;
   border-radius: var(--radius-sm);
   font-size: 12.5px;
   font-weight: 600;
-  font-family: var(--font-body);
+  font-family: var(--font);
   cursor: pointer;
-  border: none;
-  transition: all 0.15s;
+  transition: background 0.12s;
 }
 
-.topbar-btn.primary {
-  background: var(--red);
-  color: white;
-}
+.topbar-push-btn:hover { background: var(--red-dark); }
 
-.topbar-btn.primary:hover { background: var(--red-dark); }
+/* ─── CONTENT ────────────────────────── */
+.content { padding: 20px 24px; flex: 1; }
 
-.topbar-btn.outline {
-  background: white;
-  color: var(--navy);
-  border: 1.5px solid var(--gray-200);
-}
-
-.topbar-btn.outline:hover { border-color: var(--gray-400); }
-
-/* ── CONTENT ─────────────────────────── */
-.content {
-  padding: 24px 28px;
-  flex: 1;
-}
-
-/* ── VIEWS ───────────────────────────── */
+/* ─── VIEWS ──────────────────────────── */
 .view { display: none; }
 .view.active { display: block; }
 
-/* ── SUMMARY STATS ───────────────────── */
+/* ─── STATS GRID ─────────────────────── */
 .stats-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 16px;
-  margin-bottom: 24px;
+  grid-template-columns: repeat(4,1fr);
+  gap: 14px;
+  margin-bottom: 20px;
 }
 
 .stat-card {
   background: white;
   border-radius: var(--radius);
-  padding: 20px;
-  box-shadow: var(--shadow-sm);
+  padding: 18px 20px;
   border: 1px solid var(--gray-200);
-  position: relative;
-  overflow: hidden;
-  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow 0.15s;
 }
 
-.stat-card:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-md);
-}
-
-.stat-card::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0;
-  width: 4px;
-  height: 100%;
-}
-
-.stat-card.red::before { background: var(--red); }
-.stat-card.amber::before { background: var(--amber); }
-.stat-card.green::before { background: var(--green); }
-.stat-card.blue::before { background: var(--blue); }
+.stat-card:hover { box-shadow: var(--shadow-md); }
 
 .stat-label {
-  font-size: 11px;
-  font-weight: 700;
-  color: var(--gray-400);
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
+  font-size: 11.5px;
+  font-weight: 500;
+  color: var(--gray-600);
   margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
 }
 
 .stat-value {
-  font-family: var(--font-display);
-  font-size: 32px;
-  font-weight: 800;
-  color: var(--navy);
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--gray-900);
   line-height: 1;
-  margin-bottom: 6px;
+  margin-bottom: 5px;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.5px;
 }
+
+.stat-value.red { color: var(--red); }
+.stat-value.amber { color: var(--amber); }
+.stat-value.navy { color: var(--navy); }
+.stat-value.green { color: var(--green); }
 
 .stat-sub {
-  font-size: 12px;
-  color: var(--gray-600);
+  font-size: 11.5px;
+  color: var(--gray-400);
 }
 
-.stat-sub span {
-  font-weight: 700;
+.stat-indicator {
+  display: inline-block;
+  width: 4px;
+  height: 100%;
+  position: absolute;
+  top: 0; left: 0;
+  border-radius: var(--radius) 0 0 var(--radius);
 }
 
-.stat-sub .up { color: var(--green); }
-.stat-sub .down { color: var(--red); }
-
-/* ── SECTION HEADER ──────────────────── */
+/* ─── SECTION HEADER ─────────────────── */
 .section-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 16px;
+  margin-bottom: 12px;
 }
 
 .section-title {
-  font-family: var(--font-display);
-  font-size: 15px;
-  font-weight: 700;
-  color: var(--navy);
-}
-
-.section-sub {
-  font-size: 12px;
-  color: var(--gray-400);
-  margin-top: 2px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--gray-900);
 }
 
 .see-all {
   font-size: 12px;
-  font-weight: 600;
-  color: var(--red);
+  font-weight: 500;
+  color: var(--blue);
   cursor: pointer;
-  text-decoration: none;
 }
 
-/* ── TRAINING CARDS ──────────────────── */
+/* ─── TRAINING CARDS ─────────────────── */
 .training-cards-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 16px;
-  margin-bottom: 28px;
+  grid-template-columns: repeat(3,1fr);
+  gap: 14px;
+  margin-bottom: 20px;
 }
 
 .training-card {
   background: white;
   border-radius: var(--radius);
-  padding: 20px;
-  box-shadow: var(--shadow-sm);
+  padding: 18px;
   border: 1px solid var(--gray-200);
+  box-shadow: var(--shadow-sm);
   cursor: pointer;
-  transition: all 0.2s;
-  position: relative;
-  overflow: hidden;
+  transition: all 0.15s;
 }
 
 .training-card:hover {
-  transform: translateY(-3px);
-  box-shadow: var(--shadow-lg);
-  border-color: transparent;
+  border-color: var(--red);
+  box-shadow: var(--shadow-md);
 }
-
-.training-card::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: var(--radius);
-  border: 2px solid transparent;
-  transition: border-color 0.2s;
-}
-
-.training-card:hover::after { border-color: var(--red); }
 
 .card-top {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: space-between;
-  margin-bottom: 14px;
+  margin-bottom: 12px;
 }
 
 .card-icon {
-  width: 40px;
-  height: 40px;
-  border-radius: 10px;
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 18px;
+  font-size: 16px;
 }
 
 .card-icon.red { background: var(--red-soft); }
 .card-icon.amber { background: #FFF8E1; }
-.card-icon.blue { background: #EEF2FF; }
+.card-icon.blue { background: #E8EEF8; }
 
 .severity-badge {
   font-size: 10px;
-  font-weight: 800;
-  padding: 3px 8px;
-  border-radius: 20px;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 4px;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.3px;
 }
 
-.severity-badge.critical { background: #FFE4E4; color: #C00; }
-.severity-badge.high { background: #FFF3CD; color: #92400E; }
-.severity-badge.medium { background: #E0F2FE; color: #0369A1; }
+.severity-badge.critical { background: #FFE4E4; color: #B00020; }
+.severity-badge.high { background: #FFF3CD; color: #7D4E00; }
+.severity-badge.medium { background: #E3F2FD; color: #1565C0; }
 
 .card-name {
-  font-family: var(--font-display);
   font-size: 14px;
-  font-weight: 700;
-  color: var(--navy);
-  margin-bottom: 6px;
-  line-height: 1.3;
+  font-weight: 600;
+  color: var(--gray-900);
+  margin-bottom: 5px;
 }
 
 .card-desc {
@@ -451,58 +627,29 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding-top: 14px;
+  padding-top: 12px;
   border-top: 1px solid var(--gray-100);
 }
 
-.card-people {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.people-avatars {
-  display: flex;
-}
-
-.people-avatar {
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
-  border: 2px solid white;
-  margin-left: -6px;
-  font-size: 9px;
-  font-weight: 800;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-}
-
-.people-avatar:first-child { margin-left: 0; }
-
 .people-count {
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 700;
-  color: var(--navy);
+  color: var(--gray-900);
 }
 
-.people-label {
-  font-size: 11px;
-  color: var(--gray-400);
-}
+.people-label { font-size: 11px; color: var(--gray-400); }
 
 .card-arrow {
-  width: 28px;
-  height: 28px;
+  width: 24px;
+  height: 24px;
   border-radius: 50%;
   background: var(--gray-100);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 12px;
+  font-size: 11px;
   color: var(--gray-600);
-  transition: all 0.15s;
+  transition: all 0.12s;
 }
 
 .training-card:hover .card-arrow {
@@ -510,238 +657,96 @@ body {
   color: white;
 }
 
-/* ── LIVE CALL SECTION ───────────────── */
-.live-section {
+/* ─── BREADCRUMB ─────────────────────── */
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 16px;
+  font-size: 12.5px;
+}
+
+.breadcrumb-item { color: var(--gray-400); cursor: pointer; }
+.breadcrumb-item:hover { color: var(--blue); }
+.breadcrumb-item.active { color: var(--gray-900); font-weight: 500; }
+.breadcrumb-sep { color: var(--gray-300); }
+
+/* ─── AGENT LIST ─────────────────────── */
+.table-card {
   background: white;
   border-radius: var(--radius);
   border: 1px solid var(--gray-200);
   box-shadow: var(--shadow-sm);
   overflow: hidden;
-  margin-bottom: 24px;
 }
 
-.live-header {
-  padding: 16px 20px;
-  border-bottom: 1px solid var(--gray-100);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background: linear-gradient(135deg, var(--navy) 0%, var(--navy-3) 100%);
-}
-
-.live-header-left {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.live-title {
-  font-family: var(--font-display);
-  font-size: 14px;
-  font-weight: 700;
-  color: white;
-}
-
-.live-sub {
-  font-size: 11px;
-  color: rgba(255,255,255,0.5);
-  margin-top: 1px;
-}
-
-.live-calls-list {
-  padding: 0;
-}
-
-.live-call-row {
-  display: grid;
-  grid-template-columns: 200px 1fr 120px 120px 100px;
-  align-items: center;
+.table-card-header {
   padding: 14px 20px;
-  border-bottom: 1px solid var(--gray-100);
-  gap: 16px;
-  transition: background 0.15s;
-}
-
-.live-call-row:last-child { border-bottom: none; }
-.live-call-row:hover { background: var(--gray-50); }
-
-.live-call-row.header {
-  background: var(--gray-50);
-  font-size: 10px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  color: var(--gray-400);
-}
-
-.agent-info {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.agent-avatar {
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 12px;
-  font-weight: 800;
-  color: white;
-  flex-shrink: 0;
-}
-
-.agent-name {
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--navy);
-}
-
-.agent-id {
-  font-size: 11px;
-  color: var(--gray-400);
-}
-
-.call-waveform {
-  display: flex;
-  align-items: center;
-  gap: 2px;
-  height: 24px;
-}
-
-.wave-bar {
-  width: 3px;
-  border-radius: 2px;
-  background: var(--red);
-  animation: wave 1s ease-in-out infinite;
-}
-
-.wave-bar:nth-child(2) { animation-delay: 0.1s; }
-.wave-bar:nth-child(3) { animation-delay: 0.2s; }
-.wave-bar:nth-child(4) { animation-delay: 0.3s; }
-.wave-bar:nth-child(5) { animation-delay: 0.4s; }
-.wave-bar:nth-child(6) { animation-delay: 0.2s; }
-.wave-bar:nth-child(7) { animation-delay: 0.1s; }
-.wave-bar:nth-child(8) { animation-delay: 0.3s; }
-
-@keyframes wave {
-  0%, 100% { height: 4px; }
-  50% { height: 20px; }
-}
-
-.call-status {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  font-size: 12px;
-  font-weight: 600;
-}
-
-.status-dot {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-}
-
-.status-dot.live { background: var(--green); animation: pulse 1.5s infinite; }
-.status-dot.ended { background: var(--gray-400); }
-.status-dot.training { background: var(--amber); animation: pulse 1.5s infinite; }
-
-.call-timer {
-  font-family: 'Courier New', monospace;
-  font-size: 13px;
-  font-weight: 700;
-  color: var(--navy);
-}
-
-.score-pill {
-  font-size: 12px;
-  font-weight: 800;
-  padding: 3px 10px;
-  border-radius: 20px;
-}
-
-.score-pill.good { background: #E8FFF5; color: #00875A; }
-.score-pill.avg { background: #FFF8E1; color: #92400E; }
-.score-pill.poor { background: var(--red-soft); color: var(--red); }
-
-/* ── AGENT LIST VIEW ─────────────────── */
-.agent-list-view {
-  background: white;
-  border-radius: var(--radius);
-  border: 1px solid var(--gray-200);
-  box-shadow: var(--shadow-sm);
-  overflow: hidden;
-}
-
-.agent-list-header {
-  padding: 16px 20px;
-  border-bottom: 1px solid var(--gray-100);
+  border-bottom: 1px solid var(--gray-200);
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
-.agent-list-title {
-  font-family: var(--font-display);
-  font-size: 15px;
-  font-weight: 700;
-  color: var(--navy);
+.table-card-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--gray-900);
 }
 
-.agent-list-actions {
-  display: flex;
-  align-items: center;
-  gap: 8px;
+.table-card-sub {
+  font-size: 12px;
+  color: var(--gray-400);
+  margin-top: 2px;
 }
 
-.action-btn {
-  height: 32px;
-  padding: 0 14px;
+.table-actions { display: flex; align-items: center; gap: 8px; }
+
+.btn {
+  height: 30px;
+  padding: 0 13px;
   border-radius: var(--radius-sm);
   font-size: 12px;
-  font-weight: 600;
-  font-family: var(--font-body);
+  font-weight: 500;
+  font-family: var(--font);
   cursor: pointer;
   border: none;
-  transition: all 0.15s;
+  transition: all 0.12s;
 }
 
-.action-btn.primary { background: var(--red); color: white; }
-.action-btn.primary:hover { background: var(--red-dark); }
-.action-btn.outline { background: white; color: var(--navy); border: 1.5px solid var(--gray-200); }
-.action-btn.outline:hover { border-color: var(--navy); }
-.action-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+.btn-primary { background: var(--red); color: white; }
+.btn-primary:hover { background: var(--red-dark); }
+.btn-outline { background: white; color: var(--gray-900); border: 1px solid var(--gray-200); }
+.btn-outline:hover { border-color: var(--gray-400); }
+.btn:disabled { opacity: 0.4; cursor: not-allowed; }
 
-.agent-table {
-  width: 100%;
-}
+.agent-table { width: 100%; }
 
 .agent-table-header {
   display: grid;
-  grid-template-columns: 40px 1fr 120px 100px 100px 120px 100px;
-  padding: 10px 20px;
+  grid-template-columns: 44px 1fr 150px 100px 110px 110px 110px;
+  padding: 9px 20px;
   background: var(--gray-50);
-  font-size: 10px;
-  font-weight: 700;
-  color: var(--gray-400);
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--gray-600);
   text-transform: uppercase;
-  letter-spacing: 0.5px;
-  gap: 12px;
+  letter-spacing: 0.4px;
+  gap: 10px;
   border-bottom: 1px solid var(--gray-200);
+  align-items: center;
 }
 
 .agent-table-row {
   display: grid;
-  grid-template-columns: 40px 1fr 120px 100px 100px 120px 100px;
-  padding: 12px 20px;
-  gap: 12px;
+  grid-template-columns: 44px 1fr 150px 100px 110px 110px 110px;
+  padding: 11px 20px;
+  gap: 10px;
   align-items: center;
   border-bottom: 1px solid var(--gray-100);
-  transition: background 0.15s;
+  transition: background 0.1s;
   cursor: pointer;
+  font-size: 13px;
 }
 
 .agent-table-row:hover { background: var(--gray-50); }
@@ -751,244 +756,66 @@ body {
 .checkbox {
   width: 16px;
   height: 16px;
-  border: 2px solid var(--gray-200);
-  border-radius: 4px;
+  border: 1.5px solid var(--gray-300);
+  border-radius: 3px;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.15s;
+  transition: all 0.12s;
+  flex-shrink: 0;
+  font-size: 10px;
+}
+
+.checkbox.checked { background: var(--red); border-color: var(--red); color: white; }
+
+.agent-avatar-sm {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  font-weight: 700;
+  color: white;
   flex-shrink: 0;
 }
 
-.checkbox.checked {
-  background: var(--red);
-  border-color: var(--red);
-  color: white;
-  font-size: 10px;
-}
+.agent-name-text { font-size: 13px; font-weight: 500; color: var(--gray-900); }
+.agent-id-text { font-size: 11px; color: var(--gray-400); }
 
-.gap-tags {
-  display: flex;
-  gap: 4px;
-  flex-wrap: wrap;
-}
+.gap-tags { display: flex; gap: 4px; flex-wrap: wrap; }
 
 .gap-tag {
   font-size: 10px;
-  font-weight: 600;
-  padding: 2px 7px;
-  border-radius: 4px;
+  font-weight: 500;
+  padding: 2px 6px;
+  border-radius: 3px;
   background: var(--red-soft);
   color: var(--red);
 }
 
-/* ── PUSH CONTENT MODAL ──────────────── */
-.modal-overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(10,15,46,0.6);
-  z-index: 500;
-  display: none;
-  align-items: center;
-  justify-content: center;
-  backdrop-filter: blur(4px);
-}
-
-.modal-overlay.open { display: flex; }
-
-.modal {
-  background: white;
-  border-radius: 20px;
-  width: 600px;
-  max-width: 95vw;
-  max-height: 90vh;
-  overflow-y: auto;
-  box-shadow: var(--shadow-lg);
-  animation: modalIn 0.25s cubic-bezier(0.16,1,0.3,1);
-}
-
-@keyframes modalIn {
-  from { opacity: 0; transform: scale(0.95) translateY(10px); }
-  to { opacity: 1; transform: scale(1) translateY(0); }
-}
-
-.modal-header {
-  padding: 20px 24px 16px;
-  border-bottom: 1px solid var(--gray-100);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.modal-title {
-  font-family: var(--font-display);
-  font-size: 16px;
-  font-weight: 700;
-  color: var(--navy);
-}
-
-.modal-close {
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  background: var(--gray-100);
-  border: none;
-  cursor: pointer;
-  font-size: 14px;
-  color: var(--gray-600);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.modal-body { padding: 20px 24px; }
-
-.modal-section {
-  margin-bottom: 20px;
-}
-
-.modal-section-title {
+.score-pill {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 4px;
   font-size: 12px;
-  font-weight: 700;
-  color: var(--gray-400);
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  margin-bottom: 10px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
 }
 
-.content-type-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
-}
+.score-pill.good { background: #E6F7EF; color: #00875A; }
+.score-pill.avg { background: #FFF8E1; color: #92400E; }
+.score-pill.poor { background: var(--red-soft); color: var(--red); }
 
-.content-type-btn {
-  border: 2px solid var(--gray-200);
-  border-radius: var(--radius-sm);
-  padding: 12px;
-  cursor: pointer;
-  text-align: center;
-  transition: all 0.15s;
-  background: white;
-}
+.status-text { font-size: 12px; font-weight: 500; }
 
-.content-type-btn:hover { border-color: var(--red); }
-.content-type-btn.selected { border-color: var(--red); background: var(--red-soft); }
-
-.content-type-icon { font-size: 22px; margin-bottom: 6px; }
-.content-type-label { font-size: 12px; font-weight: 600; color: var(--navy); }
-
-.toggle-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 12px 0;
-  border-bottom: 1px solid var(--gray-100);
-}
-
-.toggle-row:last-child { border-bottom: none; }
-
-.toggle-label {
-  font-size: 13px;
-  font-weight: 500;
-  color: var(--navy);
-}
-
-.toggle-sub {
-  font-size: 11px;
-  color: var(--gray-400);
-  margin-top: 2px;
-}
-
-.toggle {
-  width: 42px;
-  height: 24px;
-  border-radius: 12px;
-  background: var(--gray-200);
-  position: relative;
-  cursor: pointer;
-  transition: background 0.2s;
-  flex-shrink: 0;
-}
-
-.toggle.on { background: var(--red); }
-
-.toggle::after {
-  content: '';
-  position: absolute;
-  width: 18px;
-  height: 18px;
-  background: white;
-  border-radius: 50%;
-  top: 3px;
-  left: 3px;
-  transition: transform 0.2s;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.2);
-}
-
-.toggle.on::after { transform: translateX(18px); }
-
-.question-library {
-  border: 1px solid var(--gray-200);
-  border-radius: var(--radius-sm);
-  overflow: hidden;
-  max-height: 180px;
-  overflow-y: auto;
-}
-
-.question-item {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 10px 14px;
-  border-bottom: 1px solid var(--gray-100);
-  cursor: pointer;
-  transition: background 0.1s;
-}
-
-.question-item:last-child { border-bottom: none; }
-.question-item:hover { background: var(--gray-50); }
-.question-item.selected { background: var(--red-soft); }
-
-.question-text {
-  font-size: 12.5px;
-  color: var(--navy);
-  flex: 1;
-}
-
-.modal-footer {
-  padding: 16px 24px;
-  border-top: 1px solid var(--gray-100);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.push-btn {
-  height: 42px;
-  padding: 0 24px;
-  border-radius: var(--radius-sm);
-  background: var(--red);
-  color: white;
-  font-size: 13px;
-  font-weight: 700;
-  font-family: var(--font-body);
-  cursor: pointer;
-  border: none;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  transition: background 0.15s;
-}
-
-.push-btn:hover { background: var(--red-dark); }
-
-/* ── AGENT DETAIL VIEW ───────────────── */
-.agent-detail {
+/* ─── AGENT DETAIL ───────────────────── */
+.detail-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 16px;
+  gap: 14px;
 }
 
 .detail-card {
@@ -1002,865 +829,894 @@ body {
 .detail-card.full { grid-column: 1 / -1; }
 
 .detail-card-header {
-  padding: 16px 20px;
+  padding: 13px 18px;
   border-bottom: 1px solid var(--gray-100);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--gray-900);
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 7px;
 }
 
-.detail-card-title {
-  font-family: var(--font-display);
-  font-size: 14px;
-  font-weight: 700;
-  color: var(--navy);
-}
+.detail-card-body { padding: 18px; }
 
-.detail-card-body { padding: 20px; }
-
-.agent-profile {
+.profile-row {
   display: flex;
   align-items: center;
-  gap: 16px;
-  margin-bottom: 20px;
+  gap: 14px;
+  margin-bottom: 18px;
 }
 
-.agent-profile-avatar {
-  width: 60px;
-  height: 60px;
+.profile-avatar {
+  width: 52px;
+  height: 52px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: var(--font-display);
-  font-size: 20px;
-  font-weight: 800;
+  font-size: 16px;
+  font-weight: 700;
   color: white;
   flex-shrink: 0;
 }
 
-.agent-profile-name {
-  font-family: var(--font-display);
-  font-size: 18px;
-  font-weight: 700;
-  color: var(--navy);
+.profile-name {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--gray-900);
 }
 
-.agent-profile-meta {
-  font-size: 12px;
-  color: var(--gray-400);
-  margin-top: 3px;
-}
+.profile-meta { font-size: 12px; color: var(--gray-400); margin-top: 2px; }
 
-.score-bars {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
+.score-bars { display: flex; flex-direction: column; gap: 9px; }
 
-.score-bar-row {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
+.score-bar-row { display: flex; align-items: center; gap: 10px; }
 
 .score-bar-label {
   font-size: 12px;
   color: var(--gray-600);
-  width: 140px;
+  width: 130px;
   flex-shrink: 0;
   text-transform: capitalize;
 }
 
 .score-bar-track {
   flex: 1;
-  height: 6px;
+  height: 5px;
   background: var(--gray-100);
   border-radius: 3px;
   overflow: hidden;
 }
 
-.score-bar-fill {
-  height: 100%;
-  border-radius: 3px;
-  transition: width 1s ease;
-}
+.score-bar-fill { height: 100%; border-radius: 3px; }
 
 .score-bar-val {
   font-size: 12px;
-  font-weight: 700;
-  width: 30px;
+  font-weight: 600;
+  width: 28px;
   text-align: right;
-}
-
-.insight-list {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
+  font-variant-numeric: tabular-nums;
 }
 
 .insight-item {
   display: flex;
   align-items: flex-start;
-  gap: 10px;
-  padding: 10px 12px;
+  gap: 8px;
+  padding: 9px 11px;
   border-radius: var(--radius-sm);
   font-size: 12.5px;
   line-height: 1.5;
+  margin-bottom: 6px;
 }
 
+.insight-item:last-child { margin-bottom: 0; }
 .insight-item.good { background: #F0FFF8; color: #065F46; }
 .insight-item.bad { background: var(--red-soft); color: #9F1239; }
-.insight-item.neutral { background: var(--gray-50); color: var(--gray-600); }
 
-.insight-icon { font-size: 14px; flex-shrink: 0; margin-top: 1px; }
-
-.transcription-box {
-  background: var(--gray-50);
-  border-radius: var(--radius-sm);
-  padding: 14px;
-  font-size: 12.5px;
-  line-height: 1.8;
-  color: var(--gray-600);
-  max-height: 200px;
-  overflow-y: auto;
-}
-
-.transcript-line { margin-bottom: 6px; }
-.transcript-line .speaker { font-weight: 700; color: var(--navy); margin-right: 6px; }
-.transcript-line .agent-speak { color: var(--blue); }
-.transcript-line .customer-speak { color: var(--gray-600); }
+.insight-icon { font-size: 13px; flex-shrink: 0; margin-top: 1px; }
 
 .play-btn {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 7px;
   background: var(--navy);
   color: white;
-  padding: 10px 16px;
+  padding: 8px 14px;
   border-radius: var(--radius-sm);
   font-size: 12px;
-  font-weight: 600;
+  font-weight: 500;
   cursor: pointer;
   border: none;
-  font-family: var(--font-body);
-  transition: background 0.15s;
-  width: fit-content;
-  margin-bottom: 14px;
+  font-family: var(--font);
+  margin-bottom: 12px;
 }
 
-.play-btn:hover { background: var(--navy-3); }
+.transcript-box {
+  background: var(--gray-50);
+  border-radius: var(--radius-sm);
+  padding: 12px;
+  font-size: 12px;
+  line-height: 1.8;
+  color: var(--gray-600);
+  max-height: 180px;
+  overflow-y: auto;
+  border: 1px solid var(--gray-100);
+}
 
-/* ── BREADCRUMB ──────────────────────── */
-.breadcrumb {
+.t-line { margin-bottom: 4px; }
+.t-agent { font-weight: 600; color: var(--navy); margin-right: 5px; }
+.t-customer { font-weight: 600; color: var(--gray-600); margin-right: 5px; }
+
+.training-req-grid {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 10px;
+}
+
+.req-card {
+  border-radius: var(--radius-sm);
+  padding: 12px;
+}
+
+.req-card.p1 { background: var(--red-soft); }
+.req-card.p2 { background: #FFF8E1; }
+.req-card.p3 { background: #E8EEF8; }
+
+.req-priority {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  margin-bottom: 4px;
+}
+
+.req-card.p1 .req-priority { color: var(--red); }
+.req-card.p2 .req-priority { color: var(--amber); }
+.req-card.p3 .req-priority { color: var(--navy); }
+
+.req-name { font-size: 13px; font-weight: 600; color: var(--gray-900); margin-bottom: 3px; }
+.req-desc { font-size: 11.5px; color: var(--gray-600); }
+
+/* ─── CALL RECORDINGS (Agent Detail) ─── */
+.call-recordings {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.call-rec-item {
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius-sm);
+  padding: 10px 14px;
   display: flex;
   align-items: center;
-  gap: 6px;
-  margin-bottom: 20px;
-  font-size: 13px;
+  justify-content: space-between;
+  transition: border-color 0.12s;
 }
 
-.breadcrumb-item {
-  color: var(--gray-400);
+.call-rec-item:hover { border-color: var(--navy); }
+
+.call-rec-info { display: flex; flex-direction: column; gap: 2px; }
+.call-rec-date { font-size: 12.5px; font-weight: 500; color: var(--gray-900); }
+.call-rec-meta { font-size: 11px; color: var(--gray-400); }
+
+.call-rec-actions { display: flex; align-items: center; gap: 8px; }
+
+.rec-score { font-size: 12px; font-weight: 600; }
+.rec-play-btn {
+  height: 28px;
+  padding: 0 10px;
+  background: var(--navy);
+  color: white;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-size: 11px;
+  font-weight: 500;
+  font-family: var(--font);
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 4px;
 }
 
-.breadcrumb-item:hover { color: var(--red); }
+/* ─── MODAL ──────────────────────────── */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(10,15,46,0.5);
+  z-index: 500;
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
 
-.breadcrumb-item.active { color: var(--navy); font-weight: 600; }
+.modal-overlay.open { display: flex; }
 
-.breadcrumb-sep { color: var(--gray-200); }
+.modal {
+  background: white;
+  border-radius: 12px;
+  width: 560px;
+  max-width: 95vw;
+  max-height: 88vh;
+  overflow-y: auto;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+  animation: modalIn 0.2s ease;
+}
 
-/* ── SCROLLBAR ───────────────────────── */
-::-webkit-scrollbar { width: 4px; height: 4px; }
+@keyframes modalIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.modal-header {
+  padding: 18px 22px 14px;
+  border-bottom: 1px solid var(--gray-100);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.modal-title { font-size: 15px; font-weight: 600; color: var(--gray-900); }
+.modal-sub { font-size: 12px; color: var(--gray-400); margin-top: 2px; }
+
+.modal-close {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--gray-100);
+  border: none;
+  cursor: pointer;
+  font-size: 13px;
+  color: var(--gray-600);
+}
+
+.modal-body { padding: 18px 22px; }
+
+.modal-section { margin-bottom: 18px; }
+
+.modal-section-title {
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--gray-600);
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  margin-bottom: 10px;
+}
+
+.content-type-grid {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 8px;
+}
+
+.content-type-btn {
+  border: 1.5px solid var(--gray-200);
+  border-radius: var(--radius-sm);
+  padding: 12px 8px;
+  cursor: pointer;
+  text-align: center;
+  background: white;
+  transition: all 0.12s;
+}
+
+.content-type-btn:hover { border-color: var(--navy); }
+.content-type-btn.selected { border-color: var(--red); background: var(--red-soft); }
+
+.ctype-icon { font-size: 20px; margin-bottom: 5px; }
+.ctype-label { font-size: 12px; font-weight: 500; color: var(--gray-900); }
+
+/* Content list */
+.content-list {
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  max-height: 180px;
+  overflow-y: auto;
+}
+
+.content-list-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 14px;
+  border-bottom: 1px solid var(--gray-100);
+  cursor: pointer;
+  transition: background 0.1s;
+}
+
+.content-list-item:last-child { border-bottom: none; }
+.content-list-item:hover { background: var(--gray-50); }
+.content-list-item.selected { background: var(--red-soft); }
+
+.content-file-icon { font-size: 16px; }
+.content-file-name { font-size: 12.5px; color: var(--gray-900); flex: 1; }
+.content-file-meta { font-size: 11px; color: var(--gray-400); }
+.content-relevance {
+  font-size: 10px;
+  font-weight: 600;
+  padding: 2px 6px;
+  border-radius: 3px;
+  background: #E6F7EF;
+  color: #00875A;
+}
+
+.toggle-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--gray-100);
+}
+
+.toggle-row:last-child { border-bottom: none; }
+.toggle-label { font-size: 13px; font-weight: 500; color: var(--gray-900); }
+.toggle-sub { font-size: 11px; color: var(--gray-400); margin-top: 1px; }
+
+.toggle {
+  width: 38px;
+  height: 21px;
+  border-radius: 11px;
+  background: var(--gray-200);
+  position: relative;
+  cursor: pointer;
+  transition: background 0.2s;
+  flex-shrink: 0;
+}
+
+.toggle.on { background: var(--red); }
+
+.toggle::after {
+  content: '';
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  background: white;
+  border-radius: 50%;
+  top: 3px;
+  left: 3px;
+  transition: transform 0.2s;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+}
+
+.toggle.on::after { transform: translateX(17px); }
+
+.question-library {
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  max-height: 160px;
+  overflow-y: auto;
+}
+
+.question-item {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 9px 13px;
+  border-bottom: 1px solid var(--gray-100);
+  cursor: pointer;
+  transition: background 0.1s;
+}
+
+.question-item:last-child { border-bottom: none; }
+.question-item:hover { background: var(--gray-50); }
+.question-item.selected { background: var(--red-soft); }
+.question-text { font-size: 12.5px; color: var(--gray-900); flex: 1; }
+
+.modal-footer {
+  padding: 14px 22px;
+  border-top: 1px solid var(--gray-100);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.modal-footer-meta { font-size: 12px; color: var(--gray-400); }
+
+.push-btn {
+  height: 36px;
+  padding: 0 18px;
+  background: var(--red);
+  color: white;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  font-weight: 600;
+  font-family: var(--font);
+  cursor: pointer;
+  transition: background 0.12s;
+}
+
+.push-btn:hover { background: var(--red-dark); }
+
+/* ─── SUCCESS TOAST ──────────────────── */
+.toast {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background: var(--gray-900);
+  color: white;
+  padding: 12px 18px;
+  border-radius: var(--radius);
+  font-size: 13px;
+  font-weight: 500;
+  box-shadow: var(--shadow-md);
+  z-index: 1000;
+  display: none;
+  animation: slideUp 0.25s ease;
+}
+
+@keyframes slideUp {
+  from { transform: translateY(10px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+/* ─── SCROLLBAR ──────────────────────── */
+::-webkit-scrollbar { width: 4px; }
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: var(--gray-200); border-radius: 2px; }
-
 </style>
 </head>
 <body>
 
-<!-- SIDEBAR -->
-<aside class="sidebar">
-  <div class="sidebar-logo">
-    <div class="brand">Training<span>GPT</span></div>
-    <div class="sub">Trainer Dashboard</div>
+<!-- ─── LOGIN PAGE ─────────────────────── -->
+<div class="login-page" id="login-page">
+  <div class="login-card">
+    <div class="login-left">
+      <div class="login-illustration">
+        <div class="illus-phone">
+          <div style="width:80px;height:120px;background:linear-gradient(135deg,#EEF2FF,#DDE3F5);border-radius:8px;"></div>
+        </div>
+        <div class="illus-card top-left">📊 Training</div>
+        <div class="illus-card top-right">📞 Live Call</div>
+        <div class="illus-bar">
+          <div class="bar" style="height:30px"></div>
+          <div class="bar" style="height:48px"></div>
+          <div class="bar" style="height:36px"></div>
+          <div class="bar" style="height:55px"></div>
+          <div class="bar" style="height:42px"></div>
+        </div>
+      </div>
+      <div class="login-tagline">Simplify Work. Amplify Impact.</div>
+      <div class="login-tagline-sub">Manage fleet training, track performance,<br>and stay connected — all in one place.</div>
+    </div>
+    <div class="login-right">
+      <div class="login-logo">
+        <svg class="airtel-logo-svg" viewBox="0 0 32 32" fill="none">
+          <circle cx="16" cy="16" r="16" fill="#E4002B"/>
+          <path d="M8 20 C8 20 12 10 16 10 C20 10 22 14 22 14" stroke="white" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+          <path d="M12 20 C12 20 14 15 16 15 C18 15 20 17 20 17" stroke="white" stroke-width="2" stroke-linecap="round" fill="none"/>
+          <circle cx="16" cy="21" r="2" fill="white"/>
+        </svg>
+        <div style="font-size:20px;font-weight:300;color:var(--gray-900);">Log in to <strong style="font-weight:700;">Work</strong></div>
+      </div>
+      <div class="login-subtitle">Trainer Dashboard · TrainingGPT</div>
+
+      <div class="form-group">
+        <label class="form-label">User ID <span>*</span></label>
+        <input class="form-input" type="text" placeholder="Your mobile number" id="login-id">
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Password <span>*</span></label>
+        <div class="form-input-wrap">
+          <input class="form-input" type="password" placeholder="Password" id="login-pass" value="">
+          <span class="eye-icon">👁</span>
+        </div>
+      </div>
+
+      <button class="login-btn" onclick="doLogin()">Login</button>
+
+      <div class="login-links">
+        <div class="login-link">Forgotten password?</div>
+        <div class="login-link-sub" style="margin-top:6px;">Don't have an account</div>
+        <div class="login-link">First Time ?</div>
+      </div>
+
+      <div class="login-divider"></div>
+      <button class="sso-btn">Login with SSO</button>
+      <button class="sso-btn">Login with SSO-OAM</button>
+    </div>
   </div>
-  <nav class="sidebar-nav">
-    <div class="nav-section-label">Overview</div>
-    <div class="nav-item active" onclick="showView('home')">
-      <span class="icon">⬜</span> Dashboard
-    </div>
-    <div class="nav-item" onclick="showView('live')">
-      <span class="icon">📡</span> Live Calls
-      <span class="nav-badge">3</span>
-    </div>
+</div>
 
-    <div class="nav-section-label">Training</div>
-    <div class="nav-item" onclick="showView('training')">
-      <span class="icon">📋</span> Training Queue
-      <span class="nav-badge">5</span>
-    </div>
-    <div class="nav-item" onclick="">
-      <span class="icon">📚</span> Content Library
-    </div>
-    <div class="nav-item" onclick="">
-      <span class="icon">❓</span> Question Bank
-    </div>
+<!-- ─── APP ───────────────────────────── -->
+<div class="app" id="app">
 
-    <div class="nav-section-label">Analytics</div>
-    <div class="nav-item" onclick="">
-      <span class="icon">📊</span> Performance
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <svg width="26" height="26" viewBox="0 0 32 32" fill="none">
+        <circle cx="16" cy="16" r="16" fill="#E4002B"/>
+        <path d="M8 20 C8 20 12 10 16 10 C20 10 22 14 22 14" stroke="white" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+        <path d="M12 20 C12 20 14 15 16 15 C18 15 20 17 20 17" stroke="white" stroke-width="2" stroke-linecap="round" fill="none"/>
+        <circle cx="16" cy="21" r="2" fill="white"/>
+      </svg>
+      <div class="sidebar-logo-text">
+        Trainer Dashboard
+        <span>TrainingGPT · Airtel XFE</span>
+      </div>
     </div>
-    <div class="nav-item" onclick="">
-      <span class="icon">🏆</span> Leaderboard
-    </div>
-    <div class="nav-item" onclick="">
-      <span class="icon">🤖</span> AI Insights
-    </div>
-  </nav>
-  <div class="sidebar-bottom">
-    <div class="trainer-info">
-      <div class="trainer-avatar">RA</div>
+    <nav class="sidebar-nav">
+      <div class="nav-section-label">Overview</div>
+      <div class="nav-item active" onclick="showView('home',this)">
+        <span class="nav-icon">⊞</span> Dashboard
+      </div>
+      <div class="nav-section-label">Training</div>
+      <div class="nav-item" onclick="showView('training',this)">
+        <span class="nav-icon">📋</span> Training Queue
+        <span class="nav-badge">5</span>
+      </div>
+      <div class="nav-item" onclick="">
+        <span class="nav-icon">📚</span> Content Library
+      </div>
+      <div class="nav-item" onclick="">
+        <span class="nav-icon">❓</span> Question Bank
+      </div>
+      <div class="nav-section-label">Reports</div>
+      <div class="nav-item" onclick="">
+        <span class="nav-icon">📊</span> Performance
+      </div>
+      <div class="nav-item" onclick="">
+        <span class="nav-icon">⬇</span> Download Reports
+      </div>
+    </nav>
+    <div class="sidebar-user">
+      <div class="user-avatar">RA</div>
       <div>
-        <div class="trainer-name">Ravi Arora</div>
-        <div class="trainer-role">Senior Trainer · XFE</div>
+        <div class="user-name">Ravi Arora</div>
+        <div class="user-role">Senior Trainer · XFE</div>
       </div>
     </div>
-  </div>
-</aside>
+  </aside>
 
-<!-- MAIN -->
-<main class="main">
-
-  <!-- TOPBAR -->
-  <div class="topbar">
-    <div class="page-title" id="page-title">Dashboard Overview</div>
-    <div class="topbar-right">
-      <div class="live-badge">
-        <div class="live-dot"></div>
-        3 Live Calls
+  <!-- MAIN -->
+  <main class="main">
+    <!-- TOPBAR -->
+    <div class="topbar">
+      <div class="topbar-left">
+        <div class="topbar-homes">HOMES ▾</div>
       </div>
-      <button class="topbar-btn outline" onclick="showView('live')">View Live</button>
-      <button class="topbar-btn primary" onclick="showPushModal()">+ Push Training</button>
+      <div class="topbar-right">
+        <button class="topbar-icon-btn">🔔</button>
+        <button class="topbar-icon-btn" onclick="doLogout()">⏻</button>
+      </div>
     </div>
-  </div>
 
-  <!-- CONTENT -->
-  <div class="content">
+    <div class="content">
 
-    <!-- ── HOME VIEW ── -->
-    <div class="view active" id="view-home">
+      <!-- ── HOME VIEW ── -->
+      <div class="view active" id="view-home">
 
-      <!-- Stats -->
-      <div class="stats-grid">
-        <div class="stat-card red">
-          <div class="stat-label">Total Fleet</div>
-          <div class="stat-value">1,03,500</div>
-          <div class="stat-sub">Across all LOBs</div>
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-label">Total Fleet</div>
+            <div class="stat-value navy">1,03,500</div>
+            <div class="stat-sub">Across all LOBs</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Require Training</div>
+            <div class="stat-value red">2,847</div>
+            <div class="stat-sub">↑ 312 vs last week</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Pending Training</div>
+            <div class="stat-value amber">1,204</div>
+            <div class="stat-sub">↓ 18% completion rate</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Content Not Uploaded</div>
+            <div class="stat-value green">643</div>
+            <div class="stat-sub">↓ 89 resolved today</div>
+          </div>
         </div>
-        <div class="stat-card amber">
-          <div class="stat-label">Require Training</div>
-          <div class="stat-value">2,847</div>
-          <div class="stat-sub"><span class="down">↑ 312</span> vs last week</div>
-        </div>
-        <div class="stat-card blue">
-          <div class="stat-label">Pending Training</div>
-          <div class="stat-value">1,204</div>
-          <div class="stat-sub"><span class="down">↓ 18%</span> completion rate</div>
-        </div>
-        <div class="stat-card green">
-          <div class="stat-label">Content Not Uploaded</div>
-          <div class="stat-value">643</div>
-          <div class="stat-sub"><span class="up">↓ 89</span> resolved today</div>
-        </div>
-      </div>
 
-      <!-- Training Cards -->
-      <div class="section-header">
-        <div>
+        <div class="section-header">
           <div class="section-title">Training Requirements</div>
-          <div class="section-sub">Identified from AI call evaluations · Updated 12 min ago</div>
-        </div>
-        <a class="see-all" onclick="showView('training')">See all →</a>
-      </div>
-
-      <div class="training-cards-grid">
-
-        <div class="training-card" onclick="showAgentList('Objection Handling')">
-          <div class="card-top">
-            <div class="card-icon red">🛡️</div>
-            <div class="severity-badge critical">Critical</div>
-          </div>
-          <div class="card-name">Objection Handling</div>
-          <div class="card-desc">Agents failing to counter Jio price objections and losing leads at the pitch stage.</div>
-          <div class="card-footer">
-            <div class="card-people">
-              <div class="people-avatars">
-                <div class="people-avatar" style="background:#E4002B">R</div>
-                <div class="people-avatar" style="background:#3B6FEA">A</div>
-                <div class="people-avatar" style="background:#F59E0B">S</div>
-                <div class="people-avatar" style="background:#00C48C">M</div>
-              </div>
-              <div>
-                <div class="people-count">847 agents</div>
-                <div class="people-label">identified</div>
-              </div>
-            </div>
-            <div class="card-arrow">→</div>
-          </div>
+          <span class="see-all" onclick="showView('training',null)">See all →</span>
         </div>
 
-        <div class="training-card" onclick="showAgentList('Value Anchoring')">
-          <div class="card-top">
-            <div class="card-icon amber">⚓</div>
-            <div class="severity-badge high">High</div>
-          </div>
-          <div class="card-name">Value Anchoring</div>
-          <div class="card-desc">Agents quoting speed without connecting it to customer-specific benefits.</div>
-          <div class="card-footer">
-            <div class="card-people">
-              <div class="people-avatars">
-                <div class="people-avatar" style="background:#6366F1">P</div>
-                <div class="people-avatar" style="background:#EC4899">D</div>
-                <div class="people-avatar" style="background:#14B8A6">K</div>
-              </div>
-              <div>
-                <div class="people-count">534 agents</div>
-                <div class="people-label">identified</div>
-              </div>
+        <div class="training-cards-grid">
+          <div class="training-card" onclick="showAgentList('Objection Handling','Critical',847)">
+            <div class="card-top">
+              <div class="card-icon red">🛡️</div>
+              <div class="severity-badge critical">Critical</div>
             </div>
-            <div class="card-arrow">→</div>
-          </div>
-        </div>
-
-        <div class="training-card" onclick="showAgentList('Closing Technique')">
-          <div class="card-top">
-            <div class="card-icon blue">🎯</div>
-            <div class="severity-badge high">High</div>
-          </div>
-          <div class="card-name">Closing Technique</div>
-          <div class="card-desc">Agents asking permission to close instead of using assumptive close techniques.</div>
-          <div class="card-footer">
-            <div class="card-people">
-              <div class="people-avatars">
-                <div class="people-avatar" style="background:#F97316">V</div>
-                <div class="people-avatar" style="background:#8B5CF6">N</div>
-              </div>
-              <div>
-                <div class="people-count">412 agents</div>
-                <div class="people-label">identified</div>
-              </div>
-            </div>
-            <div class="card-arrow">→</div>
-          </div>
-        </div>
-
-        <div class="training-card" onclick="showAgentList('Product Knowledge')">
-          <div class="card-top">
-            <div class="card-icon red">📡</div>
-            <div class="severity-badge medium">Medium</div>
-          </div>
-          <div class="card-name">Product Knowledge</div>
-          <div class="card-desc">Gaps in OTT bundle knowledge and plan comparison vs Jio offerings.</div>
-          <div class="card-footer">
-            <div class="card-people">
-              <div class="people-avatars">
-                <div class="people-avatar" style="background:#10B981">G</div>
-                <div class="people-avatar" style="background:#E4002B">H</div>
-                <div class="people-avatar" style="background:#3B6FEA">I</div>
-              </div>
-              <div>
-                <div class="people-count">389 agents</div>
-                <div class="people-label">identified</div>
-              </div>
-            </div>
-            <div class="card-arrow">→</div>
-          </div>
-        </div>
-
-        <div class="training-card" onclick="showAgentList('Communication Skills')">
-          <div class="card-top">
-            <div class="card-icon amber">💬</div>
-            <div class="severity-badge medium">Medium</div>
-          </div>
-          <div class="card-name">Communication Skills</div>
-          <div class="card-desc">Agents reading from scripts instead of natural conversational selling.</div>
-          <div class="card-footer">
-            <div class="card-people">
-              <div class="people-avatars">
-                <div class="people-avatar" style="background:#F59E0B">J</div>
-                <div class="people-avatar" style="background:#6366F1">K</div>
-              </div>
-              <div>
-                <div class="people-count">265 agents</div>
-                <div class="people-label">identified</div>
-              </div>
-            </div>
-            <div class="card-arrow">→</div>
-          </div>
-        </div>
-
-      </div>
-
-      <!-- Live Calls Preview -->
-      <div class="section-header">
-        <div>
-          <div class="section-title">Live Call Monitor</div>
-          <div class="section-sub">Real-time call activity across XFE fleet</div>
-        </div>
-        <a class="see-all" onclick="showView('live')">Full view →</a>
-      </div>
-
-      <div class="live-section">
-        <div class="live-header">
-          <div class="live-header-left">
-            <div class="live-badge" style="background:rgba(0,196,140,0.15)">
-              <div class="live-dot"></div>
-            </div>
-            <div>
-              <div class="live-title">Active Calls</div>
-              <div class="live-sub">3 calls in progress right now</div>
+            <div class="card-name">Objection Handling</div>
+            <div class="card-desc">Agents failing to counter Jio price objections and losing leads at pitch stage.</div>
+            <div class="card-footer">
+              <div><div class="people-count">847</div><div class="people-label">agents identified</div></div>
+              <div class="card-arrow">→</div>
             </div>
           </div>
-        </div>
-        <div class="live-calls-list">
-          <div class="live-call-row header">
-            <span>Agent</span>
-            <span>Live Audio</span>
-            <span>Status</span>
-            <span>Duration</span>
-            <span>Last Score</span>
+          <div class="training-card" onclick="showAgentList('Value Anchoring','High',534)">
+            <div class="card-top">
+              <div class="card-icon amber">⚓</div>
+              <div class="severity-badge high">High</div>
+            </div>
+            <div class="card-name">Value Anchoring</div>
+            <div class="card-desc">Agents quoting speed without connecting to customer-specific benefits.</div>
+            <div class="card-footer">
+              <div><div class="people-count">534</div><div class="people-label">agents identified</div></div>
+              <div class="card-arrow">→</div>
+            </div>
           </div>
-          <div class="live-call-row">
-            <div class="agent-info">
-              <div class="agent-avatar" style="background:#E4002B">RS</div>
-              <div>
-                <div class="agent-name">Rahul Sharma</div>
-                <div class="agent-id">XFE-4821 · Faridabad</div>
-              </div>
+          <div class="training-card" onclick="showAgentList('Closing Technique','High',412)">
+            <div class="card-top">
+              <div class="card-icon blue">🎯</div>
+              <div class="severity-badge high">High</div>
             </div>
-            <div class="call-waveform">
-              <div class="wave-bar"></div><div class="wave-bar"></div>
-              <div class="wave-bar"></div><div class="wave-bar"></div>
-              <div class="wave-bar"></div><div class="wave-bar"></div>
-              <div class="wave-bar"></div><div class="wave-bar"></div>
+            <div class="card-name">Closing Technique</div>
+            <div class="card-desc">Agents asking permission to close instead of using assumptive close technique.</div>
+            <div class="card-footer">
+              <div><div class="people-count">412</div><div class="people-label">agents identified</div></div>
+              <div class="card-arrow">→</div>
             </div>
-            <div class="call-status">
-              <div class="status-dot live"></div>
-              <span style="color:var(--green)">Live</span>
-            </div>
-            <div class="call-timer">04:23</div>
-            <div class="score-pill avg">62/100</div>
           </div>
-          <div class="live-call-row">
-            <div class="agent-info">
-              <div class="agent-avatar" style="background:#3B6FEA">AM</div>
-              <div>
-                <div class="agent-name">Amit Mishra</div>
-                <div class="agent-id">XFE-3302 · Gurugram</div>
-              </div>
+          <div class="training-card" onclick="showAgentList('Product Knowledge','Medium',389)">
+            <div class="card-top">
+              <div class="card-icon red">📡</div>
+              <div class="severity-badge medium">Medium</div>
             </div>
-            <div class="call-waveform">
-              <div class="wave-bar" style="animation-duration:0.8s"></div>
-              <div class="wave-bar" style="animation-duration:0.6s"></div>
-              <div class="wave-bar" style="animation-duration:1.1s"></div>
-              <div class="wave-bar" style="animation-duration:0.9s"></div>
-              <div class="wave-bar" style="animation-duration:0.7s"></div>
-              <div class="wave-bar" style="animation-duration:1.0s"></div>
-              <div class="wave-bar" style="animation-duration:0.8s"></div>
-              <div class="wave-bar" style="animation-duration:0.6s"></div>
+            <div class="card-name">Product Knowledge</div>
+            <div class="card-desc">Gaps in OTT bundle knowledge and plan comparison vs Jio offerings.</div>
+            <div class="card-footer">
+              <div><div class="people-count">389</div><div class="people-label">agents identified</div></div>
+              <div class="card-arrow">→</div>
             </div>
-            <div class="call-status">
-              <div class="status-dot live"></div>
-              <span style="color:var(--green)">Live</span>
-            </div>
-            <div class="call-timer">02:47</div>
-            <div class="score-pill good">78/100</div>
           </div>
-          <div class="live-call-row">
-            <div class="agent-info">
-              <div class="agent-avatar" style="background:#F59E0B">PK</div>
-              <div>
-                <div class="agent-name">Priya Kapoor</div>
-                <div class="agent-id">XFE-5190 · Noida</div>
-              </div>
+          <div class="training-card" onclick="showAgentList('Communication Skills','Medium',265)">
+            <div class="card-top">
+              <div class="card-icon amber">💬</div>
+              <div class="severity-badge medium">Medium</div>
             </div>
-            <div style="font-size:12px;color:var(--amber);font-weight:600;">In Training →</div>
-            <div class="call-status">
-              <div class="status-dot training"></div>
-              <span style="color:var(--amber)">Training</span>
+            <div class="card-name">Communication Skills</div>
+            <div class="card-desc">Agents reading from scripts instead of natural conversational selling.</div>
+            <div class="card-footer">
+              <div><div class="people-count">265</div><div class="people-label">agents identified</div></div>
+              <div class="card-arrow">→</div>
             </div>
-            <div class="call-timer">—</div>
-            <div class="score-pill poor">44/100</div>
           </div>
         </div>
       </div>
 
-    </div>
-
-    <!-- ── AGENT LIST VIEW ── -->
-    <div class="view" id="view-agent-list">
-      <div class="breadcrumb">
-        <span class="breadcrumb-item" onclick="showView('home')">Dashboard</span>
-        <span class="breadcrumb-sep">/</span>
-        <span class="breadcrumb-item" onclick="showView('training')">Training Queue</span>
-        <span class="breadcrumb-sep">/</span>
-        <span class="breadcrumb-item active" id="breadcrumb-training-name">Objection Handling</span>
-      </div>
-
-      <div class="agent-list-view">
-        <div class="agent-list-header">
-          <div>
-            <div class="agent-list-title" id="agent-list-title">Objection Handling — 847 Agents</div>
-            <div style="font-size:12px;color:var(--gray-400);margin-top:3px;">Select agents to push training content</div>
-          </div>
-          <div class="agent-list-actions">
-            <button class="action-btn outline" onclick="selectAll()">Select All</button>
-            <button class="action-btn outline" id="deselect-btn" onclick="deselectAll()" disabled>Deselect All</button>
-            <button class="action-btn primary" id="push-btn" onclick="showPushModal()" disabled>Push Training</button>
-          </div>
-        </div>
-
-        <div class="agent-table">
-          <div class="agent-table-header">
-            <span></span>
-            <span>Agent</span>
-            <span>Gap Areas</span>
-            <span>Last Score</span>
-            <span>Calls This Week</span>
-            <span>Last Call</span>
-            <span>Status</span>
-          </div>
-          <div id="agent-rows"></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ── AGENT DETAIL VIEW ── -->
-    <div class="view" id="view-agent-detail">
-      <div class="breadcrumb">
-        <span class="breadcrumb-item" onclick="showView('home')">Dashboard</span>
-        <span class="breadcrumb-sep">/</span>
-        <span class="breadcrumb-item" onclick="showView('agent-list')">Objection Handling</span>
-        <span class="breadcrumb-sep">/</span>
-        <span class="breadcrumb-item active" id="breadcrumb-agent-name">Rahul Sharma</span>
-      </div>
-
-      <div class="agent-detail">
-
-        <div class="detail-card">
-          <div class="detail-card-header">
-            <span>👤</span>
-            <div class="detail-card-title">Agent Profile</div>
-          </div>
-          <div class="detail-card-body">
-            <div class="agent-profile">
-              <div class="agent-profile-avatar" style="background:linear-gradient(135deg,#E4002B,#FF4D6D)" id="detail-avatar">RS</div>
-              <div>
-                <div class="agent-profile-name" id="detail-name">Rahul Sharma</div>
-                <div class="agent-profile-meta" id="detail-meta">XFE-4821 · Faridabad · Joined Mar 2023</div>
-              </div>
-            </div>
-            <div class="score-bars" id="detail-scores">
-              <div class="score-bar-row">
-                <div class="score-bar-label">Pitch</div>
-                <div class="score-bar-track"><div class="score-bar-fill" style="width:62%;background:var(--amber)"></div></div>
-                <div class="score-bar-val" style="color:var(--amber)">62</div>
-              </div>
-              <div class="score-bar-row">
-                <div class="score-bar-label">Objection Handling</div>
-                <div class="score-bar-track"><div class="score-bar-fill" style="width:45%;background:var(--red)"></div></div>
-                <div class="score-bar-val" style="color:var(--red)">45</div>
-              </div>
-              <div class="score-bar-row">
-                <div class="score-bar-label">Product Knowledge</div>
-                <div class="score-bar-track"><div class="score-bar-fill" style="width:78%;background:var(--green)"></div></div>
-                <div class="score-bar-val" style="color:var(--green)">78</div>
-              </div>
-              <div class="score-bar-row">
-                <div class="score-bar-label">Closing</div>
-                <div class="score-bar-track"><div class="score-bar-fill" style="width:55%;background:var(--amber)"></div></div>
-                <div class="score-bar-val" style="color:var(--amber)">55</div>
-              </div>
-              <div class="score-bar-row">
-                <div class="score-bar-label">Overall</div>
-                <div class="score-bar-track"><div class="score-bar-fill" style="width:60%;background:var(--blue)"></div></div>
-                <div class="score-bar-val" style="color:var(--blue)">60</div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="detail-card">
-          <div class="detail-card-header">
-            <span>📞</span>
-            <div class="detail-card-title">Last Call Recording</div>
-          </div>
-          <div class="detail-card-body">
-            <button class="play-btn">▶ Play Call Recording</button>
-            <div class="transcription-box">
-              <div class="transcript-line"><span class="speaker agent-speak">Agent:</span> Hello madam, main Airtel se bol raha hoon, Rahul — aapne broadband ke liye inquiry daali thi.</div>
-              <div class="transcript-line"><span class="speaker customer-speak">Customer:</span> Haan ji, hello?</div>
-              <div class="transcript-line"><span class="speaker agent-speak">Agent:</span> Madam, aapke liye ₹799 ka plan hai jisme 100 Mbps speed milegi...</div>
-              <div class="transcript-line"><span class="speaker customer-speak">Customer:</span> Bhai mere paas toh Jio Fiber laga hua hai aur woh sasta bhi hai.</div>
-              <div class="transcript-line"><span class="speaker agent-speak">Agent:</span> Madam, Airtel ka network bahut achha hai...</div>
-              <div class="transcript-line"><span class="speaker customer-speak">Customer:</span> Aap log bolte ho installation free hai, par baad mein charges aate hain.</div>
-              <div class="transcript-line"><span class="speaker agent-speak">Agent:</span> Nahi madam, koi hidden charges nahi hain...</div>
-              <div class="transcript-line"><span class="speaker customer-speak">Customer:</span> Theek hai, details WhatsApp pe bhej do. Main dekh ke batati hoon.</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="detail-card">
-          <div class="detail-card-header">
-            <span>✅</span>
-            <div class="detail-card-title">What He's Good At</div>
-          </div>
-          <div class="detail-card-body">
-            <div class="insight-list">
-              <div class="insight-item good">
-                <span class="insight-icon">✓</span>
-                Strong product knowledge — accurately quoted plan details and OTT inclusions.
-              </div>
-              <div class="insight-item good">
-                <span class="insight-icon">✓</span>
-                Professional tone throughout — never aggressive or dismissive.
-              </div>
-              <div class="insight-item good">
-                <span class="insight-icon">✓</span>
-                Good opening — introduced himself clearly with Airtel context.
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="detail-card">
-          <div class="detail-card-header">
-            <span>⚠️</span>
-            <div class="detail-card-title">Area of Improvement</div>
-          </div>
-          <div class="detail-card-body">
-            <div class="insight-list">
-              <div class="insight-item bad">
-                <span class="insight-icon">✗</span>
-                Dropped to price matching immediately when Jio objection came — should anchor value first.
-              </div>
-              <div class="insight-item bad">
-                <span class="insight-icon">✗</span>
-                Closed weakly — said "details bhej do" instead of attempting an assumptive close.
-              </div>
-              <div class="insight-item bad">
-                <span class="insight-icon">✗</span>
-                Never used OTT bundle value as a differentiator against Jio.
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="detail-card full">
-          <div class="detail-card-header">
-            <span>🎓</span>
-            <div class="detail-card-title">Training Requirement</div>
-          </div>
-          <div class="detail-card-body" style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;">
-            <div style="background:var(--red-soft);border-radius:var(--radius-sm);padding:14px;">
-              <div style="font-size:11px;font-weight:800;color:var(--red);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;">Priority 1</div>
-              <div style="font-size:13px;font-weight:700;color:var(--navy);margin-bottom:4px;">Objection Handling</div>
-              <div style="font-size:12px;color:var(--gray-600);">Jio price rebuttal script + value anchoring technique</div>
-            </div>
-            <div style="background:#FFF8E1;border-radius:var(--radius-sm);padding:14px;">
-              <div style="font-size:11px;font-weight:800;color:var(--amber);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;">Priority 2</div>
-              <div style="font-size:13px;font-weight:700;color:var(--navy);margin-bottom:4px;">Closing Techniques</div>
-              <div style="font-size:12px;color:var(--gray-600);">Assumptive close + urgency creation script</div>
-            </div>
-            <div style="background:#EEF2FF;border-radius:var(--radius-sm);padding:14px;">
-              <div style="font-size:11px;font-weight:800;color:var(--blue);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;">Priority 3</div>
-              <div style="font-size:13px;font-weight:700;color:var(--navy);margin-bottom:4px;">OTT Bundle Pitch</div>
-              <div style="font-size:12px;color:var(--gray-600);">How to position OTT value vs Jio pricing</div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-
-    <!-- ── LIVE VIEW ── -->
-    <div class="view" id="view-live">
-      <div class="section-header" style="margin-bottom:16px;">
-        <div>
-          <div class="section-title">Live Call Monitor</div>
-          <div class="section-sub">Real-time call tracking across XFE fleet</div>
-        </div>
-        <div class="live-badge">
-          <div class="live-dot"></div>
-          3 Active · 12 Completed Today
-        </div>
-      </div>
-
-      <div class="live-section">
-        <div class="live-header">
-          <div class="live-header-left">
-            <div>
-              <div class="live-title">All Calls — Today</div>
-              <div class="live-sub">Auto-refreshes every 10 seconds</div>
-            </div>
-          </div>
-        </div>
-        <div class="live-calls-list">
-          <div class="live-call-row header">
-            <span>Agent</span>
-            <span>Live Audio</span>
-            <span>Status</span>
-            <span>Duration</span>
-            <span>Last Score</span>
-          </div>
-          <div class="live-call-row" onclick="showAgentDetail('Rahul Sharma','XFE-4821 · Faridabad')">
-            <div class="agent-info">
-              <div class="agent-avatar" style="background:#E4002B">RS</div>
-              <div>
-                <div class="agent-name">Rahul Sharma</div>
-                <div class="agent-id">XFE-4821 · Faridabad</div>
-              </div>
-            </div>
-            <div class="call-waveform">
-              <div class="wave-bar"></div><div class="wave-bar"></div>
-              <div class="wave-bar"></div><div class="wave-bar"></div>
-              <div class="wave-bar"></div><div class="wave-bar"></div>
-              <div class="wave-bar"></div><div class="wave-bar"></div>
-            </div>
-            <div class="call-status"><div class="status-dot live"></div><span style="color:var(--green)">Live</span></div>
-            <div class="call-timer" id="timer1">04:23</div>
-            <div class="score-pill avg">62/100</div>
-          </div>
-          <div class="live-call-row" onclick="showAgentDetail('Amit Mishra','XFE-3302 · Gurugram')">
-            <div class="agent-info">
-              <div class="agent-avatar" style="background:#3B6FEA">AM</div>
-              <div>
-                <div class="agent-name">Amit Mishra</div>
-                <div class="agent-id">XFE-3302 · Gurugram</div>
-              </div>
-            </div>
-            <div class="call-waveform">
-              <div class="wave-bar" style="animation-duration:0.8s"></div><div class="wave-bar" style="animation-duration:0.6s"></div>
-              <div class="wave-bar" style="animation-duration:1.1s"></div><div class="wave-bar" style="animation-duration:0.9s"></div>
-              <div class="wave-bar" style="animation-duration:0.7s"></div><div class="wave-bar" style="animation-duration:1.0s"></div>
-              <div class="wave-bar" style="animation-duration:0.8s"></div><div class="wave-bar" style="animation-duration:0.6s"></div>
-            </div>
-            <div class="call-status"><div class="status-dot live"></div><span style="color:var(--green)">Live</span></div>
-            <div class="call-timer" id="timer2">02:47</div>
-            <div class="score-pill good">78/100</div>
-          </div>
-          <div class="live-call-row" onclick="showAgentDetail('Priya Kapoor','XFE-5190 · Noida')">
-            <div class="agent-info">
-              <div class="agent-avatar" style="background:#F59E0B">PK</div>
-              <div>
-                <div class="agent-name">Priya Kapoor</div>
-                <div class="agent-id">XFE-5190 · Noida</div>
-              </div>
-            </div>
-            <div style="font-size:12px;color:var(--amber);font-weight:600;">In Training Module →</div>
-            <div class="call-status"><div class="status-dot training"></div><span style="color:var(--amber)">Training</span></div>
-            <div class="call-timer">—</div>
-            <div class="score-pill poor">44/100</div>
-          </div>
-          <div class="live-call-row" onclick="showAgentDetail('Deepak Verma','XFE-2211 · Delhi')">
-            <div class="agent-info">
-              <div class="agent-avatar" style="background:#8B5CF6">DV</div>
-              <div>
-                <div class="agent-name">Deepak Verma</div>
-                <div class="agent-id">XFE-2211 · Delhi</div>
-              </div>
-            </div>
-            <div style="font-size:12px;color:var(--gray-400)">—</div>
-            <div class="call-status"><div class="status-dot ended"></div><span style="color:var(--gray-400)">Completed</span></div>
-            <div class="call-timer">08:12</div>
-            <div class="score-pill good">81/100</div>
-          </div>
-          <div class="live-call-row" onclick="showAgentDetail('Sunita Rao','XFE-6644 · Ghaziabad')">
-            <div class="agent-info">
-              <div class="agent-avatar" style="background:#10B981">SR</div>
-              <div>
-                <div class="agent-name">Sunita Rao</div>
-                <div class="agent-id">XFE-6644 · Ghaziabad</div>
-              </div>
-            </div>
-            <div style="font-size:12px;color:var(--gray-400)">—</div>
-            <div class="call-status"><div class="status-dot ended"></div><span style="color:var(--gray-400)">Completed</span></div>
-            <div class="call-timer">05:38</div>
-            <div class="score-pill avg">67/100</div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ── TRAINING VIEW ── -->
-    <div class="view" id="view-training">
-      <div class="section-header">
-        <div>
+      <!-- ── TRAINING VIEW ── -->
+      <div class="view" id="view-training">
+        <div class="section-header" style="margin-bottom:14px;">
           <div class="section-title">Training Queue</div>
-          <div class="section-sub">All training requirements identified by AI evaluation</div>
+        </div>
+        <div class="training-cards-grid">
+          <div class="training-card" onclick="showAgentList('Objection Handling','Critical',847)">
+            <div class="card-top"><div class="card-icon red">🛡️</div><div class="severity-badge critical">Critical</div></div>
+            <div class="card-name">Objection Handling</div>
+            <div class="card-desc">Agents failing to counter Jio price objections.</div>
+            <div class="card-footer"><div><div class="people-count">847</div><div class="people-label">agents</div></div><div class="card-arrow">→</div></div>
+          </div>
+          <div class="training-card" onclick="showAgentList('Value Anchoring','High',534)">
+            <div class="card-top"><div class="card-icon amber">⚓</div><div class="severity-badge high">High</div></div>
+            <div class="card-name">Value Anchoring</div>
+            <div class="card-desc">Speed without connecting to customer benefits.</div>
+            <div class="card-footer"><div><div class="people-count">534</div><div class="people-label">agents</div></div><div class="card-arrow">→</div></div>
+          </div>
+          <div class="training-card" onclick="showAgentList('Closing Technique','High',412)">
+            <div class="card-top"><div class="card-icon blue">🎯</div><div class="severity-badge high">High</div></div>
+            <div class="card-name">Closing Technique</div>
+            <div class="card-desc">Asking permission to close instead of assumptive close.</div>
+            <div class="card-footer"><div><div class="people-count">412</div><div class="people-label">agents</div></div><div class="card-arrow">→</div></div>
+          </div>
+          <div class="training-card" onclick="showAgentList('Product Knowledge','Medium',389)">
+            <div class="card-top"><div class="card-icon red">📡</div><div class="severity-badge medium">Medium</div></div>
+            <div class="card-name">Product Knowledge</div>
+            <div class="card-desc">OTT bundle and plan comparison gaps.</div>
+            <div class="card-footer"><div><div class="people-count">389</div><div class="people-label">agents</div></div><div class="card-arrow">→</div></div>
+          </div>
+          <div class="training-card" onclick="showAgentList('Communication Skills','Medium',265)">
+            <div class="card-top"><div class="card-icon amber">💬</div><div class="severity-badge medium">Medium</div></div>
+            <div class="card-name">Communication Skills</div>
+            <div class="card-desc">Script reading instead of natural selling.</div>
+            <div class="card-footer"><div><div class="people-count">265</div><div class="people-label">agents</div></div><div class="card-arrow">→</div></div>
+          </div>
         </div>
       </div>
-      <div class="training-cards-grid">
-        <div class="training-card" onclick="showAgentList('Objection Handling')">
-          <div class="card-top"><div class="card-icon red">🛡️</div><div class="severity-badge critical">Critical</div></div>
-          <div class="card-name">Objection Handling</div>
-          <div class="card-desc">Agents failing to counter Jio price objections.</div>
-          <div class="card-footer">
-            <div class="card-people">
-              <div class="people-count">847 agents</div>
+
+      <!-- ── AGENT LIST VIEW ── -->
+      <div class="view" id="view-agent-list">
+        <div class="breadcrumb">
+          <span class="breadcrumb-item" onclick="showView('home',null)">Dashboard</span>
+          <span class="breadcrumb-sep">/</span>
+          <span class="breadcrumb-item" onclick="showView('training',null)">Training Queue</span>
+          <span class="breadcrumb-sep">/</span>
+          <span class="breadcrumb-item active" id="bc-training">Objection Handling</span>
+        </div>
+        <div class="table-card">
+          <div class="table-card-header">
+            <div>
+              <div class="table-card-title" id="agent-list-title">Objection Handling</div>
+              <div class="table-card-sub">Select agents to push training content</div>
             </div>
-            <div class="card-arrow">→</div>
+            <div class="table-actions">
+              <button class="btn btn-outline" onclick="deselectAll()">Deselect All</button>
+              <button class="btn btn-primary" id="push-btn" onclick="openPushModal()" disabled>Push Training</button>
+            </div>
           </div>
-        </div>
-        <div class="training-card" onclick="showAgentList('Value Anchoring')">
-          <div class="card-top"><div class="card-icon amber">⚓</div><div class="severity-badge high">High</div></div>
-          <div class="card-name">Value Anchoring</div>
-          <div class="card-desc">Agents quoting speed without connecting to benefits.</div>
-          <div class="card-footer">
-            <div class="card-people"><div class="people-count">534 agents</div></div>
-            <div class="card-arrow">→</div>
-          </div>
-        </div>
-        <div class="training-card" onclick="showAgentList('Closing Technique')">
-          <div class="card-top"><div class="card-icon blue">🎯</div><div class="severity-badge high">High</div></div>
-          <div class="card-name">Closing Technique</div>
-          <div class="card-desc">Agents asking permission to close instead of assumptive close.</div>
-          <div class="card-footer">
-            <div class="card-people"><div class="people-count">412 agents</div></div>
-            <div class="card-arrow">→</div>
-          </div>
-        </div>
-        <div class="training-card" onclick="showAgentList('Product Knowledge')">
-          <div class="card-top"><div class="card-icon red">📡</div><div class="severity-badge medium">Medium</div></div>
-          <div class="card-name">Product Knowledge</div>
-          <div class="card-desc">Gaps in OTT bundle and plan comparison knowledge.</div>
-          <div class="card-footer">
-            <div class="card-people"><div class="people-count">389 agents</div></div>
-            <div class="card-arrow">→</div>
-          </div>
-        </div>
-        <div class="training-card" onclick="showAgentList('Communication Skills')">
-          <div class="card-top"><div class="card-icon amber">💬</div><div class="severity-badge medium">Medium</div></div>
-          <div class="card-name">Communication Skills</div>
-          <div class="card-desc">Script reading instead of natural conversational selling.</div>
-          <div class="card-footer">
-            <div class="card-people"><div class="people-count">265 agents</div></div>
-            <div class="card-arrow">→</div>
+          <div class="agent-table">
+            <div class="agent-table-header">
+              <div><div class="checkbox" id="select-all-cb" onclick="toggleSelectAll()"></div></div>
+              <span>Agent</span>
+              <span>Gap Areas</span>
+              <span>Last Score</span>
+              <span>Calls This Week</span>
+              <span>Last Call</span>
+              <span>Status</span>
+            </div>
+            <div id="agent-rows"></div>
           </div>
         </div>
       </div>
+
+      <!-- ── AGENT DETAIL VIEW ── -->
+      <div class="view" id="view-agent-detail">
+        <div class="breadcrumb">
+          <span class="breadcrumb-item" onclick="showView('home',null)">Dashboard</span>
+          <span class="breadcrumb-sep">/</span>
+          <span class="breadcrumb-item" onclick="showView('training',null)">Training Queue</span>
+          <span class="breadcrumb-sep">/</span>
+          <span class="breadcrumb-item" onclick="showView('agent-list',null)" id="bc-training2">Objection Handling</span>
+          <span class="breadcrumb-sep">/</span>
+          <span class="breadcrumb-item active" id="bc-agent">Rahul Sharma</span>
+        </div>
+
+        <div class="detail-grid">
+          <div class="detail-card">
+            <div class="detail-card-header">👤 Agent Profile</div>
+            <div class="detail-card-body">
+              <div class="profile-row">
+                <div class="profile-avatar" id="det-avatar" style="background:#E4002B">RS</div>
+                <div>
+                  <div class="profile-name" id="det-name">Rahul Sharma</div>
+                  <div class="profile-meta" id="det-meta">XFE-4821 · Faridabad · Joined Mar 2023</div>
+                </div>
+              </div>
+              <div class="score-bars">
+                <div class="score-bar-row">
+                  <div class="score-bar-label">Pitch</div>
+                  <div class="score-bar-track"><div class="score-bar-fill" style="width:62%;background:var(--amber)"></div></div>
+                  <div class="score-bar-val" style="color:var(--amber)">62</div>
+                </div>
+                <div class="score-bar-row">
+                  <div class="score-bar-label">Objection Handling</div>
+                  <div class="score-bar-track"><div class="score-bar-fill" style="width:45%;background:var(--red)"></div></div>
+                  <div class="score-bar-val" style="color:var(--red)">45</div>
+                </div>
+                <div class="score-bar-row">
+                  <div class="score-bar-label">Product Knowledge</div>
+                  <div class="score-bar-track"><div class="score-bar-fill" style="width:78%;background:var(--green)"></div></div>
+                  <div class="score-bar-val" style="color:var(--green)">78</div>
+                </div>
+                <div class="score-bar-row">
+                  <div class="score-bar-label">Closing</div>
+                  <div class="score-bar-track"><div class="score-bar-fill" style="width:55%;background:var(--amber)"></div></div>
+                  <div class="score-bar-val" style="color:var(--amber)">55</div>
+                </div>
+                <div class="score-bar-row">
+                  <div class="score-bar-label">Overall</div>
+                  <div class="score-bar-track"><div class="score-bar-fill" style="width:60%;background:var(--navy)"></div></div>
+                  <div class="score-bar-val" style="color:var(--navy)">60</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="detail-card">
+            <div class="detail-card-header">📞 Call Recordings</div>
+            <div class="detail-card-body">
+              <div class="call-recordings">
+                <div class="call-rec-item">
+                  <div class="call-rec-info">
+                    <div class="call-rec-date">08 Jun 2026, 2:14 PM</div>
+                    <div class="call-rec-meta">Duration: 4m 23s · Customer: Sunita Devi</div>
+                  </div>
+                  <div class="call-rec-actions">
+                    <span class="rec-score score-pill avg">62/100</span>
+                    <button class="rec-play-btn">▶ Play</button>
+                  </div>
+                </div>
+                <div class="call-rec-item">
+                  <div class="call-rec-info">
+                    <div class="call-rec-date">07 Jun 2026, 11:30 AM</div>
+                    <div class="call-rec-meta">Duration: 6m 10s · Customer: Ramesh Gupta</div>
+                  </div>
+                  <div class="call-rec-actions">
+                    <span class="rec-score score-pill poor">54/100</span>
+                    <button class="rec-play-btn">▶ Play</button>
+                  </div>
+                </div>
+                <div class="call-rec-item">
+                  <div class="call-rec-info">
+                    <div class="call-rec-date">06 Jun 2026, 4:05 PM</div>
+                    <div class="call-rec-meta">Duration: 5m 44s · Customer: Priya Mehta</div>
+                  </div>
+                  <div class="call-rec-actions">
+                    <span class="rec-score score-pill good">71/100</span>
+                    <button class="rec-play-btn">▶ Play</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="detail-card">
+            <div class="detail-card-header">📝 Latest Call Transcript</div>
+            <div class="detail-card-body">
+              <div class="transcript-box">
+                <div class="t-line"><span class="t-agent">Agent:</span>Hello madam, main Airtel se bol raha hoon — aapne broadband ke liye inquiry daali thi.</div>
+                <div class="t-line"><span class="t-customer">Customer:</span>Haan ji, hello?</div>
+                <div class="t-line"><span class="t-agent">Agent:</span>Madam, aapke liye ₹799 ka plan hai jisme 100 Mbps speed milegi...</div>
+                <div class="t-line"><span class="t-customer">Customer:</span>Bhai mere paas toh Jio Fiber laga hua hai aur woh sasta bhi hai.</div>
+                <div class="t-line"><span class="t-agent">Agent:</span>Madam, Airtel ka network bahut achha hai...</div>
+                <div class="t-line"><span class="t-customer">Customer:</span>Aap log bolte ho installation free hai, par baad mein charges aate hain.</div>
+                <div class="t-line"><span class="t-agent">Agent:</span>Nahi madam, koi hidden charges nahi hain...</div>
+                <div class="t-line"><span class="t-customer">Customer:</span>Theek hai, details WhatsApp pe bhej do.</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="detail-card">
+            <div class="detail-card-header">✅ What He's Good At</div>
+            <div class="detail-card-body">
+              <div class="insight-item good"><span class="insight-icon">✓</span>Strong product knowledge — accurately quoted plan details and OTT inclusions.</div>
+              <div class="insight-item good"><span class="insight-icon">✓</span>Professional tone throughout — never aggressive or dismissive with customer.</div>
+              <div class="insight-item good"><span class="insight-icon">✓</span>Good opening — introduced himself clearly with Airtel context and purpose.</div>
+            </div>
+          </div>
+
+          <div class="detail-card">
+            <div class="detail-card-header">⚠️ Area of Improvement</div>
+            <div class="detail-card-body">
+              <div class="insight-item bad"><span class="insight-icon">✗</span>Dropped to price matching immediately when Jio objection came — should anchor value first.</div>
+              <div class="insight-item bad"><span class="insight-icon">✗</span>Closed weakly — said "details bhej do" instead of attempting an assumptive close.</div>
+              <div class="insight-item bad"><span class="insight-icon">✗</span>Never used OTT bundle value as a differentiator against Jio pricing.</div>
+            </div>
+          </div>
+
+          <div class="detail-card full">
+            <div class="detail-card-header">🎓 Training Requirement</div>
+            <div class="detail-card-body">
+              <div class="training-req-grid">
+                <div class="req-card p1">
+                  <div class="req-priority">Priority 1</div>
+                  <div class="req-name">Objection Handling</div>
+                  <div class="req-desc">Jio price rebuttal script + value anchoring technique</div>
+                </div>
+                <div class="req-card p2">
+                  <div class="req-priority">Priority 2</div>
+                  <div class="req-name">Closing Techniques</div>
+                  <div class="req-desc">Assumptive close + urgency creation script</div>
+                </div>
+                <div class="req-card p3">
+                  <div class="req-priority">Priority 3</div>
+                  <div class="req-name">OTT Bundle Pitch</div>
+                  <div class="req-desc">How to position OTT value vs Jio pricing</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
+  </main>
+</div>
 
-  </div>
-</main>
-
-<!-- PUSH TRAINING MODAL -->
+<!-- ─── PUSH TRAINING MODAL ─────────────── -->
 <div class="modal-overlay" id="push-modal">
   <div class="modal">
     <div class="modal-header">
-      <div class="modal-title">Push Training Content</div>
+      <div>
+        <div class="modal-title">Push Training Content</div>
+        <div class="modal-sub" id="modal-sub-text">0 agents selected</div>
+      </div>
       <button class="modal-close" onclick="closePushModal()">✕</button>
     </div>
     <div class="modal-body">
@@ -1869,18 +1725,23 @@ body {
         <div class="modal-section-title">Select Content Type</div>
         <div class="content-type-grid">
           <div class="content-type-btn" onclick="selectContentType(this,'PPT')">
-            <div class="content-type-icon">📊</div>
-            <div class="content-type-label">Presentation</div>
+            <div class="ctype-icon">📊</div>
+            <div class="ctype-label">Presentation</div>
           </div>
           <div class="content-type-btn" onclick="selectContentType(this,'Video')">
-            <div class="content-type-icon">🎥</div>
-            <div class="content-type-label">Video</div>
+            <div class="ctype-icon">🎥</div>
+            <div class="ctype-label">Video</div>
           </div>
           <div class="content-type-btn" onclick="selectContentType(this,'Audio')">
-            <div class="content-type-icon">🎧</div>
-            <div class="content-type-label">Audio</div>
+            <div class="ctype-icon">🎧</div>
+            <div class="ctype-label">Audio</div>
           </div>
         </div>
+      </div>
+
+      <div class="modal-section" id="content-list-section" style="display:none;">
+        <div class="modal-section-title">Recommended Content <span style="font-weight:400;color:var(--green);text-transform:none;letter-spacing:0;">— AI suggested for this training gap</span></div>
+        <div class="content-list" id="content-list"></div>
       </div>
 
       <div class="modal-section">
@@ -1890,41 +1751,41 @@ body {
             <div class="toggle-label">Certification Required</div>
             <div class="toggle-sub">Agent must pass a quiz after completing content</div>
           </div>
-          <div class="toggle" id="cert-toggle" onclick="toggleOption('cert-toggle','question-section')"></div>
+          <div class="toggle" id="cert-toggle" onclick="toggleOpt('cert-toggle','q-section')"></div>
         </div>
         <div class="toggle-row">
           <div>
             <div class="toggle-label">AI Coach Session Mandatory</div>
-            <div class="toggle-sub">Agent must speak to Viraj after certification</div>
+            <div class="toggle-sub">Agent must speak to Viraj after certification to complete</div>
           </div>
-          <div class="toggle" id="coach-toggle" onclick="toggleOption('coach-toggle',null)"></div>
+          <div class="toggle" id="coach-toggle" onclick="toggleOpt('coach-toggle',null)"></div>
         </div>
       </div>
 
-      <div class="modal-section" id="question-section" style="display:none;">
+      <div class="modal-section" id="q-section" style="display:none;">
         <div class="modal-section-title">Select Certification Questions</div>
-        <div class="question-library">
-          <div class="question-item" onclick="toggleQuestion(this)">
+        <div class="question-library" id="q-library">
+          <div class="question-item" onclick="toggleQ(this)">
             <div class="checkbox">✓</div>
             <div class="question-text">When a customer says Jio is cheaper, what is the BEST first response?</div>
           </div>
-          <div class="question-item" onclick="toggleQuestion(this)">
+          <div class="question-item" onclick="toggleQ(this)">
             <div class="checkbox"></div>
             <div class="question-text">What is the key differentiator between Airtel Fiber and Jio Fiber?</div>
           </div>
-          <div class="question-item" onclick="toggleQuestion(this)">
+          <div class="question-item" onclick="toggleQ(this)">
             <div class="checkbox"></div>
             <div class="question-text">Which closing technique is most effective for Airtel XFE agents?</div>
           </div>
-          <div class="question-item" onclick="toggleQuestion(this)">
+          <div class="question-item" onclick="toggleQ(this)">
             <div class="checkbox"></div>
             <div class="question-text">What OTT apps are included in the ₹799 Airtel Xstream Fiber plan?</div>
           </div>
-          <div class="question-item" onclick="toggleQuestion(this)">
+          <div class="question-item" onclick="toggleQ(this)">
             <div class="checkbox"></div>
             <div class="question-text">How should an agent respond to hidden charges objection?</div>
           </div>
-          <div class="question-item" onclick="toggleQuestion(this)">
+          <div class="question-item" onclick="toggleQ(this)">
             <div class="checkbox"></div>
             <div class="question-text">What is the difference between dedicated and shared bandwidth?</div>
           </div>
@@ -1933,129 +1794,184 @@ body {
 
     </div>
     <div class="modal-footer">
-      <div style="font-size:12px;color:var(--gray-400)" id="selected-count">0 agents selected</div>
-      <button class="push-btn" onclick="pushTraining()">
-        🚀 Push to Agents
-      </button>
+      <div class="modal-footer-meta" id="footer-meta">Select content to proceed</div>
+      <button class="push-btn" onclick="doPush()">🚀 Push to Agents</button>
     </div>
   </div>
 </div>
 
+<!-- SUCCESS MODAL -->
+<div class="modal-overlay" id="success-modal">
+  <div class="modal" style="width:400px;text-align:center;">
+    <div class="modal-body" style="padding:36px 30px;">
+      <div style="font-size:48px;margin-bottom:14px;">✅</div>
+      <div style="font-size:16px;font-weight:600;color:var(--gray-900);margin-bottom:8px;">Training Pushed Successfully</div>
+      <div style="font-size:13px;color:var(--gray-600);line-height:1.6;margin-bottom:22px;" id="success-msg">Content has been pushed to selected agents.</div>
+      <button class="push-btn" style="margin:0 auto;" onclick="closeSuccessModal()">Done</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
 <script>
-// ── State ─────────────────────────────
-const agents = [
-  { name:'Rahul Sharma', id:'XFE-4821', location:'Faridabad', score:62, calls:8, lastCall:'2h ago', status:'Completed', gaps:['Objection','Closing'], color:'#E4002B' },
-  { name:'Amit Mishra', id:'XFE-3302', location:'Gurugram', score:45, calls:6, lastCall:'4h ago', status:'Pending', gaps:['Objection','Value'], color:'#3B6FEA' },
-  { name:'Priya Kapoor', id:'XFE-5190', location:'Noida', score:44, calls:5, lastCall:'1h ago', status:'In Training', gaps:['Objection','Product'], color:'#F59E0B' },
-  { name:'Deepak Verma', id:'XFE-2211', location:'Delhi', score:58, calls:9, lastCall:'30m ago', status:'Pending', gaps:['Objection'], color:'#8B5CF6' },
-  { name:'Sunita Rao', id:'XFE-6644', location:'Ghaziabad', score:67, calls:7, lastCall:'3h ago', status:'Completed', gaps:['Objection','Closing'], color:'#10B981' },
-  { name:'Vikram Singh', id:'XFE-1190', location:'Faridabad', score:39, calls:4, lastCall:'5h ago', status:'Pending', gaps:['Objection','Value','Product'], color:'#F97316' },
-  { name:'Neha Gupta', id:'XFE-8820', location:'Noida', score:71, calls:11, lastCall:'1h ago', status:'Completed', gaps:['Objection'], color:'#EC4899' },
+// ─── Data ─────────────────────────────────
+const AGENTS = [
+  { name:'Rahul Sharma', id:'XFE-4821', loc:'Faridabad', score:62, calls:8, last:'2h ago', status:'Completed', gaps:['Objection','Closing'], color:'#E4002B' },
+  { name:'Amit Mishra', id:'XFE-3302', loc:'Gurugram', score:45, calls:6, last:'4h ago', status:'Pending', gaps:['Objection','Value'], color:'#1565C0' },
+  { name:'Priya Kapoor', id:'XFE-5190', loc:'Noida', score:44, calls:5, last:'1h ago', status:'In Training', gaps:['Objection','Product'], color:'#F59E0B' },
+  { name:'Deepak Verma', id:'XFE-2211', loc:'Delhi', score:58, calls:9, last:'30m ago', status:'Pending', gaps:['Objection'], color:'#7B1FA2' },
+  { name:'Sunita Rao', id:'XFE-6644', loc:'Ghaziabad', score:67, calls:7, last:'3h ago', status:'Completed', gaps:['Objection','Closing'], color:'#00897B' },
+  { name:'Vikram Singh', id:'XFE-1190', loc:'Faridabad', score:39, calls:4, last:'5h ago', status:'Pending', gaps:['Objection','Value','Product'], color:'#E65100' },
+  { name:'Neha Gupta', id:'XFE-8820', loc:'Noida', score:71, calls:11, last:'1h ago', status:'Completed', gaps:['Objection'], color:'#AD1457' },
 ];
+
+const CONTENT_MAP = {
+  PPT: [
+    { name:'Objection Handling Masterclass.pptx', meta:'24 slides · Updated 01 Jun 2026', rel:'Highly Relevant' },
+    { name:'Jio vs Airtel Comparison Deck.pptx', meta:'18 slides · Updated 28 May 2026', rel:'Relevant' },
+    { name:'Closing Techniques — XFE Guide.pptx', meta:'15 slides · Updated 25 May 2026', rel:'Relevant' },
+  ],
+  Video: [
+    { name:'How to Handle Jio Price Objection.mp4', meta:'12 min · HD · Updated 02 Jun 2026', rel:'Highly Relevant' },
+    { name:'Assumptive Closing Technique Demo.mp4', meta:'8 min · HD · Updated 30 May 2026', rel:'Relevant' },
+    { name:'OTT Bundle Value Pitch.mp4', meta:'6 min · HD · Updated 27 May 2026', rel:'Relevant' },
+  ],
+  Audio: [
+    { name:'Model Call — Objection Handling.mp3', meta:'5 min · Updated 03 Jun 2026', rel:'Highly Relevant' },
+    { name:'Closing Script — Read Along.mp3', meta:'4 min · Updated 29 May 2026', rel:'Relevant' },
+  ],
+};
 
 let selectedAgents = new Set();
 let currentTraining = '';
+let selectedContent = null;
+let selectedContentType = null;
 
-// ── Views ─────────────────────────────
-function showView(view) {
+// ─── Login ────────────────────────────────
+function doLogin() {
+  const id = document.getElementById('login-id').value.trim();
+  if (!id) { alert('Please enter your mobile number'); return; }
+  document.getElementById('login-page').style.display = 'none';
+  document.getElementById('app').classList.add('visible');
+}
+
+function doLogout() {
+  document.getElementById('app').classList.remove('visible');
+  document.getElementById('login-page').style.display = 'flex';
+  document.getElementById('login-id').value = '';
+  document.getElementById('login-pass').value = '';
+}
+
+// ─── Views ────────────────────────────────
+function showView(name, navEl) {
   document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
   document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-
-  const titles = {
-    'home': 'Dashboard Overview',
-    'live': 'Live Call Monitor',
-    'training': 'Training Queue',
-    'agent-list': 'Agent List',
-    'agent-detail': 'Agent Detail'
-  };
-
-  const viewEl = document.getElementById('view-' + view);
-  if (viewEl) {
-    viewEl.classList.add('active');
-    document.getElementById('page-title').textContent = titles[view] || 'Dashboard';
-  }
+  const el = document.getElementById('view-' + name);
+  if (el) el.classList.add('active');
+  if (navEl) navEl.classList.add('active');
 }
 
-function showAgentList(trainingName) {
-  currentTraining = trainingName;
-  document.getElementById('breadcrumb-training-name').textContent = trainingName;
-  document.getElementById('agent-list-title').textContent = trainingName + ' — ' + agents.length + ' Agents';
-  renderAgentRows();
-  showView('agent-list');
+function showAgentList(training, severity, count) {
+  currentTraining = training;
   selectedAgents.clear();
-  updatePushBtn();
+  document.getElementById('bc-training').textContent = training;
+  document.getElementById('bc-training2').textContent = training;
+  document.getElementById('agent-list-title').textContent = training + ' — ' + AGENTS.length + ' Agents';
+  renderAgents();
+  showView('agent-list', null);
 }
 
-function renderAgentRows() {
+function renderAgents() {
   const container = document.getElementById('agent-rows');
-  container.innerHTML = agents.map((a, i) => {
-    const scoreColor = a.score >= 70 ? 'var(--green)' : a.score >= 55 ? 'var(--amber)' : 'var(--red)';
-    const scoreClass = a.score >= 70 ? 'good' : a.score >= 55 ? 'avg' : 'poor';
-    const isSelected = selectedAgents.has(i);
+  // Check if all selected
+  const allSelected = AGENTS.length > 0 && selectedAgents.size === AGENTS.length;
+  const cb = document.getElementById('select-all-cb');
+  if (cb) {
+    cb.className = 'checkbox' + (allSelected ? ' checked' : '');
+    cb.textContent = allSelected ? '✓' : '';
+  }
+
+  container.innerHTML = AGENTS.map((a, i) => {
+    const sc = a.score >= 70 ? 'good' : a.score >= 55 ? 'avg' : 'poor';
+    const sel = selectedAgents.has(i);
+    const statusColor = a.status === 'In Training' ? 'var(--amber)' : a.status === 'Completed' ? 'var(--green)' : 'var(--gray-600)';
+    const initials = a.name.split(' ').map(n => n[0]).join('');
     return `
-      <div class="agent-table-row ${isSelected ? 'selected' : ''}" id="row-${i}">
-        <div class="checkbox ${isSelected ? 'checked' : ''}" onclick="toggleAgent(event,${i})">
-          ${isSelected ? '✓' : ''}
-        </div>
-        <div class="agent-info" onclick="showAgentDetail('${a.name}','${a.id} · ${a.location}')">
-          <div class="agent-avatar" style="background:${a.color};width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;color:white;">${a.name.split(' ').map(n=>n[0]).join('')}</div>
+      <div class="agent-table-row ${sel ? 'selected' : ''}" id="row-${i}">
+        <div class="checkbox ${sel ? 'checked' : ''}" onclick="toggleAgent(event,${i})">${sel ? '✓' : ''}</div>
+        <div style="display:flex;align-items:center;gap:9px;" onclick="showAgentDetail('${a.name}','${a.id} · ${a.loc}')">
+          <div class="agent-avatar-sm" style="background:${a.color}">${initials}</div>
           <div>
-            <div class="agent-name">${a.name}</div>
-            <div class="agent-id">${a.id} · ${a.location}</div>
+            <div class="agent-name-text">${a.name}</div>
+            <div class="agent-id-text">${a.id} · ${a.loc}</div>
           </div>
         </div>
-        <div class="gap-tags">
-          ${a.gaps.map(g => `<span class="gap-tag">${g}</span>`).join('')}
-        </div>
-        <div class="score-pill ${scoreClass}">${a.score}/100</div>
-        <div style="font-size:13px;font-weight:600;color:var(--navy)">${a.calls} calls</div>
-        <div style="font-size:12px;color:var(--gray-400)">${a.lastCall}</div>
-        <div style="font-size:12px;font-weight:600;color:${a.status==='In Training'?'var(--amber)':a.status==='Completed'?'var(--green)':'var(--gray-600)'}">${a.status}</div>
+        <div class="gap-tags">${a.gaps.map(g => `<span class="gap-tag">${g}</span>`).join('')}</div>
+        <div class="score-pill ${sc}">${a.score}/100</div>
+        <div style="color:var(--gray-900);font-weight:500;">${a.calls} calls</div>
+        <div style="color:var(--gray-400);font-size:12px;">${a.last}</div>
+        <div class="status-text" style="color:${statusColor}">${a.status}</div>
       </div>
     `;
   }).join('');
+  updatePushBtn();
+}
+
+function toggleSelectAll() {
+  if (selectedAgents.size === AGENTS.length) {
+    selectedAgents.clear();
+  } else {
+    AGENTS.forEach((_, i) => selectedAgents.add(i));
+  }
+  renderAgents();
 }
 
 function toggleAgent(e, i) {
   e.stopPropagation();
   if (selectedAgents.has(i)) selectedAgents.delete(i);
   else selectedAgents.add(i);
-  renderAgentRows();
-  updatePushBtn();
-}
-
-function selectAll() {
-  agents.forEach((_, i) => selectedAgents.add(i));
-  renderAgentRows();
-  updatePushBtn();
+  renderAgents();
 }
 
 function deselectAll() {
   selectedAgents.clear();
-  renderAgentRows();
-  updatePushBtn();
+  renderAgents();
 }
 
 function updatePushBtn() {
   const n = selectedAgents.size;
   const btn = document.getElementById('push-btn');
-  const desel = document.getElementById('deselect-btn');
   btn.disabled = n === 0;
-  desel.disabled = n === 0;
   btn.textContent = n > 0 ? `Push Training (${n})` : 'Push Training';
-  document.getElementById('selected-count').textContent = n + ' agent' + (n !== 1 ? 's' : '') + ' selected';
 }
 
 function showAgentDetail(name, meta) {
-  document.getElementById('breadcrumb-agent-name').textContent = name;
-  document.getElementById('detail-name').textContent = name;
-  document.getElementById('detail-meta').textContent = meta + ' · Joined Mar 2023';
-  document.getElementById('detail-avatar').textContent = name.split(' ').map(n=>n[0]).join('');
-  showView('agent-detail');
+  document.getElementById('bc-agent').textContent = name;
+  const initials = name.split(' ').map(n => n[0]).join('');
+  document.getElementById('det-avatar').textContent = initials;
+  document.getElementById('det-name').textContent = name;
+  document.getElementById('det-meta').textContent = meta + ' · Joined Mar 2023';
+  showView('agent-detail', null);
 }
 
-// ── Modal ─────────────────────────────
-function showPushModal() {
+// ─── Push Modal ───────────────────────────
+function openPushModal() {
+  // Reset on open
+  selectedContent = null;
+  selectedContentType = null;
+  document.querySelectorAll('.content-type-btn').forEach(b => b.classList.remove('selected'));
+  document.getElementById('content-list-section').style.display = 'none';
+  document.getElementById('cert-toggle').className = 'toggle';
+  document.getElementById('coach-toggle').className = 'toggle';
+  document.getElementById('q-section').style.display = 'none';
+  document.querySelectorAll('.question-item').forEach(q => {
+    q.classList.remove('selected');
+    const cb = q.querySelector('.checkbox');
+    cb.classList.remove('checked');
+    cb.textContent = '';
+  });
+  document.getElementById('modal-sub-text').textContent = selectedAgents.size + ' agent' + (selectedAgents.size !== 1 ? 's' : '') + ' selected';
   document.getElementById('push-modal').classList.add('open');
 }
 
@@ -2066,44 +1982,68 @@ function closePushModal() {
 function selectContentType(el, type) {
   document.querySelectorAll('.content-type-btn').forEach(b => b.classList.remove('selected'));
   el.classList.add('selected');
+  selectedContentType = type;
+  selectedContent = null;
+
+  // Show content list
+  const items = CONTENT_MAP[type] || [];
+  const list = document.getElementById('content-list');
+  list.innerHTML = items.map((c, i) => `
+    <div class="content-list-item" onclick="selectContent(this,${i})">
+      <span class="content-file-icon">${type === 'PPT' ? '📊' : type === 'Video' ? '🎥' : '🎧'}</span>
+      <div style="flex:1">
+        <div class="content-file-name">${c.name}</div>
+        <div class="content-file-meta">${c.meta}</div>
+      </div>
+      <span class="content-relevance">${c.rel}</span>
+    </div>
+  `).join('');
+  document.getElementById('content-list-section').style.display = 'block';
+  updateFooterMeta();
 }
 
-function toggleOption(id, sectionId) {
-  const toggle = document.getElementById(id);
-  toggle.classList.toggle('on');
+function selectContent(el, idx) {
+  document.querySelectorAll('.content-list-item').forEach(i => i.classList.remove('selected'));
+  el.classList.add('selected');
+  selectedContent = idx;
+  updateFooterMeta();
+}
+
+function updateFooterMeta() {
+  const meta = document.getElementById('footer-meta');
+  if (!selectedContentType) { meta.textContent = 'Select content type to proceed'; return; }
+  if (selectedContent === null) { meta.textContent = 'Select a content item to proceed'; return; }
+  meta.textContent = `Ready to push to ${selectedAgents.size} agent${selectedAgents.size !== 1 ? 's' : ''}`;
+}
+
+function toggleOpt(id, sectionId) {
+  const t = document.getElementById(id);
+  t.classList.toggle('on');
   if (sectionId) {
-    const section = document.getElementById(sectionId);
-    section.style.display = toggle.classList.contains('on') ? 'block' : 'none';
+    document.getElementById(sectionId).style.display = t.classList.contains('on') ? 'block' : 'none';
   }
 }
 
-function toggleQuestion(el) {
+function toggleQ(el) {
   el.classList.toggle('selected');
   const cb = el.querySelector('.checkbox');
   cb.classList.toggle('checked');
   cb.textContent = cb.classList.contains('checked') ? '✓' : '';
 }
 
-function pushTraining() {
+function doPush() {
   closePushModal();
-  alert(`Training pushed to ${selectedAgents.size || 'selected'} agents successfully!`);
+  const n = selectedAgents.size;
+  const type = selectedContentType || 'Content';
+  document.getElementById('success-msg').textContent = `${type} has been successfully pushed to ${n} agent${n !== 1 ? 's' : ''} for ${currentTraining} training. Agents will be notified on their TrainingGPT app.`;
+  document.getElementById('success-modal').classList.add('open');
 }
 
-// ── Timers ────────────────────────────
-let t1 = 263, t2 = 167;
-setInterval(() => {
-  t1++; t2++;
-  const fmt = s => `${String(Math.floor(s/60)).padStart(2,'0')}:${String(s%60).padStart(2,'0')}`;
-  const t1el = document.getElementById('timer1');
-  const t2el = document.getElementById('timer2');
-  if (t1el) t1el.textContent = fmt(t1);
-  if (t2el) t2el.textContent = fmt(t2);
-}, 1000);
-
-// Close modal on overlay click
-document.getElementById('push-modal').addEventListener('click', function(e) {
-  if (e.target === this) closePushModal();
-});
+function closeSuccessModal() {
+  document.getElementById('success-modal').classList.remove('open');
+  selectedAgents.clear();
+  renderAgents();
+}
 </script>
 </body>
 </html>

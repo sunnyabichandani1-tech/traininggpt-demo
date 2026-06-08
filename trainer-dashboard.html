@@ -2035,7 +2035,7 @@ function doPush() {
   closePushModal();
   const n = selectedAgents.size;
   const type = selectedContentType || 'Content';
-  document.getElementById('success-msg').textContent = `${type} has been successfully pushed to ${n} agent${n !== 1 ? 's' : ''} for ${currentTraining} training. Agents will be notified on their TrainingGPT app.`;
+  document.getElementById('success-msg').textContent = `${type} has been successfully pushed to ${n} agent${n !== 1 ? 's' : ''} for ${currentTraining} training. Agents will be notified on Atlas app.`;
   document.getElementById('success-modal').classList.add('open');
 }
 

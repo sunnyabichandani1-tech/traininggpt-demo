@@ -427,6 +427,7 @@ body{font-family:var(--font);background:var(--gray-50);color:var(--gray-900);min
       <div class="topbar-homes">HOMES ▾</div>
       <div class="topbar-right">
         <button class="tb-icon">🔔</button>
+        <button onclick="openXFEApp()" style="height:30px;padding:0 12px;background:#E3F2FD;color:#1565C0;border:1px solid #90CAF9;border-radius:4px;font-size:11.5px;font-weight:600;cursor:pointer;font-family:inherit;display:flex;align-items:center;gap:4px;">📱 Open XFE App</button>
         <button class="tb-icon" onclick="doLogout()">⏻</button>
       </div>
     </div>
@@ -460,6 +461,26 @@ body{font-family:var(--font);background:var(--gray-50);color:var(--gray-900);min
             <div class="stat-label">Pending Training</div>
             <div class="stat-value amber">1,204</div>
             <div class="stat-sub">↓ 18% completion rate</div>
+          </div>
+        </div>
+
+        <!-- LIVE CALL FEED -->
+        <div id="live-feed-section" style="display:none;margin-bottom:18px;">
+          <div class="sec-hdr">
+            <div style="display:flex;align-items:center;gap:8px;">
+              <div class="sec-title">Live Call Feed</div>
+              <span style="display:flex;align-items:center;gap:4px;background:#E8F5E9;color:#2E7D32;font-size:10px;font-weight:700;padding:2px 8px;border-radius:10px;">
+                <span style="width:6px;height:6px;border-radius:50%;background:#2E7D32;animation:livePulse 1.5s infinite;display:inline-block;"></span>
+                LIVE
+              </span>
+            </div>
+          </div>
+          <style>@keyframes livePulse{0%,100%{opacity:1;}50%{opacity:0.4;}}</style>
+          <div style="background:white;border-radius:6px;border:1px solid #DDE0E8;box-shadow:0 1px 3px rgba(0,0,0,0.07);overflow:hidden;">
+            <div style="display:grid;grid-template-columns:1fr 140px 120px 110px 90px;padding:8px 18px;background:#F4F5F7;font-size:10.5px;font-weight:600;color:#6B7594;text-transform:uppercase;letter-spacing:0.3px;border-bottom:1px solid #DDE0E8;">
+              <span>Agent</span><span>Training Gap</span><span>Score</span><span>Status</span><span>Action</span>
+            </div>
+            <div id="live-feed-rows"></div>
           </div>
         </div>
 
@@ -1044,16 +1065,165 @@ function updFtr(){
   m.textContent=`Ready to push to ${sel.size} agent${sel.size!==1?"s":""}`;
 }
 
-function doPush(){
+// Webhook to write assignment to Google Sheet
+const PUSH_WEBHOOK = 'https://hook.us2.make.com/ver5l2cce1yyflkwrn1sndttiazy8916';
+const SHEET_ID = '1LmtVPNQNzOHJhhtGlhKaOtFHEdY3O44dUz4_UvwXzak';
+const SHEET_API_KEY = ''; // Add Google Sheets API key for live mode
+
+// Demo: XFE app window reference (for postMessage on same device)
+let xfeWindow = null;
+
+async function doPush(){
   closePushModal();
-  const n=sel.size;
-  document.getElementById("succ-msg").textContent=`${selCT} content has been successfully pushed to ${n} agent${n!==1?"s":""} for "${curTrain}" training. Agents will be notified on their TrainingGPT app.`;
+  const n = sel.size;
+  const certOn = document.getElementById("cert-tog").classList.contains("on");
+  const coachOn = document.getElementById("coach-tog").classList.contains("on");
+  const contentFile = selCI !== null && CONTENT_MAP[selCT] ? CONTENT_MAP[selCT][selCI].name : '';
+
+  const assignmentPayload = {
+    trainingName: curTrain,
+    contentType: selCT || 'Video',
+    contentFile: contentFile,
+    certRequired: certOn,
+    coachRequired: coachOn,
+    assignedAt: new Date().toISOString()
+  };
+
+  // 1. Send to Make.com Scenario 4 → writes to Google Sheet Assignments tab
+  const agentPhones = Array.from(sel).map(i => AGENTS[i].id);
+  try {
+    await fetch(PUSH_WEBHOOK, {
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({
+        ...assignmentPayload,
+        agentIds: agentPhones,
+        agentCount: n
+      })
+    });
+  } catch(e){ console.warn('Webhook error:', e); }
+
+  // 2. Demo: postMessage to XFE app window if open on same device
+  if(xfeWindow && !xfeWindow.closed){
+    xfeWindow.postMessage({ type: 'TRAINING_ASSIGNED', payload: assignmentPayload }, '*');
+  }
+
+  // 3. Show success
+  document.getElementById("succ-msg").textContent = `${selCT || 'Content'} pushed to ${n} agent${n!==1?"s":""} for "${curTrain}" training. Agents will receive a notification on their TrainingGPT app immediately.`;
   document.getElementById("succ-modal").classList.add("open");
 }
 
 function closeSucc(){
   document.getElementById("succ-modal").classList.remove("open");
   sel.clear(); renderAgents();
+}
+
+// Open XFE app in new tab for same-device demo
+function openXFEApp(){
+  xfeWindow = window.open('xfe.html', 'xfe_demo');
+  toast('XFE App opened — ask leader to log in and make a call');
+}
+
+// ── LIVE CALL FEED ─────────────────────────────────
+// Polls Google Sheet Feedback tab for real call evaluations
+let liveFeedRows = [];
+let liveFeedInterval = null;
+
+function startLiveFeed(){
+  document.getElementById('live-feed-section').style.display = 'block';
+  if(!SHEET_API_KEY){
+    // Demo mode: show simulated live data
+    renderLiveFeed(getLiveDemoData());
+    return;
+  }
+  liveFeedInterval = setInterval(async ()=>{
+    try {
+      const url = `https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/Feedback!A:F?key=${SHEET_API_KEY}`;
+      const r = await fetch(url);
+      const d = await r.json();
+      const rows = (d.values || []).slice(1).filter(r => r[2]);
+      const parsed = rows.map(row => {
+        let scores = {}, gaps = [];
+        try {
+          const j = JSON.parse(row[2]);
+          scores = j.scores || {};
+          gaps = (j.gaps || []).map(g => g.area || g);
+        } catch(e){}
+        return {
+          agentPhone: row[1] || '',
+          scores,
+          gaps,
+          timestamp: row[5] || '',
+          callId: row[0] || ''
+        };
+      });
+      renderLiveFeed(parsed.slice(-5).reverse());
+    } catch(e){ console.warn('Live feed poll error:', e); }
+  }, 5000);
+}
+
+function getLiveDemoData(){
+  return [
+    { agentPhone: '98XXXXXXXX01', scores:{ overall:62 }, gaps:['Objection Handling','Closing'], timestamp: 'Just now', callId:'demo-001', isLive:true },
+    { agentPhone: '98XXXXXXXX02', scores:{ overall:45 }, gaps:['Value Anchoring'], timestamp: '2 min ago', callId:'demo-002', isLive:false },
+    { agentPhone: '98XXXXXXXX03', scores:{ overall:78 }, gaps:['Closing Technique'], timestamp: '5 min ago', callId:'demo-003', isLive:false },
+  ];
+}
+
+function renderLiveFeed(rows){
+  const container = document.getElementById('live-feed-rows');
+  if(!rows || !rows.length){
+    container.innerHTML = '<div style="padding:16px 18px;font-size:12.5px;color:#9BA3BE;">No calls recorded yet. Ask the leader to make a call via the XFE App.</div>';
+    return;
+  }
+  container.innerHTML = rows.map((r,i) => {
+    const sc = (r.scores.overall || 0);
+    const scClass = sc >= 70 ? 'good' : sc >= 55 ? 'avg' : 'poor';
+    const isLive = r.isLive || i === 0;
+    const gapStr = (r.gaps || []).slice(0,2).map(g => `<span style="font-size:10px;font-weight:500;padding:2px 5px;border-radius:3px;background:#FFF0F2;color:#E4002B;">${g}</span>`).join('');
+    return `
+      <div style="display:grid;grid-template-columns:1fr 140px 120px 110px 90px;padding:11px 18px;border-bottom:1px solid #F0F2F6;align-items:center;cursor:pointer;transition:background 0.1s;" onmouseover="this.style.background='#F8F9FC'" onmouseout="this.style.background=''">
+        <div style="display:flex;align-items:center;gap:8px;">
+          ${isLive ? '<span style="width:7px;height:7px;border-radius:50%;background:#2E7D32;animation:livePulse 1.5s infinite;display:inline-block;flex-shrink:0;"></span>' : '<span style="width:7px;height:7px;border-radius:50%;background:#C4C9D9;display:inline-block;flex-shrink:0;"></span>'}
+          <div>
+            <div style="font-size:12.5px;font-weight:500;color:#1A2035;">${r.agentPhone}</div>
+            <div style="font-size:10.5px;color:#9BA3BE;">${r.timestamp}</div>
+          </div>
+        </div>
+        <div style="display:flex;gap:3px;flex-wrap:wrap;">${gapStr || '<span style="font-size:11px;color:#9BA3BE;">—</span>'}</div>
+        <div><span class="score-pill ${scClass}" style="font-size:11.5px;">${sc}/100</span></div>
+        <div style="font-size:11.5px;font-weight:500;color:${isLive?'#2E7D32':'#6B7594'};">${isLive?'Live':'Completed'}</div>
+        <button onclick="viewLiveCall('${r.agentPhone}','${(r.gaps||[]).join(',')}')" style="height:26px;padding:0 10px;background:#1976D2;color:white;border:none;border-radius:4px;font-size:11px;font-weight:500;cursor:pointer;font-family:inherit;">View</button>
+      </div>
+    `;
+  }).join('');
+}
+
+function viewLiveCall(phone, gapsStr){
+  const gaps = gapsStr.split(',').filter(Boolean);
+  const training = gaps[0] || 'Training Needs';
+  // Show agent detail with this data
+  showDetail(phone, phone + ' · Live Call');
+  // Switch to training needs tab automatically
+  setTimeout(()=>{
+    const tabs = document.querySelectorAll('.dtab');
+    tabs.forEach(t => t.classList.remove('active'));
+    tabs[2].classList.add('active');
+    document.getElementById('tab-lead').style.display='none';
+    document.getElementById('tab-call').style.display='none';
+    document.getElementById('tab-training').style.display='';
+  }, 100);
+}
+
+// Auto-start live feed when dashboard loads
+setTimeout(startLiveFeed, 1000);
+
+function toast(msg){
+  const t = document.createElement('div');
+  t.style.cssText = 'position:fixed;bottom:20px;right:20px;background:#1A2035;color:white;padding:10px 16px;border-radius:6px;font-size:12.5px;font-weight:500;z-index:1000;animation:mIn 0.2s ease;';
+  t.textContent = msg;
+  document.body.appendChild(t);
+  setTimeout(()=>t.remove(), 3000);
 }
 
 document.getElementById("push-modal").addEventListener("click",function(e){if(e.target===this)closePushModal();});

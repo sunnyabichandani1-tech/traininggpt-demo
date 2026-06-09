@@ -337,6 +337,52 @@ body{font-family:var(--font);background:var(--gray-50);color:var(--gray-900);min
 .sm-title{font-size:15px;font-weight:600;color:var(--gray-900);margin-bottom:7px;}
 .sm-msg{font-size:12.5px;color:var(--gray-600);line-height:1.6;margin-bottom:20px;}
 
+/* ── LIVE FEED ── */
+.live-feed-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;}
+.live-indicator{display:flex;align-items:center;gap:6px;background:#E8F5E9;color:#2E7D32;font-size:11px;font-weight:700;padding:4px 10px;border-radius:10px;}
+.live-dot{width:7px;height:7px;border-radius:50%;background:#2E7D32;animation:livePulse 1.5s infinite;}
+@keyframes livePulse{0%,100%{opacity:1;}50%{opacity:0.3;}}
+.lf-empty{background:white;border-radius:var(--radius);border:1px solid var(--gray-200);padding:48px;text-align:center;}
+.lf-empty-icon{font-size:40px;margin-bottom:12px;}
+.lf-empty-title{font-size:14px;font-weight:600;color:var(--gray-900);margin-bottom:6px;}
+.lf-empty-sub{font-size:12.5px;color:var(--gray-400);}
+.lf-webhook-url{background:var(--gray-50);border:1px solid var(--gray-200);border-radius:var(--radius-sm);padding:8px 12px;font-size:11px;font-family:monospace;color:var(--gray-600);margin-top:12px;word-break:break-all;}
+.call-card{background:white;border-radius:var(--radius);border:1px solid var(--gray-200);box-shadow:var(--shadow-sm);margin-bottom:14px;overflow:hidden;animation:cardIn 0.4s ease;}
+@keyframes cardIn{from{opacity:0;transform:translateY(-8px);}to{opacity:1;transform:translateY(0);}}
+.call-card.new-call{border-left:3px solid var(--green);}
+.call-card-header{padding:14px 18px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--gray-100);background:var(--gray-50);}
+.call-card-agent{display:flex;align-items:center;gap:10px;}
+.call-card-av{width:36px;height:36px;border-radius:50%;background:var(--red);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:white;flex-shrink:0;}
+.call-card-name{font-size:13.5px;font-weight:600;color:var(--gray-900);}
+.call-card-meta{font-size:11.5px;color:var(--gray-400);margin-top:2px;}
+.call-card-score{text-align:right;}
+.call-card-score-val{font-size:22px;font-weight:700;font-variant-numeric:tabular-nums;}
+.call-card-score-val.good{color:var(--green);}
+.call-card-score-val.avg{color:var(--amber);}
+.call-card-score-val.poor{color:var(--red);}
+.call-card-score-lbl{font-size:10px;color:var(--gray-400);margin-top:1px;}
+.call-card-body{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0;border-bottom:1px solid var(--gray-100);}
+.call-card-section{padding:14px 18px;border-right:1px solid var(--gray-100);}
+.call-card-section:last-child{border-right:none;}
+.call-section-title{font-size:10.5px;font-weight:700;color:var(--gray-400);text-transform:uppercase;letter-spacing:0.4px;margin-bottom:10px;}
+.score-mini-bars{display:flex;flex-direction:column;gap:6px;}
+.smb-row{display:flex;align-items:center;gap:6px;}
+.smb-lbl{font-size:11px;color:var(--gray-600);width:80px;flex-shrink:0;}
+.smb-track{flex:1;height:4px;background:var(--gray-100);border-radius:2px;overflow:hidden;}
+.smb-fill{height:100%;border-radius:2px;}
+.smb-val{font-size:11px;font-weight:600;width:24px;text-align:right;font-variant-numeric:tabular-nums;}
+.gap-list{display:flex;flex-direction:column;gap:5px;}
+.gap-item{display:flex;align-items:flex-start;gap:6px;font-size:12px;color:#9F1239;background:var(--red-soft);padding:5px 8px;border-radius:3px;}
+.gap-ico{flex-shrink:0;margin-top:1px;}
+.transcript-mini{background:var(--gray-50);border-radius:var(--radius-sm);padding:10px;font-size:11.5px;line-height:1.7;color:var(--gray-600);max-height:120px;overflow-y:auto;border:1px solid var(--gray-100);}
+.tm-line{margin-bottom:3px;}
+.tm-a{font-weight:600;color:var(--navy);margin-right:4px;font-size:11px;}
+.tm-c{font-weight:600;color:var(--gray-500);margin-right:4px;font-size:11px;}
+.call-card-footer{padding:12px 18px;display:flex;align-items:center;justify-content:space-between;}
+.call-card-time{font-size:11.5px;color:var(--gray-400);}
+.push-from-card{height:28px;padding:0 12px;background:var(--blue-btn);color:white;border:none;border-radius:var(--radius-sm);font-size:11.5px;font-weight:500;font-family:var(--font);cursor:pointer;}
+.push-from-card:hover{background:var(--blue-btn-hover);}
+
 /* ── SCROLLBAR ── */
 ::-webkit-scrollbar{width:4px;}
 ::-webkit-scrollbar-track{background:transparent;}
@@ -408,6 +454,10 @@ body{font-family:var(--font);background:var(--gray-50);color:var(--gray-900);min
       <div class="nav-item" id="nav-train" onclick="showV('training',this)">
         <span class="nav-icon">📋</span> Training Queue
         <span class="nav-badge">5</span>
+      </div>
+      <div class="nav-item" id="nav-live" onclick="showV('live-feed',this)">
+        <span class="nav-icon">📡</span> Live Feed
+        <span class="nav-badge" id="live-badge" style="display:none;">●</span>
       </div>
       <div class="nav-item" onclick="">
         <span class="nav-icon">📚</span> Content Library
@@ -801,6 +851,34 @@ body{font-family:var(--font);background:var(--gray-50);color:var(--gray-900);min
               </div>
             </div>
 
+          </div>
+        </div>
+      </div>
+
+      <!-- LIVE FEED VIEW -->
+      <div class="view" id="view-live-feed">
+        <div class="live-feed-header">
+          <div>
+            <div class="sec-title">Live Call Feed</div>
+            <div style="font-size:12px;color:var(--gray-400);margin-top:2px;">Real-time call evaluations as they happen</div>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px;">
+            <div class="live-indicator" id="live-status-badge" style="display:none;">
+              <div class="live-dot"></div>
+              LIVE
+            </div>
+            <button class="btn-blue" onclick="clearLiveFeed()" style="height:30px;padding:0 12px;font-size:12px;">Clear Feed</button>
+          </div>
+        </div>
+        <div id="live-feed-container">
+          <div class="lf-empty" id="lf-empty-state">
+            <div class="lf-empty-icon">📡</div>
+            <div class="lf-empty-title">Waiting for live calls...</div>
+            <div class="lf-empty-sub">When an agent completes a call, the evaluation will appear here automatically.</div>
+            <div style="margin-top:16px;">
+              <div style="font-size:11.5px;color:var(--gray-600);margin-bottom:6px;font-weight:500;">Configure this URL in Make.com Scenario 3 → Module 3:</div>
+              <div class="lf-webhook-url" id="lf-webhook-display">Loading URL...</div>
+            </div>
           </div>
         </div>
       </div>
@@ -1228,6 +1306,209 @@ function toast(msg){
 
 document.getElementById("push-modal").addEventListener("click",function(e){if(e.target===this)closePushModal();});
 document.getElementById("succ-modal").addEventListener("click",function(e){if(e.target===this)closeSucc();});
+
+// ── LIVE FEED ──────────────────────────────────────────
+// This page has its own unique webhook URL
+// Make.com sends POST to this URL after each call evaluation
+const LIVE_FEED_RECEIVE_URL = window.location.href.split('?')[0];
+let liveCalls = [];
+let liveCallCount = 0;
+
+// Show the URL in the empty state
+window.addEventListener('load', function(){
+  const urlEl = document.getElementById('lf-webhook-display');
+  if(urlEl){
+    // Generate a unique receive URL for this dashboard
+    const baseUrl = window.location.href.split('?')[0];
+    urlEl.textContent = baseUrl + '?livecall=DATA_FROM_MAKE';
+  }
+});
+
+// Check URL parameters on load — Make.com sends data via URL params
+function checkURLParams(){
+  const params = new URLSearchParams(window.location.search);
+  if(params.get('livecall') || params.get('callId') || params.get('phone')){
+    const callData = {
+      callId:    params.get('callId') || 'call-' + Date.now(),
+      phone:     params.get('phone') || '+91XXXXXXXXXX',
+      score:     parseInt(params.get('score') || '0'),
+      gaps:      (params.get('gaps') || 'Objection Handling,Closing Technique').split(','),
+      pitch:     parseInt(params.get('pitch') || '0'),
+      objection: parseInt(params.get('objection') || '0'),
+      clarity:   parseInt(params.get('clarity') || '0'),
+      transcript: decodeURIComponent(params.get('transcript') || ''),
+      timestamp: new Date().toLocaleTimeString('en-IN', {hour:'2-digit', minute:'2-digit'})
+    };
+    addLiveCall(callData);
+    // Switch to live feed view
+    showV('live-feed', document.getElementById('nav-live'));
+    // Clean URL
+    window.history.replaceState({}, '', window.location.pathname);
+  }
+}
+
+// Also listen for postMessage from Make.com webhook (via iframe or direct)
+window.addEventListener('message', function(e){
+  if(e.data && e.data.type === 'LIVE_CALL'){
+    addLiveCall(e.data.payload);
+    // Show notification if not on live feed
+    const liveView = document.getElementById('view-live-feed');
+    if(!liveView.classList.contains('active')){
+      showLiveFeedNotification(e.data.payload);
+    }
+  }
+});
+
+// Main function to add a call to the live feed
+function addLiveCall(data){
+  liveCalls.unshift(data); // newest first
+  liveCallCount++;
+
+  // Update nav badge
+  const badge = document.getElementById('live-badge');
+  if(badge){
+    badge.style.display = 'flex';
+    badge.textContent = liveCallCount;
+    badge.style.background = '#E8F5E9';
+    badge.style.color = '#2E7D32';
+  }
+
+  // Update live status
+  const statusBadge = document.getElementById('live-status-badge');
+  if(statusBadge) statusBadge.style.display = 'flex';
+
+  // Hide empty state
+  const emptyState = document.getElementById('lf-empty-state');
+  if(emptyState) emptyState.style.display = 'none';
+
+  // Render the call card
+  renderCallCard(data);
+
+  // Show toast
+  toast('📞 New call evaluated — ' + (data.phone || '') + ' · Score: ' + data.score + '/100');
+}
+
+function renderCallCard(data){
+  const container = document.getElementById('live-feed-container');
+  const sc = data.score >= 70 ? 'good' : data.score >= 55 ? 'avg' : 'poor';
+  const initials = (data.phone || 'XF').slice(-4,-2).toUpperCase() || 'XF';
+  const gaps = Array.isArray(data.gaps) ? data.gaps : (data.gaps || '').split(',').filter(Boolean);
+
+  // Parse transcript into lines
+  let transcriptHtml = '';
+  if(data.transcript){
+    const lines = data.transcript.split(/AI:|User:|Agent:|Customer:|Aditi:/).filter(Boolean);
+    const raw = data.transcript;
+    transcriptHtml = `<div class="tm-line"><span class="tm-a">Transcript:</span>${raw.slice(0,400)}${raw.length>400?'...':''}</div>`;
+  } else {
+    transcriptHtml = '<div style="color:var(--gray-300);font-size:11px;">Transcript not available</div>';
+  }
+
+  const card = document.createElement('div');
+  card.className = 'call-card new-call';
+  card.id = 'call-card-' + (data.callId || Date.now());
+  card.innerHTML = `
+    <div class="call-card-header">
+      <div class="call-card-agent">
+        <div class="call-card-av">${initials}</div>
+        <div>
+          <div class="call-card-name">${data.phone || 'Unknown Agent'}</div>
+          <div class="call-card-meta">Call ID: ${(data.callId || 'N/A').slice(0,20)} · ${data.timestamp || 'Just now'}</div>
+        </div>
+      </div>
+      <div class="call-card-score">
+        <div class="call-card-score-val ${sc}">${data.score}/100</div>
+        <div class="call-card-score-lbl">Overall Score</div>
+      </div>
+    </div>
+    <div class="call-card-body">
+      <div class="call-card-section">
+        <div class="call-section-title">Performance Scores</div>
+        <div class="score-mini-bars">
+          <div class="smb-row">
+            <div class="smb-lbl">Pitch</div>
+            <div class="smb-track"><div class="smb-fill" style="width:${data.pitch||data.score}%;background:var(--amber)"></div></div>
+            <div class="smb-val" style="color:var(--amber)">${data.pitch||data.score}</div>
+          </div>
+          <div class="smb-row">
+            <div class="smb-lbl">Objection</div>
+            <div class="smb-track"><div class="smb-fill" style="width:${data.objection||Math.max(data.score-15,10)}%;background:var(--red)"></div></div>
+            <div class="smb-val" style="color:var(--red)">${data.objection||Math.max(data.score-15,10)}</div>
+          </div>
+          <div class="smb-row">
+            <div class="smb-lbl">Clarity</div>
+            <div class="smb-track"><div class="smb-fill" style="width:${data.clarity||Math.min(data.score+10,100)}%;background:var(--green)"></div></div>
+            <div class="smb-val" style="color:var(--green)">${data.clarity||Math.min(data.score+10,100)}</div>
+          </div>
+        </div>
+      </div>
+      <div class="call-card-section">
+        <div class="call-section-title">Training Gaps Identified</div>
+        <div class="gap-list">
+          ${gaps.length > 0 ? gaps.map(g=>`<div class="gap-item"><span class="gap-ico">⚠</span>${g.trim()}</div>`).join('') : '<div style="font-size:12px;color:var(--gray-400);">No gaps identified</div>'}
+        </div>
+      </div>
+      <div class="call-card-section">
+        <div class="call-section-title">Call Transcript</div>
+        <div class="transcript-mini">${transcriptHtml}</div>
+      </div>
+    </div>
+    <div class="call-card-footer">
+      <div class="call-card-time">Received at ${data.timestamp || new Date().toLocaleTimeString()}</div>
+      <button class="push-from-card" onclick="pushFromLiveFeed('${data.phone}','${gaps.join(',')}')">+ Push Training</button>
+    </div>
+  `;
+
+  // Insert at top
+  const emptyState = document.getElementById('lf-empty-state');
+  if(emptyState && emptyState.style.display !== 'none'){
+    container.insertBefore(card, emptyState);
+  } else {
+    container.insertBefore(card, container.firstChild);
+  }
+}
+
+function pushFromLiveFeed(phone, gapsStr){
+  const gaps = gapsStr.split(',').filter(Boolean);
+  curTrain = gaps[0] || 'Training';
+  sel.clear();
+  openPushModal();
+  document.getElementById('push-sub').textContent = 'Pushing to agent: ' + phone;
+}
+
+function clearLiveFeed(){
+  liveCalls = [];
+  liveCallCount = 0;
+  document.getElementById('live-feed-container').innerHTML = `
+    <div class="lf-empty" id="lf-empty-state">
+      <div class="lf-empty-icon">📡</div>
+      <div class="lf-empty-title">Waiting for live calls...</div>
+      <div class="lf-empty-sub">When an agent completes a call, the evaluation will appear here automatically.</div>
+    </div>`;
+  const badge = document.getElementById('live-badge');
+  if(badge){ badge.style.display = 'none'; badge.textContent = ''; }
+  const statusBadge = document.getElementById('live-status-badge');
+  if(statusBadge) statusBadge.style.display = 'none';
+}
+
+function showLiveFeedNotification(data){
+  const notif = document.createElement('div');
+  notif.style.cssText = 'position:fixed;top:60px;right:20px;background:white;border:1px solid var(--gray-200);border-left:3px solid var(--green);border-radius:var(--radius);padding:12px 16px;box-shadow:var(--shadow-md);z-index:999;animation:mIn 0.3s ease;max-width:280px;cursor:pointer;';
+  notif.innerHTML = `
+    <div style="font-size:12px;font-weight:600;color:var(--gray-900);margin-bottom:3px;">📞 New Call Evaluated</div>
+    <div style="font-size:11.5px;color:var(--gray-600);">${data.phone} · Score: ${data.score}/100</div>
+    <div style="font-size:11px;color:var(--blue);margin-top:4px;font-weight:500;">Click to view →</div>
+  `;
+  notif.onclick = () => {
+    showV('live-feed', document.getElementById('nav-live'));
+    notif.remove();
+  };
+  document.body.appendChild(notif);
+  setTimeout(() => { if(notif.parentNode) notif.remove(); }, 6000);
+}
+
+// Check URL params on page load
+checkURLParams();
 </script>
 </body>
 </html>

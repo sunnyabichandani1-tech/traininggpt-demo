@@ -893,6 +893,7 @@ const VAPI_COACH_AGENT    = 'fb3b7682-5602-454c-b3f6-1dfce9949fdd';
 const SHEET_ID            = '1LmtVPNQNzOHJhhtGlhKaOtFHEdY3O44dUz4_UvwXzak';
 const SHEET_API_KEY       = ''; // Add Google Sheets API key here
 const POLL_INTERVAL_MS    = 5000;
+const ASSIGN_POLL_MS      = 4000; // Poll assignments tab every 4 seconds
 
 // ── State ───────────────────────────────────
 let currentUser = { id: '', name: '', number: '' };
@@ -901,8 +902,11 @@ let callSecs = 0;
 let activeTask = null;
 let activeCallId = null;
 let pollInterval = null;
+let assignPollInterval = null;
+let seenAssignments = new Set();
 let feedbackData = null;
 let currentSlide = 0;
+let pendingAssignment = null;
 
 // ── LOGIN ────────────────────────────────────
 function doLogin(){
@@ -922,6 +926,104 @@ function doLogin(){
   document.getElementById('welcome-name').textContent = currentUser.name + ',';
   showPage('page-dashboard');
   toast('👋', 'Welcome! Logged in as ' + currentUser.number);
+  startAssignmentPolling();
+}
+
+// ── TRAINING ASSIGNMENT POLLING ─────────────────────────────
+function startAssignmentPolling(){
+  if(assignPollInterval) clearInterval(assignPollInterval);
+  if(!SHEET_API_KEY){ return; } // Demo: triggered by trainer dashboard via postMessage
+  assignPollInterval = setInterval(async ()=>{
+    try {
+      const url = `https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/Assignments!A:H?key=${SHEET_API_KEY}`;
+      const r = await fetch(url);
+      const d = await r.json();
+      const rows = (d.values || []).slice(1);
+      for(let i = rows.length - 1; i >= 0; i--){
+        const row = rows[i];
+        const phone = row[0] || '';
+        const rowKey = phone + '_' + (row[6] || i);
+        if(phone.includes(currentUser.number) && !seenAssignments.has(rowKey)){
+          seenAssignments.add(rowKey);
+          showTrainingAssignedNotification({
+            trainingName: row[1] || 'Training',
+            contentType: row[2] || 'Video',
+            contentFile: row[3] || '',
+            certRequired: row[4] === 'true' || row[4] === 'TRUE',
+            coachRequired: row[5] === 'true' || row[5] === 'TRUE',
+            assignedAt: row[6] || new Date().toISOString()
+          });
+          break;
+        }
+      }
+    } catch(e){ console.warn('Assignment poll error:', e); }
+  }, ASSIGN_POLL_MS);
+}
+
+window.addEventListener('message', function(e){
+  if(e.data && e.data.type === 'TRAINING_ASSIGNED'){
+    triggerDemoAssignment(e.data.payload);
+  }
+});
+
+function triggerDemoAssignment(data){
+  pendingAssignment = data;
+  showTrainingAssignedNotification(data);
+}
+
+function showTrainingAssignedNotification(assignment){
+  pendingAssignment = assignment;
+  const existing = document.getElementById('assign-notif');
+  if(existing) existing.remove();
+  const notif = document.createElement('div');
+  notif.id = 'assign-notif';
+  notif.style.cssText = 'position:fixed;top:0;left:0;right:0;z-index:9999;background:linear-gradient(135deg,#1565C0,#0D47A1);color:white;padding:0;box-shadow:0 4px 20px rgba(0,0,0,0.3);animation:assignSlide 0.4s cubic-bezier(0.16,1,0.3,1);';
+  notif.innerHTML = `
+    <style>@keyframes assignSlide{from{transform:translateY(-100%);}to{transform:translateY(0);}}</style>
+    <div style="padding:12px 16px 14px;">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+        <span style="font-size:20px;">🎓</span>
+        <div style="flex:1;">
+          <div style="font-size:13px;font-weight:700;">Training Assigned by Trainer</div>
+          <div style="font-size:11px;opacity:0.75;margin-top:1px;">Just now — action required</div>
+        </div>
+        <button onclick="document.getElementById('assign-notif').remove()" style="background:rgba(255,255,255,0.15);border:none;color:white;width:24px;height:24px;border-radius:50%;cursor:pointer;font-size:12px;">✕</button>
+      </div>
+      <div style="background:rgba(255,255,255,0.12);border-radius:8px;padding:10px 12px;margin-bottom:10px;">
+        <div style="font-size:13px;font-weight:700;margin-bottom:5px;">${assignment.trainingName}</div>
+        <div style="display:flex;gap:5px;flex-wrap:wrap;">
+          <span style="background:rgba(255,255,255,0.2);border-radius:4px;padding:2px 8px;font-size:10px;font-weight:600;">${assignment.contentType}</span>
+          ${assignment.certRequired ? '<span style="background:rgba(255,255,255,0.2);border-radius:4px;padding:2px 8px;font-size:10px;font-weight:600;">📝 Certification Required</span>' : ''}
+          ${assignment.coachRequired ? '<span style="background:rgba(255,255,255,0.2);border-radius:4px;padding:2px 8px;font-size:10px;font-weight:600;">🤖 AI Coach Mandatory</span>' : ''}
+        </div>
+      </div>
+      <button onclick="startAssignedTraining()" style="width:100%;background:white;color:#1565C0;border:none;border-radius:8px;padding:10px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;">Start Training Now →</button>
+    </div>
+  `;
+  document.body.appendChild(notif);
+  toast('🎓', 'Training assigned: ' + assignment.trainingName);
+}
+
+function startAssignedTraining(){
+  const existing = document.getElementById('assign-notif');
+  if(existing) existing.remove();
+  if(pendingAssignment){
+    feedbackData = {
+      scores:{ pitch:62, objection_handling:45, product_knowledge:78, closing:55, overall:60 },
+      gaps:[{
+        area: pendingAssignment.trainingName,
+        what_happened: "Your trainer identified this as an area to improve based on your recent calls.",
+        what_to_say: "Follow the training content assigned to you and apply the technique on your next call.",
+        example: "Practice with AI Coach Viraj after completing the module to lock in the learning."
+      }],
+      mcq:[
+        { question:"When a customer says Jio is cheaper, what is the BEST first response?", options:["Offer a discount to match Jio's price","Acknowledge and anchor on OTT bundle value","End the call politely","Ask for a supervisor"], answer:1 },
+        { question:"What is the key differentiator between Airtel Fiber and Jio Fiber?", options:["Airtel is always cheaper","Dedicated vs shared bandwidth","Airtel has more plans","Jio has better coverage"], answer:1 }
+      ],
+      coachRequired: pendingAssignment.coachRequired
+    };
+    openTrainingModule();
+  }
 }
 
 function togglePwd(){

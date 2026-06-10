@@ -1732,6 +1732,7 @@ function toIST(isoStr){
 
 // Render the Recent Observations table
 function renderROTable(obs){
+  if(typeof roSel === 'undefined' || roSel === null) roSel = new Set();
   const container = document.getElementById('ro-rows');
   const countEl = document.getElementById('ro-count');
   if(!obs || obs.length === 0){
@@ -1775,6 +1776,7 @@ function renderROTable(obs){
 
 function togROAgent(e, i){
   e.stopPropagation();
+  if(typeof roSel === 'undefined') roSel = new Set();
   if(roSel.has(i)) roSel.delete(i); else roSel.add(i);
   renderROTable(loadObservations());
 }

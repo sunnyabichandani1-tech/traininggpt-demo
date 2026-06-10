@@ -1484,28 +1484,8 @@ window.addEventListener('load', function(){
   }
 });
 
-// Check URL parameters on load — Make.com sends data via URL params
-function checkURLParams(){
-  const params = new URLSearchParams(window.location.search);
-  if(params.get('livecall') || params.get('callId') || params.get('phone')){
-    const callData = {
-      callId:    params.get('callId') || 'call-' + Date.now(),
-      phone:     params.get('phone') || '+91XXXXXXXXXX',
-      score:     parseInt(params.get('score') || '0'),
-      gaps:      (params.get('gaps') || 'Objection Handling,Closing Technique').split(','),
-      pitch:     parseInt(params.get('pitch') || '0'),
-      objection: parseInt(params.get('objection') || '0'),
-      clarity:   parseInt(params.get('clarity') || '0'),
-      transcript: decodeURIComponent(params.get('transcript') || ''),
-      timestamp: new Date().toLocaleTimeString('en-IN', {hour:'2-digit', minute:'2-digit'})
-    };
-    addLiveCall(callData);
-    // Switch to live feed view
-    showV('live-feed', document.getElementById('nav-live'));
-    // Clean URL
-    window.history.replaceState({}, '', window.location.pathname);
-  }
-}
+// checkURLParams — defined below in Recent Observations section
+function checkURLParams(){ _checkURLParamsImpl(); }
 
 // Also listen for postMessage from Make.com webhook (via iframe or direct)
 window.addEventListener('message', function(e){
@@ -1915,9 +1895,8 @@ function openPushModalFromObs(){
   document.getElementById('push-sub').textContent = 'Pushing to agent: ' + (currentObs?.phone || '');
 }
 
-// Override checkURLParams to also save to observations
-const _origCheckURLParams = checkURLParams;
-function checkURLParams(){
+// Main URL params handler — saves to observations + live feed
+function _checkURLParamsImpl(){
   const params = new URLSearchParams(window.location.search);
   if(params.get('callId') || params.get('phone')){
     const gaps = (params.get('gaps') || 'Objection Handling,Closing Technique').split(',');

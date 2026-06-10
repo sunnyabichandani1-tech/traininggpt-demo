@@ -1914,17 +1914,19 @@ function _checkURLParamsImpl(){
     addObservation(obsData);
     // Also add to live feed
     addLiveCall({...obsData, timestamp: new Date().toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit'})});
-    showV('training', document.getElementById('nav-train'));
     window.history.replaceState({}, '', window.location.pathname);
-    setTimeout(function(){ renderROTable(loadObservations()); }, 100);
-    toast('📞 New observation received — ' + obsData.phone + ' · Score: ' + obsData.overallScore + '/100');
+    setTimeout(function(){
+      showV('training', document.getElementById('nav-train'));
+      renderROTable(loadObservations());
+      toast('📞 New observation received — ' + obsData.phone + ' · Score: ' + obsData.overallScore + '/100');
+    }, 500);
   }
 }
 
 // Init — load existing observations on page load
 window.addEventListener('load', function(){
   const obs = loadObservations();
-  renderROTable(obs);
+  if(obs && obs.length > 0) renderROTable(obs);
   // Show URL hint
   const urlEl = document.getElementById('lf-webhook-display');
   if(urlEl) urlEl.textContent = window.location.href.split('?')[0] + '?callId=xxx&phone=+91xxx&score=72&gaps=Objection,Closing&transcript=...';

@@ -383,6 +383,49 @@ body{font-family:var(--font);background:var(--gray-50);color:var(--gray-900);min
 .push-from-card{height:28px;padding:0 12px;background:var(--blue-btn);color:white;border:none;border-radius:var(--radius-sm);font-size:11.5px;font-weight:500;font-family:var(--font);cursor:pointer;}
 .push-from-card:hover{background:var(--blue-btn-hover);}
 
+/* ── RECENT OBSERVATIONS ── */
+.ro-wrap{background:white;border-radius:var(--radius);border:1px solid var(--gray-200);box-shadow:var(--shadow-sm);overflow:hidden;margin-top:18px;}
+.ro-header{padding:14px 20px;border-bottom:1px solid var(--gray-200);display:flex;align-items:center;justify-content:space-between;}
+.ro-title{font-size:13.5px;font-weight:700;color:var(--gray-900);}
+.ro-count{font-size:12px;color:var(--gray-400);margin-left:6px;}
+.ro-filter-row{display:grid;grid-template-columns:40px 1.5fr 1fr 120px 110px 160px 110px;gap:0;border-bottom:1px solid var(--gray-200);padding:8px 20px;background:var(--gray-50);align-items:center;}
+.ro-filter-row span{font-size:11px;font-weight:600;color:var(--gray-600);text-transform:uppercase;letter-spacing:0.3px;}
+.ro-row{display:grid;grid-template-columns:40px 1.5fr 1fr 120px 110px 160px 110px;gap:0;padding:11px 20px;border-bottom:1px solid #F0F2F6;align-items:center;cursor:pointer;transition:background 0.1s;}
+.ro-row:hover{background:#F8F9FC;}
+.ro-row:last-child{border-bottom:none;}
+.ro-row.selected{background:#EEF3FF;}
+.ro-empty{padding:32px;text-align:center;color:var(--gray-400);font-size:13px;}
+.ro-empty-ico{font-size:28px;margin-bottom:8px;}
+
+/* ── OBSERVATION DETAIL ── */
+.obs-detail-page{background:white;border-radius:var(--radius);border:1px solid var(--gray-200);}
+.obs-agent-banner{padding:16px 20px;background:linear-gradient(135deg,var(--navy) 0%,#2C3E6B 100%);display:flex;align-items:center;justify-content:space-between;}
+.obs-agent-info{display:flex;align-items:center;gap:12px;}
+.obs-agent-av{width:42px;height:42px;border-radius:50%;background:var(--red);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;color:white;flex-shrink:0;}
+.obs-agent-name{font-size:15px;font-weight:600;color:white;}
+.obs-agent-meta{font-size:12px;color:rgba(255,255,255,0.6);margin-top:2px;}
+.obs-score-badge{text-align:right;}
+.obs-score-val{font-size:28px;font-weight:700;color:white;font-variant-numeric:tabular-nums;line-height:1;}
+.obs-score-lbl{font-size:10px;color:rgba(255,255,255,0.5);margin-top:2px;}
+.obs-meta-row{display:flex;align-items:center;gap:16px;padding:10px 20px;background:var(--gray-50);border-bottom:1px solid var(--gray-200);}
+.obs-meta-item{font-size:11.5px;color:var(--gray-600);display:flex;align-items:center;gap:4px;}
+.obs-meta-item strong{color:var(--gray-900);font-weight:600;}
+.obs-body{padding:20px;}
+.obs-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;}
+.obs-card{background:white;border-radius:var(--radius);border:1px solid var(--gray-200);box-shadow:var(--shadow-sm);overflow:hidden;}
+.obs-card.full{grid-column:1/-1;}
+.obs-card-hdr{padding:11px 16px;border-bottom:1px solid var(--gray-100);font-size:12.5px;font-weight:600;color:var(--gray-900);}
+.obs-card-body{padding:14px 16px;}
+.obs-transcript{background:var(--gray-50);border-radius:var(--radius-sm);padding:12px;font-size:12px;line-height:1.8;color:var(--gray-600);max-height:200px;overflow-y:auto;border:1px solid var(--gray-100);}
+.obs-line{margin-bottom:4px;}
+.obs-spk-a{font-weight:700;color:var(--navy);margin-right:4px;font-size:11px;}
+.obs-spk-c{font-weight:700;color:var(--gray-500);margin-right:4px;font-size:11px;}
+.obs-score-bars{display:flex;flex-direction:column;gap:8px;}
+.call-hist-row{display:flex;align-items:center;justify-content:space-between;padding:7px 0;border-bottom:1px solid var(--gray-100);font-size:12px;}
+.call-hist-row:last-child{border-bottom:none;}
+.call-hist-date{color:var(--gray-600);}
+.call-hist-score{font-weight:600;}
+
 /* ── SCROLLBAR ── */
 ::-webkit-scrollbar{width:4px;}
 ::-webkit-scrollbar-track{background:transparent;}
@@ -581,6 +624,35 @@ body{font-family:var(--font);background:var(--gray-50);color:var(--gray-900);min
           <div class="tc" onclick="showAgentList('Closing Technique','High',412)"><div class="tc-top"><div class="tc-icon b">🎯</div><div class="sev high">High</div></div><div class="tc-name">Closing Technique</div><div class="tc-desc">Asking permission instead of assumptive close.</div><div class="tc-foot"><div><div class="tc-count">412</div><div class="tc-lbl">agents</div></div><div class="tc-arr">→</div></div></div>
           <div class="tc" onclick="showAgentList('Product Knowledge','Medium',389)"><div class="tc-top"><div class="tc-icon r">📡</div><div class="sev med">Medium</div></div><div class="tc-name">Product Knowledge</div><div class="tc-desc">OTT bundle and plan comparison gaps.</div><div class="tc-foot"><div><div class="tc-count">389</div><div class="tc-lbl">agents</div></div><div class="tc-arr">→</div></div></div>
           <div class="tc" onclick="showAgentList('Communication Skills','Medium',265)"><div class="tc-top"><div class="tc-icon a">💬</div><div class="sev med">Medium</div></div><div class="tc-name">Communication Skills</div><div class="tc-desc">Script reading instead of natural selling.</div><div class="tc-foot"><div><div class="tc-count">265</div><div class="tc-lbl">agents</div></div><div class="tc-arr">→</div></div></div>
+        </div>
+      </div>
+
+      <!-- RECENT OBSERVATIONS in Training Queue -->
+      <div class="ro-wrap" id="ro-section">
+        <div class="ro-header">
+          <div style="display:flex;align-items:center;">
+            <div class="ro-title">Recent Observations</div>
+            <span class="ro-count" id="ro-count">— 0 records</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px;">
+            <button class="btn-outline" onclick="deselectAllRO()">Deselect All</button>
+            <button class="btn-blue" id="ro-push-btn" onclick="openPushModal()" disabled>+ Push Training</button>
+          </div>
+        </div>
+        <div class="ro-filter-row">
+          <div><div class="checkbox" id="ro-sa-cb" onclick="toggleROSA()"></div></div>
+          <span>Agent</span>
+          <span>Agent Number</span>
+          <span>Gap Area</span>
+          <span>Score</span>
+          <span>Date & Time</span>
+          <span>Action</span>
+        </div>
+        <div id="ro-rows">
+          <div class="ro-empty">
+            <div class="ro-empty-ico">📋</div>
+            <div>No observations yet. Observations will appear here after calls are evaluated.</div>
+          </div>
         </div>
       </div>
 
@@ -851,6 +923,96 @@ body{font-family:var(--font);background:var(--gray-50);color:var(--gray-900);min
               </div>
             </div>
 
+          </div>
+        </div>
+      </div>
+
+      <!-- OBSERVATION DETAIL VIEW -->
+      <div class="view" id="view-obs-detail">
+        <div class="breadcrumb">
+          <span class="bc-item" onclick="showV('home',document.getElementById('nav-dash'))">Dashboard</span>
+          <span class="bc-sep">/</span>
+          <span class="bc-item" onclick="showV('training',document.getElementById('nav-train'))">Training Queue</span>
+          <span class="bc-sep">/</span>
+          <span class="bc-item cur" id="bc-obs-agent">Observation Detail</span>
+        </div>
+        <div class="obs-detail-page">
+          <div class="obs-agent-banner">
+            <div class="obs-agent-info">
+              <div class="obs-agent-av" id="obs-av">XF</div>
+              <div>
+                <div class="obs-agent-name" id="obs-name">Agent Name</div>
+                <div class="obs-agent-meta" id="obs-meta">XFE · Call Observation</div>
+              </div>
+            </div>
+            <div class="obs-score-badge">
+              <div class="obs-score-val" id="obs-score-val">—</div>
+              <div class="obs-score-lbl">Call Score</div>
+            </div>
+          </div>
+          <div class="obs-meta-row">
+            <div class="obs-meta-item">📞 <strong id="obs-phone">—</strong></div>
+            <div class="obs-meta-item">🕐 <strong id="obs-time">—</strong></div>
+            <div class="obs-meta-item">⚠️ Gap: <strong id="obs-gap">—</strong></div>
+            <div class="obs-meta-item">📋 Call ID: <strong id="obs-callid">—</strong></div>
+          </div>
+          <div class="obs-body">
+            <div class="obs-grid">
+              <!-- Transcript -->
+              <div class="obs-card full">
+                <div class="obs-card-hdr">📞 Latest Call Transcript</div>
+                <div class="obs-card-body">
+                  <div class="obs-transcript" id="obs-transcript">Transcript not available.</div>
+                </div>
+              </div>
+              <!-- Scores -->
+              <div class="obs-card">
+                <div class="obs-card-hdr">📊 Performance Scores</div>
+                <div class="obs-card-body">
+                  <div class="obs-score-bars">
+                    <div class="sb-row"><div class="sb-lbl">Pitch</div><div class="sb-track"><div class="sb-fill" id="obs-bar-pitch" style="height:100%;border-radius:3px;background:#E65100"></div></div><div class="sb-val" id="obs-val-pitch" style="color:#E65100">—</div></div>
+                    <div class="sb-row"><div class="sb-lbl">Objection</div><div class="sb-track"><div class="sb-fill" id="obs-bar-obj" style="height:100%;border-radius:3px;background:var(--red)"></div></div><div class="sb-val" id="obs-val-obj" style="color:var(--red)">—</div></div>
+                    <div class="sb-row"><div class="sb-lbl">Clarity</div><div class="sb-track"><div class="sb-fill" id="obs-bar-clar" style="height:100%;border-radius:3px;background:var(--green)"></div></div><div class="sb-val" id="obs-val-clar" style="color:var(--green)">—</div></div>
+                    <div class="sb-row"><div class="sb-lbl">Overall</div><div class="sb-track"><div class="sb-fill" id="obs-bar-ov" style="height:100%;border-radius:3px;background:var(--navy)"></div></div><div class="sb-val" id="obs-val-ov" style="color:var(--navy)">—</div></div>
+                  </div>
+                </div>
+              </div>
+              <!-- Call History -->
+              <div class="obs-card">
+                <div class="obs-card-hdr">📈 Call History (This Agent)</div>
+                <div class="obs-card-body">
+                  <div id="obs-call-hist"><div style="font-size:12px;color:var(--gray-400);">No prior calls recorded.</div></div>
+                </div>
+              </div>
+              <!-- What's Good -->
+              <div class="obs-card">
+                <div class="obs-card-hdr">✅ What He's Good At</div>
+                <div class="obs-card-body" id="obs-good">
+                  <div class="insight good"><span class="insight-ico">✓</span>Evaluation data will appear here.</div>
+                </div>
+              </div>
+              <!-- Improvement -->
+              <div class="obs-card">
+                <div class="obs-card-hdr">⚠️ Area of Improvement</div>
+                <div class="obs-card-body" id="obs-improve">
+                  <div class="insight bad"><span class="insight-ico">✗</span>Evaluation data will appear here.</div>
+                </div>
+              </div>
+              <!-- Training Requirement -->
+              <div class="obs-card full">
+                <div class="obs-card-hdr">🎓 Training Requirement</div>
+                <div class="obs-card-body">
+                  <div class="req-grid" id="obs-req-grid">
+                    <div class="req p1"><div class="req-pri">Priority 1</div><div class="req-name" id="obs-req1">—</div><div class="req-desc">Identified from call evaluation</div></div>
+                    <div class="req p2"><div class="req-pri">Priority 2</div><div class="req-name" id="obs-req2">—</div><div class="req-desc">Supporting skill gap</div></div>
+                    <div class="req p3"><div class="req-pri">Priority 3</div><div class="req-name" id="obs-req3">Communication Skills</div><div class="req-desc">Natural conversation flow</div></div>
+                  </div>
+                  <div style="margin-top:14px;display:flex;justify-content:flex-end;">
+                    <button class="btn-blue" onclick="openPushModalFromObs()">🚀 Push Training Nudge</button>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -1507,6 +1669,282 @@ function showLiveFeedNotification(data){
 
 // Check URL params on page load
 checkURLParams();
+
+// ── RECENT OBSERVATIONS ─────────────────────────────────
+// Storage key for observations
+const RO_KEY = 'traininggpt_observations';
+let roSel = new Set();
+let currentObs = null;
+
+// Load observations from localStorage
+function loadObservations(){
+  try {
+    const raw = localStorage.getItem(RO_KEY);
+    return raw ? JSON.parse(raw) : [];
+  } catch(e){ return []; }
+}
+
+// Save observations to localStorage
+function saveObservations(obs){
+  try { localStorage.setItem(RO_KEY, JSON.stringify(obs)); } catch(e){}
+}
+
+// Add new observation (called from URL params or manual)
+function addObservation(data){
+  const obs = loadObservations();
+  // Add timestamp if not present
+  if(!data.receivedAt) data.receivedAt = new Date().toISOString();
+  obs.unshift(data); // newest first
+  // Keep top 20 only
+  const trimmed = obs.slice(0, 20);
+  saveObservations(trimmed);
+  renderROTable(trimmed);
+}
+
+// Parse Groq JSON response for scores/gaps
+function parseGroqResponse(raw){
+  if(!raw) return {scores:{pitch:0,objection:0,clarity:0}, gaps:[]};
+  try {
+    // Clean markdown
+    const clean = raw.replace(/```json|```/g,'').trim();
+    const j = JSON.parse(clean);
+    return {
+      scores: j.scores || {pitch:0,objection:0,clarity:0},
+      gaps: j.gaps || [],
+      mcq: j.mcq || {}
+    };
+  } catch(e){
+    return {scores:{pitch:0,objection:0,clarity:0}, gaps: raw ? [raw.slice(0,40)] : []};
+  }
+}
+
+// Format IST datetime
+function toIST(isoStr){
+  try {
+    const d = new Date(isoStr);
+    return d.toLocaleString('en-IN', {
+      timeZone:'Asia/Kolkata',
+      day:'2-digit', month:'short', year:'numeric',
+      hour:'2-digit', minute:'2-digit', hour12:true
+    });
+  } catch(e){ return isoStr || '—'; }
+}
+
+// Render the Recent Observations table
+function renderROTable(obs){
+  const container = document.getElementById('ro-rows');
+  const countEl = document.getElementById('ro-count');
+  if(!obs || obs.length === 0){
+    container.innerHTML = '<div class="ro-empty"><div class="ro-empty-ico">📋</div><div>No observations yet. Observations will appear here after calls are evaluated.</div></div>';
+    if(countEl) countEl.textContent = '— 0 records';
+    return;
+  }
+  if(countEl) countEl.textContent = `— ${obs.length} record${obs.length!==1?'s':''}`;
+
+  container.innerHTML = obs.map((o, i) => {
+    const parsed = parseGroqResponse(o.score);
+    const overallScore = o.overallScore || parsed.scores?.pitch || parseInt(o.score) || 0;
+    const sc = overallScore >= 70 ? 'good' : overallScore >= 55 ? 'avg' : 'poor';
+    const gaps = Array.isArray(o.gaps) ? o.gaps : (o.gaps || '').split(',').filter(Boolean);
+    const gapStr = gaps.slice(0,2).map(g => `<span class="gap-tag">${g.trim()}</span>`).join('');
+    const phone = o.phone || '—';
+    const isS = roSel.has(i);
+    const initials = phone.slice(-4,-2) || 'XF';
+    return `<div class="ro-row ${isS?'selected':''}" id="ro-row-${i}">
+      <div><div class="checkbox ${isS?'chk':''}" onclick="togROAgent(event,${i})">${isS?'✓':''}</div></div>
+      <div class="agent-cell" onclick="showObsDetail(${i})">
+        <div class="av" style="background:var(--navy)">${initials}</div>
+        <div>
+          <div class="an">Agent ${phone.slice(-4)}</div>
+          <div class="aid" style="color:var(--gray-400);">XFE</div>
+        </div>
+      </div>
+      <div style="font-size:12.5px;font-weight:500;color:var(--gray-900);">${phone}</div>
+      <div class="gap-tags">${gapStr || '<span class="gap-tag">—</span>'}</div>
+      <div><span class="score-pill ${sc}">${overallScore}/100</span></div>
+      <div style="font-size:12px;color:var(--gray-600);">${toIST(o.receivedAt)}</div>
+      <div style="display:flex;align-items:center;gap:6px;">
+        <button onclick="showObsDetail(${i})" style="height:26px;padding:0 10px;background:var(--blue-btn);color:white;border:none;border-radius:4px;font-size:11px;font-weight:500;cursor:pointer;font-family:inherit;">View</button>
+        <button onclick="pushSingleObs(event,${i})" style="height:26px;padding:0 10px;background:white;color:var(--blue-btn);border:1px solid var(--blue-btn);border-radius:4px;font-size:11px;font-weight:500;cursor:pointer;font-family:inherit;">Push</button>
+      </div>
+    </div>`;
+  }).join('');
+
+  updateROPB();
+}
+
+function togROAgent(e, i){
+  e.stopPropagation();
+  if(roSel.has(i)) roSel.delete(i); else roSel.add(i);
+  renderROTable(loadObservations());
+}
+
+function toggleROSA(){
+  const obs = loadObservations();
+  if(roSel.size === obs.length) roSel.clear();
+  else obs.forEach((_,i) => roSel.add(i));
+  renderROTable(obs);
+}
+
+function deselectAllRO(){ roSel.clear(); renderROTable(loadObservations()); }
+
+function updateROPB(){
+  const btn = document.getElementById('ro-push-btn');
+  if(btn){ btn.disabled = roSel.size === 0; btn.textContent = roSel.size > 0 ? `+ Push Training (${roSel.size})` : '+ Push Training'; }
+}
+
+function pushSingleObs(e, i){
+  e.stopPropagation();
+  const obs = loadObservations();
+  const o = obs[i];
+  const gaps = Array.isArray(o.gaps) ? o.gaps : (o.gaps||'').split(',').filter(Boolean);
+  curTrain = gaps[0] || 'Training';
+  roSel.clear();
+  roSel.add(i);
+  openPushModal();
+  document.getElementById('push-sub').textContent = 'Pushing to agent: ' + (o.phone || '');
+}
+
+// Show observation detail page
+function showObsDetail(i){
+  const obs = loadObservations();
+  const o = obs[i];
+  currentObs = o;
+
+  const parsed = parseGroqResponse(o.score);
+  const overallScore = o.overallScore || parsed.scores?.pitch || parseInt(o.score) || 0;
+  const gaps = Array.isArray(o.gaps) ? o.gaps : (o.gaps||'').split(',').filter(Boolean);
+  const phone = o.phone || '—';
+  const initials = phone.slice(-4,-2) || 'XF';
+
+  // Banner
+  document.getElementById('obs-av').textContent = initials;
+  document.getElementById('obs-name').textContent = 'Agent ' + phone.slice(-4);
+  document.getElementById('obs-meta').textContent = 'XFE · ' + toIST(o.receivedAt);
+  document.getElementById('obs-score-val').textContent = overallScore + '/100';
+  document.getElementById('bc-obs-agent').textContent = phone;
+
+  // Meta row
+  document.getElementById('obs-phone').textContent = phone;
+  document.getElementById('obs-time').textContent = toIST(o.receivedAt);
+  document.getElementById('obs-gap').textContent = gaps.slice(0,2).join(', ') || '—';
+  document.getElementById('obs-callid').textContent = (o.callId || '—').slice(0,20);
+
+  // Transcript
+  const transcriptEl = document.getElementById('obs-transcript');
+  if(o.transcript && o.transcript.length > 5){
+    const lines = o.transcript.split(/(?=AI:|Agent:|Customer:|Aditi:|User:)/);
+    if(lines.length > 1){
+      transcriptEl.innerHTML = lines.map(line => {
+        if(line.startsWith('AI:') || line.startsWith('Aditi:') || line.startsWith('Customer:')){
+          return `<div class="obs-line"><span class="obs-spk-c">Customer:</span>${line.replace(/^(AI:|Aditi:|Customer:)/,'').trim()}</div>`;
+        }
+        return `<div class="obs-line"><span class="obs-spk-a">Agent:</span>${line.replace(/^(Agent:|User:)/,'').trim()}</div>`;
+      }).join('');
+    } else {
+      transcriptEl.textContent = o.transcript;
+    }
+  } else {
+    transcriptEl.textContent = 'Transcript not available for this call.';
+  }
+
+  // Scores
+  const pitch = parsed.scores?.pitch || overallScore;
+  const obj = parsed.scores?.objection || Math.max(overallScore-15,0);
+  const clar = parsed.scores?.clarity || Math.min(overallScore+8,100);
+
+  document.getElementById('obs-bar-pitch').style.width = pitch + '%';
+  document.getElementById('obs-val-pitch').textContent = pitch;
+  document.getElementById('obs-bar-obj').style.width = obj + '%';
+  document.getElementById('obs-val-obj').textContent = obj;
+  document.getElementById('obs-bar-clar').style.width = clar + '%';
+  document.getElementById('obs-val-clar').textContent = clar;
+  document.getElementById('obs-bar-ov').style.width = overallScore + '%';
+  document.getElementById('obs-val-ov').textContent = overallScore;
+
+  // What's good / improvement — derive from gaps
+  const goodItems = [
+    'Professional tone maintained throughout the call.',
+    'Clear product introduction with plan details.',
+    'Proper greeting and Airtel context established.'
+  ];
+  const badItems = gaps.length > 0
+    ? gaps.map(g => g.trim() + ' — needs improvement based on call evaluation.')
+    : ['Review call for improvement areas.'];
+
+  document.getElementById('obs-good').innerHTML = goodItems.map(g =>
+    `<div class="insight good"><span class="insight-ico">✓</span>${g}</div>`).join('');
+  document.getElementById('obs-improve').innerHTML = badItems.map(b =>
+    `<div class="insight bad"><span class="insight-ico">✗</span>${b}</div>`).join('');
+
+  // Training requirements
+  document.getElementById('obs-req1').textContent = gaps[0] || '—';
+  document.getElementById('obs-req2').textContent = gaps[1] || 'Value Anchoring';
+
+  // Call history for this agent
+  const allObs = loadObservations();
+  const agentHistory = allObs.filter(x => x.phone === phone).slice(0,5);
+  const histEl = document.getElementById('obs-call-hist');
+  if(agentHistory.length > 0){
+    histEl.innerHTML = agentHistory.map(h => {
+      const sc = h.overallScore || parseInt(h.score) || 0;
+      const cls = sc>=70?'good':sc>=55?'avg':'poor';
+      return `<div class="call-hist-row">
+        <span class="call-hist-date">${toIST(h.receivedAt)}</span>
+        <span class="call-hist-score score-pill ${cls}">${sc}/100</span>
+      </div>`;
+    }).join('');
+  } else {
+    histEl.innerHTML = '<div style="font-size:12px;color:var(--gray-400);">No prior calls recorded.</div>';
+  }
+
+  // Set curTrain for push modal
+  curTrain = gaps[0] || 'Training';
+
+  showV('obs-detail', document.getElementById('nav-train'));
+}
+
+function openPushModalFromObs(){
+  if(currentObs){
+    const gaps = Array.isArray(currentObs.gaps) ? currentObs.gaps : (currentObs.gaps||'').split(',').filter(Boolean);
+    curTrain = gaps[0] || 'Training';
+  }
+  openPushModal();
+  document.getElementById('push-sub').textContent = 'Pushing to agent: ' + (currentObs?.phone || '');
+}
+
+// Override checkURLParams to also save to observations
+const _origCheckURLParams = checkURLParams;
+function checkURLParams(){
+  const params = new URLSearchParams(window.location.search);
+  if(params.get('callId') || params.get('phone')){
+    const gaps = (params.get('gaps') || 'Objection Handling,Closing Technique').split(',');
+    const obsData = {
+      callId:      params.get('callId') || 'call-' + Date.now(),
+      phone:       params.get('phone') || '+91XXXXXXXXXX',
+      score:       params.get('score') || '0',
+      overallScore: parseInt(params.get('score') || '0'),
+      gaps:        gaps,
+      transcript:  decodeURIComponent(params.get('transcript') || ''),
+      receivedAt:  new Date().toISOString()
+    };
+    addObservation(obsData);
+    // Also add to live feed
+    addLiveCall({...obsData, timestamp: new Date().toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit'})});
+    showV('training', document.getElementById('nav-train'));
+    window.history.replaceState({}, '', window.location.pathname);
+    toast('📞 New observation received — ' + obsData.phone + ' · Score: ' + obsData.overallScore + '/100');
+  }
+}
+
+// Init — load existing observations on page load
+window.addEventListener('load', function(){
+  const obs = loadObservations();
+  renderROTable(obs);
+  // Show URL hint
+  const urlEl = document.getElementById('lf-webhook-display');
+  if(urlEl) urlEl.textContent = window.location.href.split('?')[0] + '?callId=xxx&phone=+91xxx&score=72&gaps=Objection,Closing&transcript=...';
+});
 </script>
 </body>
 </html>

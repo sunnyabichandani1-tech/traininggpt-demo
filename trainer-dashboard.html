@@ -494,7 +494,7 @@ body{font-family:var(--font);background:var(--gray-50);color:var(--gray-900);min
       <div class="nav-item active" id="nav-dash" onclick="showV('home',this)">
         <span class="nav-icon">⊞</span> Dashboard
       </div>
-      <div class="nav-item" id="nav-train" onclick="showV('training',this)">
+      <div class="nav-item" id="nav-train" onclick="showV('training',this);renderROTable(loadObservations());">
         <span class="nav-icon">📋</span> Training Queue
         <span class="nav-badge">5</span>
       </div>
@@ -579,7 +579,7 @@ body{font-family:var(--font);background:var(--gray-50);color:var(--gray-900);min
 
         <div class="sec-hdr">
           <div class="sec-title">Training Requirements</div>
-          <span class="see-all" onclick="showV('training',document.getElementById('nav-train'))">See all →</span>
+          <span class="see-all" onclick="showV('training',document.getElementById('nav-train'));renderROTable(loadObservations());">See all →</span>
         </div>
         <div class="tc-grid">
           <div class="tc" onclick="showAgentList('Objection Handling','Critical',847)">
@@ -1110,7 +1110,7 @@ body{font-family:var(--font);background:var(--gray-50);color:var(--gray-900);min
 </div>
 
 <script>
-const LOGO = "";
+var LOGO = "";
 
 // Inject logo
 // logo injection removed
@@ -1673,8 +1673,8 @@ checkURLParams();
 // ── RECENT OBSERVATIONS ─────────────────────────────────
 // Storage key for observations
 const RO_KEY = 'traininggpt_observations';
-let roSel = new Set();
-let currentObs = null;
+var roSel = new Set();
+var currentObs = null;
 
 // Load observations from localStorage
 function loadObservations(){
@@ -1933,6 +1933,7 @@ function checkURLParams(){
     addLiveCall({...obsData, timestamp: new Date().toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit'})});
     showV('training', document.getElementById('nav-train'));
     window.history.replaceState({}, '', window.location.pathname);
+    setTimeout(function(){ renderROTable(loadObservations()); }, 100);
     toast('📞 New observation received — ' + obsData.phone + ' · Score: ' + obsData.overallScore + '/100');
   }
 }

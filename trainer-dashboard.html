@@ -1649,8 +1649,10 @@ function showLiveFeedNotification(data){
   setTimeout(() => { if(notif.parentNode) notif.remove(); }, 6000);
 }
 
-// Check URL params on page load
-checkURLParams();
+// Check URL params after DOM ready
+window.addEventListener('DOMContentLoaded', function(){
+  checkURLParams();
+});
 
 // ── RECENT OBSERVATIONS ─────────────────────────────────
 // Storage key for observations

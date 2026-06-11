@@ -492,6 +492,9 @@ body{font-family:var(--font);background:var(--gray-50);color:var(--gray-900);min
       <div class="nav-item" id="nav-content" onclick="showV('content-library',this)">
         <span class="nav-icon">📚</span> Training Content
       </div>
+      <div class="nav-item" id="nav-bulk" onclick="showV('bulk-push',this)">
+        <span class="nav-icon">📤</span> Push Content in Bulk
+      </div>
     </nav>
     <div class="sidebar-user">
       <div class="su-avatar">RA</div>
@@ -1031,40 +1034,6 @@ body{font-family:var(--font);background:var(--gray-50);color:var(--gray-900);min
           </div>
         </div>
 
-        <!-- BULK UPLOAD -->
-        <div style="background:white;border-radius:var(--radius);border:1px solid var(--gray-200);padding:20px;margin-bottom:20px;">
-          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;">
-            <div style="display:flex;align-items:center;gap:8px;">
-              <span style="font-size:18px;">📤</span>
-              <div style="font-size:13.5px;font-weight:600;color:var(--gray-900);">Bulk Training Upload</div>
-            </div>
-            <button class="btn-outline" id="bulk-toggle" onclick="toggleBulk()">Expand</button>
-          </div>
-          <div id="bulk-upload-panel" style="display:none;">
-            <div style="background:var(--blue-light);border:1px solid #90CAF9;border-radius:var(--radius-sm);padding:14px;margin-bottom:14px;">
-              <div style="font-size:12px;font-weight:600;color:var(--blue);margin-bottom:8px;">📋 Required Excel Format</div>
-              <div style="display:grid;grid-template-columns:repeat(6,1fr);gap:6px;">
-                <div style="background:white;border:1px solid #90CAF9;border-radius:3px;padding:6px 8px;font-size:11px;font-weight:500;color:var(--navy);text-align:center;">User Number</div>
-                <div style="background:white;border:1px solid #90CAF9;border-radius:3px;padding:6px 8px;font-size:11px;font-weight:500;color:var(--navy);text-align:center;">Template ID</div>
-                <div style="background:white;border:1px solid #90CAF9;border-radius:3px;padding:6px 8px;font-size:11px;font-weight:500;color:var(--navy);text-align:center;">Push Certification</div>
-                <div style="background:white;border:1px solid #90CAF9;border-radius:3px;padding:6px 8px;font-size:11px;font-weight:500;color:var(--navy);text-align:center;">Certificate End Date</div>
-                <div style="background:white;border:1px solid #90CAF9;border-radius:3px;padding:6px 8px;font-size:11px;font-weight:500;color:var(--navy);text-align:center;">Enable Coach AI</div>
-                <div style="background:white;border:1px solid #90CAF9;border-radius:3px;padding:6px 8px;font-size:11px;font-weight:500;color:var(--navy);text-align:center;">AI Persona</div>
-              </div>
-            </div>
-            <div style="border:2px dashed var(--gray-200);border-radius:var(--radius);padding:24px;text-align:center;cursor:pointer;margin-bottom:12px;" onclick="document.getElementById('bulk-file-input').click()">
-              <div style="font-size:24px;margin-bottom:6px;">📎</div>
-              <div style="font-size:13px;font-weight:500;color:var(--gray-900);">Click to upload Excel file</div>
-              <div style="font-size:11.5px;color:var(--gray-400);margin-top:3px;">.xlsx or .csv files supported</div>
-              <input type="file" id="bulk-file-input" style="display:none;" accept=".xlsx,.csv">
-            </div>
-            <div style="display:flex;justify-content:space-between;">
-              <button class="btn-outline" onclick="downloadTemplate()">⬇ Download Template</button>
-              <button class="btn-blue" onclick="processBulkUpload()">Upload and Process</button>
-            </div>
-          </div>
-        </div>
-
         <!-- CONTENT LIBRARY -->
         <div style="margin-bottom:12px;">
           <div class="sec-title" style="font-size:14px;">Content Library</div>
@@ -1113,7 +1082,120 @@ body{font-family:var(--font);background:var(--gray-50);color:var(--gray-900);min
         </div>
       </div>
 
-            <!-- LIVE FEED VIEW -->
+            <!-- BULK PUSH VIEW -->
+      <div class="view" id="view-bulk-push">
+        <div style="margin-bottom:20px;">
+          <div class="sec-title" style="font-size:16px;margin-bottom:4px;">Push Content in Bulk</div>
+          <div style="font-size:12px;color:var(--gray-400);">Upload an Excel file to assign training to multiple agents at once</div>
+        </div>
+
+        <div style="background:white;border-radius:var(--radius);border:1px solid var(--gray-200);padding:24px;margin-bottom:18px;">
+          <!-- Excel format guide -->
+          <div style="font-size:13.5px;font-weight:600;color:var(--gray-900);margin-bottom:4px;">📋 Required Excel Format</div>
+          <div style="font-size:12px;color:var(--gray-400);margin-bottom:16px;">Each row in the Excel file represents one agent assignment</div>
+
+          <div style="background:var(--blue-light);border:1px solid #90CAF9;border-radius:var(--radius-sm);padding:16px;margin-bottom:20px;">
+            <div style="font-size:12px;font-weight:600;color:var(--blue);margin-bottom:10px;">Column Headers Required</div>
+            <div style="display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin-bottom:10px;">
+              <div style="background:white;border:1px solid #90CAF9;border-radius:4px;padding:8px;text-align:center;">
+                <div style="font-size:10px;color:var(--gray-400);margin-bottom:3px;">Column A</div>
+                <div style="font-size:12px;font-weight:600;color:var(--navy);">User Number</div>
+              </div>
+              <div style="background:white;border:1px solid #90CAF9;border-radius:4px;padding:8px;text-align:center;">
+                <div style="font-size:10px;color:var(--gray-400);margin-bottom:3px;">Column B</div>
+                <div style="font-size:12px;font-weight:600;color:var(--navy);">Template ID</div>
+              </div>
+              <div style="background:white;border:1px solid #90CAF9;border-radius:4px;padding:8px;text-align:center;">
+                <div style="font-size:10px;color:var(--gray-400);margin-bottom:3px;">Column C</div>
+                <div style="font-size:12px;font-weight:600;color:var(--navy);">Push Certification</div>
+              </div>
+              <div style="background:white;border:1px solid #90CAF9;border-radius:4px;padding:8px;text-align:center;">
+                <div style="font-size:10px;color:var(--gray-400);margin-bottom:3px;">Column D</div>
+                <div style="font-size:12px;font-weight:600;color:var(--navy);">Certificate End Date</div>
+              </div>
+              <div style="background:white;border:1px solid #90CAF9;border-radius:4px;padding:8px;text-align:center;">
+                <div style="font-size:10px;color:var(--gray-400);margin-bottom:3px;">Column E</div>
+                <div style="font-size:12px;font-weight:600;color:var(--navy);">Enable Coach AI</div>
+              </div>
+              <div style="background:white;border:1px solid #90CAF9;border-radius:4px;padding:8px;text-align:center;">
+                <div style="font-size:10px;color:var(--gray-400);margin-bottom:3px;">Column F</div>
+                <div style="font-size:12px;font-weight:600;color:var(--navy);">AI Persona</div>
+              </div>
+            </div>
+            <div style="font-size:11px;color:var(--blue);">📌 Example: 9716299969 | OBJ-001 | Yes | 30-Jun-2026 | Yes | Viraj</div>
+          </div>
+
+          <!-- Upload area -->
+          <div style="border:2px dashed var(--gray-200);border-radius:var(--radius);padding:40px;text-align:center;cursor:pointer;margin-bottom:16px;transition:border-color 0.15s;" 
+               onclick="document.getElementById('bulk-file-input-2').click()"
+               onmouseover="this.style.borderColor='var(--blue)'"
+               onmouseout="this.style.borderColor='var(--gray-200)'">
+            <div style="font-size:36px;margin-bottom:10px;">📎</div>
+            <div style="font-size:14px;font-weight:600;color:var(--gray-900);margin-bottom:5px;">Click to upload your Excel file</div>
+            <div style="font-size:12.5px;color:var(--gray-400);">.xlsx or .csv files supported · Max 10,000 rows</div>
+            <input type="file" id="bulk-file-input-2" style="display:none;" accept=".xlsx,.csv" onchange="handleBulkFile(this)">
+          </div>
+
+          <div id="bulk-file-preview" style="display:none;background:var(--green-bg);border:1px solid #A5D6A7;border-radius:var(--radius-sm);padding:12px 16px;margin-bottom:16px;">
+            <div style="display:flex;align-items:center;gap:8px;">
+              <span style="font-size:16px;">✅</span>
+              <div>
+                <div style="font-size:13px;font-weight:600;color:#1B5E20;" id="bulk-file-name">file.xlsx</div>
+                <div style="font-size:11.5px;color:#2E7D32;" id="bulk-file-meta">Ready to process</div>
+              </div>
+            </div>
+          </div>
+
+          <div style="display:flex;justify-content:space-between;align-items:center;">
+            <button class="btn-outline" onclick="downloadBulkTemplate()" style="display:flex;align-items:center;gap:6px;">
+              ⬇ Download Template
+            </button>
+            <button class="btn-blue" onclick="processBulkUpload2()" style="gap:6px;">
+              🚀 Upload and Assign Training
+            </button>
+          </div>
+        </div>
+
+        <!-- Recent bulk uploads -->
+        <div class="task-list-wrap">
+          <div class="tl-header">
+            <div class="tl-title-row">
+              <div class="tl-title">Recent Bulk Uploads</div>
+              <div class="tl-count">(3 uploads)</div>
+            </div>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 100px 100px 120px 100px;padding:8px 20px;background:var(--gray-50);border-bottom:1px solid var(--gray-200);">
+            <span style="font-size:11px;font-weight:600;color:var(--gray-600);text-transform:uppercase;">File Name</span>
+            <span style="font-size:11px;font-weight:600;color:var(--gray-600);text-transform:uppercase;">Agents</span>
+            <span style="font-size:11px;font-weight:600;color:var(--gray-600);text-transform:uppercase;">Uploaded</span>
+            <span style="font-size:11px;font-weight:600;color:var(--gray-600);text-transform:uppercase;">Status</span>
+            <span style="font-size:11px;font-weight:600;color:var(--gray-600);text-transform:uppercase;">Actions</span>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 100px 100px 120px 100px;padding:12px 20px;border-bottom:1px solid #F0F2F6;align-items:center;">
+            <div><div style="font-size:13px;font-weight:500;color:var(--gray-900);">objection_training_batch1.xlsx</div><div style="font-size:11px;color:var(--gray-400);">Objection Handling · 847 agents</div></div>
+            <div style="font-size:12px;color:var(--gray-600);">847</div>
+            <div style="font-size:11.5px;color:var(--gray-400);">09 Jun 2026</div>
+            <div><span class="score-pill good" style="font-size:10px;">Completed</span></div>
+            <div><button style="height:26px;padding:0 8px;background:var(--blue-btn);color:white;border:none;border-radius:4px;font-size:11px;cursor:pointer;" onclick="toast('Viewing upload details...')">View</button></div>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 100px 100px 120px 100px;padding:12px 20px;border-bottom:1px solid #F0F2F6;align-items:center;">
+            <div><div style="font-size:13px;font-weight:500;color:var(--gray-900);">closing_skills_june.xlsx</div><div style="font-size:11px;color:var(--gray-400);">Closing Technique · 412 agents</div></div>
+            <div style="font-size:12px;color:var(--gray-600);">412</div>
+            <div style="font-size:11.5px;color:var(--gray-400);">07 Jun 2026</div>
+            <div><span class="score-pill good" style="font-size:10px;">Completed</span></div>
+            <div><button style="height:26px;padding:0 8px;background:var(--blue-btn);color:white;border:none;border-radius:4px;font-size:11px;cursor:pointer;" onclick="toast('Viewing upload details...')">View</button></div>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 100px 100px 120px 100px;padding:12px 20px;align-items:center;">
+            <div><div style="font-size:13px;font-weight:500;color:var(--gray-900);">value_anchoring_batch.csv</div><div style="font-size:11px;color:var(--gray-400);">Value Anchoring · 534 agents</div></div>
+            <div style="font-size:12px;color:var(--gray-600);">534</div>
+            <div style="font-size:11.5px;color:var(--gray-400);">05 Jun 2026</div>
+            <div><span class="score-pill avg" style="font-size:10px;">In Progress</span></div>
+            <div><button style="height:26px;padding:0 8px;background:var(--blue-btn);color:white;border:none;border-radius:4px;font-size:11px;cursor:pointer;" onclick="toast('Viewing upload details...')">View</button></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- LIVE FEED VIEW -->
       <div class="view" id="view-live-feed">
         <div class="live-feed-header">
           <div>
@@ -1418,7 +1500,7 @@ function selectCT(el,type){
   el.classList.add("sel"); selCT=type; selCI=null;
   const ico=type==="PPT"?"📊":type==="Video"?"🎥":"🎧";
   const items=CONTENT_MAP[type]||[];
-  document.getElementById("cl-list").innerHTML=items.map((c,i)=>
+  const clList=document.getElementById("cl-list"); if(clList) clList.innerHTML=items.map((c,i)=>
     `<div class="cl-item" onclick="selContent(this,${i})">
       <span class="cl-ico">${ico}</span>
       <div style="flex:1"><div class="cl-name">${c.name}</div><div class="cl-meta">${c.meta}</div></div>
@@ -1770,7 +1852,7 @@ function pushFromLiveFeed(phone, gapsStr){
 function clearLiveFeed(){
   liveCalls = [];
   liveCallCount = 0;
-  document.getElementById('live-feed-container').innerHTML = `
+  const lfc=document.getElementById('live-feed-container'); if(lfc) lfc.innerHTML = `
     <div class="lf-empty" id="lf-empty-state">
       <div class="lf-empty-icon">📡</div>
       <div class="lf-empty-title">Waiting for live calls...</div>
@@ -1829,7 +1911,7 @@ function showContentRows(filter){
   const titles = {all:'All Training Content',video:'Videos',ppt:'Presentations',audio:'Audio Guides'};
   document.getElementById('content-rows-title').textContent = titles[filter] || 'All Content';
   document.getElementById('content-rows-count').textContent = '(' + items.length + ' items)';
-  document.getElementById('content-rows-body').innerHTML = items.map(item => `
+  const crb=document.getElementById('content-rows-body'); if(crb) crb.innerHTML = items.map(item => `
     <div style="display:grid;grid-template-columns:44px 1fr 130px 90px 120px 70px 110px;padding:11px 20px;border-bottom:1px solid #F0F2F6;align-items:center;">
       <div style="font-size:20px;">${item.ico}</div>
       <div><div style="font-size:13px;font-weight:500;color:var(--gray-900);">${item.name}</div><div style="font-size:11px;color:var(--gray-400);">${item.type} · ${item.dur}</div></div>
@@ -1860,6 +1942,28 @@ function filterContent(type){
 
 function downloadTemplate(){
   toast('📥 Template downloading...');
+}
+
+function downloadBulkTemplate(){
+  toast('📥 Excel template downloading...');
+}
+
+function handleBulkFile(input){
+  const file = input.files[0];
+  if(!file) return;
+  const preview = document.getElementById('bulk-file-preview');
+  const nameEl = document.getElementById('bulk-file-name');
+  const metaEl = document.getElementById('bulk-file-meta');
+  if(preview) preview.style.display = 'block';
+  if(nameEl) nameEl.textContent = file.name;
+  if(metaEl) metaEl.textContent = (file.size/1024).toFixed(1) + ' KB · Ready to process';
+}
+
+function processBulkUpload2(){
+  const file = document.getElementById('bulk-file-input-2')?.files[0];
+  if(!file){ toast('Please select an Excel file first'); return; }
+  toast('⏳ Processing ' + file.name + '...');
+  setTimeout(() => toast('✅ Bulk upload complete! Training assigned to agents.'), 2000);
 }
 
 function processBulkUpload(){
@@ -2068,9 +2172,9 @@ function showObsDetail(i){
     ? gaps.map(g => g.trim())
     : ['Review call for improvement areas.'];
 
-  document.getElementById('obs-good').innerHTML = goodItems.map(g =>
+  const og=document.getElementById('obs-good'); if(og) og.innerHTML = goodItems.map(g =>
     `<div class="insight good"><span class="insight-ico">✓</span>${g}</div>`).join('');
-  document.getElementById('obs-improve').innerHTML = badItems.map(b =>
+  const oi=document.getElementById('obs-improve'); if(oi) oi.innerHTML = badItems.map(b =>
     `<div class="insight bad"><span class="insight-ico">✗</span>${b}</div>`).join('');
 
   // Training requirements
@@ -2140,43 +2244,30 @@ async function refreshFromJSONbin(){
   let btn = null;
   try { btn = document.querySelector('[onclick="refreshFromJSONbin()"]'); } catch(e){}
   if(btn) btn.textContent = '⏳ Loading...';
+  
+  // Try Cloudflare Worker first, fall back to localStorage
+  let records = [];
   try {
-    // Route through Cloudflare Worker to avoid CORS
-    const resp = await fetch(
-      'https://traininggpt-eval.sunnyabichandani1.workers.dev/read',
-      { method: 'GET' }
-    );
-    if(!resp.ok) throw new Error('HTTP ' + resp.status);
-    const data = await resp.json();
-    let records = Array.isArray(data) ? data : (Array.isArray(data.record) ? data.record : []);
-    records = records.filter(r => r && !r.init && r.phone);
-    records.sort((a,b) => new Date(b.receivedAt||0) - new Date(a.receivedAt||0));
-    records = records.slice(0, 20);
-    if(records.length > 0){
-      saveObservations(records);
-      renderROTable(records);
-      toast('✅ ' + records.length + ' record' + (records.length!==1?'s':'') + ' loaded');
-    } else {
-      // Fall back to localStorage
-      const local = loadObservations();
-      if(local.length > 0){
-        renderROTable(local);
-        toast('Showing ' + local.length + ' cached record' + (local.length!==1?'s':''));
-      } else {
-        toast('No observations yet — make a call first');
-      }
+    const resp = await fetch('https://traininggpt-eval.sunnyabichandani1.workers.dev/read', { method:'GET' });
+    if(resp.ok){
+      const data = await resp.json();
+      records = Array.isArray(data) ? data.filter(r => r && r.phone) : [];
+      records.sort((a,b) => new Date(b.receivedAt||0) - new Date(a.receivedAt||0));
+      records = records.slice(0,20);
+      if(records.length > 0) saveObservations(records);
     }
-  } catch(e){
-    console.warn('JSONbin fetch failed:', e.message);
-    // Fall back to localStorage silently
-    const local = loadObservations();
-    if(local.length > 0){
-      renderROTable(local);
-      toast('Showing cached data — ' + local.length + ' record' + (local.length!==1?'s':''));
-    } else {
-      toast('No data yet — make a call to see observations');
-    }
+  } catch(e){ /* silent fallback */ }
+
+  // Use localStorage if worker returned nothing
+  if(records.length === 0) records = loadObservations();
+
+  if(records.length > 0){
+    renderROTable(records);
+    toast('✅ ' + records.length + ' record' + (records.length!==1?'s':'') + ' loaded');
+  } else {
+    toast('No observations yet — make a call first');
   }
+
   if(btn) btn.textContent = '🔄 Refresh';
 }
 

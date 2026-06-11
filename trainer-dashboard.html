@@ -388,9 +388,9 @@ body{font-family:var(--font);background:var(--gray-50);color:var(--gray-900);min
 .ro-header{padding:14px 20px;border-bottom:1px solid var(--gray-200);display:flex;align-items:center;justify-content:space-between;}
 .ro-title{font-size:13.5px;font-weight:700;color:var(--gray-900);}
 .ro-count{font-size:12px;color:var(--gray-400);margin-left:6px;}
-.ro-filter-row{display:grid;grid-template-columns:40px 1.5fr 1fr 120px 110px 160px 110px;gap:0;border-bottom:1px solid var(--gray-200);padding:8px 20px;background:var(--gray-50);align-items:center;}
+.ro-filter-row{display:grid;grid-template-columns:40px 140px 90px 90px 70px 1fr 100px;gap:0;border-bottom:1px solid var(--gray-200);padding:6px 20px;background:var(--gray-50);align-items:center;}
 .ro-filter-row span{font-size:11px;font-weight:600;color:var(--gray-600);text-transform:uppercase;letter-spacing:0.3px;}
-.ro-row{display:grid;grid-template-columns:40px 1.5fr 1fr 120px 110px 160px 110px;gap:0;padding:11px 20px;border-bottom:1px solid #F0F2F6;align-items:center;cursor:pointer;transition:background 0.1s;}
+.ro-row{display:grid;grid-template-columns:40px 140px 90px 90px 70px 1fr 100px;gap:0;padding:8px 20px;border-bottom:1px solid #F0F2F6;align-items:center;cursor:pointer;transition:background 0.1s;}
 .ro-row:hover{background:#F8F9FC;}
 .ro-row:last-child{border-bottom:none;}
 .ro-row.selected{background:#EEF3FF;}
@@ -434,51 +434,116 @@ body{font-family:var(--font);background:var(--gray-50);color:var(--gray-900);min
 </head>
 <body>
 
-<!-- ── LOGIN ── -->
-<div class="login-page" id="login-page">
-  <div class="login-card">
-    <div class="login-left">
-      <div class="login-illus">
-        <div class="illus-phone"><div class="illus-phone-screen"></div></div>
-        <div class="illus-chip tl">📊 Training</div>
-        <div class="illus-chip tr">📞 Call Log</div>
-        <div class="illus-bars">
-          <div class="ibar" style="height:28px"></div>
-          <div class="ibar" style="height:42px"></div>
-          <div class="ibar" style="height:34px"></div>
-          <div class="ibar" style="height:50px"></div>
-          <div class="ibar" style="height:38px"></div>
+<!-- ── LOGIN — Airtelwork.com exact clone ── -->
+<div class="login-page" id="login-page" style="background:linear-gradient(135deg,#E8EBF5 0%,#EEF0FA 40%,#E6EAF4 100%);min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px;position:relative;overflow:hidden;">
+  <!-- Soft background blobs -->
+  <div style="position:absolute;top:-100px;left:-80px;width:350px;height:350px;border-radius:50%;background:rgba(196,204,235,0.4);filter:blur(50px);pointer-events:none;"></div>
+  <div style="position:absolute;bottom:-80px;right:-60px;width:320px;height:320px;border-radius:50%;background:rgba(196,204,235,0.35);filter:blur(50px);pointer-events:none;"></div>
+
+  <div style="width:100%;max-width:880px;background:white;border-radius:16px;display:grid;grid-template-columns:55% 45%;overflow:hidden;box-shadow:0 4px 32px rgba(120,130,180,0.12);position:relative;z-index:1;">
+    
+    <!-- LEFT — illustration area, light grey-blue, NO bottom text overlap -->
+    <div style="background:#F0F3FA;display:flex;flex-direction:column;overflow:hidden;">
+      <!-- Illustration fills top portion -->
+      <div style="flex:1;padding:32px 28px 0;position:relative;background:linear-gradient(180deg,#EEF1FB 0%,#E8EDF8 100%);">
+        <!-- Grid dots pattern -->
+        <div style="position:absolute;inset:0;background-image:radial-gradient(circle,rgba(150,165,210,0.2) 1px,transparent 1px);background-size:22px 22px;"></div>
+        
+        <!-- Isometric illustration SVG -->
+        <div style="position:relative;z-index:1;display:flex;align-items:center;justify-content:center;height:280px;">
+          <svg viewBox="0 0 380 280" width="360" height="270" xmlns="http://www.w3.org/2000/svg">
+            <!-- Main phone/tablet (landscape) -->
+            <rect x="80" y="80" width="200" height="130" rx="14" fill="#C8D8EA" stroke="#B0C4D8" stroke-width="1.5"/>
+            <rect x="88" y="88" width="184" height="114" rx="10" fill="#D8E8F4"/>
+            <!-- Screen content - bar chart -->
+            <rect x="100" y="130" width="16" height="50" rx="3" fill="#7EC8A0" opacity="0.8"/>
+            <rect x="122" y="110" width="16" height="70" rx="3" fill="#7EC8A0"/>
+            <rect x="144" y="120" width="16" height="60" rx="3" fill="#7EC8A0" opacity="0.9"/>
+            <rect x="166" y="95" width="16" height="85" rx="3" fill="#7EC8A0"/>
+            <rect x="188" y="115" width="16" height="65" rx="3" fill="#7EC8A0" opacity="0.85"/>
+            <!-- Green arrow on chart -->
+            <polyline points="100,155 130,125 158,135 188,100 215,110" stroke="#2ECC71" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            <polygon points="215,102 221,116 209,112" fill="#2ECC71"/>
+            <!-- Phone camera dots -->
+            <circle cx="290" cy="108" r="4" fill="#B0C0D4"/>
+            <circle cx="290" cy="165" r="4" fill="#B0C0D4"/>
+            <!-- Phone shadow -->
+            <ellipse cx="180" cy="218" rx="90" ry="8" fill="rgba(150,170,200,0.2)"/>
+            
+            <!-- Floating card top-left (purple) -->
+            <rect x="30" y="40" width="66" height="66" rx="10" fill="#8B7FD4" filter="url(#shadow1)"/>
+            <text x="63" y="82" font-size="28" text-anchor="middle" dominant-baseline="middle">📋</text>
+            
+            <!-- Floating card top-right (green) -->
+            <rect x="284" y="30" width="62" height="62" rx="10" fill="#5BAD8A" filter="url(#shadow1)"/>
+            <text x="315" y="64" font-size="24" text-anchor="middle" dominant-baseline="middle">📞</text>
+            
+            <!-- Floating card left-middle (blue) -->
+            <rect x="18" y="130" width="52" height="56" rx="9" fill="#6B8FD4" filter="url(#shadow1)"/>
+            <text x="44" y="161" font-size="20" text-anchor="middle" dominant-baseline="middle">📱</text>
+            
+            <!-- Handshake bottom right -->
+            <text x="295" y="230" font-size="46" text-anchor="middle" dominant-baseline="middle">🤝</text>
+            
+            <!-- Dashed connecting lines -->
+            <line x1="96" y1="72" x2="130" y2="90" stroke="#B0BCD8" stroke-width="1.5" stroke-dasharray="5,4"/>
+            <line x1="284" y1="61" x2="265" y2="85" stroke="#B0BCD8" stroke-width="1.5" stroke-dasharray="5,4"/>
+            <line x1="70" y1="152" x2="90" y2="148" stroke="#B0BCD8" stroke-width="1.5" stroke-dasharray="5,4"/>
+            
+            <defs>
+              <filter id="shadow1" x="-20%" y="-20%" width="140%" height="140%">
+                <feDropShadow dx="2" dy="4" stdDeviation="4" flood-color="rgba(80,100,160,0.2)"/>
+              </filter>
+            </defs>
+          </svg>
         </div>
       </div>
-      <div class="login-tag">Simplify Work. Amplify Impact.</div>
-      <div class="login-tag-sub">Manage fleet training, track performance,<br>and stay connected — all in one place.</div>
+      
+      <!-- Text below illustration, white background like original -->
+      <div style="background:white;padding:20px 28px 28px;text-align:center;border-top:1px solid #F0F2FA;">
+        <div style="font-size:16px;font-weight:600;color:#1A1A2E;margin-bottom:6px;">Simplify Work. Amplify Impact.</div>
+        <div style="font-size:12.5px;color:#6B7A9E;line-height:1.7;">Manage your daily tasks, track performance, and stay<br>connected with your team — all in one place.</div>
+      </div>
     </div>
-    <div class="login-right">
-      <div class="login-logo-row">
-        <img src="data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 40"%3E%3Ccircle cx="20" cy="20" r="18" fill="%23E4002B"/%3E%3Cpath d="M10 26 C10 26 15 12 20 12 C25 12 28 18 28 18" stroke="white" stroke-width="3" stroke-linecap="round" fill="none"/%3E%3Cpath d="M14 26 C14 26 17 19 20 19 C23 19 26 22 26 22" stroke="white" stroke-width="2.5" stroke-linecap="round" fill="none"/%3E%3Ccircle cx="20" cy="27" r="2.5" fill="white"/%3E%3Ctext x="42" y="27" font-family="Arial" font-size="18" font-weight="bold" fill="%23E4002B"%3Eairtel%3C/text%3E%3C/svg%3E" class="login-logo-img" alt="Airtel">
-        <div class="login-header-text">Log in to <strong>Work</strong></div>
-      </div>
-      <div class="login-sub">Trainer Dashboard · TrainingGPT</div>
-      <div class="form-group">
-        <label class="form-label">User ID <span>*</span></label>
-        <input class="form-input" type="text" placeholder="Your mobile number" id="lid">
-      </div>
-      <div class="form-group">
-        <label class="form-label">Password <span>*</span></label>
-        <div class="inp-wrap">
-          <input class="form-input" type="password" placeholder="Password" id="lpwd">
-          <span class="eye">👁</span>
+
+    <!-- RIGHT — login form -->
+    <div style="padding:48px 44px;display:flex;flex-direction:column;justify-content:center;background:white;">
+      <!-- "Log in to Work" heading with airtel logo -->
+      <div style="display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:28px;">
+        <span style="font-size:22px;font-weight:400;color:#1A1A1A;font-family:Georgia,serif;">Log in to</span>
+        <div style="display:flex;align-items:center;gap:5px;">
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+            <circle cx="14" cy="14" r="14" fill="#1A1A1A"/>
+            <path d="M5 21 C5 21 8.5 9 14 9 C19.5 9 22 15 22 15" stroke="white" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+            <path d="M8 21 C8 21 10.5 15.5 14 15.5 C17.5 15.5 19.5 18.5 19.5 18.5" stroke="white" stroke-width="1.8" stroke-linecap="round" fill="none"/>
+            <circle cx="14" cy="22" r="1.8" fill="white"/>
+          </svg>
+          <span style="font-size:22px;font-weight:700;color:#1A1A1A;font-family:Georgia,serif;">Work</span>
         </div>
       </div>
-      <button class="login-btn" onclick="doLogin()">Login</button>
-      <div class="login-links">
-        <div class="login-link">Forgotten password?</div>
-        <div class="login-link-sub" style="margin-top:5px;">Don't have an account</div>
-        <div class="login-link">First Time ?</div>
+
+      <div style="margin-bottom:14px;">
+        <label style="font-size:13px;font-weight:500;color:#1A1A1A;margin-bottom:6px;display:block;">User ID*</label>
+        <input class="form-input" type="text" placeholder="Your mobile number or OLM ID" id="lid" style="border-radius:8px;height:46px;font-size:13.5px;border:1.5px solid #D0D5DD;width:100%;">
       </div>
-      <div class="login-divider"></div>
-      <button class="sso-btn">Login with SSO</button>
-      <button class="sso-btn">Login with SSO-OAM</button>
+      <div style="margin-bottom:20px;">
+        <label style="font-size:13px;font-weight:500;color:#1A1A1A;margin-bottom:6px;display:block;">Password*</label>
+        <div class="inp-wrap">
+          <input class="form-input" type="password" placeholder="Password" id="lpwd" style="border-radius:8px;height:46px;font-size:13.5px;border:1.5px solid #D0D5DD;width:100%;">
+          <span class="eye" style="color:#98A2B3;font-size:16px;">👁</span>
+        </div>
+      </div>
+      
+      <button onclick="doLogin()" style="width:100%;height:46px;background:#1A1A1A;color:white;border:none;border-radius:8px;font-size:14px;font-weight:600;font-family:var(--font);cursor:pointer;margin-bottom:16px;">Login</button>
+      
+      <div style="text-align:center;margin-bottom:18px;">
+        <div style="font-size:13px;color:#1565C0;cursor:pointer;font-weight:600;margin-bottom:5px;">Forgotten password?</div>
+        <div style="font-size:12.5px;color:#667085;margin-bottom:3px;">Don't have an account</div>
+        <div style="font-size:13px;color:#1565C0;cursor:pointer;font-weight:600;">First Time ?</div>
+      </div>
+      
+      <button style="width:100%;height:44px;background:white;color:#1A1A1A;border:1.5px solid #D0D5DD;border-radius:8px;font-size:13px;font-weight:600;font-family:var(--font);cursor:pointer;margin-bottom:10px;">Login with SSO</button>
+      <button style="width:100%;height:44px;background:white;color:#1A1A1A;border:1.5px solid #D0D5DD;border-radius:8px;font-size:13px;font-weight:600;font-family:var(--font);cursor:pointer;">Login with SSO-OAM</button>
     </div>
   </div>
 </div>
@@ -487,8 +552,16 @@ body{font-family:var(--font);background:var(--gray-50);color:var(--gray-900);min
 <div class="app" id="app">
   <aside class="sidebar">
     <div class="sidebar-logo">
-      <img src="data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 40"%3E%3Ccircle cx="20" cy="20" r="18" fill="%23E4002B"/%3E%3Cpath d="M10 26 C10 26 15 12 20 12 C25 12 28 18 28 18" stroke="white" stroke-width="3" stroke-linecap="round" fill="none"/%3E%3Cpath d="M14 26 C14 26 17 19 20 19 C23 19 26 22 26 22" stroke="white" stroke-width="2.5" stroke-linecap="round" fill="none"/%3E%3Ccircle cx="20" cy="27" r="2.5" fill="white"/%3E%3Ctext x="42" y="27" font-family="Arial" font-size="18" font-weight="bold" fill="%23E4002B"%3Eairtel%3C/text%3E%3C/svg%3E" alt="Airtel">
-      <div class="sidebar-logo-text">Trainer Dashboard<br>TrainingGPT · XFE</div>
+      <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="14" cy="14" r="14" fill="#E4002B"/>
+        <path d="M6 21 C6 21 9.5 9 14 9 C18.5 9 21 14 21 14" stroke="white" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+        <path d="M9 21 C9 21 11 15 14 15 C17 15 19 18 19 18" stroke="white" stroke-width="2" stroke-linecap="round" fill="none"/>
+        <circle cx="14" cy="22" r="2" fill="white"/>
+      </svg>
+      <div>
+        <div style="font-size:13px;font-weight:700;color:white;letter-spacing:0.5px;">airtel</div>
+        <div class="sidebar-logo-text">Trainer Dashboard</div>
+      </div>
     </div>
     <nav class="sidebar-nav">
       <div class="nav-item active" id="nav-dash" onclick="showV('home',this)">
@@ -498,12 +571,8 @@ body{font-family:var(--font);background:var(--gray-50);color:var(--gray-900);min
         <span class="nav-icon">📋</span> Training Queue
         <span class="nav-badge">5</span>
       </div>
-      <div class="nav-item" id="nav-live" onclick="showV('live-feed',this)">
-        <span class="nav-icon">📡</span> Live Feed
-        <span class="nav-badge" id="live-badge" style="display:none;">●</span>
-      </div>
-      <div class="nav-item" onclick="">
-        <span class="nav-icon">📚</span> Content Library
+      <div class="nav-item" id="nav-content" onclick="showV('content-library',this)">
+        <span class="nav-icon">📚</span> Training Content
       </div>
     </nav>
     <div class="sidebar-user">
@@ -519,7 +588,7 @@ body{font-family:var(--font);background:var(--gray-50);color:var(--gray-900);min
     <div class="topbar">
       <div class="topbar-homes">HOMES ▾</div>
       <div class="topbar-right">
-        <button class="tb-icon">🔔</button>
+        <button class="tb-icon" onclick="refreshFromJSONbin()" title="Refresh observations" style="font-size:14px;">🔄</button>
         <button onclick="openXFEApp()" style="height:30px;padding:0 12px;background:#E3F2FD;color:#1565C0;border:1px solid #90CAF9;border-radius:4px;font-size:11.5px;font-weight:600;cursor:pointer;font-family:inherit;display:flex;align-items:center;gap:4px;">📱 Open XFE App</button>
         <button class="tb-icon" onclick="doLogout()">⏻</button>
       </div>
@@ -556,66 +625,9 @@ body{font-family:var(--font);background:var(--gray-50);color:var(--gray-900);min
             <div class="stat-sub">↓ 18% completion rate</div>
           </div>
         </div>
-
-        <!-- LIVE CALL FEED -->
-        <div id="live-feed-section" style="display:none;margin-bottom:18px;">
-          <div class="sec-hdr">
-            <div style="display:flex;align-items:center;gap:8px;">
-              <div class="sec-title">Live Call Feed</div>
-              <span style="display:flex;align-items:center;gap:4px;background:#E8F5E9;color:#2E7D32;font-size:10px;font-weight:700;padding:2px 8px;border-radius:10px;">
-                <span style="width:6px;height:6px;border-radius:50%;background:#2E7D32;animation:livePulse 1.5s infinite;display:inline-block;"></span>
-                LIVE
-              </span>
-            </div>
-          </div>
-          <style>@keyframes livePulse{0%,100%{opacity:1;}50%{opacity:0.4;}}</style>
-          <div style="background:white;border-radius:6px;border:1px solid #DDE0E8;box-shadow:0 1px 3px rgba(0,0,0,0.07);overflow:hidden;">
-            <div style="display:grid;grid-template-columns:1fr 140px 120px 110px 90px;padding:8px 18px;background:#F4F5F7;font-size:10.5px;font-weight:600;color:#6B7594;text-transform:uppercase;letter-spacing:0.3px;border-bottom:1px solid #DDE0E8;">
-              <span>Agent</span><span>Training Gap</span><span>Score</span><span>Status</span><span>Action</span>
-            </div>
-            <div id="live-feed-rows"></div>
-          </div>
-        </div>
-
-        <div class="sec-hdr">
-          <div class="sec-title">Training Requirements</div>
-          <span class="see-all" onclick="showV('training',document.getElementById('nav-train'));renderROTable(loadObservations());">See all →</span>
-        </div>
-        <div class="tc-grid">
-          <div class="tc" onclick="showAgentList('Objection Handling','Critical',847)">
-            <div class="tc-top"><div class="tc-icon r">🛡️</div><div class="sev crit">Critical</div></div>
-            <div class="tc-name">Objection Handling</div>
-            <div class="tc-desc">Agents failing to counter Jio price objections and losing leads at pitch stage.</div>
-            <div class="tc-foot"><div><div class="tc-count">847</div><div class="tc-lbl">agents identified</div></div><div class="tc-arr">→</div></div>
-          </div>
-          <div class="tc" onclick="showAgentList('Value Anchoring','High',534)">
-            <div class="tc-top"><div class="tc-icon a">⚓</div><div class="sev high">High</div></div>
-            <div class="tc-name">Value Anchoring</div>
-            <div class="tc-desc">Agents quoting speed without connecting to customer-specific benefits.</div>
-            <div class="tc-foot"><div><div class="tc-count">534</div><div class="tc-lbl">agents identified</div></div><div class="tc-arr">→</div></div>
-          </div>
-          <div class="tc" onclick="showAgentList('Closing Technique','High',412)">
-            <div class="tc-top"><div class="tc-icon b">🎯</div><div class="sev high">High</div></div>
-            <div class="tc-name">Closing Technique</div>
-            <div class="tc-desc">Agents asking permission to close instead of using assumptive close.</div>
-            <div class="tc-foot"><div><div class="tc-count">412</div><div class="tc-lbl">agents identified</div></div><div class="tc-arr">→</div></div>
-          </div>
-          <div class="tc" onclick="showAgentList('Product Knowledge','Medium',389)">
-            <div class="tc-top"><div class="tc-icon r">📡</div><div class="sev med">Medium</div></div>
-            <div class="tc-name">Product Knowledge</div>
-            <div class="tc-desc">Gaps in OTT bundle knowledge and plan comparison vs Jio offerings.</div>
-            <div class="tc-foot"><div><div class="tc-count">389</div><div class="tc-lbl">agents identified</div></div><div class="tc-arr">→</div></div>
-          </div>
-          <div class="tc" onclick="showAgentList('Communication Skills','Medium',265)">
-            <div class="tc-top"><div class="tc-icon a">💬</div><div class="sev med">Medium</div></div>
-            <div class="tc-name">Communication Skills</div>
-            <div class="tc-desc">Agents reading from scripts instead of natural conversational selling.</div>
-            <div class="tc-foot"><div><div class="tc-count">265</div><div class="tc-lbl">agents identified</div></div><div class="tc-arr">→</div></div>
-          </div>
-        </div>
       </div>
 
-      <!-- TRAINING -->
+            <!-- TRAINING -->
       <div class="view" id="view-training">
         <div class="sec-hdr" style="margin-bottom:14px;"><div class="sec-title">Training Queue</div></div>
         <div class="tc-grid">
@@ -625,7 +637,6 @@ body{font-family:var(--font);background:var(--gray-50);color:var(--gray-900);min
           <div class="tc" onclick="showAgentList('Product Knowledge','Medium',389)"><div class="tc-top"><div class="tc-icon r">📡</div><div class="sev med">Medium</div></div><div class="tc-name">Product Knowledge</div><div class="tc-desc">OTT bundle and plan comparison gaps.</div><div class="tc-foot"><div><div class="tc-count">389</div><div class="tc-lbl">agents</div></div><div class="tc-arr">→</div></div></div>
           <div class="tc" onclick="showAgentList('Communication Skills','Medium',265)"><div class="tc-top"><div class="tc-icon a">💬</div><div class="sev med">Medium</div></div><div class="tc-name">Communication Skills</div><div class="tc-desc">Script reading instead of natural selling.</div><div class="tc-foot"><div><div class="tc-count">265</div><div class="tc-lbl">agents</div></div><div class="tc-arr">→</div></div></div>
         </div>
-      </div>
 
       <!-- RECENT OBSERVATIONS in Training Queue -->
       <div class="ro-wrap" id="ro-section">
@@ -642,11 +653,11 @@ body{font-family:var(--font);background:var(--gray-50);color:var(--gray-900);min
         </div>
         <div class="ro-filter-row">
           <div><div class="checkbox" id="ro-sa-cb" onclick="toggleROSA()"></div></div>
-          <span>Agent</span>
-          <span>Agent Number</span>
-          <span>Gap Area</span>
-          <span>Score</span>
           <span>Date & Time</span>
+          <span>Agent</span>
+          <span>Number</span>
+          <span>Score</span>
+          <span>Gap Area</span>
           <span>Action</span>
         </div>
         <div id="ro-rows">
@@ -656,6 +667,8 @@ body{font-family:var(--font);background:var(--gray-50);color:var(--gray-900);min
           </div>
         </div>
       </div>
+
+      </div><!-- end view-training -->
 
       <!-- AGENT LIST -->
       <div class="view" id="view-agent-list">
@@ -1018,6 +1031,146 @@ body{font-family:var(--font);background:var(--gray-50);color:var(--gray-900);min
         </div>
       </div>
 
+      <!-- CONTENT LIBRARY VIEW -->
+      <div class="view" id="view-content-library">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;">
+          <div>
+            <div class="sec-title" style="font-size:16px;">Training Content</div>
+            <div style="font-size:12px;color:var(--gray-400);margin-top:3px;">Create, manage and push training content to your fleet</div>
+          </div>
+          <div style="display:flex;gap:8px;">
+            <button class="btn-blue" onclick="showCreateContent()">+ Create New Content</button>
+            <button class="btn-outline" onclick="showBulkUpload()">📤 Bulk Upload</button>
+          </div>
+        </div>
+
+        <!-- CREATE CONTENT PANEL -->
+        <div id="create-content-panel" style="display:none;background:white;border-radius:var(--radius);border:1px solid var(--gray-200);padding:20px;margin-bottom:18px;">
+          <div style="font-size:13.5px;font-weight:600;color:var(--gray-900);margin-bottom:14px;">✨ AI Content Generator</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;">
+            <div>
+              <div class="form-label" style="font-size:12px;margin-bottom:5px;">Content Type</div>
+              <select class="tl-select" style="width:100%;height:36px;" id="gen-type">
+                <option>Video Script</option>
+                <option>Presentation Deck</option>
+                <option>Audio Guide</option>
+                <option>Quick Reference Card</option>
+              </select>
+            </div>
+            <div>
+              <div class="form-label" style="font-size:12px;margin-bottom:5px;">Training Gap</div>
+              <select class="tl-select" style="width:100%;height:36px;" id="gen-gap">
+                <option>Objection Handling</option>
+                <option>Value Anchoring</option>
+                <option>Closing Technique</option>
+                <option>Product Knowledge</option>
+                <option>Communication Skills</option>
+              </select>
+            </div>
+          </div>
+          <div style="margin-bottom:12px;">
+            <div class="form-label" style="font-size:12px;margin-bottom:5px;">Describe what you want to create</div>
+            <textarea id="gen-prompt" style="width:100%;height:70px;border:1.5px solid var(--gray-200);border-radius:var(--radius-sm);padding:10px;font-size:13px;font-family:var(--font);resize:none;outline:none;" placeholder="e.g. A 5-minute video script showing how to handle the Jio price objection using real customer scenarios from Faridabad market..."></textarea>
+          </div>
+          <div style="display:flex;justify-content:flex-end;gap:8px;">
+            <button class="btn-outline" onclick="document.getElementById('create-content-panel').style.display='none'">Cancel</button>
+            <button class="btn-blue" onclick="generateContent()">🤖 Generate with AI</button>
+          </div>
+        </div>
+
+        <!-- BULK UPLOAD PANEL -->
+        <div id="bulk-upload-panel" style="display:none;background:white;border-radius:var(--radius);border:1px solid var(--gray-200);padding:20px;margin-bottom:18px;">
+          <div style="font-size:13.5px;font-weight:600;color:var(--gray-900);margin-bottom:4px;">📤 Bulk Training Upload</div>
+          <div style="font-size:12px;color:var(--gray-400);margin-bottom:16px;">Upload an Excel file to push training to multiple agents at once</div>
+          
+          <div style="background:var(--blue-light);border:1px solid #90CAF9;border-radius:var(--radius-sm);padding:14px;margin-bottom:16px;">
+            <div style="font-size:12px;font-weight:600;color:var(--blue);margin-bottom:8px;">📋 Required Excel Format</div>
+            <div style="display:grid;grid-template-columns:repeat(6,1fr);gap:6px;">
+              ${['User Number','Template ID','Push Certification','Certificate End Date','Enable Coach AI','AI Persona'].map(col => 
+                `<div style="background:white;border:1px solid #90CAF9;border-radius:3px;padding:6px 8px;font-size:11px;font-weight:500;color:var(--navy);text-align:center;">${col}</div>`
+              ).join('')}
+            </div>
+            <div style="font-size:11px;color:var(--blue);margin-top:8px;">Each row = one agent assignment. Download template below.</div>
+          </div>
+
+          <div style="border:2px dashed var(--gray-200);border-radius:var(--radius);padding:32px;text-align:center;margin-bottom:12px;cursor:pointer;" onclick="document.getElementById('bulk-file-input').click()">
+            <div style="font-size:28px;margin-bottom:8px;">📎</div>
+            <div style="font-size:13px;font-weight:500;color:var(--gray-900);">Click to upload Excel file</div>
+            <div style="font-size:11.5px;color:var(--gray-400);margin-top:4px;">.xlsx or .csv files supported</div>
+            <input type="file" id="bulk-file-input" style="display:none;" accept=".xlsx,.csv">
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;">
+            <button class="btn-outline" style="font-size:12px;" onclick="downloadTemplate()">⬇ Download Template</button>
+            <div style="display:flex;gap:8px;">
+              <button class="btn-outline" onclick="document.getElementById('bulk-upload-panel').style.display='none'">Cancel</button>
+              <button class="btn-blue" onclick="processBulkUpload()">Upload & Process</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- CONTENT GRID -->
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:18px;">
+          <div style="background:white;border-radius:var(--radius);border:1px solid var(--gray-200);padding:14px;cursor:pointer;" onclick="filterContent('all')">
+            <div style="font-size:22px;margin-bottom:6px;">📁</div>
+            <div style="font-size:13px;font-weight:600;color:var(--gray-900);">All Content</div>
+            <div style="font-size:11px;color:var(--gray-400);margin-top:2px;">12 items</div>
+          </div>
+          <div style="background:white;border-radius:var(--radius);border:1px solid var(--gray-200);padding:14px;cursor:pointer;" onclick="filterContent('video')">
+            <div style="font-size:22px;margin-bottom:6px;">🎥</div>
+            <div style="font-size:13px;font-weight:600;color:var(--gray-900);">Videos</div>
+            <div style="font-size:11px;color:var(--gray-400);margin-top:2px;">5 items</div>
+          </div>
+          <div style="background:white;border-radius:var(--radius);border:1px solid var(--gray-200);padding:14px;cursor:pointer;" onclick="filterContent('ppt')">
+            <div style="font-size:22px;margin-bottom:6px;">📊</div>
+            <div style="font-size:13px;font-weight:600;color:var(--gray-900);">Presentations</div>
+            <div style="font-size:11px;color:var(--gray-400);margin-top:2px;">4 items</div>
+          </div>
+          <div style="background:white;border-radius:var(--radius);border:1px solid var(--gray-200);padding:14px;cursor:pointer;" onclick="filterContent('audio')">
+            <div style="font-size:22px;margin-bottom:6px;">🎧</div>
+            <div style="font-size:13px;font-weight:600;color:var(--gray-900);">Audio Guides</div>
+            <div style="font-size:11px;color:var(--gray-400);margin-top:2px;">3 items</div>
+          </div>
+        </div>
+
+        <!-- CONTENT LIST -->
+        <div class="task-list-wrap" id="content-list-wrap">
+          <div class="tl-header">
+            <div class="tl-title-row">
+              <div class="tl-title">All Training Content</div>
+              <div class="tl-count">(12 items)</div>
+            </div>
+            <div class="tl-actions">
+              <div class="tl-sort">Sort by: <select class="tl-select"><option>Newest</option><option>Most Used</option><option>Gap Type</option></select></div>
+            </div>
+          </div>
+          ${[
+            {ico:'🎥',name:'Handling Jio Price Objection',type:'Video',dur:'12 min',gap:'Objection Handling',used:847,date:'02 Jun 2026'},
+            {ico:'🎥',name:'Assumptive Closing Technique Demo',type:'Video',dur:'8 min',gap:'Closing Technique',used:534,date:'30 May 2026'},
+            {ico:'📊',name:'Objection Handling Masterclass',type:'PPT',dur:'24 slides',gap:'Objection Handling',used:412,date:'01 Jun 2026'},
+            {ico:'📊',name:'Jio vs Airtel Comparison Deck',type:'PPT',dur:'18 slides',gap:'Value Anchoring',used:389,date:'28 May 2026'},
+            {ico:'🎥',name:'OTT Bundle Value Pitch',type:'Video',dur:'6 min',gap:'Product Knowledge',used:265,date:'27 May 2026'},
+            {ico:'🎧',name:'Model Call — Objection Handling',type:'Audio',dur:'5 min',gap:'Objection Handling',used:198,date:'03 Jun 2026'},
+            {ico:'📊',name:'Closing Techniques — XFE Guide',type:'PPT',dur:'15 slides',gap:'Closing Technique',used:176,date:'25 May 2026'},
+            {ico:'🎧',name:'Closing Script — Read Along',type:'Audio',dur:'4 min',gap:'Closing Technique',used:143,date:'29 May 2026'},
+          ].map(item => `
+          <div class="task-row" style="grid-template-columns:50px 1fr 100px 100px 160px 80px 100px;">
+            <div style="font-size:22px;text-align:center;">${item.ico}</div>
+            <div>
+              <div style="font-size:13px;font-weight:500;color:var(--gray-900);">${item.name}</div>
+              <div style="font-size:11px;color:var(--gray-400);">${item.type} · ${item.dur}</div>
+            </div>
+            <div><span class="gap-tag">${item.gap.split(' ')[0]}</span></div>
+            <div style="font-size:12px;color:var(--gray-600);">${item.used} agents</div>
+            <div style="font-size:11.5px;color:var(--gray-400);">${item.date}</div>
+            <div><span class="score-pill good" style="font-size:10px;">Active</span></div>
+            <div style="display:flex;gap:5px;">
+              <button style="height:26px;padding:0 8px;background:var(--blue-btn);color:white;border:none;border-radius:4px;font-size:11px;cursor:pointer;" onclick="toast('Opening ${item.name}...')">View</button>
+              <button style="height:26px;padding:0 8px;background:white;color:var(--blue-btn);border:1px solid var(--blue-btn);border-radius:4px;font-size:11px;cursor:pointer;" onclick="toast('Editing ${item.name}...')">Edit</button>
+            </div>
+          </div>`).join('')}
+        </div>
+      </div>
+
       <!-- LIVE FEED VIEW -->
       <div class="view" id="view-live-feed">
         <div class="live-feed-header">
@@ -1132,6 +1285,50 @@ const AGENTS = [
   {name:"Neha Gupta",id:"XFE-8820",loc:"Noida",score:71,calls:11,last:"1h ago",status:"Pending",gaps:["Objection"],color:"#AD1457"},
   {name:"Sunita Rao",id:"XFE-6644",loc:"Ghaziabad",score:67,calls:7,last:"3h ago",status:"Pending",gaps:["Objection","Closing"],color:"#00897B"},
 ];
+
+// Agent phone → name mapping
+const AGENT_NAMES = {
+  '9716299969': 'Sunny',
+  '919716299969': 'Sunny',
+  '+919716299969': 'Sunny',
+  '9818673827': 'Ravi',
+  '919818673827': 'Ravi',
+  '+919818673827': 'Ravi',
+  '9703070123': 'Rishab',
+  '919703070123': 'Rishab',
+  '+919703070123': 'Rishab',
+  '9654495454': 'Thulasi',
+  '919654495454': 'Thulasi',
+  '+919654495454': 'Thulasi',
+  '9205474250': 'Varun',
+  '919205474250': 'Varun',
+  '+919205474250': 'Varun',
+  '997111800': 'Pradipt',
+  '9971118800': 'Pradipt',
+  '+919971118800': 'Pradipt',
+  '9818891014': 'Anant',
+  '919818891014': 'Anant',
+  '+919818891014': 'Anant',
+  '9873182585': 'Manoj',
+  '919873182585': 'Manoj',
+  '+919873182585': 'Manoj',
+  '9899577359': 'Chandan',
+  '919899577359': 'Chandan',
+  '+919899577359': 'Chandan',
+  '9810202024': 'Amit',
+  '919810202024': 'Amit',
+  '+919810202024': 'Amit',
+};
+
+function getAgentName(phone){
+  if(!phone) return 'Unknown';
+  const clean = phone.replace(/\s+/g,'');
+  if(AGENT_NAMES[clean]) return AGENT_NAMES[clean];
+  // Try last 10 digits
+  const last10 = clean.slice(-10);
+  if(AGENT_NAMES[last10]) return AGENT_NAMES[last10];
+  return clean; // fallback to number
+}
 
 const CONTENT_MAP = {
   PPT:[{name:"Objection Handling Masterclass.pptx",meta:"24 slides · Updated 01 Jun 2026",rel:"Highly Relevant"},{name:"Jio vs Airtel Comparison Deck.pptx",meta:"18 slides · Updated 28 May 2026",rel:"Relevant"},{name:"Closing Techniques — XFE Guide.pptx",meta:"15 slides · Updated 25 May 2026",rel:"Relevant"}],
@@ -1660,6 +1857,42 @@ window.addEventListener('DOMContentLoaded', function(){
   checkURLParams();
 });
 
+// ── CONTENT LIBRARY FUNCTIONS ──────────────────────────
+function showCreateContent(){
+  document.getElementById('create-content-panel').style.display = 'block';
+  document.getElementById('bulk-upload-panel').style.display = 'none';
+}
+
+function showBulkUpload(){
+  document.getElementById('bulk-upload-panel').style.display = 'block';
+  document.getElementById('create-content-panel').style.display = 'none';
+}
+
+function generateContent(){
+  const type = document.getElementById('gen-type').value;
+  const gap = document.getElementById('gen-gap').value;
+  const prompt = document.getElementById('gen-prompt').value;
+  if(!prompt.trim()){ toast('Please describe what you want to create'); return; }
+  toast('🤖 Generating ' + type + ' for ' + gap + '...');
+  setTimeout(() => toast('✅ Content generated! Review in draft folder.'), 2500);
+}
+
+function filterContent(type){
+  const titles = {all:'All Training Content (12)',video:'Videos (5)',ppt:'Presentations (4)',audio:'Audio Guides (3)'};
+  toast('Showing: ' + (titles[type] || 'All Content'));
+}
+
+function downloadTemplate(){
+  toast('📥 Template downloading...');
+}
+
+function processBulkUpload(){
+  const file = document.getElementById('bulk-file-input').files[0];
+  if(!file){ toast('Please select an Excel file first'); return; }
+  toast('⏳ Processing ' + file.name + '...');
+  setTimeout(() => toast('✅ Bulk upload complete! Training assigned to agents.'), 2000);
+}
+
 // ── RECENT OBSERVATIONS ─────────────────────────────────
 // Storage key for observations
 const RO_KEY = 'traininggpt_observations';
@@ -1740,23 +1973,22 @@ function renderROTable(obs){
     const gapStr = gaps.slice(0,2).map(g => `<span class="gap-tag">${g.trim()}</span>`).join('');
     const phone = o.phone || '—';
     const isS = roSel.has(i);
-    const initials = phone.slice(-4,-2) || 'XF';
+    const agentName = getAgentName(phone);
+    const nameDisplay = agentName.length > 10 ? agentName.slice(0,10) : agentName;
+    const phoneDisplay = phone.slice(-10);
     return `<div class="ro-row ${isS?'selected':''}" id="ro-row-${i}">
       <div><div class="checkbox ${isS?'chk':''}" onclick="togROAgent(event,${i})">${isS?'✓':''}</div></div>
-      <div class="agent-cell" onclick="showObsDetail(${i})">
-        <div class="av" style="background:var(--navy)">${initials}</div>
-        <div>
-          <div class="an">Agent ${phone.slice(-4)}</div>
-          <div class="aid" style="color:var(--gray-400);">XFE</div>
-        </div>
+      <div style="font-size:11px;color:var(--gray-600);">${toIST(o.receivedAt)}</div>
+      <div class="agent-cell" onclick="showObsDetail(${i})" style="cursor:pointer;">
+        <div class="av" style="background:var(--navy);width:24px;height:24px;font-size:9px;flex-shrink:0;">${agentName.slice(0,2).toUpperCase()}</div>
+        <div style="font-size:12px;font-weight:500;color:var(--gray-900);max-width:80px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${nameDisplay}</div>
       </div>
-      <div style="font-size:12.5px;font-weight:500;color:var(--gray-900);">${phone}</div>
-      <div class="gap-tags">${gapStr || '<span class="gap-tag">—</span>'}</div>
-      <div><span class="score-pill ${sc}">${overallScore}/100</span></div>
-      <div style="font-size:12px;color:var(--gray-600);">${toIST(o.receivedAt)}</div>
-      <div style="display:flex;align-items:center;gap:6px;">
-        <button onclick="showObsDetail(${i})" style="height:26px;padding:0 10px;background:var(--blue-btn);color:white;border:none;border-radius:4px;font-size:11px;font-weight:500;cursor:pointer;font-family:inherit;">View</button>
-        <button onclick="pushSingleObs(event,${i})" style="height:26px;padding:0 10px;background:white;color:var(--blue-btn);border:1px solid var(--blue-btn);border-radius:4px;font-size:11px;font-weight:500;cursor:pointer;font-family:inherit;">Push</button>
+      <div style="font-size:11.5px;color:var(--gray-600);">${phoneDisplay}</div>
+      <div><span class="score-pill ${sc}" style="font-size:11px;padding:2px 5px;">${overallScore}</span></div>
+      <div class="gap-tags" style="flex-wrap:wrap;">${gapStr || '<span class="gap-tag">—</span>'}</div>
+      <div style="display:flex;align-items:center;gap:4px;">
+        <button onclick="showObsDetail(${i})" style="height:24px;padding:0 8px;background:var(--blue-btn);color:white;border:none;border-radius:4px;font-size:10.5px;font-weight:500;cursor:pointer;font-family:inherit;">View</button>
+        <button onclick="pushSingleObs(event,${i})" style="height:24px;padding:0 8px;background:white;color:var(--blue-btn);border:1px solid var(--blue-btn);border-radius:4px;font-size:10.5px;font-weight:500;cursor:pointer;font-family:inherit;">Push</button>
       </div>
     </div>`;
   }).join('');
@@ -1811,7 +2043,7 @@ function showObsDetail(i){
 
   // Banner
   document.getElementById('obs-av').textContent = initials;
-  document.getElementById('obs-name').textContent = 'Agent ' + phone.slice(-4);
+  document.getElementById('obs-name').textContent = getAgentName(phone);
   document.getElementById('obs-meta').textContent = 'XFE · ' + toIST(o.receivedAt);
   document.getElementById('obs-score-val').textContent = overallScore + '/100';
   document.getElementById('bc-obs-agent').textContent = phone;
@@ -1854,14 +2086,12 @@ function showObsDetail(i){
   document.getElementById('obs-bar-ov').style.width = overallScore + '%';
   document.getElementById('obs-val-ov').textContent = overallScore;
 
-  // What's good / improvement — derive from gaps
-  const goodItems = [
-    'Professional tone maintained throughout the call.',
-    'Clear product introduction with plan details.',
-    'Proper greeting and Airtel context established.'
-  ];
+  // What's good / improvement — use real data from Groq evaluation
+  const goodItems = Array.isArray(o.good) && o.good.length > 0
+    ? o.good
+    : ['Professional tone maintained throughout the call.', 'Clear product introduction with plan details.', 'Proper greeting and Airtel context established.'];
   const badItems = gaps.length > 0
-    ? gaps.map(g => g.trim() + ' — needs improvement based on call evaluation.')
+    ? gaps.map(g => g.trim())
     : ['Review call for improvement areas.'];
 
   document.getElementById('obs-good').innerHTML = goodItems.map(g =>

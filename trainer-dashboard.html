@@ -71,7 +71,7 @@ body{font-family:var(--font);background:var(--gray-50);color:var(--gray-900);min
 .login-link-sub{font-size:12px;color:var(--gray-400);margin-bottom:3px;}
 .login-divider{height:1px;background:var(--gray-100);margin:14px 0;}
 .sso-btn{width:100%;height:42px;background:white;color:var(--gray-900);border:1.5px solid var(--gray-200);border-radius:var(--radius-sm);font-size:13px;font-weight:600;font-family:var(--font);cursor:pointer;margin-bottom:8px;transition:border-color 0.15s;}
-.sso-btn:hover{border-color:var(--gray-400); }
+.sso-btn:hover{border-color:var(--gray-400);}
 
 /* ── APP ── */
 .app{display:none;}
@@ -635,6 +635,7 @@ body{font-family:var(--font);background:var(--gray-50);color:var(--gray-900);min
             <span class="ro-count" id="ro-count">— 0 records</span>
           </div>
           <div style="display:flex;align-items:center;gap:8px;">
+            <button class="btn-outline" onclick="refreshFromJSONbin()">🔄 Refresh</button>
             <button class="btn-outline" onclick="deselectAllRO()">Deselect All</button>
             <button class="btn-blue" id="ro-push-btn" onclick="openPushModal()" disabled>+ Push Training</button>
           </div>
@@ -1113,6 +1114,11 @@ body{font-family:var(--font);background:var(--gray-50);color:var(--gray-900);min
 // Capture URL params immediately before anything clears them
 var _capturedParams = new URLSearchParams(window.location.search);
 var LOGO = "";
+
+// ── JSONBIN CONFIG ──────────────────────────────────────
+const JSONBIN_ID  = '6a2a90f8da38895dfeaca333';
+const JSONBIN_KEY = '$2a$10$ynONZ6vAYBRLuR0s6aRwDOaGL2pZFyJkNeOiuR12nKtBR.Fjgd6gq';
+const JSONBIN_URL = 'https://api.jsonbin.io/v3/b/' + JSONBIN_ID + '/latest';
 
 // Inject logo
 // logo injection removed
@@ -1925,10 +1931,53 @@ function _checkURLParamsImpl(){
   }
 }
 
-// Init — load existing observations on page load
+// ── JSONBIN FETCH ──────────────────────────────────────
+async function refreshFromJSONbin(){
+  const btn = document.querySelector('.btn-outline[onclick="refreshFromJSONbin()"]');
+  if(btn) btn.textContent = '⏳ Loading...';
+  try {
+    const resp = await fetch(JSONBIN_URL, {
+      headers: {
+        'X-Master-Key': JSONBIN_KEY,
+        'X-Bin-Versioning': 'false'
+      }
+    });
+    const data = await resp.json();
+    let records = data.record || [];
+    
+    // Filter out init record
+    records = records.filter(r => !r.init);
+    
+    // Sort newest first
+    records.sort((a,b) => new Date(b.receivedAt||0) - new Date(a.receivedAt||0));
+    
+    // Keep top 20
+    records = records.slice(0, 20);
+    
+    if(records.length > 0){
+      // Save to localStorage as backup
+      saveObservations(records);
+      renderROTable(records);
+      toast('✅ ' + records.length + ' observation' + (records.length!==1?'s':'') + ' loaded');
+    } else {
+      toast('No observations yet — make a call first');
+    }
+  } catch(e){
+    console.error('JSONbin error:', e);
+    toast('❌ Could not load — check connection');
+  }
+  if(btn) btn.textContent = '🔄 Refresh';
+}
+
+// Init — load from JSONbin on page load + fallback to localStorage
 window.addEventListener('load', function(){
+  // First show localStorage data immediately
   const obs = loadObservations();
   if(obs && obs.length > 0) renderROTable(obs);
+  
+  // Then fetch fresh from JSONbin
+  refreshFromJSONbin();
+  
   // Show URL hint
   const urlEl = document.getElementById('lf-webhook-display');
   if(urlEl) urlEl.textContent = window.location.href.split('?')[0] + '?callId=xxx&phone=+91xxx&score=72&gaps=Objection,Closing&transcript=...';

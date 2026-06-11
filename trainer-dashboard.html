@@ -485,13 +485,10 @@ body{font-family:var(--font);background:var(--gray-50);color:var(--gray-900);min
       </div>
     </div>
     <nav class="sidebar-nav">
-      <div class="nav-item active" id="nav-dash" onclick="showV('home',this)">
+      <div class="nav-item active" id="nav-dash" onclick="showV('home',this);renderROTable(loadObservations());">
         <span class="nav-icon">⊞</span> Dashboard
       </div>
-      <div class="nav-item" id="nav-train" onclick="showV('training',this);renderROTable(loadObservations());">
-        <span class="nav-icon">📋</span> Training Queue
-        <span class="nav-badge">5</span>
-      </div>
+
       <div class="nav-item" id="nav-content" onclick="showV('content-library',this)">
         <span class="nav-icon">📚</span> Training Content
       </div>
@@ -517,9 +514,10 @@ body{font-family:var(--font);background:var(--gray-50);color:var(--gray-900);min
 
     <div class="content">
 
-      <!-- HOME -->
+      <!-- DASHBOARD (combined home + training queue) -->
       <div class="view active" id="view-home">
-        <div class="stats-grid">
+        <!-- KPI CARDS -->
+        <div class="stats-grid" style="margin-bottom:20px;">
           <div class="stat-card">
             <div class="stat-label">Total Fleet</div>
             <div class="stat-value navy">103K</div>
@@ -546,20 +544,52 @@ body{font-family:var(--font);background:var(--gray-50);color:var(--gray-900);min
             <div class="stat-sub">↓ 18% completion rate</div>
           </div>
         </div>
-      </div>
 
-            <!-- TRAINING -->
-      <div class="view" id="view-training">
-        <div class="sec-hdr" style="margin-bottom:14px;"><div class="sec-title">Training Queue</div></div>
-        <div class="tc-grid">
-          <div class="tc" onclick="showAgentList('Objection Handling','Critical',847)"><div class="tc-top"><div class="tc-icon r">🛡️</div><div class="sev crit">Critical</div></div><div class="tc-name">Objection Handling</div><div class="tc-desc">Agents failing to counter Jio price objections.</div><div class="tc-foot"><div><div class="tc-count">847</div><div class="tc-lbl">agents</div></div><div class="tc-arr">→</div></div></div>
-          <div class="tc" onclick="showAgentList('Value Anchoring','High',534)"><div class="tc-top"><div class="tc-icon a">⚓</div><div class="sev high">High</div></div><div class="tc-name">Value Anchoring</div><div class="tc-desc">Speed without connecting to customer benefits.</div><div class="tc-foot"><div><div class="tc-count">534</div><div class="tc-lbl">agents</div></div><div class="tc-arr">→</div></div></div>
-          <div class="tc" onclick="showAgentList('Closing Technique','High',412)"><div class="tc-top"><div class="tc-icon b">🎯</div><div class="sev high">High</div></div><div class="tc-name">Closing Technique</div><div class="tc-desc">Asking permission instead of assumptive close.</div><div class="tc-foot"><div><div class="tc-count">412</div><div class="tc-lbl">agents</div></div><div class="tc-arr">→</div></div></div>
-          <div class="tc" onclick="showAgentList('Product Knowledge','Medium',389)"><div class="tc-top"><div class="tc-icon r">📡</div><div class="sev med">Medium</div></div><div class="tc-name">Product Knowledge</div><div class="tc-desc">OTT bundle and plan comparison gaps.</div><div class="tc-foot"><div><div class="tc-count">389</div><div class="tc-lbl">agents</div></div><div class="tc-arr">→</div></div></div>
-          <div class="tc" onclick="showAgentList('Communication Skills','Medium',265)"><div class="tc-top"><div class="tc-icon a">💬</div><div class="sev med">Medium</div></div><div class="tc-name">Communication Skills</div><div class="tc-desc">Script reading instead of natural selling.</div><div class="tc-foot"><div><div class="tc-count">265</div><div class="tc-lbl">agents</div></div><div class="tc-arr">→</div></div></div>
+        <!-- TRAINING QUEUE CARDS -->
+        <div class="sec-hdr" style="margin-bottom:14px;">
+          <div class="sec-title">Training Queue</div>
+        </div>
+        <div class="tc-grid" style="grid-template-columns:repeat(3,1fr);margin-bottom:20px;">
+          <div class="tc" onclick="showAgentList('Objection Handling','Critical',847)">
+            <div class="tc-top"><div class="tc-icon r">🛡️</div><div class="sev crit">Critical</div></div>
+            <div class="tc-name">Objection Handling</div>
+            <div class="tc-desc">Agents failing to counter Jio price objections and losing leads at pitch stage.</div>
+            <div class="tc-foot"><div><div class="tc-count">847</div><div class="tc-lbl">agents identified</div></div><div class="tc-arr">→</div></div>
+          </div>
+          <div class="tc" onclick="showAgentList('Value Anchoring','High',534)">
+            <div class="tc-top"><div class="tc-icon a">⚓</div><div class="sev high">High</div></div>
+            <div class="tc-name">Value Anchoring</div>
+            <div class="tc-desc">Agents quoting speed without connecting to customer-specific benefits.</div>
+            <div class="tc-foot"><div><div class="tc-count">534</div><div class="tc-lbl">agents identified</div></div><div class="tc-arr">→</div></div>
+          </div>
+          <div class="tc" onclick="showAgentList('Closing Technique','High',412)">
+            <div class="tc-top"><div class="tc-icon b">🎯</div><div class="sev high">High</div></div>
+            <div class="tc-name">Closing Technique</div>
+            <div class="tc-desc">Agents asking permission to close instead of using assumptive close.</div>
+            <div class="tc-foot"><div><div class="tc-count">412</div><div class="tc-lbl">agents identified</div></div><div class="tc-arr">→</div></div>
+          </div>
+          <div class="tc" onclick="showAgentList('Product Knowledge','Medium',389)">
+            <div class="tc-top"><div class="tc-icon r">📡</div><div class="sev med">Medium</div></div>
+            <div class="tc-name">Product Knowledge</div>
+            <div class="tc-desc">Gaps in OTT bundle knowledge and plan comparison vs Jio offerings.</div>
+            <div class="tc-foot"><div><div class="tc-count">389</div><div class="tc-lbl">agents identified</div></div><div class="tc-arr">→</div></div>
+          </div>
+          <div class="tc" onclick="showAgentList('Communication Skills','Medium',265)">
+            <div class="tc-top"><div class="tc-icon a">💬</div><div class="sev med">Medium</div></div>
+            <div class="tc-name">Communication Skills</div>
+            <div class="tc-desc">Agents reading from scripts instead of natural conversational selling.</div>
+            <div class="tc-foot"><div><div class="tc-count">265</div><div class="tc-lbl">agents identified</div></div><div class="tc-arr">→</div></div>
+          </div>
+          <!-- 6th card - Fatal - highlighted red -->
+          <div class="tc" onclick="showAgentList('Fatal Errors','Fatal',43)" style="border:2px solid var(--red);background:#FFF5F5;">
+            <div class="tc-top"><div class="tc-icon r">🚨</div><div class="sev crit" style="background:#E4002B;color:white;">FATAL</div></div>
+            <div class="tc-name" style="color:var(--red);">Fatal Errors</div>
+            <div class="tc-desc">Agents making critical compliance or misrepresentation errors on calls.</div>
+            <div class="tc-foot"><div><div class="tc-count" style="color:var(--red);">43</div><div class="tc-lbl">agents flagged</div></div><div class="tc-arr" style="background:var(--red-soft);color:var(--red);">→</div></div>
+          </div>
         </div>
 
-      <!-- RECENT OBSERVATIONS in Training Queue -->
+        <!-- RECENT OBSERVATIONS in Training Queue -->
       <div class="ro-wrap" id="ro-section">
         <div class="ro-header">
           <div style="display:flex;align-items:center;">
@@ -589,14 +619,16 @@ body{font-family:var(--font);background:var(--gray-50);color:var(--gray-900);min
         </div>
       </div>
 
-      </div><!-- end view-training -->
+      </div>
+
+      
 
       <!-- AGENT LIST -->
       <div class="view" id="view-agent-list">
         <div class="breadcrumb">
           <span class="bc-item" onclick="showV('home',document.getElementById('nav-dash'))">Dashboard</span>
           <span class="bc-sep">/</span>
-          <span class="bc-item" onclick="showV('training',document.getElementById('nav-train'))">Training Queue</span>
+          <span class="bc-item" onclick="showV('home',document.getElementById('nav-dash'))">Training Queue</span>
           <span class="bc-sep">/</span>
           <span class="bc-item cur" id="bc-train">Objection Handling</span>
         </div>
@@ -630,7 +662,7 @@ body{font-family:var(--font);background:var(--gray-50);color:var(--gray-900);min
         <div class="breadcrumb">
           <span class="bc-item" onclick="showV('home',document.getElementById('nav-dash'))">Dashboard</span>
           <span class="bc-sep">/</span>
-          <span class="bc-item" onclick="showV('training',document.getElementById('nav-train'))">Training Queue</span>
+          <span class="bc-item" onclick="showV('home',document.getElementById('nav-dash'))">Training Queue</span>
           <span class="bc-sep">/</span>
           <span class="bc-item" onclick="showV('agent-list',null)" id="bc-train2">Objection Handling</span>
           <span class="bc-sep">/</span>
@@ -867,7 +899,7 @@ body{font-family:var(--font);background:var(--gray-50);color:var(--gray-900);min
         <div class="breadcrumb">
           <span class="bc-item" onclick="showV('home',document.getElementById('nav-dash'))">Dashboard</span>
           <span class="bc-sep">/</span>
-          <span class="bc-item" onclick="showV('training',document.getElementById('nav-train'))">Training Queue</span>
+          <span class="bc-item" onclick="showV('home',document.getElementById('nav-dash'))">Training Queue</span>
           <span class="bc-sep">/</span>
           <span class="bc-item cur" id="bc-obs-agent">Observation Detail</span>
         </div>
@@ -954,118 +986,121 @@ body{font-family:var(--font);background:var(--gray-50);color:var(--gray-900);min
 
       <!-- CONTENT LIBRARY VIEW -->
       <div class="view" id="view-content-library">
-        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;">
-          <div>
-            <div class="sec-title" style="font-size:16px;">Training Content</div>
-            <div style="font-size:12px;color:var(--gray-400);margin-top:3px;">Create, manage and push training content to your fleet</div>
-          </div>
-          <div style="display:flex;gap:8px;">
-            <button class="btn-blue" onclick="showCreateContent()">+ Create New Content</button>
-            <button class="btn-outline" onclick="showBulkUpload()">📤 Bulk Upload</button>
-          </div>
+        <div style="margin-bottom:20px;">
+          <div class="sec-title" style="font-size:16px;margin-bottom:4px;">Training Content</div>
+          <div style="font-size:12px;color:var(--gray-400);">Create and manage training content for your fleet</div>
         </div>
 
-        <!-- CREATE CONTENT PANEL -->
-        <div id="create-content-panel" style="display:none;background:white;border-radius:var(--radius);border:1px solid var(--gray-200);padding:20px;margin-bottom:18px;">
-          <div style="font-size:13.5px;font-weight:600;color:var(--gray-900);margin-bottom:14px;">✨ AI Content Generator</div>
+        <!-- AI CONTENT GENERATOR — always visible -->
+        <div style="background:white;border-radius:var(--radius);border:1px solid var(--gray-200);padding:20px;margin-bottom:20px;">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:14px;">
+            <span style="font-size:18px;">✨</span>
+            <div style="font-size:13.5px;font-weight:600;color:var(--gray-900);">AI Content Generator</div>
+            <span style="font-size:10.5px;background:var(--blue-light);color:var(--blue);padding:2px 8px;border-radius:10px;font-weight:600;">Powered by AI</span>
+          </div>
           <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;">
             <div>
-              <div style="font-size:12px;font-weight:500;margin-bottom:5px;">Content Type</div>
+              <div style="font-size:12px;font-weight:500;color:var(--gray-900);margin-bottom:5px;">Content Type</div>
               <select class="tl-select" style="width:100%;height:36px;" id="gen-type">
                 <option>Video Script</option>
                 <option>Presentation Deck</option>
                 <option>Audio Guide</option>
                 <option>Quick Reference Card</option>
+                <option>MCQ Quiz</option>
               </select>
             </div>
             <div>
-              <div style="font-size:12px;font-weight:500;margin-bottom:5px;">Training Gap</div>
+              <div style="font-size:12px;font-weight:500;color:var(--gray-900);margin-bottom:5px;">Training Gap</div>
               <select class="tl-select" style="width:100%;height:36px;" id="gen-gap">
                 <option>Objection Handling</option>
                 <option>Value Anchoring</option>
                 <option>Closing Technique</option>
                 <option>Product Knowledge</option>
                 <option>Communication Skills</option>
+                <option>Fatal Error Prevention</option>
               </select>
             </div>
           </div>
-          <div style="margin-bottom:12px;">
-            <div style="font-size:12px;font-weight:500;margin-bottom:5px;">Describe what you want to create</div>
-            <textarea id="gen-prompt" style="width:100%;height:70px;border:1.5px solid var(--gray-200);border-radius:var(--radius-sm);padding:10px;font-size:13px;font-family:var(--font);resize:none;outline:none;" placeholder="e.g. A 5-minute video script showing how to handle the Jio price objection..."></textarea>
+          <div style="margin-bottom:14px;">
+            <div style="font-size:12px;font-weight:500;color:var(--gray-900);margin-bottom:5px;">Describe what you want to create</div>
+            <textarea id="gen-prompt" style="width:100%;height:72px;border:1.5px solid var(--gray-200);border-radius:var(--radius-sm);padding:10px 12px;font-size:13px;font-family:var(--font);resize:none;outline:none;color:var(--gray-900);" placeholder="e.g. A 5-minute video script showing how to handle the Jio price objection using real customer scenarios from Faridabad market..."></textarea>
           </div>
-          <div style="display:flex;justify-content:flex-end;gap:8px;">
-            <button class="btn-outline" onclick="document.getElementById('create-content-panel').style.display='none'">Cancel</button>
-            <button class="btn-blue" onclick="generateContent()">🤖 Generate with AI</button>
+          <div style="display:flex;align-items:center;justify-content:space-between;">
+            <div style="font-size:11.5px;color:var(--gray-400);">AI will generate content tailored to your fleet's gap areas</div>
+            <button class="btn-blue" onclick="generateContent()" style="gap:6px;">🤖 Generate with AI</button>
           </div>
         </div>
 
-        <!-- BULK UPLOAD PANEL -->
-        <div id="bulk-upload-panel" style="display:none;background:white;border-radius:var(--radius);border:1px solid var(--gray-200);padding:20px;margin-bottom:18px;">
-          <div style="font-size:13.5px;font-weight:600;color:var(--gray-900);margin-bottom:4px;">📤 Bulk Training Upload</div>
-          <div style="font-size:12px;color:var(--gray-400);margin-bottom:16px;">Upload an Excel file to push training to multiple agents at once</div>
-          <div style="background:var(--blue-light);border:1px solid #90CAF9;border-radius:var(--radius-sm);padding:14px;margin-bottom:16px;">
-            <div style="font-size:12px;font-weight:600;color:var(--blue);margin-bottom:8px;">📋 Required Excel Format</div>
-            <div style="display:grid;grid-template-columns:repeat(6,1fr);gap:6px;">
-              <div style="background:white;border:1px solid #90CAF9;border-radius:3px;padding:6px 8px;font-size:11px;font-weight:500;color:var(--navy);text-align:center;">User Number</div>
-              <div style="background:white;border:1px solid #90CAF9;border-radius:3px;padding:6px 8px;font-size:11px;font-weight:500;color:var(--navy);text-align:center;">Template ID</div>
-              <div style="background:white;border:1px solid #90CAF9;border-radius:3px;padding:6px 8px;font-size:11px;font-weight:500;color:var(--navy);text-align:center;">Push Certification</div>
-              <div style="background:white;border:1px solid #90CAF9;border-radius:3px;padding:6px 8px;font-size:11px;font-weight:500;color:var(--navy);text-align:center;">Certificate End Date</div>
-              <div style="background:white;border:1px solid #90CAF9;border-radius:3px;padding:6px 8px;font-size:11px;font-weight:500;color:var(--navy);text-align:center;">Enable Coach AI</div>
-              <div style="background:white;border:1px solid #90CAF9;border-radius:3px;padding:6px 8px;font-size:11px;font-weight:500;color:var(--navy);text-align:center;">AI Persona</div>
+        <!-- BULK UPLOAD -->
+        <div style="background:white;border-radius:var(--radius);border:1px solid var(--gray-200);padding:20px;margin-bottom:20px;">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;">
+            <div style="display:flex;align-items:center;gap:8px;">
+              <span style="font-size:18px;">📤</span>
+              <div style="font-size:13.5px;font-weight:600;color:var(--gray-900);">Bulk Training Upload</div>
             </div>
-            <div style="font-size:11px;color:var(--blue);margin-top:8px;">Each row = one agent assignment.</div>
+            <button class="btn-outline" id="bulk-toggle" onclick="toggleBulk()">Expand</button>
           </div>
-          <div style="border:2px dashed var(--gray-200);border-radius:var(--radius);padding:32px;text-align:center;margin-bottom:12px;cursor:pointer;" onclick="document.getElementById('bulk-file-input').click()">
-            <div style="font-size:28px;margin-bottom:8px;">📎</div>
-            <div style="font-size:13px;font-weight:500;color:var(--gray-900);">Click to upload Excel file</div>
-            <div style="font-size:11.5px;color:var(--gray-400);margin-top:4px;">.xlsx or .csv files supported</div>
-            <input type="file" id="bulk-file-input" style="display:none;" accept=".xlsx,.csv">
-          </div>
-          <div style="display:flex;justify-content:space-between;align-items:center;">
-            <button class="btn-outline" style="font-size:12px;" onclick="downloadTemplate()">⬇ Download Template</button>
-            <div style="display:flex;gap:8px;">
-              <button class="btn-outline" onclick="document.getElementById('bulk-upload-panel').style.display='none'">Cancel</button>
+          <div id="bulk-upload-panel" style="display:none;">
+            <div style="background:var(--blue-light);border:1px solid #90CAF9;border-radius:var(--radius-sm);padding:14px;margin-bottom:14px;">
+              <div style="font-size:12px;font-weight:600;color:var(--blue);margin-bottom:8px;">📋 Required Excel Format</div>
+              <div style="display:grid;grid-template-columns:repeat(6,1fr);gap:6px;">
+                <div style="background:white;border:1px solid #90CAF9;border-radius:3px;padding:6px 8px;font-size:11px;font-weight:500;color:var(--navy);text-align:center;">User Number</div>
+                <div style="background:white;border:1px solid #90CAF9;border-radius:3px;padding:6px 8px;font-size:11px;font-weight:500;color:var(--navy);text-align:center;">Template ID</div>
+                <div style="background:white;border:1px solid #90CAF9;border-radius:3px;padding:6px 8px;font-size:11px;font-weight:500;color:var(--navy);text-align:center;">Push Certification</div>
+                <div style="background:white;border:1px solid #90CAF9;border-radius:3px;padding:6px 8px;font-size:11px;font-weight:500;color:var(--navy);text-align:center;">Certificate End Date</div>
+                <div style="background:white;border:1px solid #90CAF9;border-radius:3px;padding:6px 8px;font-size:11px;font-weight:500;color:var(--navy);text-align:center;">Enable Coach AI</div>
+                <div style="background:white;border:1px solid #90CAF9;border-radius:3px;padding:6px 8px;font-size:11px;font-weight:500;color:var(--navy);text-align:center;">AI Persona</div>
+              </div>
+            </div>
+            <div style="border:2px dashed var(--gray-200);border-radius:var(--radius);padding:24px;text-align:center;cursor:pointer;margin-bottom:12px;" onclick="document.getElementById('bulk-file-input').click()">
+              <div style="font-size:24px;margin-bottom:6px;">📎</div>
+              <div style="font-size:13px;font-weight:500;color:var(--gray-900);">Click to upload Excel file</div>
+              <div style="font-size:11.5px;color:var(--gray-400);margin-top:3px;">.xlsx or .csv files supported</div>
+              <input type="file" id="bulk-file-input" style="display:none;" accept=".xlsx,.csv">
+            </div>
+            <div style="display:flex;justify-content:space-between;">
+              <button class="btn-outline" onclick="downloadTemplate()">⬇ Download Template</button>
               <button class="btn-blue" onclick="processBulkUpload()">Upload and Process</button>
             </div>
           </div>
         </div>
 
-        <!-- CONTENT TYPE FILTER CARDS -->
+        <!-- CONTENT LIBRARY -->
+        <div style="margin-bottom:12px;">
+          <div class="sec-title" style="font-size:14px;">Content Library</div>
+        </div>
         <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:18px;">
-          <div style="background:white;border-radius:var(--radius);border:1px solid var(--gray-200);padding:14px;cursor:pointer;transition:all 0.15s;" onclick="toast('Showing: All Content')">
-            <div style="font-size:22px;margin-bottom:6px;">📁</div>
+          <div class="tc" onclick="showContentRows('all')" style="padding:14px;">
+            <div style="font-size:24px;margin-bottom:8px;">📁</div>
             <div style="font-size:13px;font-weight:600;color:var(--gray-900);">All Content</div>
             <div style="font-size:11px;color:var(--gray-400);margin-top:2px;">8 items</div>
           </div>
-          <div style="background:white;border-radius:var(--radius);border:1px solid var(--gray-200);padding:14px;cursor:pointer;transition:all 0.15s;" onclick="toast('Showing: Videos')">
-            <div style="font-size:22px;margin-bottom:6px;">🎥</div>
+          <div class="tc" onclick="showContentRows('video')" style="padding:14px;">
+            <div style="font-size:24px;margin-bottom:8px;">🎥</div>
             <div style="font-size:13px;font-weight:600;color:var(--gray-900);">Videos</div>
             <div style="font-size:11px;color:var(--gray-400);margin-top:2px;">3 items</div>
           </div>
-          <div style="background:white;border-radius:var(--radius);border:1px solid var(--gray-200);padding:14px;cursor:pointer;transition:all 0.15s;" onclick="toast('Showing: Presentations')">
-            <div style="font-size:22px;margin-bottom:6px;">📊</div>
+          <div class="tc" onclick="showContentRows('ppt')" style="padding:14px;">
+            <div style="font-size:24px;margin-bottom:8px;">📊</div>
             <div style="font-size:13px;font-weight:600;color:var(--gray-900);">Presentations</div>
             <div style="font-size:11px;color:var(--gray-400);margin-top:2px;">3 items</div>
           </div>
-          <div style="background:white;border-radius:var(--radius);border:1px solid var(--gray-200);padding:14px;cursor:pointer;transition:all 0.15s;" onclick="toast('Showing: Audio Guides')">
-            <div style="font-size:22px;margin-bottom:6px;">🎧</div>
+          <div class="tc" onclick="showContentRows('audio')" style="padding:14px;">
+            <div style="font-size:24px;margin-bottom:8px;">🎧</div>
             <div style="font-size:13px;font-weight:600;color:var(--gray-900);">Audio Guides</div>
             <div style="font-size:11px;color:var(--gray-400);margin-top:2px;">2 items</div>
           </div>
         </div>
 
-        <!-- CONTENT TABLE -->
-        <div class="task-list-wrap">
+        <!-- CONTENT ROWS -->
+        <div class="task-list-wrap" id="content-rows-wrap">
           <div class="tl-header">
             <div class="tl-title-row">
-              <div class="tl-title">All Training Content</div>
-              <div class="tl-count">(8 items)</div>
-            </div>
-            <div class="tl-actions">
-              <div class="tl-sort">Sort by: <select class="tl-select"><option>Newest</option><option>Most Used</option><option>Gap Type</option></select></div>
+              <div class="tl-title" id="content-rows-title">All Training Content</div>
+              <div class="tl-count" id="content-rows-count">(8 items)</div>
             </div>
           </div>
-          <div style="display:grid;grid-template-columns:44px 1fr 140px 100px 130px 70px 120px;padding:8px 20px;background:var(--gray-50);border-bottom:1px solid var(--gray-200);">
+          <div style="display:grid;grid-template-columns:44px 1fr 130px 90px 120px 70px 110px;padding:8px 20px;background:var(--gray-50);border-bottom:1px solid var(--gray-200);">
             <span style="font-size:11px;font-weight:600;color:var(--gray-600);text-transform:uppercase;"></span>
             <span style="font-size:11px;font-weight:600;color:var(--gray-600);text-transform:uppercase;">Content Name</span>
             <span style="font-size:11px;font-weight:600;color:var(--gray-600);text-transform:uppercase;">Gap Area</span>
@@ -1074,78 +1109,7 @@ body{font-family:var(--font);background:var(--gray-50);color:var(--gray-900);min
             <span style="font-size:11px;font-weight:600;color:var(--gray-600);text-transform:uppercase;">Status</span>
             <span style="font-size:11px;font-weight:600;color:var(--gray-600);text-transform:uppercase;">Actions</span>
           </div>
-          <div style="display:grid;grid-template-columns:44px 1fr 140px 100px 130px 70px 120px;padding:11px 20px;border-bottom:1px solid #F0F2F6;align-items:center;">
-            <div style="font-size:20px;">🎥</div>
-            <div><div style="font-size:13px;font-weight:500;color:var(--gray-900);">Handling Jio Price Objection</div><div style="font-size:11px;color:var(--gray-400);">Video · 12 min</div></div>
-            <div><span class="gap-tag">Objection</span></div>
-            <div style="font-size:12px;color:var(--gray-600);">847 agents</div>
-            <div style="font-size:11.5px;color:var(--gray-400);">02 Jun 2026</div>
-            <div><span class="score-pill good" style="font-size:10px;">Active</span></div>
-            <div style="display:flex;gap:5px;"><button style="height:26px;padding:0 8px;background:var(--blue-btn);color:white;border:none;border-radius:4px;font-size:11px;cursor:pointer;" onclick="toast('Opening...')">View</button><button style="height:26px;padding:0 8px;background:white;color:var(--blue-btn);border:1px solid var(--blue-btn);border-radius:4px;font-size:11px;cursor:pointer;" onclick="toast('Editing...')">Edit</button></div>
-          </div>
-          <div style="display:grid;grid-template-columns:44px 1fr 140px 100px 130px 70px 120px;padding:11px 20px;border-bottom:1px solid #F0F2F6;align-items:center;">
-            <div style="font-size:20px;">🎥</div>
-            <div><div style="font-size:13px;font-weight:500;color:var(--gray-900);">Assumptive Closing Technique Demo</div><div style="font-size:11px;color:var(--gray-400);">Video · 8 min</div></div>
-            <div><span class="gap-tag">Closing</span></div>
-            <div style="font-size:12px;color:var(--gray-600);">534 agents</div>
-            <div style="font-size:11.5px;color:var(--gray-400);">30 May 2026</div>
-            <div><span class="score-pill good" style="font-size:10px;">Active</span></div>
-            <div style="display:flex;gap:5px;"><button style="height:26px;padding:0 8px;background:var(--blue-btn);color:white;border:none;border-radius:4px;font-size:11px;cursor:pointer;" onclick="toast('Opening...')">View</button><button style="height:26px;padding:0 8px;background:white;color:var(--blue-btn);border:1px solid var(--blue-btn);border-radius:4px;font-size:11px;cursor:pointer;" onclick="toast('Editing...')">Edit</button></div>
-          </div>
-          <div style="display:grid;grid-template-columns:44px 1fr 140px 100px 130px 70px 120px;padding:11px 20px;border-bottom:1px solid #F0F2F6;align-items:center;">
-            <div style="font-size:20px;">📊</div>
-            <div><div style="font-size:13px;font-weight:500;color:var(--gray-900);">Objection Handling Masterclass</div><div style="font-size:11px;color:var(--gray-400);">PPT · 24 slides</div></div>
-            <div><span class="gap-tag">Objection</span></div>
-            <div style="font-size:12px;color:var(--gray-600);">412 agents</div>
-            <div style="font-size:11.5px;color:var(--gray-400);">01 Jun 2026</div>
-            <div><span class="score-pill good" style="font-size:10px;">Active</span></div>
-            <div style="display:flex;gap:5px;"><button style="height:26px;padding:0 8px;background:var(--blue-btn);color:white;border:none;border-radius:4px;font-size:11px;cursor:pointer;" onclick="toast('Opening...')">View</button><button style="height:26px;padding:0 8px;background:white;color:var(--blue-btn);border:1px solid var(--blue-btn);border-radius:4px;font-size:11px;cursor:pointer;" onclick="toast('Editing...')">Edit</button></div>
-          </div>
-          <div style="display:grid;grid-template-columns:44px 1fr 140px 100px 130px 70px 120px;padding:11px 20px;border-bottom:1px solid #F0F2F6;align-items:center;">
-            <div style="font-size:20px;">📊</div>
-            <div><div style="font-size:13px;font-weight:500;color:var(--gray-900);">Jio vs Airtel Comparison Deck</div><div style="font-size:11px;color:var(--gray-400);">PPT · 18 slides</div></div>
-            <div><span class="gap-tag">Value</span></div>
-            <div style="font-size:12px;color:var(--gray-600);">389 agents</div>
-            <div style="font-size:11.5px;color:var(--gray-400);">28 May 2026</div>
-            <div><span class="score-pill good" style="font-size:10px;">Active</span></div>
-            <div style="display:flex;gap:5px;"><button style="height:26px;padding:0 8px;background:var(--blue-btn);color:white;border:none;border-radius:4px;font-size:11px;cursor:pointer;" onclick="toast('Opening...')">View</button><button style="height:26px;padding:0 8px;background:white;color:var(--blue-btn);border:1px solid var(--blue-btn);border-radius:4px;font-size:11px;cursor:pointer;" onclick="toast('Editing...')">Edit</button></div>
-          </div>
-          <div style="display:grid;grid-template-columns:44px 1fr 140px 100px 130px 70px 120px;padding:11px 20px;border-bottom:1px solid #F0F2F6;align-items:center;">
-            <div style="font-size:20px;">🎥</div>
-            <div><div style="font-size:13px;font-weight:500;color:var(--gray-900);">OTT Bundle Value Pitch</div><div style="font-size:11px;color:var(--gray-400);">Video · 6 min</div></div>
-            <div><span class="gap-tag">Product</span></div>
-            <div style="font-size:12px;color:var(--gray-600);">265 agents</div>
-            <div style="font-size:11.5px;color:var(--gray-400);">27 May 2026</div>
-            <div><span class="score-pill good" style="font-size:10px;">Active</span></div>
-            <div style="display:flex;gap:5px;"><button style="height:26px;padding:0 8px;background:var(--blue-btn);color:white;border:none;border-radius:4px;font-size:11px;cursor:pointer;" onclick="toast('Opening...')">View</button><button style="height:26px;padding:0 8px;background:white;color:var(--blue-btn);border:1px solid var(--blue-btn);border-radius:4px;font-size:11px;cursor:pointer;" onclick="toast('Editing...')">Edit</button></div>
-          </div>
-          <div style="display:grid;grid-template-columns:44px 1fr 140px 100px 130px 70px 120px;padding:11px 20px;border-bottom:1px solid #F0F2F6;align-items:center;">
-            <div style="font-size:20px;">🎧</div>
-            <div><div style="font-size:13px;font-weight:500;color:var(--gray-900);">Model Call — Objection Handling</div><div style="font-size:11px;color:var(--gray-400);">Audio · 5 min</div></div>
-            <div><span class="gap-tag">Objection</span></div>
-            <div style="font-size:12px;color:var(--gray-600);">198 agents</div>
-            <div style="font-size:11.5px;color:var(--gray-400);">03 Jun 2026</div>
-            <div><span class="score-pill good" style="font-size:10px;">Active</span></div>
-            <div style="display:flex;gap:5px;"><button style="height:26px;padding:0 8px;background:var(--blue-btn);color:white;border:none;border-radius:4px;font-size:11px;cursor:pointer;" onclick="toast('Opening...')">View</button><button style="height:26px;padding:0 8px;background:white;color:var(--blue-btn);border:1px solid var(--blue-btn);border-radius:4px;font-size:11px;cursor:pointer;" onclick="toast('Editing...')">Edit</button></div>
-          </div>
-          <div style="display:grid;grid-template-columns:44px 1fr 140px 100px 130px 70px 120px;padding:11px 20px;border-bottom:1px solid #F0F2F6;align-items:center;">
-            <div style="font-size:20px;">📊</div>
-            <div><div style="font-size:13px;font-weight:500;color:var(--gray-900);">Closing Techniques — XFE Guide</div><div style="font-size:11px;color:var(--gray-400);">PPT · 15 slides</div></div>
-            <div><span class="gap-tag">Closing</span></div>
-            <div style="font-size:12px;color:var(--gray-600);">176 agents</div>
-            <div style="font-size:11.5px;color:var(--gray-400);">25 May 2026</div>
-            <div><span class="score-pill good" style="font-size:10px;">Active</span></div>
-            <div style="display:flex;gap:5px;"><button style="height:26px;padding:0 8px;background:var(--blue-btn);color:white;border:none;border-radius:4px;font-size:11px;cursor:pointer;" onclick="toast('Opening...')">View</button><button style="height:26px;padding:0 8px;background:white;color:var(--blue-btn);border:1px solid var(--blue-btn);border-radius:4px;font-size:11px;cursor:pointer;" onclick="toast('Editing...')">Edit</button></div>
-          </div>
-          <div style="display:grid;grid-template-columns:44px 1fr 140px 100px 130px 70px 120px;padding:11px 20px;align-items:center;">
-            <div style="font-size:20px;">🎧</div>
-            <div><div style="font-size:13px;font-weight:500;color:var(--gray-900);">Closing Script — Read Along</div><div style="font-size:11px;color:var(--gray-400);">Audio · 4 min</div></div>
-            <div><span class="gap-tag">Closing</span></div>
-            <div style="font-size:12px;color:var(--gray-600);">143 agents</div>
-            <div style="font-size:11.5px;color:var(--gray-400);">29 May 2026</div>
-            <div><span class="score-pill good" style="font-size:10px;">Active</span></div>
-            <div style="display:flex;gap:5px;"><button style="height:26px;padding:0 8px;background:var(--blue-btn);color:white;border:none;border-radius:4px;font-size:11px;cursor:pointer;" onclick="toast('Opening...')">View</button><button style="height:26px;padding:0 8px;background:white;color:var(--blue-btn);border:1px solid var(--blue-btn);border-radius:4px;font-size:11px;cursor:pointer;" onclick="toast('Editing...')">Edit</button></div>
-          </div>
+          <div id="content-rows-body"></div>
         </div>
       </div>
 
@@ -1250,6 +1214,7 @@ var LOGO = "";
 const JSONBIN_ID  = '6a2a90f8da38895dfeaca333';
 const JSONBIN_KEY = '$2a$10$ynONZ6vAYBRLuR0s6aRwDOaGL2pZFyJkNeOiuR12nKtBR.Fjgd6gq';
 const JSONBIN_URL = 'https://api.jsonbin.io/v3/b/' + JSONBIN_ID + '/latest';
+// JSONbin supports CORS — ensure correct headers are sent
 
 // Inject logo
 // logo injection removed
@@ -1262,6 +1227,9 @@ const AGENTS = [
   {name:"Vikram Singh",id:"XFE-1190",loc:"Faridabad",score:39,calls:4,last:"5h ago",status:"Pending",gaps:["Objection","Value","Product"],color:"#E65100"},
   {name:"Neha Gupta",id:"XFE-8820",loc:"Noida",score:71,calls:11,last:"1h ago",status:"Pending",gaps:["Objection"],color:"#AD1457"},
   {name:"Sunita Rao",id:"XFE-6644",loc:"Ghaziabad",score:67,calls:7,last:"3h ago",status:"Pending",gaps:["Objection","Closing"],color:"#00897B"},
+  {name:"Karan Mehta",id:"XFE-9901",loc:"Faridabad",score:51,calls:5,last:"6h ago",status:"Pending",gaps:["Closing","Value"],color:"#0288D1"},
+  {name:"Pooja Singh",id:"XFE-7712",loc:"Delhi",score:48,calls:6,last:"3h ago",status:"Pending",gaps:["Product","Objection"],color:"#7B1FA2"},
+  {name:"Ravi Kumar",id:"XFE-5533",loc:"Noida",score:55,calls:8,last:"1h ago",status:"Pending",gaps:["Objection"],color:"#2E7D32"},
 ];
 
 // Agent phone → name mapping
@@ -1346,7 +1314,7 @@ function showAgentList(training, sev, count){
   document.getElementById("al-title").textContent = "TASK LIST";
   document.getElementById("al-count").textContent = "( Pending Training · " + training + " )";
   renderAgents();
-  showV("agent-list", document.getElementById("nav-train"));
+  showV("agent-list", document.getElementById("nav-dash"));
 }
 
 function renderAgents(){
@@ -1551,7 +1519,7 @@ let liveFeedRows = [];
 let liveFeedInterval = null;
 
 function startLiveFeed(){
-  document.getElementById('live-feed-section').style.display = 'block';
+  const lfs=document.getElementById('live-feed-section'); if(lfs) lfs.style.display='block';
   if(!SHEET_API_KEY){
     // Demo mode: show simulated live data
     renderLiveFeed(getLiveDemoData());
@@ -1630,9 +1598,9 @@ function viewLiveCall(phone, gapsStr){
     const tabs = document.querySelectorAll('.dtab');
     tabs.forEach(t => t.classList.remove('active'));
     tabs[2].classList.add('active');
-    document.getElementById('tab-lead').style.display='none';
-    document.getElementById('tab-call').style.display='none';
-    document.getElementById('tab-training').style.display='';
+    const tl=document.getElementById('tab-lead'); if(tl) tl.style.display='none';
+    const tc=document.getElementById('tab-call'); if(tc) tc.style.display='none';
+    const tt=document.getElementById('tab-training'); if(tt) tt.style.display='';
   }, 100);
 }
 
@@ -1689,7 +1657,7 @@ function addLiveCall(data){
 
   // Update nav badge
   const badge = document.getElementById('live-badge');
-  if(badge){
+  if(badge && badge.style){
     badge.style.display = 'flex';
     badge.textContent = liveCallCount;
     badge.style.background = '#E8F5E9';
@@ -1836,14 +1804,44 @@ window.addEventListener('DOMContentLoaded', function(){
 });
 
 // ── CONTENT LIBRARY FUNCTIONS ──────────────────────────
-function showCreateContent(){
-  document.getElementById('create-content-panel').style.display = 'block';
-  document.getElementById('bulk-upload-panel').style.display = 'none';
+function toggleBulk(){
+  const panel = document.getElementById('bulk-upload-panel');
+  const btn = document.getElementById('bulk-toggle');
+  if(!panel) return;
+  const visible = panel.style.display !== 'none';
+  panel.style.display = visible ? 'none' : 'block';
+  if(btn) btn.textContent = visible ? 'Expand' : 'Collapse';
 }
 
-function showBulkUpload(){
-  document.getElementById('bulk-upload-panel').style.display = 'block';
-  document.getElementById('create-content-panel').style.display = 'none';
+const ALL_CONTENT = [
+  {ico:'🎥',name:'Handling Jio Price Objection',type:'Video',dur:'12 min',gap:'Objection Handling',used:847,date:'02 Jun 2026',cat:'video'},
+  {ico:'🎥',name:'Assumptive Closing Technique Demo',type:'Video',dur:'8 min',gap:'Closing Technique',used:534,date:'30 May 2026',cat:'video'},
+  {ico:'📊',name:'Objection Handling Masterclass',type:'PPT',dur:'24 slides',gap:'Objection Handling',used:412,date:'01 Jun 2026',cat:'ppt'},
+  {ico:'📊',name:'Jio vs Airtel Comparison Deck',type:'PPT',dur:'18 slides',gap:'Value Anchoring',used:389,date:'28 May 2026',cat:'ppt'},
+  {ico:'🎥',name:'OTT Bundle Value Pitch',type:'Video',dur:'6 min',gap:'Product Knowledge',used:265,date:'27 May 2026',cat:'video'},
+  {ico:'🎧',name:'Model Call — Objection Handling',type:'Audio',dur:'5 min',gap:'Objection Handling',used:198,date:'03 Jun 2026',cat:'audio'},
+  {ico:'📊',name:'Closing Techniques — XFE Guide',type:'PPT',dur:'15 slides',gap:'Closing Technique',used:176,date:'25 May 2026',cat:'ppt'},
+  {ico:'🎧',name:'Closing Script — Read Along',type:'Audio',dur:'4 min',gap:'Closing Technique',used:143,date:'29 May 2026',cat:'audio'},
+];
+
+function showContentRows(filter){
+  const items = filter === 'all' ? ALL_CONTENT : ALL_CONTENT.filter(i => i.cat === filter);
+  const titles = {all:'All Training Content',video:'Videos',ppt:'Presentations',audio:'Audio Guides'};
+  document.getElementById('content-rows-title').textContent = titles[filter] || 'All Content';
+  document.getElementById('content-rows-count').textContent = '(' + items.length + ' items)';
+  document.getElementById('content-rows-body').innerHTML = items.map(item => `
+    <div style="display:grid;grid-template-columns:44px 1fr 130px 90px 120px 70px 110px;padding:11px 20px;border-bottom:1px solid #F0F2F6;align-items:center;">
+      <div style="font-size:20px;">${item.ico}</div>
+      <div><div style="font-size:13px;font-weight:500;color:var(--gray-900);">${item.name}</div><div style="font-size:11px;color:var(--gray-400);">${item.type} · ${item.dur}</div></div>
+      <div><span class="gap-tag">${item.gap.split(' ')[0]}</span></div>
+      <div style="font-size:12px;color:var(--gray-600);">${item.used}</div>
+      <div style="font-size:11.5px;color:var(--gray-400);">${item.date}</div>
+      <div><span class="score-pill good" style="font-size:10px;">Active</span></div>
+      <div style="display:flex;gap:5px;">
+        <button style="height:26px;padding:0 8px;background:var(--blue-btn);color:white;border:none;border-radius:4px;font-size:11px;cursor:pointer;" onclick="toast('Opening ${item.name}...')">View</button>
+        <button style="height:26px;padding:0 8px;background:white;color:var(--blue-btn);border:1px solid var(--blue-btn);border-radius:4px;font-size:11px;cursor:pointer;" onclick="toast('Edit mode: ${item.name}')">Edit</button>
+      </div>
+    </div>`).join('');
 }
 
 function generateContent(){
@@ -2055,14 +2053,12 @@ function showObsDetail(i){
   const obj = parsed.scores?.objection || Math.max(overallScore-15,0);
   const clar = parsed.scores?.clarity || Math.min(overallScore+8,100);
 
-  document.getElementById('obs-bar-pitch').style.width = pitch + '%';
-  document.getElementById('obs-val-pitch').textContent = pitch;
-  document.getElementById('obs-bar-obj').style.width = obj + '%';
-  document.getElementById('obs-val-obj').textContent = obj;
-  document.getElementById('obs-bar-clar').style.width = clar + '%';
-  document.getElementById('obs-val-clar').textContent = clar;
-  document.getElementById('obs-bar-ov').style.width = overallScore + '%';
-  document.getElementById('obs-val-ov').textContent = overallScore;
+  function setBar(id,val){const el=document.getElementById(id);if(el)el.style.width=val+'%';}
+  function setVal(id,val){const el=document.getElementById(id);if(el)el.textContent=val;}
+  setBar('obs-bar-pitch',pitch); setVal('obs-val-pitch',pitch);
+  setBar('obs-bar-obj',obj); setVal('obs-val-obj',obj);
+  setBar('obs-bar-clar',clar); setVal('obs-val-clar',clar);
+  setBar('obs-bar-ov',overallScore); setVal('obs-val-ov',overallScore);
 
   // What's good / improvement — use real data from Groq evaluation
   const goodItems = Array.isArray(o.good) && o.good.length > 0
@@ -2132,7 +2128,7 @@ function _checkURLParamsImpl(){
     addLiveCall({...obsData, timestamp: new Date().toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit'})});
     window.history.replaceState({}, '', window.location.pathname);
     setTimeout(function(){
-      showV('training', document.getElementById('nav-train'));
+      showV('home',document.getElementById('nav-dash'));
       renderROTable(loadObservations());
       toast('📞 New observation received — ' + obsData.phone + ' · Score: ' + obsData.overallScore + '/100');
     }, 500);
@@ -2141,44 +2137,53 @@ function _checkURLParamsImpl(){
 
 // ── JSONBIN FETCH ──────────────────────────────────────
 async function refreshFromJSONbin(){
-  const btn = document.querySelector('.btn-outline[onclick="refreshFromJSONbin()"]');
+  let btn = null;
+  try { btn = document.querySelector('[onclick="refreshFromJSONbin()"]'); } catch(e){}
   if(btn) btn.textContent = '⏳ Loading...';
   try {
-    const resp = await fetch(JSONBIN_URL, {
-      headers: {
-        'X-Master-Key': JSONBIN_KEY,
-        'X-Bin-Versioning': 'false'
-      }
-    });
+    // Route through Cloudflare Worker to avoid CORS
+    const resp = await fetch(
+      'https://traininggpt-eval.sunnyabichandani1.workers.dev/read',
+      { method: 'GET' }
+    );
+    if(!resp.ok) throw new Error('HTTP ' + resp.status);
     const data = await resp.json();
-    let records = data.record || [];
-    
-    // Filter out init record
-    records = records.filter(r => !r.init);
-    
-    // Sort newest first
+    let records = Array.isArray(data) ? data : (Array.isArray(data.record) ? data.record : []);
+    records = records.filter(r => r && !r.init && r.phone);
     records.sort((a,b) => new Date(b.receivedAt||0) - new Date(a.receivedAt||0));
-    
-    // Keep top 20
     records = records.slice(0, 20);
-    
     if(records.length > 0){
-      // Save to localStorage as backup
       saveObservations(records);
       renderROTable(records);
-      toast('✅ ' + records.length + ' observation' + (records.length!==1?'s':'') + ' loaded');
+      toast('✅ ' + records.length + ' record' + (records.length!==1?'s':'') + ' loaded');
     } else {
-      toast('No observations yet — make a call first');
+      // Fall back to localStorage
+      const local = loadObservations();
+      if(local.length > 0){
+        renderROTable(local);
+        toast('Showing ' + local.length + ' cached record' + (local.length!==1?'s':''));
+      } else {
+        toast('No observations yet — make a call first');
+      }
     }
   } catch(e){
-    console.error('JSONbin error:', e);
-    toast('❌ Could not load — check connection');
+    console.warn('JSONbin fetch failed:', e.message);
+    // Fall back to localStorage silently
+    const local = loadObservations();
+    if(local.length > 0){
+      renderROTable(local);
+      toast('Showing cached data — ' + local.length + ' record' + (local.length!==1?'s':''));
+    } else {
+      toast('No data yet — make a call to see observations');
+    }
   }
   if(btn) btn.textContent = '🔄 Refresh';
 }
 
 // Init — load from JSONbin on page load + fallback to localStorage
 window.addEventListener('load', function(){
+  // Load content rows
+  try { showContentRows('all'); } catch(e){ console.warn('Content rows:', e); }
   // First show localStorage data immediately
   const obs = loadObservations();
   if(obs && obs.length > 0) renderROTable(obs);

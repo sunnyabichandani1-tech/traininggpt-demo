@@ -248,23 +248,22 @@ html,body{
   .tiles-row{display:flex;gap:14px;flex-wrap:wrap;}
   .tile{width:148px;height:148px;}
 }
-.training-overlay{position:absolute;inset:0;background:rgba(0,0,0,0.7);z-index:600;display:none;align-items:flex-end;justify-content:center;}
+.training-overlay{position:absolute;inset:0;background:var(--white);z-index:900;display:none;flex-direction:column;}
 .training-overlay.open{display:flex;}
-.training-sheet{background:var(--white);border-radius:24px 24px 0 0;width:100%;max-width:520px;max-height:92vh;display:flex;flex-direction:column;animation:modalUp 0.35s cubic-bezier(0.16,1,0.3,1);}
-.training-header{padding:16px 20px 12px;border-bottom:1px solid var(--border);flex-shrink:0;}
-.training-handle{width:40px;height:4px;background:var(--gray-300);border-radius:2px;margin:0 auto 14px;}
-.training-header-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;}
-.training-title{font-size:15px;font-weight:800;color:var(--gray-900);}
+.training-header{padding:12px 18px;border-bottom:1px solid var(--border);flex-shrink:0;display:flex;flex-direction:column;gap:10px;}
+.training-header-top{display:flex;align-items:center;justify-content:space-between;}
+.training-title{font-size:14px;font-weight:800;color:var(--gray-900);}
 .training-close{width:28px;height:28px;border-radius:50%;background:var(--gray-100);border:none;cursor:pointer;font-size:14px;color:var(--gray-500);}
 .training-dots{display:flex;gap:4px;align-items:center;}
-.training-body{flex:1;overflow-y:auto;padding:20px;transition:opacity 0.25s ease;}
-.training-footer{padding:14px 20px;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-shrink:0;background:var(--white);}
+.training-body{flex:1;overflow-y:auto;padding:18px 18px 0;-webkit-overflow-scrolling:touch;}
+.training-body::-webkit-scrollbar{display:none;}
+.training-footer{padding:12px 18px 20px;border-top:1px solid var(--border);flex-shrink:0;background:var(--white);display:flex;align-items:center;justify-content:space-between;}
 .slide-counter{font-size:12px;font-weight:700;color:var(--gray-500);}
-.nav-btn{height:42px;padding:0 20px;border-radius:10px;font-size:13px;font-weight:800;font-family:var(--font);cursor:pointer;border:none;transition:all 0.15s;}
+.nav-btn{height:44px;padding:0 22px;border-radius:10px;font-size:13px;font-weight:800;font-family:var(--font);cursor:pointer;border:none;transition:all 0.15s;}
 .btn-prev{background:var(--gray-100);color:var(--gray-700);}
 .btn-prev:hover{background:var(--gray-300);}
-.btn-next{background:var(--gray-900);color:white;}
-.btn-next:hover{background:var(--red);}
+.btn-next{background:#1976D2;color:white;flex:1;margin-left:10px;}
+.btn-next:hover{background:#1565C0;}
 </style>
 </head>
 <body>
@@ -855,46 +854,100 @@ function renderTrainingModule(){
 let mcqAnswers = {};
 let mcqSubmitted = false;
 
+let mcqCurrentQ = 0;
+
 function renderMCQ(body, mcq){
   mcqAnswers = {};
   mcqSubmitted = false;
-  let html = `<div style="font-size:11px;font-weight:800;color:#E4002B;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:4px;">Certification Check</div><div style="font-size:18px;font-weight:800;color:#1A1A1A;margin-bottom:20px;">Test your understanding</div>`;
-  mcq.forEach((q, qi)=>{
-    html += `<div style="margin-bottom:20px;"><div style="font-size:13px;font-weight:700;color:#1A1A1A;margin-bottom:10px;line-height:1.5;">Q${qi+1}. ${q.question}</div><div id="mcq-options-${qi}">${q.options.map((opt, oi)=>`<div id="mcq-opt-${qi}-${oi}" onclick="selectMCQ(${qi},${oi},${q.correct})" style="padding:10px 14px;border:1.5px solid #E5E5EA;border-radius:10px;margin-bottom:6px;font-size:13px;cursor:pointer;transition:all 0.15s;">${String.fromCharCode(65+oi)}. ${opt}</div>`).join('')}</div></div>`;
-  });
-  html += `<button id="mcq-submit-btn" onclick="submitMCQ(${JSON.stringify(mcq).replace(/"/g,'&quot;')})" disabled style="width:100%;height:48px;background:#E0E0E0;color:white;border:none;border-radius:10px;font-size:14px;font-weight:800;font-family:inherit;cursor:not-allowed;margin-top:4px;">Submit Answers</button>`;
-  body.innerHTML = html;
+  mcqCurrentQ = 0;
+  renderMCQQuestion(body, mcq, 0);
 }
 
-function selectMCQ(qi, oi, correct){
-  if(mcqSubmitted) return;
-  mcqAnswers[qi] = oi;
-  const container = document.getElementById('mcq-options-' + qi);
-  container.querySelectorAll('div[id^="mcq-opt-"]').forEach(el => { el.style.background = ''; el.style.borderColor = '#E5E5EA'; el.style.color = ''; });
-  const sel = document.getElementById('mcq-opt-' + qi + '-' + oi);
-  if(sel){ sel.style.background = '#EEF0FD'; sel.style.borderColor = '#5065EA'; sel.style.color = '#2A3A9A'; }
-  if(feedbackData && Object.keys(mcqAnswers).length === feedbackData.mcq.length){
-    const btn = document.getElementById('mcq-submit-btn');
-    if(btn){ btn.disabled = false; btn.style.background = '#1A1A1A'; btn.style.cursor = 'pointer'; }
+function renderMCQQuestion(body, mcq, qi){
+  const q = mcq[qi];
+  const total = mcq.length;
+  body.innerHTML =
+    '<div style="font-size:11px;font-weight:700;color:#1976D2;margin-bottom:6px;letter-spacing:0.3px;">QUESTION ' + (qi+1) + ' OF ' + total + '</div>' +
+    '<div style="font-size:15px;font-weight:800;color:#1A1A1A;margin-bottom:20px;line-height:1.5;">' + q.question + '</div>' +
+    '<div id="mcq-options-' + qi + '">' +
+      q.options.map((opt, oi) =>
+        '<div id="mcq-opt-' + qi + '-' + oi + '" onclick="selectMCQSingle(' + qi + ',' + oi + ',' + q.correct + ')" ' +
+        'style="padding:12px 14px;border:1.5px solid #E5E5EA;border-radius:10px;margin-bottom:8px;font-size:13px;cursor:pointer;transition:all 0.15s;display:flex;align-items:center;gap:10px;">' +
+        '<span style="width:24px;height:24px;border-radius:50%;border:1.5px solid #E5E5EA;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;">' + String.fromCharCode(65+oi) + '</span>' +
+        '<span>' + opt + '</span>' +
+        '</div>'
+      ).join('') +
+    '</div>';
+
+  // Update Next button to say "Next Question" or "Submit"
+  const nextBtn = document.getElementById('btn-next');
+  if(nextBtn){
+    nextBtn.textContent = qi < total-1 ? 'Next Question →' : 'Submit Answers';
+    nextBtn.disabled = true;
+    nextBtn.style.opacity = '0.4';
+    nextBtn.onclick = function(){
+      if(qi < total-1){
+        mcqCurrentQ = qi+1;
+        renderMCQQuestion(body, mcq, mcqCurrentQ);
+      } else {
+        submitMCQAnswers(mcq);
+      }
+    };
   }
 }
 
-function submitMCQ(mcq){
+function selectMCQSingle(qi, oi, correct){
   if(mcqSubmitted) return;
+  mcqAnswers[qi] = oi;
+  const container = document.getElementById('mcq-options-' + qi);
+  if(!container) return;
+  container.querySelectorAll('div[id^="mcq-opt-"]').forEach(el => {
+    el.style.background = '';
+    el.style.borderColor = '#E5E5EA';
+    el.style.color = '';
+    el.querySelector('span')?.style && (el.querySelector('span').style.borderColor = '#E5E5EA');
+  });
+  const sel = document.getElementById('mcq-opt-' + qi + '-' + oi);
+  if(sel){
+    sel.style.background = '#EEF3FF';
+    sel.style.borderColor = '#1976D2';
+    sel.style.color = '#1565C0';
+  }
+  // Enable Next button
+  const nextBtn = document.getElementById('btn-next');
+  if(nextBtn){ nextBtn.disabled = false; nextBtn.style.opacity = '1'; }
+}
+
+function submitMCQAnswers(mcq){
   mcqSubmitted = true;
   let correct = 0;
-  mcq.forEach((q, qi)=>{
-    const chosen = mcqAnswers[qi];
-    const isCorrect = chosen === q.correct;
-    if(isCorrect) correct++;
-    const opts = document.getElementById('mcq-options-' + qi);
-    if(opts){ opts.querySelectorAll('div[id^="mcq-opt-"]').forEach((el, oi)=>{ if(oi === q.correct){ el.style.background = '#E8F8ED'; el.style.borderColor = '#34C759'; el.style.color = '#1A7A35'; } else if(oi === chosen && chosen !== q.correct){ el.style.background = '#FEE2E2'; el.style.borderColor = '#E4002B'; el.style.color = '#B91C1C'; } }); }
-  });
-  const btn = document.getElementById('mcq-submit-btn');
+  mcq.forEach((q, qi)=>{ if(mcqAnswers[qi] === q.correct) correct++; });
   const pct = Math.round((correct/mcq.length)*100);
-  if(btn){ btn.textContent = `${correct}/${mcq.length} correct (${pct}%) — ${pct>=70?'✓ Passed':'Keep practising'}`; btn.style.background = pct>=70 ? '#34C759' : '#FF9500'; }
-  toast(pct>=70 ? '✅' : '📝', `${correct}/${mcq.length} correct — ${pct>=70?'Certification passed!':'Review and try again'}`);
+  const body = document.getElementById('training-body');
+  body.innerHTML =
+    '<div style="text-align:center;padding:20px 0;">' +
+      '<div style="font-size:48px;margin-bottom:12px;">' + (pct>=70?'🎉':'📝') + '</div>' +
+      '<div style="font-size:20px;font-weight:800;color:#1A1A1A;margin-bottom:8px;">' + (pct>=70?'Passed!':'Keep Practising') + '</div>' +
+      '<div style="font-size:13px;color:#6C6C70;margin-bottom:20px;">' + correct + '/' + mcq.length + ' correct (' + pct + '%)</div>' +
+      '<div style="background:' + (pct>=70?'#E8F5E9':'#FFF3E0') + ';border-radius:12px;padding:14px;font-size:13px;color:' + (pct>=70?'#2E7D32':'#E65100') + ';font-weight:600;">' +
+        (pct>=70 ? '✅ Certification check passed! Proceed to speak with your coach.' : '💡 Review the gap areas and try again on your next call.') +
+      '</div>' +
+    '</div>';
+  toast(pct>=70 ? '✅' : '📝', correct + '/' + mcq.length + ' correct — ' + (pct>=70?'Passed!':'Keep practising'));
+  const nextBtn = document.getElementById('btn-next');
+  if(nextBtn){
+    nextBtn.textContent = 'Continue →';
+    nextBtn.disabled = false;
+    nextBtn.style.opacity = '1';
+    nextBtn.onclick = function(){ nextSlide(); };
+  }
 }
+
+function selectMCQ(qi, oi, correct){
+  selectMCQSingle(qi, oi, correct);
+}
+
+
 
 function nextSlide(){
   if(!feedbackData) return;
@@ -954,7 +1007,7 @@ function toast(icon, msg){
   document.getElementById('t-icon').textContent = icon;
   document.getElementById('t-msg').textContent = msg;
   t.classList.add('show');
-  setTimeout(()=> t.classList.remove('show') , 3500);
+  setTimeout(()=> t.classList.remove('show'), 3500);
 }
 
 document.addEventListener('keydown', e => {

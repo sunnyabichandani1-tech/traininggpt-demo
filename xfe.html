@@ -954,7 +954,7 @@ function toast(icon, msg){
   document.getElementById('t-icon').textContent = icon;
   document.getElementById('t-msg').textContent = msg;
   t.classList.add('show');
-  setTimeout(()=> t.classList.remove('show'), 3500);
+  setTimeout(()=> t.classList.remove('show') , 3500);
 }
 
 document.addEventListener('keydown', e => {

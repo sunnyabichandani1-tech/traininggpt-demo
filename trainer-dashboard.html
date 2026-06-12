@@ -1302,16 +1302,16 @@ const JSONBIN_URL = 'https://api.jsonbin.io/v3/b/' + JSONBIN_ID + '/latest';
 // logo injection removed
 
 const AGENTS = [
-  {name:"Rahul Sharma",id:"XFE-4821",loc:"Faridabad",score:62,calls:8,last:"2h ago",status:"Pending",gaps:["Objection","Closing"],color:"#E4002B"},
-  {name:"Amit Mishra",id:"XFE-3302",loc:"Gurugram",score:45,calls:6,last:"4h ago",status:"Pending",gaps:["Objection","Value"],color:"#1565C0"},
-  {name:"Priya Kapoor",id:"XFE-5190",loc:"Noida",score:44,calls:5,last:"1h ago",status:"Pending",gaps:["Objection","Product"],color:"#F59E0B"},
-  {name:"Deepak Verma",id:"XFE-2211",loc:"Delhi",score:58,calls:9,last:"30m ago",status:"Pending",gaps:["Objection"],color:"#7B1FA2"},
-  {name:"Vikram Singh",id:"XFE-1190",loc:"Faridabad",score:39,calls:4,last:"5h ago",status:"Pending",gaps:["Objection","Value","Product"],color:"#E65100"},
-  {name:"Neha Gupta",id:"XFE-8820",loc:"Noida",score:71,calls:11,last:"1h ago",status:"Pending",gaps:["Objection"],color:"#AD1457"},
-  {name:"Sunita Rao",id:"XFE-6644",loc:"Ghaziabad",score:67,calls:7,last:"3h ago",status:"Pending",gaps:["Objection","Closing"],color:"#00897B"},
-  {name:"Karan Mehta",id:"XFE-9901",loc:"Faridabad",score:51,calls:5,last:"6h ago",status:"Pending",gaps:["Closing","Value"],color:"#0288D1"},
-  {name:"Pooja Singh",id:"XFE-7712",loc:"Delhi",score:48,calls:6,last:"3h ago",status:"Pending",gaps:["Product","Objection"],color:"#7B1FA2"},
-  {name:"Ravi Kumar",id:"XFE-5533",loc:"Noida",score:55,calls:8,last:"1h ago",status:"Pending",gaps:["Objection"],color:"#2E7D32"},
+  {name:"Sunny",id:"XFE-4821",phone:"9716299969",loc:"Faridabad",score:62,calls:8,last:"2h ago",status:"Pending",gaps:["Objection","Closing"],color:"#E4002B"},
+  {name:"Ravi",id:"XFE-3302",phone:"9818673827",loc:"Gurugram",score:45,calls:6,last:"4h ago",status:"Pending",gaps:["Objection","Value"],color:"#1565C0"},
+  {name:"Rishab",id:"XFE-5190",phone:"9703070123",loc:"Noida",score:44,calls:5,last:"1h ago",status:"Pending",gaps:["Objection","Product"],color:"#F59E0B"},
+  {name:"Thulasi",id:"XFE-2211",phone:"9654495454",loc:"Delhi",score:58,calls:9,last:"30m ago",status:"Pending",gaps:["Objection"],color:"#7B1FA2"},
+  {name:"Varun",id:"XFE-1190",phone:"9205474250",loc:"Faridabad",score:39,calls:4,last:"5h ago",status:"Pending",gaps:["Objection","Value","Product"],color:"#E65100"},
+  {name:"Pradipt",id:"XFE-8820",phone:"9971118800",loc:"Noida",score:71,calls:11,last:"1h ago",status:"Pending",gaps:["Objection"],color:"#AD1457"},
+  {name:"Anant",id:"XFE-6644",phone:"9818891014",loc:"Ghaziabad",score:67,calls:7,last:"3h ago",status:"Pending",gaps:["Objection","Closing"],color:"#00897B"},
+  {name:"Manoj",id:"XFE-9901",phone:"9873182585",loc:"Faridabad",score:51,calls:5,last:"6h ago",status:"Pending",gaps:["Closing","Value"],color:"#0288D1"},
+  {name:"Chandan",id:"XFE-7712",phone:"9899577359",loc:"Delhi",score:48,calls:6,last:"3h ago",status:"Pending",gaps:["Product","Objection"],color:"#7B1FA2"},
+  {name:"Amit",id:"XFE-5533",phone:"9810202024",loc:"Noida",score:55,calls:8,last:"1h ago",status:"Pending",gaps:["Objection"],color:"#2E7D32"},
 ];
 
 // Agent phone → name mapping
@@ -1595,7 +1595,7 @@ async function doPush(){
   } catch(e){ console.warn('JSONbin assign error:', e); }
 
   // 2. Also send to Make.com Scenario 4 → writes to Google Sheet Assignments tab
-  const agentPhones = Array.from(sel).map(i => AGENTS[i].id);
+  const agentPhones = Array.from(sel).map(i => AGENTS[i].phone || AGENTS[i].id);
   try {
     await fetch(PUSH_WEBHOOK, {
       method: 'POST',

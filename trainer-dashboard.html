@@ -1560,7 +1560,21 @@ async function doPush(){
     assignedAt: new Date().toISOString()
   };
 
-  const agentPhones = Array.from(sel).map(i => AGENTS[i].phone || AGENTS[i].id);
+  // Get phones from agent selection OR observation selection
+  let agentPhones = [];
+  if(sel.size > 0){
+    agentPhones = Array.from(sel).map(i => AGENTS[i].phone || AGENTS[i].id);
+  } else if(typeof roSel !== 'undefined' && roSel.size > 0){
+    const obs = loadObservations();
+    agentPhones = Array.from(roSel).map(i => {
+      const o = obs[i];
+      if(!o) return '';
+      // phone can be "+919716299969" or "9716299969" — normalize to last 10 digits
+      const p = (o.phone || '').toString().replace(/[^0-9]/g,'').slice(-10);
+      return p;
+    }).filter(p => p.length === 10);
+  }
+  console.log('Push target phones:', agentPhones);
 
   // 1. Write assignments directly to JSONbin — XFE polls and gets notified
   const JBIN_ID  = '6a2a90f8da38895dfeaca333';

@@ -556,16 +556,19 @@ function playChime(){
 }
 
 function showTrainingAssignedNotification(assignment){
-  // Hard lock — only one notification per session, never during active training
+  // Only one per session
   if(sessionTrainingDone) return;
-  if(document.getElementById('assign-notif')) return; // banner already showing
-  if(document.getElementById('training-overlay') &&
-     document.getElementById('training-overlay').classList.contains('open')) return;
 
   pendingAssignment = assignment;
   activeAssignment = assignment;
-  // Stop polling immediately — no more checks this session
+
+  // Stop polling immediately
   if(assignPollInterval){ clearInterval(assignPollInterval); assignPollInterval = null; }
+
+  // Remove any existing banner first
+  const old = document.getElementById('assign-notif');
+  if(old) old.remove();
+
   playChime();
   showTrainingBannerOnly(assignment);
 }

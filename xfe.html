@@ -34,1100 +34,382 @@ html,body{
   align-items:center;
   justify-content:center;
 }
-
-/* ── DESKTOP BACKGROUND ── */
-.desktop-bg {
-  position:fixed;
-  inset:0;
-  background: linear-gradient(135deg, #0F0F1E 0%, #1A1A2E 40%, #16213E 100%);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  z-index:0;
-}
-
-.desktop-bg::before {
-  content:'';
-  position:absolute;
-  inset:0;
-  background-image: radial-gradient(circle at 20% 50%, rgba(80,101,234,0.08) 0%, transparent 50%),
-                    radial-gradient(circle at 80% 20%, rgba(228,0,43,0.06) 0%, transparent 40%);
-}
-
-/* ── PHONE FRAME ── */
-.phone-shell {
-  position:relative;
-  width:390px;
-  height:844px;
-  flex-shrink:0;
-  z-index:10;
-}
-
-/* Outer phone body */
-.phone-body {
-  position:absolute;
-  inset:0;
-  background: linear-gradient(145deg, #2A2A2A, #1A1A1A);
-  border-radius:50px;
-  box-shadow:
-    0 0 0 1px rgba(255,255,255,0.08),
-    0 30px 80px rgba(0,0,0,0.8),
-    0 10px 30px rgba(0,0,0,0.5),
-    inset 0 1px 0 rgba(255,255,255,0.1),
-    inset 0 -1px 0 rgba(0,0,0,0.3);
-}
-
-/* Side buttons */
-.phone-btn-vol-up {
-  position:absolute;
-  left:-3px; top:160px;
-  width:3px; height:36px;
-  background:linear-gradient(to right,#1A1A1A,#333);
-  border-radius:2px 0 0 2px;
-}
-.phone-btn-vol-dn {
-  position:absolute;
-  left:-3px; top:210px;
-  width:3px; height:36px;
-  background:linear-gradient(to right,#1A1A1A,#333);
-  border-radius:2px 0 0 2px;
-}
-.phone-btn-power {
-  position:absolute;
-  right:-3px; top:180px;
-  width:3px; height:60px;
-  background:linear-gradient(to left,#1A1A1A,#333);
-  border-radius:0 2px 2px 0;
-}
-
-/* Screen bezel */
-.phone-screen-bezel {
-  position:absolute;
-  inset:10px;
-  background:#000;
-  border-radius:42px;
-  overflow:hidden;
-}
-
-/* Dynamic island */
-.phone-island {
-  position:absolute;
-  top:14px; left:50%;
-  transform:translateX(-50%);
-  width:120px; height:34px;
-  background:#000;
-  border-radius:20px;
-  z-index:200;
-  box-shadow:0 0 0 1px rgba(255,255,255,0.05);
-}
-
-/* The actual screen where app renders */
-.phone-screen {
-  position:absolute;
-  inset:0;
-  border-radius:42px;
-  overflow:hidden;
-  background:var(--gray-100);
-}
-/* Task pages need proper height */
-#page-tasks, #page-dashboard {
-  height:100%;
-  position:relative;
-}
-
-/* Status bar */
-.phone-status-bar {
-  position:absolute;
-  top:0; left:0; right:0;
-  height:50px;
-  display:flex;
-  align-items:flex-end;
-  justify-content:space-between;
-  padding:0 28px 8px;
-  z-index:150;
-  pointer-events:none;
-  background:transparent;
-}
-
-.psb-time {
-  font-size:15px;
-  font-weight:700;
-  color:var(--gray-900);
-  letter-spacing:-0.3px;
-}
-
-.psb-icons {
-  display:flex;
-  align-items:center;
-  gap:5px;
-}
-
-.psb-icon {
-  font-size:12px;
-  color:var(--gray-900);
-}
-
-/* Home indicator */
-.phone-home-bar {
-  position:absolute;
-  bottom:8px; left:50%;
-  transform:translateX(-50%);
-  width:130px; height:5px;
-  background:rgba(0,0,0,0.2);
-  border-radius:3px;
-  z-index:200;
-}
-
-/* App pages scroll inside screen */
-.phone-app {
-  position:absolute;
-  inset:0;
-  overflow:hidden;
-}
-/* Modal containers need overflow visible on their parent */
-.call-modal-overlay,
-.training-overlay {
-  position:absolute !important;
-  inset:0 !important;
-  z-index:800 !important;
-}
-
-
-/* Override page system for phone context */
-.page{
-  display:none;
-  width:100%;
-  height:100%;
-  overflow-y:auto;
-  overflow-x:hidden;
-  -webkit-overflow-scrolling:touch;
-}
+.desktop-bg{position:fixed;inset:0;background:linear-gradient(135deg,#0F0F1E 0%,#1A1A2E 40%,#16213E 100%);display:flex;align-items:center;justify-content:center;z-index:0;}
+.desktop-bg::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle at 20% 50%,rgba(80,101,234,0.08) 0%,transparent 50%),radial-gradient(circle at 80% 20%,rgba(228,0,43,0.06) 0%,transparent 40%);}
+.phone-shell{position:relative;width:390px;height:844px;flex-shrink:0;z-index:10;}
+.phone-body{position:absolute;inset:0;background:linear-gradient(145deg,#2A2A2A,#1A1A1A);border-radius:50px;box-shadow:0 0 0 1px rgba(255,255,255,0.08),0 30px 80px rgba(0,0,0,0.8),0 10px 30px rgba(0,0,0,0.5),inset 0 1px 0 rgba(255,255,255,0.1),inset 0 -1px 0 rgba(0,0,0,0.3);}
+.phone-btn-vol-up{position:absolute;left:-3px;top:160px;width:3px;height:36px;background:linear-gradient(to right,#1A1A1A,#333);border-radius:2px 0 0 2px;}
+.phone-btn-vol-dn{position:absolute;left:-3px;top:210px;width:3px;height:36px;background:linear-gradient(to right,#1A1A1A,#333);border-radius:2px 0 0 2px;}
+.phone-btn-power{position:absolute;right:-3px;top:180px;width:3px;height:60px;background:linear-gradient(to left,#1A1A1A,#333);border-radius:0 2px 2px 0;}
+.phone-screen-bezel{position:absolute;inset:10px;background:#000;border-radius:42px;overflow:hidden;}
+.phone-island{position:absolute;top:14px;left:50%;transform:translateX(-50%);width:120px;height:34px;background:#000;border-radius:20px;z-index:200;box-shadow:0 0 0 1px rgba(255,255,255,0.05);}
+.phone-screen{position:absolute;inset:0;border-radius:42px;overflow:hidden;background:var(--gray-100);}
+#page-tasks,#page-dashboard{height:100%;position:relative;}
+.phone-status-bar{position:absolute;top:0;left:0;right:0;height:50px;display:flex;align-items:flex-end;justify-content:space-between;padding:0 28px 8px;z-index:150;pointer-events:none;background:transparent;}
+.psb-time{font-size:15px;font-weight:700;color:var(--gray-900);letter-spacing:-0.3px;}
+.psb-icons{display:flex;align-items:center;gap:5px;}
+.phone-home-bar{position:absolute;bottom:8px;left:50%;transform:translateX(-50%);width:130px;height:5px;background:rgba(0,0,0,0.2);border-radius:3px;z-index:200;}
+.phone-app{position:absolute;inset:0;overflow:hidden;}
+.call-modal-overlay,.training-overlay{position:absolute !important;inset:0 !important;z-index:800 !important;}
+.page{display:none;width:100%;height:100%;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;}
 .page.active{display:flex;flex-direction:column;}
-
-/* Scrollbar hidden inside phone */
 .page::-webkit-scrollbar{display:none;}
-
-/* Login page full phone height */
-#page-login{
-  min-height:100%;
-  background:linear-gradient(135deg,#E8EAFA 0%,#F0F2FF 40%,#E8F0FF 100%);
-  align-items:center;
-  justify-content:center;
-  padding:54px 20px 24px;
-}
-
-/* Info label below phone */
-.phone-label {
-  position:absolute;
-  bottom:-48px;
-  left:50%;
-  transform:translateX(-50%);
-  text-align:center;
-  white-space:nowrap;
-}
-
-.phone-label-text {
-  font-size:12px;
-  font-weight:500;
-  color:rgba(255,255,255,0.35);
-  letter-spacing:0.5px;
-}
-
-/* Decorative elements on desktop */
-.desk-decor {
-  position:fixed;
-  z-index:1;
-  opacity:0.04;
-  font-size:300px;
-  color:white;
-  pointer-events:none;
-  user-select:none;
-}
-.desk-decor.left { left:-80px; bottom:-60px; }
-.desk-decor.right { right:-80px; top:-60px; }
-
-/* ── PAGE SYSTEM ─────────────────────────── */
+#page-login{min-height:100%;background:white;align-items:center;justify-content:center;padding:20px;}
+.phone-label{position:absolute;bottom:-48px;left:50%;transform:translateX(-50%);text-align:center;white-space:nowrap;}
+.phone-label-text{font-size:12px;font-weight:500;color:rgba(255,255,255,0.35);letter-spacing:0.5px;}
+.desk-decor{position:fixed;z-index:1;opacity:0.04;font-size:300px;color:white;pointer-events:none;user-select:none;}
+.desk-decor.left{left:-80px;bottom:-60px;}
+.desk-decor.right{right:-80px;top:-60px;}
 .page{display:none;min-height:100vh;}
 .page.active{display:flex;flex-direction:column;}
-
-/* ══════════════════════════════
-   PAGE 1 — LOGIN
-══════════════════════════════ */
-#page-login{
-  background:linear-gradient(135deg,#E8EAFA 0%,#F0F2FF 40%,#E8F0FF 100%);
-  align-items:center;justify-content:center;padding:24px;min-height:100vh;
-}
-.login-card{
-  background:var(--white);border-radius:20px;
-  box-shadow:var(--shadow-lg);
-  display:flex;flex-direction:column;
-  width:100%;overflow:hidden;
-}
-.login-left{
-  display:none;
-}
-.login-illustration{
-  width:200px;height:160px;margin-bottom:24px;
-  position:relative;
-}
-/* Isometric phone illustration */
-.iso-base{
-  position:absolute;bottom:0;left:50%;transform:translateX(-50%);
-  width:120px;height:20px;
-  background:#C8D4F0;border-radius:4px;
-  clip-path:polygon(8% 0%,92% 0%,100% 100%,0% 100%);
-}
-.iso-phone{
-  position:absolute;bottom:18px;left:50%;transform:translateX(-50%) rotate(-5deg);
-  width:80px;height:130px;background:var(--white);
-  border-radius:12px;border:2px solid #D0D8F0;
-  box-shadow:4px 4px 0 #B8C4E8;
-}
-.iso-screen{
-  position:absolute;top:10px;left:6px;right:6px;bottom:10px;
-  background:linear-gradient(160deg,#EEF2FF,#E0E8FF);
-  border-radius:8px;overflow:hidden;
-}
+#page-login{background:white;align-items:center;justify-content:center;padding:20px;min-height:100vh;}
+.login-card{background:var(--white);border-radius:20px;box-shadow:var(--shadow-lg);display:flex;flex-direction:column;width:100%;overflow:hidden;}
+.login-left{display:none;}
+.login-illustration{width:200px;height:160px;margin-bottom:24px;position:relative;}
+.iso-base{position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:120px;height:20px;background:#C8D4F0;border-radius:4px;clip-path:polygon(8% 0%,92% 0%,100% 100%,0% 100%);}
+.iso-phone{position:absolute;bottom:18px;left:50%;transform:translateX(-50%) rotate(-5deg);width:80px;height:130px;background:var(--white);border-radius:12px;border:2px solid #D0D8F0;box-shadow:4px 4px 0 #B8C4E8;}
+.iso-screen{position:absolute;top:10px;left:6px;right:6px;bottom:10px;background:linear-gradient(160deg,#EEF2FF,#E0E8FF);border-radius:8px;overflow:hidden;}
 .iso-bar{height:4px;background:var(--red);margin:6px 6px 4px;}
 .iso-line{height:3px;background:#C8D0E8;border-radius:2px;margin:4px 6px;}
 .iso-line.short{width:60%;}
-.iso-arrow{
-  position:absolute;bottom:24px;right:24px;
-  width:40px;height:50px;
-}
-.iso-arrow::before{
-  content:'';position:absolute;bottom:0;left:50%;transform:translateX(-50%);
-  border-left:8px solid transparent;border-right:8px solid transparent;
-  border-bottom:14px solid var(--green);
-}
-.iso-arrow::after{
-  content:'';position:absolute;bottom:14px;left:50%;transform:translateX(-50%);
-  width:6px;height:20px;background:var(--green);border-radius:2px;
-}
-.iso-card{
-  position:absolute;top:10px;left:0;
-  width:48px;height:36px;background:var(--white);
-  border-radius:8px;border:1.5px solid #C8D4F0;
-  display:flex;align-items:center;justify-content:center;
-  box-shadow:2px 2px 0 #C0CCE8;
-}
-.iso-card2{
-  position:absolute;top:10px;right:0;
-  width:48px;height:36px;background:var(--white);
-  border-radius:8px;border:1.5px solid #B8D4C8;
-  display:flex;align-items:center;justify-content:center;
-  box-shadow:2px 2px 0 #A8C4B8;
-}
+.iso-arrow{position:absolute;bottom:24px;right:24px;width:40px;height:50px;}
+.iso-arrow::before{content:'';position:absolute;bottom:0;left:50%;transform:translateX(-50%);border-left:8px solid transparent;border-right:8px solid transparent;border-bottom:14px solid var(--green);}
+.iso-arrow::after{content:'';position:absolute;bottom:14px;left:50%;transform:translateX(-50%);width:6px;height:20px;background:var(--green);border-radius:2px;}
+.iso-card{position:absolute;top:10px;left:0;width:48px;height:36px;background:var(--white);border-radius:8px;border:1.5px solid #C8D4F0;display:flex;align-items:center;justify-content:center;box-shadow:2px 2px 0 #C0CCE8;}
+.iso-card2{position:absolute;top:10px;right:0;width:48px;height:36px;background:var(--white);border-radius:8px;border:1.5px solid #B8D4C8;display:flex;align-items:center;justify-content:center;box-shadow:2px 2px 0 #A8C4B8;}
 .login-tagline{font-size:16px;font-weight:700;color:var(--gray-900);margin-bottom:6px;}
 .login-sub{font-size:13px;color:var(--gray-500);line-height:1.6;max-width:200px;}
-
 .login-right{padding:24px 22px 20px;}
-.login-title{
-  font-size:22px;font-weight:700;color:var(--gray-900);
-  margin-bottom:28px;display:flex;align-items:center;gap:10px;
-}
-.work-logo{
-  display:flex;align-items:center;gap:6px;
-  font-size:22px;font-weight:800;
-  color:var(--black);
-}
-
+.login-title{font-size:22px;font-weight:700;color:var(--gray-900);margin-bottom:28px;display:flex;align-items:center;gap:10px;}
+.work-logo{display:flex;align-items:center;gap:6px;font-size:22px;font-weight:800;color:var(--black);}
 .field-group{margin-bottom:18px;}
-.field-label{
-  font-size:13px;font-weight:600;color:var(--gray-700);
-  margin-bottom:7px;display:block;
-}
+.field-label{font-size:13px;font-weight:600;color:var(--gray-700);margin-bottom:7px;display:block;}
 .field-label sup{color:var(--red);}
-.field-input{
-  width:100%;height:50px;border:1.5px solid var(--border);
-  border-radius:var(--radius-sm);padding:0 16px;
-  font-size:14px;font-family:var(--font);color:var(--gray-900);
-  outline:none;transition:border-color 0.15s;background:var(--white);
-}
+.field-input{width:100%;height:50px;border:1.5px solid var(--border);border-radius:var(--radius-sm);padding:0 16px;font-size:14px;font-family:var(--font);color:var(--gray-900);outline:none;transition:border-color 0.15s;background:var(--white);}
 .field-input:focus{border-color:var(--blue);}
 .field-input::placeholder{color:var(--gray-300);}
 .password-wrap{position:relative;}
 .password-wrap .field-input{padding-right:44px;}
-.eye-btn{
-  position:absolute;right:14px;top:50%;transform:translateY(-50%);
-  background:none;border:none;cursor:pointer;color:var(--gray-300);padding:0;
-}
-.login-btn{
-  width:100%;height:50px;background:var(--gray-900);color:white;
-  border:none;border-radius:var(--radius-sm);
-  font-size:15px;font-weight:700;font-family:var(--font);
-  cursor:pointer;transition:background 0.15s;margin-bottom:16px;
-}
+.eye-btn{position:absolute;right:14px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;color:var(--gray-300);padding:0;}
+.login-btn{width:100%;height:50px;background:var(--gray-900);color:white;border:none;border-radius:var(--radius-sm);font-size:15px;font-weight:700;font-family:var(--font);cursor:pointer;transition:background 0.15s;margin-bottom:16px;}
 .login-btn:hover{background:#333;}
 .login-links{text-align:center;margin-bottom:20px;}
-.login-links a{
-  color:var(--blue);font-size:13px;font-weight:700;
-  text-decoration:none;display:block;margin-bottom:6px;
-}
+.login-links a{color:var(--blue);font-size:13px;font-weight:700;text-decoration:none;display:block;margin-bottom:6px;}
 .login-links p{font-size:13px;color:var(--gray-500);margin-bottom:4px;}
-.sso-btn{
-  width:100%;height:48px;background:var(--white);
-  border:1.5px solid var(--border);border-radius:var(--radius-sm);
-  font-size:14px;font-weight:700;font-family:var(--font);
-  color:var(--gray-900);cursor:pointer;margin-bottom:10px;
-  transition:border-color 0.15s;
-}
+.sso-btn{width:100%;height:48px;background:var(--white);border:1.5px solid var(--border);border-radius:var(--radius-sm);font-size:14px;font-weight:700;font-family:var(--font);color:var(--gray-900);cursor:pointer;margin-bottom:10px;transition:border-color 0.15s;}
 .sso-btn:hover{border-color:var(--gray-500);}
-.login-error{
-  background:#FEE2E2;color:#B91C1C;font-size:13px;font-weight:600;
-  padding:10px 14px;border-radius:8px;margin-bottom:14px;display:none;
-}
-
-/* ══════════════════════════════
-   PAGE 2 — DASHBOARD
-══════════════════════════════ */
+.login-error{background:#FEE2E2;color:#B91C1C;font-size:13px;font-weight:600;padding:10px 14px;border-radius:8px;margin-bottom:14px;display:none;}
 #page-dashboard{background:var(--gray-100);padding-top:0;}
-
-.aw-nav{
-  background:var(--white);border-bottom:1px solid var(--border);
-  height:50px;padding:0 16px;
-  display:flex;align-items:center;justify-content:space-between;
-  position:sticky;top:0;z-index:100;
-  margin-top:50px;
-}
+.aw-nav{background:var(--white);border-bottom:1px solid var(--border);height:50px;padding:0 16px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;margin-top:50px;}
 .aw-nav-logo{display:flex;align-items:center;gap:8px;}
-.airtel-logo-red{
-  display:flex;align-items:center;gap:6px;
-  font-size:20px;font-weight:800;color:var(--red);
-}
+.airtel-logo-red{display:flex;align-items:center;gap:6px;font-size:20px;font-weight:800;color:var(--red);}
 .airtel-logo-red svg{width:28px;height:28px;}
 .aw-nav-right{display:flex;align-items:center;gap:16px;}
-.aw-region{
-  display:flex;align-items:center;gap:4px;
-  color:var(--blue);font-size:13px;font-weight:700;cursor:pointer;
-}
-.aw-power{
-  width:32px;height:32px;border-radius:50%;
-  background:var(--gray-100);border:none;cursor:pointer;
-  display:flex;align-items:center;justify-content:center;color:var(--gray-500);
-}
-
+.aw-region{display:flex;align-items:center;gap:4px;color:var(--blue);font-size:13px;font-weight:700;cursor:pointer;}
+.aw-power{width:32px;height:32px;border-radius:50%;background:var(--gray-100);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--gray-500);}
 .dash-body{padding:16px;width:100%;}
 .dash-welcome{font-size:16px;font-weight:600;color:var(--gray-700);margin-bottom:24px;}
 .dash-welcome span{color:var(--gray-900);font-weight:800;}
-
-/* SECTION GROUP */
 .section-group{margin-bottom:32px;}
-.section-header{
-  display:flex;align-items:center;gap:10px;margin-bottom:14px;
-}
-.section-icon{
-  width:40px;height:40px;border-radius:50%;
-  display:flex;align-items:center;justify-content:center;flex-shrink:0;
-}
+.section-header{display:flex;align-items:center;gap:10px;margin-bottom:14px;}
+.section-icon{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
 .section-icon.green{background:#C8EDD4;}
 .section-icon.purple{background:#E4D8F4;}
 .section-icon svg{width:20px;height:20px;}
 .section-name{font-size:15px;font-weight:800;color:var(--gray-900);letter-spacing:0.2px;}
-
-/* TILES */
 .tiles-row{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;}
-.tile{
-  width:100%;height:130px;
-  background:var(--white);border:1.5px solid var(--border);
-  border-radius:var(--radius);padding:16px 14px;
-  cursor:pointer;transition:all 0.2s;
-  display:flex;flex-direction:column;
-  justify-content:space-between;
-  position:relative;overflow:hidden;
-}
+.tile{width:100%;height:130px;background:var(--white);border:1.5px solid var(--border);border-radius:var(--radius);padding:16px 14px;cursor:pointer;transition:all 0.2s;display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden;}
 .tile:hover{border-color:var(--blue);box-shadow:var(--shadow-md);transform:translateY(-2px);}
-.tile.highlight{
-  border-color:var(--red);
-  background:linear-gradient(160deg,#FFF8F9,var(--white));
-}
-.tile.highlight::before{
-  content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--red);
-}
-.tile-icon{
-  width:40px;height:40px;border-radius:10px;
-  display:flex;align-items:center;justify-content:center;
-  background:var(--gray-100);
-}
-.tile.highlight .tile-icon{background:var(--red-light);}
+.tile.highlight{border-color:var(--blue);background:var(--white);}
+.tile.highlight::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--blue);}
+.tile-icon{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;background:var(--gray-100);}
+.tile.highlight .tile-icon{background:var(--gray-100);}
 .tile-icon svg{width:20px;height:20px;}
 .tile-label{font-size:12px;font-weight:800;color:var(--gray-700);line-height:1.3;text-transform:uppercase;letter-spacing:0.3px;}
 .tile-sublabel{font-size:10px;color:var(--gray-500);font-weight:600;text-transform:uppercase;letter-spacing:0.3px;margin-top:2px;}
-.tile-count{
-  position:absolute;top:10px;right:10px;
-  min-width:22px;height:22px;border-radius:11px;
-  background:var(--gray-900);color:white;
-  font-size:11px;font-weight:800;
-  display:flex;align-items:center;justify-content:center;padding:0 5px;
-}
-.tile.highlight .tile-count{background:var(--red);}
+.tile-count{position:absolute;top:10px;right:10px;min-width:22px;height:22px;border-radius:11px;background:var(--gray-900);color:white;font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center;padding:0 5px;}
+.tile.highlight .tile-count{background:var(--gray-900);}
 .tile-count.pulse{animation:countPulse 2s ease-in-out infinite;}
 @keyframes countPulse{0%,100%{transform:scale(1);}50%{transform:scale(1.15);}}
-
-/* NEW LEAD BADGE */
-.new-badge{
-  display:inline-flex;align-items:center;gap:4px;
-  background:var(--red);color:white;
-  font-size:9px;font-weight:800;padding:2px 6px;border-radius:4px;
-  letter-spacing:0.5px;text-transform:uppercase;
-  animation:badgePulse 1.5s ease-in-out infinite;
-}
+.new-badge{display:inline-flex;align-items:center;gap:4px;background:var(--gray-900);color:white;font-size:9px;font-weight:800;padding:2px 6px;border-radius:4px;letter-spacing:0.5px;text-transform:uppercase;animation:badgePulse 1.5s ease-in-out infinite;}
 @keyframes badgePulse{0%,100%{opacity:1;}50%{opacity:0.7;}}
 .new-dot{width:5px;height:5px;border-radius:50%;background:white;}
-
-/* ══════════════════════════════
-   PAGE 3 — TASK LIST
-══════════════════════════════ */
 #page-tasks{background:var(--gray-100);height:100%;}
-
-.task-nav{
-  background:var(--white);border-bottom:1px solid var(--border);
-  height:56px;padding:0 20px;
-  display:flex;align-items:center;gap:14px;
-  position:sticky;top:0;z-index:100;
-}
-.back-btn{
-  width:34px;height:34px;border-radius:50%;
-  background:var(--gray-100);border:none;cursor:pointer;
-  display:flex;align-items:center;justify-content:center;
-  color:var(--gray-700);flex-shrink:0;
-}
+.task-nav{background:var(--white);border-bottom:1px solid var(--border);height:56px;padding:0 20px;display:flex;align-items:center;gap:14px;position:sticky;top:0;z-index:100;}
+.back-btn{width:34px;height:34px;border-radius:50%;background:var(--gray-100);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--gray-700);flex-shrink:0;}
 .task-nav-title{font-size:16px;font-weight:800;color:var(--gray-900);flex:1;text-align:center;}
-.task-nav-more{
-  width:34px;height:34px;border-radius:50%;
-  background:var(--gray-100);border:none;cursor:pointer;
-  display:flex;align-items:center;justify-content:center;color:var(--gray-500);
-}
-
-.task-filters{
-  background:var(--white);padding:12px 20px;
-  display:flex;gap:8px;border-bottom:1px solid var(--border);
-  overflow-x:auto;
-}
-.filter-chip{
-  display:flex;align-items:center;gap:5px;
-  background:var(--gray-100);border:1px solid var(--border);
-  border-radius:20px;padding:5px 12px;font-size:12px;font-weight:700;
-  color:var(--gray-700);cursor:pointer;white-space:nowrap;flex-shrink:0;
-}
+.task-nav-more{width:34px;height:34px;border-radius:50%;background:var(--gray-100);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--gray-500);}
+.task-filters{background:var(--white);padding:12px 20px;display:flex;gap:8px;border-bottom:1px solid var(--border);overflow-x:auto;}
+.filter-chip{display:flex;align-items:center;gap:5px;background:var(--gray-100);border:1px solid var(--border);border-radius:20px;padding:5px 12px;font-size:12px;font-weight:700;color:var(--gray-700);cursor:pointer;white-space:nowrap;flex-shrink:0;}
 .filter-chip svg{width:12px;height:12px;}
-
 .task-body{padding:16px 20px;flex:1;}
-.task-section-label{
-  font-size:11px;font-weight:800;color:var(--gray-500);
-  text-transform:uppercase;letter-spacing:0.5px;
-  margin-bottom:12px;display:flex;align-items:center;gap:6px;
-}
-.task-section-label span{
-  background:var(--gray-300);color:var(--white);
-  font-size:10px;padding:1px 6px;border-radius:10px;
-}
-
-/* TASK CARD */
-.task-card{
-  background:var(--white);border-radius:var(--radius);
-  border:1.5px solid var(--border);padding:16px;
-  margin-bottom:12px;
-  animation:cardIn 0.3s ease;
-}
-.task-card.new-lead{
-  border-color:var(--red);
-  box-shadow:0 0 0 3px rgba(228,0,43,0.06);
-}
+.task-section-label{font-size:11px;font-weight:800;color:var(--gray-500);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:12px;display:flex;align-items:center;gap:6px;}
+.task-section-label span{background:var(--gray-300);color:var(--white);font-size:10px;padding:1px 6px;border-radius:10px;}
+.task-card{background:var(--white);border-radius:8px;border:1.5px solid var(--border);padding:16px;margin-bottom:12px;animation:cardIn 0.3s ease;box-shadow:0 1px 4px rgba(0,0,0,0.06);transition:box-shadow 0.18s,border-color 0.18s;}.task-card:hover{box-shadow:0 6px 20px rgba(0,0,0,0.13);border-color:#B0B8D0;}
+.task-card.new-lead{border-color:var(--blue);box-shadow:0 2px 10px rgba(80,101,234,0.12);}.task-card.new-lead:hover{box-shadow:0 6px 24px rgba(80,101,234,0.22);}
 @keyframes cardIn{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:none;}}
 .task-tags{display:flex;gap:6px;margin-bottom:10px;flex-wrap:wrap;}
-.task-tag{
-  font-size:10px;font-weight:700;padding:3px 9px;
-  border-radius:20px;background:var(--blue-light);color:var(--blue);
-}
+.task-tag{font-size:10px;font-weight:700;padding:3px 9px;border-radius:20px;background:var(--blue-light);color:var(--blue);}
 .task-tag.online{background:var(--green-light);color:#1A7A35;}
 .task-tag.self{background:var(--purple-light);color:var(--purple);}
 .task-tag.new{background:var(--red-light);color:var(--red);}
 .task-tag.rescheduled{background:var(--amber-light);color:#92400E;}
 .task-title{font-size:15px;font-weight:800;color:var(--gray-900);margin-bottom:6px;}
 .task-meta{display:flex;align-items:center;gap:8px;margin-bottom:8px;flex-wrap:wrap;}
-.task-meta-item{
-  display:flex;align-items:center;gap:4px;
-  font-size:12px;color:var(--gray-500);font-weight:600;
-}
+.task-meta-item{display:flex;align-items:center;gap:4px;font-size:12px;color:var(--gray-500);font-weight:600;}
 .task-meta-item svg{width:13px;height:13px;flex-shrink:0;}
 .task-customer{font-size:14px;font-weight:700;color:var(--gray-900);margin-bottom:2px;}
 .task-address{font-size:12px;color:var(--gray-500);line-height:1.5;margin-bottom:8px;}
-.task-plan{
-  display:inline-flex;align-items:center;gap:5px;
-  background:var(--gray-100);border-radius:6px;
-  padding:4px 10px;font-size:12px;font-weight:700;color:var(--gray-700);
-  margin-bottom:12px;
-}
-.task-status{
-  display:inline-flex;align-items:center;gap:5px;
-  font-size:11px;font-weight:700;padding:4px 10px;
-  border-radius:6px;margin-bottom:14px;
-}
+.task-plan{display:inline-flex;align-items:center;gap:5px;background:var(--gray-100);border-radius:6px;padding:4px 10px;font-size:12px;font-weight:700;color:var(--gray-700);margin-bottom:12px;}
+.task-status{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;padding:4px 10px;border-radius:6px;margin-bottom:14px;}
 .task-status.new{background:var(--red-light);color:var(--red);}
 .task-status.inprogress{background:var(--amber-light);color:#92400E;}
 .task-status.done{background:var(--green-light);color:#1A7A35;}
-
 .task-cta-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
-.cta-navigate{
-  height:44px;background:var(--gray-100);color:var(--gray-700);
-  border:1.5px solid var(--border);border-radius:10px;
-  font-size:13px;font-weight:700;font-family:var(--font);cursor:pointer;
-  display:flex;align-items:center;justify-content:center;gap:6px;
-  transition:all 0.15s;
-}
+.cta-navigate{height:44px;background:var(--gray-100);color:var(--gray-700);border:1.5px solid var(--border);border-radius:10px;font-size:13px;font-weight:700;font-family:var(--font);cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;transition:all 0.15s;}
 .cta-navigate:hover{background:var(--gray-900);color:white;border-color:var(--gray-900);}
-.cta-call{
-  height:44px;background:var(--gray-900);color:white;
-  border:none;border-radius:10px;
-  font-size:13px;font-weight:700;font-family:var(--font);cursor:pointer;
-  display:flex;align-items:center;justify-content:center;gap:6px;
-  transition:background 0.15s;
-}
-.cta-call:hover{background:var(--red);}
+.cta-call{height:44px;background:#1976D2;color:white;border:none;border-radius:10px;font-size:13px;font-weight:700;font-family:var(--font);cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;transition:background 0.15s;}
+.cta-call:hover{background:#1565C0;}
 .cta-call.calling{background:var(--green);animation:callRing 0.6s ease-in-out infinite alternate;}
 @keyframes callRing{from{background:var(--green);}to{background:#28A044;}}
-
-/* CALL MODAL */
-.call-modal-overlay{
-  position:absolute;inset:0;background:rgba(0,0,0,0.6);
-  z-index:500;display:none;align-items:flex-end;justify-content:center;
-}
+.call-modal-overlay{position:absolute;inset:0;background:rgba(0,0,0,0.6);z-index:500;display:none;align-items:center;justify-content:center;padding:20px;}
 .call-modal-overlay.open{display:flex;}
-.call-modal{
-  background:var(--white);border-radius:24px 24px 0 0;
-  padding:24px 20px 36px;width:100%;
-  animation:modalUp 0.35s cubic-bezier(0.16,1,0.3,1);
-  max-height:85%;overflow-y:auto;
-}
+.call-modal{background:var(--white);border-radius:16px;padding:22px 20px 20px;width:100%;animation:popIn 0.25s cubic-bezier(0.16,1,0.3,1);}
 @keyframes modalUp{from{transform:translateY(100%);}to{transform:translateY(0);}}
-.call-modal-handle{
-  width:40px;height:4px;background:var(--gray-300);
-  border-radius:2px;margin:0 auto 20px;
-}
-.call-modal-title{font-size:18px;font-weight:800;color:var(--gray-900);text-align:center;margin-bottom:4px;}
-.call-modal-sub{font-size:13px;color:var(--gray-500);text-align:center;margin-bottom:24px;}
-.call-modal-info{
-  background:var(--gray-100);border-radius:var(--radius-sm);
-  padding:16px;margin-bottom:20px;
-}
-.call-modal-row{
-  display:flex;justify-content:space-between;
-  font-size:13px;padding:4px 0;
-}
+@keyframes popIn{from{opacity:0;transform:scale(0.92);}to{opacity:1;transform:scale(1);}}
+.call-modal-handle{width:40px;height:4px;background:var(--gray-300);border-radius:2px;margin:0 auto 12px;}
+.call-modal-title{font-size:17px;font-weight:800;color:var(--gray-900);text-align:center;margin-bottom:3px;}
+.call-modal-sub{font-size:13px;color:var(--gray-500);text-align:center;margin-bottom:14px;}
+.call-modal-info{background:var(--gray-100);border-radius:var(--radius-sm);padding:12px;margin-bottom:14px;}
+.call-modal-row{display:flex;justify-content:space-between;font-size:12px;padding:3px 0;}
 .call-modal-row-label{color:var(--gray-500);font-weight:600;}
 .call-modal-row-val{color:var(--gray-900);font-weight:700;}
-.call-flow-note{
-  background:var(--blue-light);border-radius:10px;
-  padding:12px 14px;margin-bottom:20px;
-  font-size:12px;color:#2A3A9A;font-weight:600;line-height:1.6;
-  display:flex;gap:8px;align-items:flex-start;
-}
+.call-flow-note{background:var(--blue-light);border-radius:10px;padding:10px 12px;margin-bottom:14px;font-size:12px;color:#2A3A9A;font-weight:600;line-height:1.5;display:flex;gap:8px;align-items:flex-start;}
 .call-flow-note svg{width:16px;height:16px;flex-shrink:0;margin-top:1px;}
-.confirm-call-btn{
-  width:100%;height:52px;background:var(--green);color:white;
-  border:none;border-radius:12px;font-size:15px;font-weight:700;
-  font-family:var(--font);cursor:pointer;
-  display:flex;align-items:center;justify-content:center;gap:8px;
-  margin-bottom:10px;transition:background 0.15s;
-}
-.confirm-call-btn:hover{background:#28A044;}
-.cancel-call-btn{
-  width:100%;height:44px;background:var(--gray-100);color:var(--gray-700);
-  border:none;border-radius:12px;font-size:14px;font-weight:700;
-  font-family:var(--font);cursor:pointer;
-}
-
-/* CALLING STATE */
+.confirm-call-btn{width:100%;height:46px;background:#1976D2;color:white;border:none;border-radius:12px;font-size:14px;font-weight:700;font-family:var(--font);cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:8px;transition:background 0.15s;}
+.confirm-call-btn:hover{background:#1565C0;}
+.cancel-call-btn{width:100%;height:40px;background:var(--gray-100);color:var(--gray-700);border:none;border-radius:12px;font-size:13px;font-weight:700;font-family:var(--font);cursor:pointer;}
 .calling-state{display:none;text-align:center;padding:20px 0;}
 .calling-state.show{display:block;}
-.call-avatar{
-  width:72px;height:72px;border-radius:50%;
-  background:var(--red);color:white;
-  font-size:24px;font-weight:800;
-  display:flex;align-items:center;justify-content:center;
-  margin:0 auto 12px;position:relative;
-}
-.call-avatar::after{
-  content:'';position:absolute;inset:-6px;
-  border:2px solid rgba(228,0,43,0.3);border-radius:50%;
-  animation:avatarRing 1.2s ease-out infinite;
-}
+.call-avatar{width:72px;height:72px;border-radius:50%;background:var(--red);color:white;font-size:24px;font-weight:800;display:flex;align-items:center;justify-content:center;margin:0 auto 12px;position:relative;}
+.call-avatar::after{content:'';position:absolute;inset:-6px;border:2px solid rgba(228,0,43,0.3);border-radius:50%;animation:avatarRing 1.2s ease-out infinite;}
 @keyframes avatarRing{0%{transform:scale(1);opacity:1;}100%{transform:scale(1.4);opacity:0;}}
 .calling-name{font-size:18px;font-weight:800;color:var(--gray-900);margin-bottom:4px;}
 .calling-status{font-size:13px;color:var(--gray-500);margin-bottom:20px;}
 .call-timer-display{font-size:28px;font-weight:300;color:var(--gray-700);letter-spacing:3px;margin-bottom:24px;font-variant-numeric:tabular-nums;}
-.end-call-btn{
-  width:64px;height:64px;border-radius:50%;background:#FF3B30;
-  border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;
-  margin:0 auto;box-shadow:0 4px 16px rgba(255,59,48,0.4);
-}
-
-/* TOAST */
-.toast{
-  position:fixed;bottom:60px;left:50%;transform:translateX(-50%) translateY(80px);
-  background:var(--gray-900);color:white;padding:12px 20px;
-  border-radius:12px;font-size:13px;font-weight:700;
-  white-space:nowrap;opacity:0;transition:all 0.3s cubic-bezier(0.16,1,0.3,1);
-  z-index:9999;box-shadow:var(--shadow-lg);
-  display:flex;align-items:center;gap:8px;
-}
+.end-call-btn{width:64px;height:64px;border-radius:50%;background:#FF3B30;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;margin:0 auto;box-shadow:0 4px 16px rgba(255,59,48,0.4);}
+.toast{position:fixed;bottom:60px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--gray-900);color:white;padding:12px 20px;border-radius:12px;font-size:13px;font-weight:700;white-space:nowrap;opacity:0;transition:all 0.3s cubic-bezier(0.16,1,0.3,1);z-index:9999;box-shadow:var(--shadow-lg);display:flex;align-items:center;gap:8px;}
 .toast.show{transform:translateX(-50%) translateY(0);opacity:1;}
-
-/* ══════════════════════════════
-   MOBILE RESPONSIVE
-══════════════════════════════ */
-
-/* Base: treat everything as mobile-first */
-@media (max-width: 640px) {
-
-  /* LOGIN */
-  #page-login { padding: 16px; align-items: flex-start; padding-top: 40px; }
-  .login-card {
-    grid-template-columns: 1fr;
-    max-width: 100%;
-    border-radius: 20px;
-  }
-  .login-left { display: none; } /* hide illustration on mobile */
-  .login-right { padding: 28px 24px; }
-  .login-title { font-size: 18px; margin-bottom: 20px; }
-  .field-input { height: 48px; font-size: 15px; }
-  .login-btn { height: 48px; font-size: 15px; }
-  .sso-btn { height: 44px; font-size: 13px; }
-
-  /* DASHBOARD */
-  .aw-nav { padding: 0 16px; }
-  .dash-body { padding: 16px; }
-  .dash-welcome { font-size: 15px; margin-bottom: 18px; }
-
-  /* TILES — 2 per row on mobile */
-  .tiles-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-  }
-  .tile {
-    width: 100%;
-    height: 140px;
-    padding: 14px 12px;
-  }
-  .tile-label { font-size: 11px; }
-  .tile-sublabel { font-size: 9px; }
-  .tile-count { font-size: 10px; min-width: 20px; height: 20px; }
-
-  /* TASK LIST */
-  .task-nav { padding: 0 14px; }
-  .task-filters { padding: 10px 14px; }
-  .task-body { padding: 14px 16px; }
-  .task-card { padding: 14px; }
-  .task-title { font-size: 14px; }
-  .task-customer { font-size: 13px; }
-  .task-address { font-size: 11px; }
-  .task-plan { font-size: 11px; }
-  .cta-navigate, .cta-call { height: 42px; font-size: 13px; }
-
-  /* CALL MODAL */
-  .call-modal { padding: 20px 20px 36px; }
-  .call-modal-title { font-size: 17px; }
-  .call-modal-sub { font-size: 12px; }
-  .call-modal-row { font-size: 12px; }
-  .call-flow-note { font-size: 11px; }
-  .confirm-call-btn { height: 50px; font-size: 14px; }
-
-  /* TOAST — centered bottom */
-  .toast { font-size: 12px; padding: 10px 16px; max-width: calc(100% - 32px); white-space: normal; }
+@media(max-width:640px){
+  #page-login{padding:16px;align-items:flex-start;padding-top:40px;}
+  .login-card{grid-template-columns:1fr;max-width:100%;border-radius:20px;}
+  .login-left{display:none;}
+  .login-right{padding:28px 24px;}
+  .login-title{font-size:18px;margin-bottom:20px;}
+  .field-input{height:48px;font-size:15px;}
+  .login-btn{height:48px;font-size:15px;}
+  .sso-btn{height:44px;font-size:13px;}
+  .aw-nav{padding:0 16px;}
+  .dash-body{padding:16px;}
+  .dash-welcome{font-size:15px;margin-bottom:18px;}
+  .tiles-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+  .tile{width:100%;height:140px;padding:14px 12px;}
+  .tile-label{font-size:11px;}
+  .tile-sublabel{font-size:9px;}
+  .tile-count{font-size:10px;min-width:20px;height:20px;}
+  .task-nav{padding:0 14px;}
+  .task-filters{padding:10px 14px;}
+  .task-body{padding:14px 16px;}
+  .task-card{padding:14px;}
+  .task-title{font-size:14px;}
+  .task-customer{font-size:13px;}
+  .task-address{font-size:11px;}
+  .task-plan{font-size:11px;}
+  .cta-navigate,.cta-call{height:42px;font-size:13px;}
+  .call-modal{padding:20px 20px 36px;}
+  .call-modal-title{font-size:17px;}
+  .call-modal-sub{font-size:12px;}
+  .call-modal-row{font-size:12px;}
+  .call-flow-note{font-size:11px;}
+  .confirm-call-btn{height:50px;font-size:14px;}
+  .toast{font-size:12px;padding:10px 16px;max-width:calc(100% - 32px);white-space:normal;}
 }
-
-/* Tablet: show illustration, single column login still */
-@media (min-width: 641px) and (max-width: 860px) {
-  .login-card { grid-template-columns: 1fr; max-width: 460px; }
-  .login-left { display: none; }
-  .login-right { padding: 36px 36px; }
-
-  .tiles-row {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 14px;
-  }
-  .tile { width: 100%; }
-
-  .dash-body { padding: 20px; }
-  .task-body { padding: 16px 20px; }
+@media(min-width:641px) and (max-width:860px){
+  .login-card{grid-template-columns:1fr;max-width:460px;}
+  .login-left{display:none;}
+  .login-right{padding:36px 36px;}
+  .tiles-row{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
+  .tile{width:100%;}
+  .dash-body{padding:20px;}
+  .task-body{padding:16px 20px;}
 }
-
-/* Desktop: full layout */
-@media (min-width: 861px) {
-  .login-left { display: flex; }
-  .tiles-row { display: flex; gap: 14px; flex-wrap: wrap; }
-  .tile { width: 148px; height: 148px; }
+@media(min-width:861px){
+  .login-left{display:flex;}
+  .tiles-row{display:flex;gap:14px;flex-wrap:wrap;}
+  .tile{width:148px;height:148px;}
 }
-
-
-/* ── TRAINING MODULE OVERLAY ─────────────── */
-.training-overlay{
-  position:absolute;inset:0;background:rgba(0,0,0,0.7);
-  z-index:600;display:none;align-items:flex-end;justify-content:center;
-}
+.training-overlay{position:absolute;inset:0;background:rgba(0,0,0,0.7);z-index:600;display:none;align-items:flex-end;justify-content:center;}
 .training-overlay.open{display:flex;}
-.training-sheet{
-  background:var(--white);border-radius:24px 24px 0 0;
-  width:100%;max-width:520px;
-  max-height:92vh;display:flex;flex-direction:column;
-  animation:modalUp 0.35s cubic-bezier(0.16,1,0.3,1);
-}
-.training-header{
-  padding:16px 20px 12px;border-bottom:1px solid var(--border);
-  flex-shrink:0;
-}
+.training-sheet{background:var(--white);border-radius:24px 24px 0 0;width:100%;max-width:520px;max-height:92vh;display:flex;flex-direction:column;animation:modalUp 0.35s cubic-bezier(0.16,1,0.3,1);}
+.training-header{padding:16px 20px 12px;border-bottom:1px solid var(--border);flex-shrink:0;}
 .training-handle{width:40px;height:4px;background:var(--gray-300);border-radius:2px;margin:0 auto 14px;}
 .training-header-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;}
 .training-title{font-size:15px;font-weight:800;color:var(--gray-900);}
 .training-close{width:28px;height:28px;border-radius:50%;background:var(--gray-100);border:none;cursor:pointer;font-size:14px;color:var(--gray-500);}
 .training-dots{display:flex;gap:4px;align-items:center;}
-.training-body{
-  flex:1;overflow-y:auto;padding:20px;
-  transition:opacity 0.25s ease;
-}
-.training-footer{
-  padding:14px 20px;border-top:1px solid var(--border);
-  display:flex;align-items:center;justify-content:space-between;
-  flex-shrink:0;background:var(--white);
-}
+.training-body{flex:1;overflow-y:auto;padding:20px;transition:opacity 0.25s ease;}
+.training-footer{padding:14px 20px;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-shrink:0;background:var(--white);}
 .slide-counter{font-size:12px;font-weight:700;color:var(--gray-500);}
-.nav-btn{
-  height:42px;padding:0 20px;border-radius:10px;
-  font-size:13px;font-weight:800;font-family:var(--font);
-  cursor:pointer;border:none;transition:all 0.15s;
-}
+.nav-btn{height:42px;padding:0 20px;border-radius:10px;font-size:13px;font-weight:800;font-family:var(--font);cursor:pointer;border:none;transition:all 0.15s;}
 .btn-prev{background:var(--gray-100);color:var(--gray-700);}
 .btn-prev:hover{background:var(--gray-300);}
 .btn-next{background:var(--gray-900);color:white;}
 .btn-next:hover{background:var(--red);}
-
 </style>
 </head>
 <body>
-
-<!-- ── DESKTOP BACKGROUND ── -->
 <div class="desktop-bg">
   <span class="desk-decor left">✦</span>
   <span class="desk-decor right">✦</span>
 </div>
-
-<!-- ── PHONE SHELL ── -->
 <div class="phone-shell">
-
-  <!-- Physical phone body -->
   <div class="phone-body"></div>
   <div class="phone-btn-vol-up"></div>
   <div class="phone-btn-vol-dn"></div>
   <div class="phone-btn-power"></div>
-
-  <!-- Screen bezel + dynamic island -->
   <div class="phone-screen-bezel">
     <div class="phone-island"></div>
     <div class="phone-screen">
-
-      <!-- Status bar -->
       <div class="phone-status-bar" id="status-bar">
         <span class="psb-time" id="status-time">9:41</span>
         <div class="psb-icons">
-          <svg width="17" height="12" viewBox="0 0 17 12" fill="currentColor" style="color:#1C1C1E;opacity:0.8;">
-            <rect x="0" y="3" width="3" height="9" rx="1"/>
-            <rect x="4.5" y="2" width="3" height="10" rx="1"/>
-            <rect x="9" y="0" width="3" height="12" rx="1"/>
-            <rect x="13.5" y="0" width="3" height="12" rx="1" opacity="0.3"/>
-          </svg>
-          <svg width="16" height="12" viewBox="0 0 16 12" fill="currentColor" style="color:#1C1C1E;opacity:0.8;margin:0 1px;">
-            <path d="M8 2.4C5.6 2.4 3.4 3.4 1.8 5L0 3.2C2.2 1.2 5 0 8 0s5.8 1.2 8 3.2L14.2 5C12.6 3.4 10.4 2.4 8 2.4z"/>
-            <path d="M8 5.6c-1.6 0-3 .6-4 1.6L2.4 5.6C3.8 4.2 5.8 3.2 8 3.2s4.2 1 5.6 2.4L12 7.2c-1-1-2.4-1.6-4-1.6z"/>
-            <circle cx="8" cy="10" r="2"/>
-          </svg>
-          <svg width="25" height="12" viewBox="0 0 25 12" fill="none" style="color:#1C1C1E;">
-            <rect x="0.5" y="0.5" width="21" height="11" rx="3.5" stroke="currentColor" stroke-opacity="0.35"/>
-            <rect x="2" y="2" width="17" height="8" rx="2" fill="currentColor"/>
-            <path d="M23 4v4a2 2 0 000-4z" fill="currentColor" opacity="0.4"/>
-          </svg>
+          <svg width="17" height="12" viewBox="0 0 17 12" fill="currentColor" style="color:#1C1C1E;opacity:0.8;"><rect x="0" y="3" width="3" height="9" rx="1"/><rect x="4.5" y="2" width="3" height="10" rx="1"/><rect x="9" y="0" width="3" height="12" rx="1"/><rect x="13.5" y="0" width="3" height="12" rx="1" opacity="0.3"/></svg>
+          <svg width="16" height="12" viewBox="0 0 16 12" fill="currentColor" style="color:#1C1C1E;opacity:0.8;margin:0 1px;"><path d="M8 2.4C5.6 2.4 3.4 3.4 1.8 5L0 3.2C2.2 1.2 5 0 8 0s5.8 1.2 8 3.2L14.2 5C12.6 3.4 10.4 2.4 8 2.4z"/><path d="M8 5.6c-1.6 0-3 .6-4 1.6L2.4 5.6C3.8 4.2 5.8 3.2 8 3.2s4.2 1 5.6 2.4L12 7.2c-1-1-2.4-1.6-4-1.6z"/><circle cx="8" cy="10" r="2"/></svg>
+          <svg width="25" height="12" viewBox="0 0 25 12" fill="none" style="color:#1C1C1E;"><rect x="0.5" y="0.5" width="21" height="11" rx="3.5" stroke="currentColor" stroke-opacity="0.35"/><rect x="2" y="2" width="17" height="8" rx="2" fill="currentColor"/><path d="M23 4v4a2 2 0 000-4z" fill="currentColor" opacity="0.4"/></svg>
         </div>
       </div>
-
-      <!-- App container -->
       <div class="phone-app" id="phone-app">
 
-<!-- ══════════════════════════════
-     PAGE 1 — LOGIN
-══════════════════════════════ -->
-<div class="page active" id="page-login">
-  <div class="login-card">
-
-    <!-- LEFT ILLUSTRATION -->
-    <div class="login-left">
-      <div class="login-illustration">
-        <div class="iso-card">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#7B5EA7" stroke-width="2" width="20" height="20"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M3 9h18"/></svg>
-        </div>
-        <div class="iso-card2">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#34C759" stroke-width="2" width="20" height="20"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8a19.79 19.79 0 01-3.07-8.63A2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92v2z"/></svg>
-        </div>
-        <div class="iso-phone">
-          <div class="iso-screen">
-            <div class="iso-bar"></div>
-            <div class="iso-line"></div>
-            <div class="iso-line short"></div>
-            <div class="iso-line"></div>
-            <div class="iso-line short"></div>
-          </div>
-        </div>
-        <div class="iso-arrow"></div>
-        <div class="iso-base"></div>
-      </div>
-      <div class="login-tagline">Simplify Work. Amplify Impact.</div>
-      <div class="login-sub">Manage your daily leads, track performance, and stay connected with your team — all in one place.</div>
+<div class="page active" id="page-login" style="background:white;align-items:center;justify-content:center;padding:32px 24px;">
+  <div style="width:100%;max-width:300px;">
+    <div style="text-align:center;margin-bottom:28px;">
+      <div style="font-size:20px;font-weight:300;color:#1A1A1A;">Log in to <strong style="font-weight:700;">Work</strong></div>
     </div>
-
-    <!-- RIGHT FORM -->
-    <div class="login-right">
-      <div class="login-title">
-        Log in to
-        <div class="work-logo">
-          <svg width="32" height="32" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M95 35 C88 18 68 10 50 14 C30 18 14 36 14 58 C14 80 30 98 52 100 C68 102 82 94 90 82 L80 76 C74 86 62 92 50 90 C32 88 20 74 20 58 C20 40 34 24 52 22 C66 20 80 28 86 40 Z" fill="#0A0A0A"/>
-            <path d="M90 82 C96 72 98 58 94 44 L84 48 C88 58 86 70 80 78 Z" fill="#0A0A0A"/>
-          </svg>
-          Work
-        </div>
-      </div>
-
-      <div class="login-error" id="login-error">Incorrect password. Please try again.</div>
-
-      <div class="field-group">
-        <label class="field-label">Mobile Number <sup>*</sup></label>
-        <input class="field-input" type="tel" id="login-userid" placeholder="10-digit mobile number" maxlength="10" autofocus/>
-      </div>
-      <div class="field-group">
-        <label class="field-label">Password <sup>*</sup></label>
-        <div class="password-wrap">
-          <input class="field-input" type="password" id="login-password" placeholder="Password" onkeydown="if(event.key==='Enter')doLogin()"/>
-          <button class="eye-btn" onclick="togglePwd()" type="button">
-            <svg id="eye-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17.94 17.94A10.07 10.07 0 0112 20c-7 0-11-8-11-8a18.45 18.45 0 015.06-5.94M9.9 4.24A9.12 9.12 0 0112 4c7 0 11 8 11 8a18.5 18.5 0 01-2.16 3.19m-6.72-1.07a3 3 0 11-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>
-          </button>
-        </div>
-      </div>
-
-      <button class="login-btn" onclick="doLogin()">Login</button>
-
-      <div class="login-links">
-        <a href="#">Forgotten password?</a>
-        <p>Don't have an account</p>
-        <a href="#">First Time ?</a>
-      </div>
-
-      <button class="sso-btn">Login with SSO</button>
-      <button class="sso-btn">Login with SSO-OAM</button>
-      <div style="text-align:center;margin-top:16px;padding-top:14px;border-top:1px solid var(--border);">
-        <span style="font-size:11px;color:var(--gray-300);font-weight:600;">
-          v1.6 &nbsp;·&nbsp; Built 03 Jun 2026, 07:13 AM IST
-        </span>
+    <div class="login-error" id="login-error">Incorrect password. Please try again.</div>
+    <div class="field-group">
+      <label class="field-label">Mobile Number <sup>*</sup></label>
+      <input class="field-input" type="tel" id="login-userid" placeholder="10-digit mobile number" maxlength="10" autofocus/>
+    </div>
+    <div class="field-group">
+      <label class="field-label">Password <sup>*</sup></label>
+      <div class="password-wrap">
+        <input class="field-input" type="password" id="login-password" placeholder="Password" onkeydown="if(event.key==='Enter')doLogin()"/>
+        <button class="eye-btn" onclick="togglePwd()" type="button">
+          <svg id="eye-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17.94 17.94A10.07 10.07 0 0112 20c-7 0-11-8-11-8a18.45 18.45 0 015.06-5.94M9.9 4.24A9.12 9.12 0 0112 4c7 0 11 8 11 8a18.5 18.5 0 01-2.16 3.19m-6.72-1.07a3 3 0 11-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>
+        </button>
       </div>
     </div>
+    <button class="login-btn" onclick="doLogin()">Login</button>
+    <div class="login-links">
+      <a href="#">Forgotten password?</a>
+      <p>Don't have an account</p>
+      <a href="#">First Time ?</a>
+    </div>
+    <button class="sso-btn">Login with SSO</button>
+    <button class="sso-btn">Login with SSO-OAM</button>
   </div>
 </div>
 
-
-<!-- ══════════════════════════════
-     PAGE 2 — DASHBOARD
-══════════════════════════════ -->
 <div class="page" id="page-dashboard">
   <nav class="aw-nav">
     <div class="aw-nav-logo">
-      <div class="airtel-logo-red">
-        <svg viewBox="0 0 40 40" fill="none">
-          <path d="M20 4C11.163 4 4 11.163 4 20s7.163 16 16 16 16-7.163 16-16S28.837 4 20 4z" fill="#E4002B"/>
-          <path d="M17 12c0-1.657 1.343-3 3-3s3 1.343 3 3v14h-6V12z" fill="white"/>
-        </svg>
-        airtel
-      </div>
+      <div style="font-size:13px;font-weight:700;color:var(--gray-900);">airtel <span style="font-weight:400;color:var(--gray-500);">Work</span></div>
     </div>
     <div class="aw-nav-right">
-      <div class="aw-region">
-        NATIONAL <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
-      </div>
-      <button class="aw-power" onclick="logout()">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18.36 6.64a9 9 0 11-12.73 0"/><line x1="12" y1="2" x2="12" y2="12"/></svg>
-      </button>
+      <div class="aw-region">NATIONAL <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg></div>
+      <button class="aw-power" onclick="logout()"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18.36 6.64a9 9 0 11-12.73 0"/><line x1="12" y1="2" x2="12" y2="12"/></svg></button>
     </div>
   </nav>
-
   <div class="dash-body">
     <div class="dash-welcome">Welcome <span id="welcome-name">Rohan Sharma</span>,</div>
-
-    <!-- HOMES / XFE SECTION -->
     <div class="section-group">
       <div class="section-header">
-        <div class="section-icon purple">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#7B5EA7" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-        </div>
+        <div class="section-icon purple"><svg viewBox="0 0 24 24" fill="none" stroke="#7B5EA7" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
         <span class="section-name">HOMES</span>
       </div>
       <div class="tiles-row">
-
-        <!-- TILE 1: New Leads — Highlighted -->
-        <div class="tile highlight" onclick="openTaskPage('new')">
+        <div class="tile highlight" onclick="openTaskPage('new')" style="border-color:var(--blue);box-shadow:0 2px 12px rgba(80,101,234,0.15);" onmouseover="this.style.boxShadow='0 6px 24px rgba(80,101,234,0.28)'" onmouseout="this.style.boxShadow='0 2px 12px rgba(80,101,234,0.15)'">
           <div class="tile-count pulse" id="tile-new-count">5</div>
-          <div class="tile-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="#E4002B" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8a19.79 19.79 0 01-3.07-8.63A2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92v2z"/></svg>
-          </div>
-          <div>
-            <div class="tile-label">New Leads</div>
-            <div class="tile-sublabel">Pending Calls</div>
-            <div style="margin-top:6px;"><span class="new-badge"><span class="new-dot"></span>Live</span></div>
-          </div>
+          <div class="tile-icon"><svg viewBox="0 0 24 24" fill="none" stroke="var(--gray-700)" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8a19.79 19.79 0 01-3.07-8.63A2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92v2z"/></svg></div>
+          <div><div class="tile-label">New Leads</div><div class="tile-sublabel">Pending Calls</div><div style="margin-top:6px;"><span class="new-badge"><span class="new-dot"></span>Live</span></div></div>
         </div>
-
-        <!-- TILE 2: Reschedule -->
         <div class="tile" onclick="openTaskPage('reschedule')">
           <div class="tile-count">3</div>
-          <div class="tile-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="#5065EA" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-          </div>
-          <div>
-            <div class="tile-label">Reschedule</div>
-            <div class="tile-sublabel">Leads for Today</div>
-          </div>
+          <div class="tile-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#5065EA" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
+          <div><div class="tile-label">Reschedule</div><div class="tile-sublabel">Leads for Today</div></div>
         </div>
-
-        <!-- TILE 3: No Disposition -->
         <div class="tile" onclick="openTaskPage('nodisposition')">
           <div class="tile-count">7</div>
-          <div class="tile-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="#FF9500" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-          </div>
-          <div>
-            <div class="tile-label">No Disposition</div>
-            <div class="tile-sublabel">Action Required</div>
-          </div>
+          <div class="tile-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#FF9500" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+          <div><div class="tile-label">No Disposition</div><div class="tile-sublabel">Action Required</div></div>
         </div>
-
       </div>
     </div>
-
-    <!-- B2B SECTION -->
     <div class="section-group">
       <div class="section-header">
-        <div class="section-icon green">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#1A7A35" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg>
-        </div>
+        <div class="section-icon green"><svg viewBox="0 0 24 24" fill="none" stroke="#1A7A35" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg></div>
         <span class="section-name">B2B</span>
       </div>
       <div class="tiles-row">
         <div class="tile" onclick="openTaskPage('b2b')">
           <div class="tile-count">2</div>
-          <div class="tile-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="#1A7A35" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
-          </div>
-          <div>
-            <div class="tile-label">Enterprise</div>
-            <div class="tile-sublabel">SME Leads</div>
-          </div>
+          <div class="tile-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#1A7A35" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg></div>
+          <div><div class="tile-label">Enterprise</div><div class="tile-sublabel">SME Leads</div></div>
         </div>
       </div>
     </div>
-
   </div>
 </div>
 
-
-<!-- ══════════════════════════════
-     PAGE 3 — TASK LIST
-══════════════════════════════ -->
 <div class="page" id="page-tasks">
-
   <nav class="task-nav">
-    <button class="back-btn" onclick="goBack()">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
-    </button>
+    <button class="back-btn" onclick="goBack()"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 5l-7 7 7 7"/></svg></button>
     <div class="task-nav-title" id="task-page-title">All Tasks</div>
-    <button class="task-nav-more">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="5" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="12" cy="19" r="1"/></svg>
-    </button>
+    <button class="task-nav-more"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="5" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="12" cy="19" r="1"/></svg></button>
   </nav>
-
   <div class="task-filters">
-    <div class="filter-chip">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-      Sort
-    </div>
-    <div class="filter-chip">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
-      Filter
-    </div>
+    <div class="filter-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>Sort</div>
+    <div class="filter-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>Filter</div>
     <div class="filter-chip">Show in calendar</div>
     <div class="filter-chip">Online Leads</div>
     <div class="filter-chip">Self-Generated</div>
   </div>
-
-  <div class="task-body" id="task-body">
-    <!-- Populated by JS -->
-  </div>
+  <div class="task-body" id="task-body"></div>
 </div>
 
-
-<!-- ══════════════════════════════
-     CALL MODAL
-══════════════════════════════ -->
 <div class="call-modal-overlay" id="call-modal">
   <div class="call-modal">
-    <div class="call-modal-handle"></div>
-
-    <!-- PRE-CALL STATE -->
     <div id="pre-call-state">
-      <div class="call-modal-title">Call Now</div>
-      <div class="call-modal-sub">A call will be placed to your registered number first, then connected to the customer.</div>
-      <div class="call-modal-info">
-        <div class="call-modal-row">
-          <span class="call-modal-row-label">Customer</span>
-          <span class="call-modal-row-val" id="modal-customer">—</span>
-        </div>
-        <div class="call-modal-row">
-          <span class="call-modal-row-label">Plan interest</span>
-          <span class="call-modal-row-val" id="modal-plan">—</span>
-        </div>
-        <div class="call-modal-row">
-          <span class="call-modal-row-label">Address</span>
-          <span class="call-modal-row-val" id="modal-address">—</span>
-        </div>
-        <div class="call-modal-row">
-          <span class="call-modal-row-label">Your number</span>
-          <span class="call-modal-row-val" id="modal-agent-num">—</span>
-        </div>
+      <div style="font-size:16px;font-weight:800;color:var(--gray-900);text-align:center;margin-bottom:10px;">Call Now</div>
+      <div style="background:var(--gray-100);border-radius:10px;padding:10px 12px;margin-bottom:10px;">
+        <div class="call-modal-row"><span class="call-modal-row-label">Customer</span><span class="call-modal-row-val" id="modal-customer">—</span></div>
+        <div class="call-modal-row"><span class="call-modal-row-label">Plan</span><span class="call-modal-row-val" id="modal-plan">—</span></div>
+        <div class="call-modal-row"><span class="call-modal-row-label">Address</span><span class="call-modal-row-val" id="modal-address">—</span></div>
+        <div class="call-modal-row"><span class="call-modal-row-label">Your number</span><span class="call-modal-row-val" id="modal-agent-num">—</span></div>
       </div>
-      <div class="call-flow-note">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>
-        System will call your number first. Once you answer, it will connect you to the customer automatically.
-      </div>
-      <button class="confirm-call-btn" onclick="confirmCall()">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8a19.79 19.79 0 01-3.07-8.63A2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92v2z"/></svg>
-        Confirm & Call
-      </button>
+      <button class="confirm-call-btn" onclick="confirmCall()">Confirm &amp; Call</button>
       <button class="cancel-call-btn" onclick="closeCallModal()">Cancel</button>
     </div>
-
-    <!-- CALLING STATE -->
     <div class="calling-state" id="calling-state">
       <div class="call-avatar" id="call-avatar-initials">RS</div>
       <div class="calling-name" id="calling-name">Customer</div>
       <div class="calling-status" id="calling-status">Calling your number…</div>
       <div class="call-timer-display" id="call-timer-display">00:00</div>
-      <button class="end-call-btn" onclick="endCall()">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><path d="M10.68 13.31a16 16 0 003.41 2.6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.42 19.42 0 01-3.33-2.67m-2.67-3.34a19.79 19.79 0 01-3.07-8.63A2 2 0 014.11 2h3a2 2 0 011.72 2c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L7.91 9.91"/><line x1="23" y1="1" x2="1" y2="23"/></svg>
-      </button>
+      <button class="end-call-btn" onclick="endCall()"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><path d="M10.68 13.31a16 16 0 003.41 2.6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.42 19.42 0 01-3.33-2.67m-2.67-3.34a19.79 19.79 0 01-3.07-8.63A2 2 0 014.11 2h3a2 2 0 011.72 2c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L7.91 9.91"/><line x1="23" y1="1" x2="1" y2="23"/></svg></button>
     </div>
-
   </div>
 </div>
 
-
-<!-- TRAINING MODULE OVERLAY -->
 <div class="training-overlay" id="training-overlay">
   <div class="training-sheet">
     <div class="training-header">
@@ -1148,31 +430,23 @@ html,body{
 </div>
 
       </div><!-- /phone-app -->
-      <!-- Home indicator -->
       <div class="phone-home-bar"></div>
     </div><!-- /phone-screen -->
   </div><!-- /phone-screen-bezel -->
-
-  <!-- Label below phone -->
-  <div class="phone-label">
-    <div class="phone-label-text">AIRTEL XFE — TRAININGGPT DEMO</div>
-  </div>
-
+  <div class="phone-label"><div class="phone-label-text">AIRTEL XFE — TRAININGGPT DEMO</div></div>
 </div><!-- /phone-shell -->
 
 <div class="toast" id="toast"><span id="t-icon">✓</span> <span id="t-msg">Done</span></div>
 
 <script>
-// ── Configuration ────────────────────────────
 const MAKE_VAPI_WEBHOOK   = 'https://hook.us2.make.com/jehi84e3z81cjltmg6vqkgm51dvxrwtu';
 const VAPI_CUSTOMER_AGENT = 'd5f7bbb8-7c0a-46cb-a922-5bf94d9101ef';
 const VAPI_COACH_AGENT    = 'fb3b7682-5602-454c-b3f6-1dfce9949fdd';
 const SHEET_ID            = '1LmtVPNQNzOHJhhtGlhKaOtFHEdY3O44dUz4_UvwXzak';
-const SHEET_API_KEY       = ''; // Add Google Sheets API key here
+const SHEET_API_KEY       = '';
 const POLL_INTERVAL_MS    = 5000;
-const ASSIGN_POLL_MS      = 4000; // Poll assignments tab every 4 seconds
+const ASSIGN_POLL_MS      = 4000;
 
-// ── State ───────────────────────────────────
 let currentUser = { id: '', name: '', number: '' };
 let callTimerInterval = null;
 let callSecs = 0;
@@ -1185,31 +459,26 @@ let feedbackData = null;
 let currentSlide = 0;
 let pendingAssignment = null;
 
-// ── LOGIN ────────────────────────────────────
 function doLogin(){
   const uid = document.getElementById('login-userid').value.trim();
   const pwd = document.getElementById('login-password').value.trim();
   const err = document.getElementById('login-error');
   const digitsOnly = uid.replace(/\D/g, '');
-
   if(digitsOnly.length < 10){ toast('⚠','Please enter a valid 10-digit mobile number'); return; }
   err.style.display = 'none';
-
-  // Extract number
   currentUser.id     = uid;
   currentUser.number = digitsOnly.slice(-10);
-  currentUser.name   = 'XFE Agent';
-
+  const AN={'9716299969':'Sunny','9818673827':'Ravi','9703070123':'Rishab','9654495454':'Thulasi','9205474250':'Varun','9971118800':'Pradipt','9818891014':'Anant','9873182585':'Manoj','9899577359':'Chandan','9810202024':'Amit'};
+  currentUser.name = AN[currentUser.number] || currentUser.number;
   document.getElementById('welcome-name').textContent = currentUser.name + ',';
   showPage('page-dashboard');
   toast('👋', 'Welcome! Logged in as ' + currentUser.number);
   startAssignmentPolling();
 }
 
-// ── TRAINING ASSIGNMENT POLLING ─────────────────────────────
 function startAssignmentPolling(){
   if(assignPollInterval) clearInterval(assignPollInterval);
-  if(!SHEET_API_KEY){ return; } // Demo: triggered by trainer dashboard via postMessage
+  if(!SHEET_API_KEY){ return; }
   assignPollInterval = setInterval(async ()=>{
     try {
       const url = `https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/Assignments!A:H?key=${SHEET_API_KEY}`;
@@ -1254,7 +523,6 @@ function showTrainingAssignedNotification(assignment){
   if(existing) existing.remove();
   const notif = document.createElement('div');
   notif.id = 'assign-notif';
-  // Position inside phone app div
   const phoneApp = document.getElementById('phone-app');
   notif.style.cssText = 'position:absolute;top:0;left:0;right:0;z-index:9999;background:linear-gradient(135deg,#1565C0,#0D47A1);color:white;padding:0;box-shadow:0 4px 20px rgba(0,0,0,0.3);animation:assignSlide 0.4s cubic-bezier(0.16,1,0.3,1);';
   if(phoneApp){ phoneApp.style.position='relative'; }
@@ -1291,12 +559,7 @@ function startAssignedTraining(){
   if(pendingAssignment){
     feedbackData = {
       scores:{ pitch:62, objection_handling:45, product_knowledge:78, closing:55, overall:60 },
-      gaps:[{
-        area: pendingAssignment.trainingName,
-        what_happened: "Your trainer identified this as an area to improve based on your recent calls.",
-        what_to_say: "Follow the training content assigned to you and apply the technique on your next call.",
-        example: "Practice with AI Coach Viraj after completing the module to lock in the learning."
-      }],
+      gaps:[{ area: pendingAssignment.trainingName, what_happened: "Your trainer identified this as an area to improve based on your recent calls.", what_to_say: "Follow the training content assigned to you and apply the technique on your next call.", example: "Practice with AI Coach Viraj after completing the module to lock in the learning." }],
       mcq:[
         { question:"When a customer says Jio is cheaper, what is the BEST first response?", options:["Offer a discount to match Jio's price","Acknowledge and anchor on OTT bundle value","End the call politely","Ask for a supervisor"], answer:1 },
         { question:"What is the key differentiator between Airtel Fiber and Jio Fiber?", options:["Airtel is always cheaper","Dedicated vs shared bandwidth","Airtel has more plans","Jio has better coverage"], answer:1 }
@@ -1318,7 +581,6 @@ function logout(){
   document.getElementById('login-password').value = '';
 }
 
-// ── TASK DATA ────────────────────────────────
 const tasks = {
   new: [
     { id:1, type:'online', tag:'Online Lead', title:'New Fiber Connection', customer:'Rahul Sharma', phone:'9810XXXXXX', address:'RPS Green Valley, Sector 42, Faridabad', plan:'₹799 — 100 Mbps', date:'Today', time:'Just now', status:'new', isNew: true },
@@ -1341,14 +603,8 @@ const tasks = {
   ]
 };
 
-const pageTitles = {
-  new: 'New Leads',
-  reschedule: 'Reschedule Leads',
-  nodisposition: 'Leads without Disposition',
-  b2b: 'B2B Leads'
-};
+const pageTitles = { new:'New Leads', reschedule:'Reschedule Leads', nodisposition:'Leads without Disposition', b2b:'B2B Leads' };
 
-// ── OPEN TASK PAGE ────────────────────────────
 function openTaskPage(type){
   document.getElementById('task-page-title').textContent = pageTitles[type] || 'All Tasks';
   renderTasks(type);
@@ -1358,31 +614,14 @@ function openTaskPage(type){
 function renderTasks(type){
   const list = tasks[type] || [];
   const body = document.getElementById('task-body');
-
-  // Separate new online leads from rest
   const onlineNew  = list.filter(t => t.type==='online' && t.isNew);
   const selfLeads  = list.filter(t => t.type==='self');
   const onlineOld  = list.filter(t => t.type==='online' && !t.isNew);
   const rest       = [...onlineOld, ...selfLeads];
-
   let html = '';
-
-  if(onlineNew.length){
-    html += `<div class="task-section-label">Online leads <span>${onlineNew.length}</span></div>`;
-    onlineNew.forEach(t => { html += buildTaskCard(t); });
-  }
-  if(rest.length){
-    const label = type === 'new' ? 'Self-generated leads' : 'All leads';
-    html += `<div class="task-section-label" style="margin-top:20px;">${label} <span>${rest.length}</span></div>`;
-    rest.forEach(t => { html += buildTaskCard(t); });
-  }
-  if(!list.length){
-    html = `<div style="text-align:center;padding:48px 20px;color:var(--gray-500);">
-      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="display:block;margin:0 auto 12px;"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>
-      No tasks in this category
-    </div>`;
-  }
-
+  if(onlineNew.length){ html += `<div class="task-section-label">Online leads <span>${onlineNew.length}</span></div>`; onlineNew.forEach(t => { html += buildTaskCard(t); }); }
+  if(rest.length){ const label = type === 'new' ? 'Self-generated leads' : 'All leads'; html += `<div class="task-section-label" style="margin-top:20px;">${label} <span>${rest.length}</span></div>`; rest.forEach(t => { html += buildTaskCard(t); }); }
+  if(!list.length){ html = `<div style="text-align:center;padding:48px 20px;color:var(--gray-500);"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="display:block;margin:0 auto 12px;"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>No tasks in this category</div>`; }
   body.innerHTML = html;
 }
 
@@ -1390,60 +629,31 @@ function buildTaskCard(t){
   const isNew = t.isNew ? 'new-lead' : '';
   const tagClass = t.type === 'online' ? 'online' : t.type === 'self' ? 'self' : '';
   const statusLabel = {new:'New',inprogress:'In Progress',done:'Done'}[t.status];
-  const statusClass = t.status;
-  return `
-  <div class="task-card ${isNew}" id="card-${t.id}">
-    <div class="task-tags">
-      <span class="task-tag ${tagClass}">${t.tag}</span>
-      <span class="task-tag">Broadband</span>
-      ${t.isNew ? '<span class="task-tag new">● New</span>' : ''}
-    </div>
+  return `<div class="task-card ${isNew}" id="card-${t.id}">
+    <div class="task-tags"><span class="task-tag ${tagClass}">${t.tag}</span><span class="task-tag">Broadband</span>${t.isNew ? '<span class="task-tag new">● New</span>' : ''}</div>
     <div class="task-title">${t.title}</div>
-    <div class="task-meta">
-      <div class="task-meta-item">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
-        ${t.time}
-      </div>
-      <div class="task-meta-item">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-        ${t.date}
-      </div>
-    </div>
+    <div class="task-meta"><div class="task-meta-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>${t.time}</div><div class="task-meta-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>${t.date}</div></div>
     <div class="task-customer">${t.customer}</div>
     <div class="task-address">${t.address}</div>
-    <div class="task-plan">
-      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-      ${t.plan}
-    </div>
-    <div class="task-status ${statusClass}">● ${statusLabel}</div>
+    <div class="task-plan"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>${t.plan}</div>
+    <div class="task-status ${t.status}">● ${statusLabel}</div>
     <div class="task-cta-row">
-      <button class="cta-navigate" onclick="navigate('${t.address}')">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>
-        Navigate
-      </button>
-      <button class="cta-call" id="callbtn-${t.id}" onclick="openCallModal(${t.id})">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8a19.79 19.79 0 01-3.07-8.63A2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92v2z"/></svg>
-        Call Now
-      </button>
+      <button class="cta-navigate" onclick="navigate('${t.address}')"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>Navigate</button>
+      <button class="cta-call" id="callbtn-${t.id}" onclick="openCallModal(${t.id})"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8a19.79 19.79 0 01-3.07-8.63A2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92v2z"/></svg>Call Now</button>
     </div>
   </div>`;
 }
 
-// ── CALL MODAL ────────────────────────────────
 function openCallModal(taskId){
   const allTasks = Object.values(tasks).flat();
   activeTask = allTasks.find(t => t.id === taskId);
   if(!activeTask) return;
-
   document.getElementById('modal-customer').textContent = activeTask.customer;
   document.getElementById('modal-plan').textContent     = activeTask.plan;
   document.getElementById('modal-address').textContent  = activeTask.address.split(',')[0];
   document.getElementById('modal-agent-num').textContent = currentUser.number || '9810XXXXXX';
-
-  // Reset to pre-call state
   document.getElementById('pre-call-state').style.display = 'block';
   document.getElementById('calling-state').classList.remove('show');
-
   document.getElementById('call-modal').classList.add('open');
 }
 
@@ -1454,80 +664,39 @@ function closeCallModal(){
 
 async function confirmCall(){
   if(!activeTask) return;
-
-  // Switch to calling UI state
   document.getElementById('pre-call-state').style.display = 'none';
   const cs = document.getElementById('calling-state');
   cs.classList.add('show');
-
-  // Set avatar initials and name
   const initials = activeTask.customer.split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase();
   document.getElementById('call-avatar-initials').textContent = initials;
   document.getElementById('calling-name').textContent = activeTask.customer;
   document.getElementById('calling-status').textContent = 'Calling your number…';
   document.getElementById('call-timer-display').textContent = '00:00';
-
-  // Format agent number — ensure +91 prefix
   const rawNumber = currentUser.number.replace(/\D/g, '');
-  const agentNumber = rawNumber.startsWith('91')
-    ? '+' + rawNumber
-    : '+91' + rawNumber.slice(-10);
-
+  const agentNumber = rawNumber.startsWith('91') ? '+' + rawNumber : '+91' + rawNumber.slice(-10);
   toast('📞', 'Calling ' + agentNumber + ' — answer to connect to customer');
-
-  // ── Fire call via Make.com → VAPI ────────────
   try {
-    const resp = await fetch(MAKE_VAPI_WEBHOOK, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        assistantId:  VAPI_CUSTOMER_AGENT,
-        agentNumber:  agentNumber,
-        agentName:    currentUser.name,
-        customerName: activeTask.customer,
-        planInterest: activeTask.plan
-      })
-    });
-
+    const resp = await fetch(MAKE_VAPI_WEBHOOK, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ assistantId: VAPI_CUSTOMER_AGENT, agentNumber, agentName: currentUser.name, customerName: activeTask.customer, planInterest: activeTask.plan }) });
     if(resp.ok){
       activeCallId = 'via-make';
       document.getElementById('calling-status').textContent = 'Ringing your number — please answer';
       toast('✓', 'Call triggered · Answer your phone now');
-
-      // After 8s assume connected
-      setTimeout(()=>{
-        document.getElementById('calling-status').textContent = 'Connected · AI customer active';
-        startCallTimer();
-        toast('📱', activeTask.customer + ' (AI) is now on the line');
-      }, 8000);
-
+      setTimeout(()=>{ document.getElementById('calling-status').textContent = 'Connected · AI customer active'; startCallTimer(); toast('📱', activeTask.customer + ' (AI) is now on the line'); }, 8000);
     } else {
       document.getElementById('calling-status').textContent = 'Webhook error — try again';
       toast('⚠', 'Make.com error: ' + resp.status);
     }
-
   } catch(e) {
     document.getElementById('calling-status').textContent = 'Network error — check connection';
     toast('⚠', 'Call failed: ' + e.message);
-    console.error('Call error full:', e);
-    // Fallback — simulate call for demo if webhook fails
-    setTimeout(()=>{
-      document.getElementById('calling-status').textContent = 'Demo mode — simulating call';
-      startCallTimer();
-      toast('📱', 'Demo: AI customer connected');
-    }, 3000);
+    setTimeout(()=>{ document.getElementById('calling-status').textContent = 'Demo mode — simulating call'; startCallTimer(); toast('📱', 'Demo: AI customer connected'); }, 3000);
   }
 }
 
 function startCallTimer(){
   callSecs = 0;
   clearInterval(callTimerInterval);
-  callTimerInterval = setInterval(()=>{
-    callSecs++;
-    const m = String(Math.floor(callSecs/60)).padStart(2,'0');
-    const s = String(callSecs%60).padStart(2,'0');
-    document.getElementById('call-timer-display').textContent = m+':'+s;
-  }, 1000);
+  callTimerInterval = setInterval(()=>{ callSecs++; const m=String(Math.floor(callSecs/60)).padStart(2,'0'); const s=String(callSecs%60).padStart(2,'0'); document.getElementById('call-timer-display').textContent = m+':'+s; }, 1000);
 }
 
 async function endCall(){
@@ -1535,8 +704,6 @@ async function endCall(){
   activeCallId = null;
   closeCallModal();
   toast('📊', 'Call ended · Evaluating your call…');
-
-  // Mark lead card as evaluating
   if(activeTask){
     const card = document.getElementById('card-' + activeTask.id);
     if(card){
@@ -1548,39 +715,25 @@ async function endCall(){
       if(statusEl) statusEl.after(badge);
     }
   }
-
-  // Start polling GSheet for feedback (or simulate after 8s for demo)
-  if(SHEET_API_KEY){
-    startPollingFeedback();
-  } else {
-    // Demo mode — simulate Claude feedback after 8 seconds
-    setTimeout(()=> receiveFeedback(getDemoFeedback()), 8000);
-  }
+  if(SHEET_API_KEY){ startPollingFeedback(); } else { setTimeout(()=> receiveFeedback(getDemoFeedback()), 8000); }
 }
 
-// ── GSheet polling ────────────────────────────
 function startPollingFeedback(){
   if(pollInterval) clearInterval(pollInterval);
   let attempts = 0;
   pollInterval = setInterval(async ()=>{
     attempts++;
-    if(attempts > 24){ clearInterval(pollInterval); return; } // 2 min timeout
+    if(attempts > 24){ clearInterval(pollInterval); return; }
     try{
       const url = `https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/Feedback!A:F?key=${SHEET_API_KEY}`;
       const r = await fetch(url);
       const d = await r.json();
       const rows = d.values || [];
-      // Find row matching agent number (skip header)
       const agentNum = currentUser.number;
       for(let i = rows.length-1; i >= 1; i--){
         if(rows[i][1] && rows[i][1].includes(agentNum) && rows[i][2]){
           clearInterval(pollInterval);
-          try{
-            const parsed = JSON.parse(rows[i][2]);
-            receiveFeedback(parsed);
-          } catch(e){
-            receiveFeedback(getDemoFeedback());
-          }
+          try{ const parsed = JSON.parse(rows[i][2]); receiveFeedback(parsed); } catch(e){ receiveFeedback(getDemoFeedback()); }
           return;
         }
       }
@@ -1588,106 +741,39 @@ function startPollingFeedback(){
   }, POLL_INTERVAL_MS);
 }
 
-// ── Demo feedback (used when no API key) ──────
 function getDemoFeedback(){
   return {
     scores: { pitch:62, objection_handling:45, product_knowledge:78, closing:55, overall:60 },
     gaps: [
-      {
-        area: "Objection Handling",
-        what_happened: "When Rahul said Jio is cheaper, you immediately dropped to price matching instead of anchoring value first.",
-        what_to_say: "Acknowledge first — 'I completely understand, Jio is a great option. Can I show you one thing that might change the math for you?' Then introduce the OTT bundle value.",
-        example: "At ₹799, Airtel includes Netflix, Prime and Hotstar — that's ₹1,100 worth of OTT alone. So you're actually saving ₹300 a month versus Jio + separate OTT subscriptions."
-      },
-      {
-        area: "Value Anchoring",
-        what_happened: "You mentioned speed but never connected it to a specific benefit the customer cares about.",
-        what_to_say: "Instead of '100 Mbps speed', say 'Your family can stream 4K on 3 devices simultaneously with zero buffering — dedicated fibre, not shared.'",
-        example: "Dedicated vs shared bandwidth is the key differentiator vs Jio. Make it real — 'During IPL season, Jio slows down because everyone is streaming. Airtel fibre is dedicated to your home.'"
-      },
-      {
-        area: "Closing Technique",
-        what_happened: "You asked 'would you like to think about it?' — giving the customer an easy exit.",
-        what_to_say: "Use an assumptive close — 'I can get installation done tomorrow at 10 AM. Does that work for you?' Never ask permission to close.",
-        example: "Create urgency: 'This plan price is valid till end of month. If I book your slot now, you lock in ₹799 permanently — even if prices go up next quarter.'"
-      }
+      { area:"Objection Handling", what_happened:"When Rahul said Jio is cheaper, you immediately dropped to price matching instead of anchoring value first.", what_to_say:"Acknowledge first — 'I completely understand, Jio is a great option. Can I show you one thing that might change the math for you?' Then introduce the OTT bundle value.", example:"At ₹799, Airtel includes Netflix, Prime and Hotstar — that's ₹1,100 worth of OTT alone. So you're actually saving ₹300 a month versus Jio + separate OTT subscriptions." },
+      { area:"Value Anchoring", what_happened:"You mentioned speed but never connected it to a specific benefit the customer cares about.", what_to_say:"Instead of '100 Mbps speed', say 'Your family can stream 4K on 3 devices simultaneously with zero buffering — dedicated fibre, not shared.'", example:"Dedicated vs shared bandwidth is the key differentiator vs Jio. Make it real — 'During IPL season, Jio slows down because everyone is streaming. Airtel fibre is dedicated to your home.'" },
+      { area:"Closing Technique", what_happened:"You asked 'would you like to think about it?' — giving the customer an easy exit.", what_to_say:"Use an assumptive close — 'I can get installation done tomorrow at 10 AM. Does that work for you?' Never ask permission to close.", example:"Create urgency: 'This plan price is valid till end of month. If I book your slot now, you lock in ₹799 permanently — even if prices go up next quarter.'" }
     ],
     mcq: [
-      {
-        question: "A customer says 'Jio is cheaper.' What is the BEST first response?",
-        options: [
-          "Offer a discount to match Jio's price",
-          "Acknowledge and then anchor the OTT bundle value",
-          "Tell them Airtel quality is better",
-          "Ask them what they currently pay"
-        ],
-        correct: 1
-      },
-      {
-        question: "What is the key differentiator between Airtel Fiber and Jio Fiber?",
-        options: [
-          "Airtel has faster speeds",
-          "Airtel is cheaper",
-          "Airtel uses dedicated fibre, Jio uses shared bandwidth",
-          "Airtel has better customer service"
-        ],
-        correct: 2
-      },
-      {
-        question: "Which closing technique is most effective?",
-        options: [
-          "Ask if they want to think about it",
-          "Say you will call back later",
-          "Assumptive close with a specific installation slot",
-          "Send details on WhatsApp"
-        ],
-        correct: 2
-      }
+      { question:"A customer says 'Jio is cheaper.' What is the BEST first response?", options:["Offer a discount to match Jio's price","Acknowledge and then anchor the OTT bundle value","Tell them Airtel quality is better","Ask them what they currently pay"], correct:1 },
+      { question:"What is the key differentiator between Airtel Fiber and Jio Fiber?", options:["Airtel has faster speeds","Airtel is cheaper","Airtel uses dedicated fibre, Jio uses shared bandwidth","Airtel has better customer service"], correct:2 },
+      { question:"Which closing technique is most effective?", options:["Ask if they want to think about it","Say you will call back later","Assumptive close with a specific installation slot","Send details on WhatsApp"], correct:2 }
     ]
   };
 }
 
-// ── Receive feedback + show badge ─────────────
 function receiveFeedback(data){
   feedbackData = data;
   if(!activeTask) return;
-
-  // Remove evaluating badge
   const evalBadge = document.getElementById('eval-badge-' + activeTask.id);
   if(evalBadge) evalBadge.remove();
-
   const card = document.getElementById('card-' + activeTask.id);
   if(!card) return;
-
-  // Add feedback ready badge to card
   const badge = document.createElement('div');
   badge.id = 'feedback-badge-' + activeTask.id;
   badge.style.cssText = 'cursor:pointer;display:flex;align-items:center;justify-content:space-between;background:linear-gradient(135deg,#E4002B,#C2001F);border-radius:10px;padding:12px 14px;margin-bottom:10px;animation:cardIn 0.4s ease;';
-  badge.innerHTML = `
-    <div>
-      <div style="color:white;font-size:13px;font-weight:800;margin-bottom:2px;">📊 Training feedback ready</div>
-      <div style="color:rgba(255,255,255,0.8);font-size:11px;">Overall score: ${data.scores.overall}/100 · ${data.gaps.length} areas to improve</div>
-    </div>
-    <div style="background:white;color:#E4002B;font-size:11px;font-weight:800;padding:6px 12px;border-radius:6px;white-space:nowrap;">View Training →</div>
-  `;
+  badge.innerHTML = `<div><div style="color:white;font-size:13px;font-weight:800;margin-bottom:2px;">📊 Training feedback ready</div><div style="color:rgba(255,255,255,0.8);font-size:11px;">Overall score: ${data.scores.overall}/100 · ${data.gaps.length} areas to improve</div></div><div style="background:white;color:#E4002B;font-size:11px;font-weight:800;padding:6px 12px;border-radius:6px;white-space:nowrap;">View Training →</div>`;
   badge.onclick = ()=> openTrainingModule();
-
   const statusEl = card.querySelector('.task-status');
   if(statusEl) statusEl.after(badge);
-
-  // Show notification toast
   toast('🎯', `Feedback ready · Score: ${data.scores.overall}/100`);
-
-  // Send browser notification if supported
-  if('Notification' in window && Notification.permission === 'granted'){
-    new Notification('TrainingGPT', {
-      body: `Your call feedback is ready. Score: ${data.scores.overall}/100`,
-      icon: ''
-    });
-  }
 }
 
-// ── Open training module ───────────────────────
 function openTrainingModule(){
   if(!feedbackData) return;
   currentSlide = 0;
@@ -1704,14 +790,10 @@ function renderTrainingModule(){
   const gaps = feedbackData.gaps;
   const scores = feedbackData.scores;
   const mcq = feedbackData.mcq;
-
-  // Total slides = gaps + 1 MCQ screen + 1 Coach screen
   const totalSlides = gaps.length + 2;
   const isGapSlide = currentSlide < gaps.length;
   const isMCQSlide = currentSlide === gaps.length;
   const isCoachSlide = currentSlide === gaps.length + 1;
-
-  // Update progress dots
   const dotsEl = document.getElementById('training-dots');
   dotsEl.innerHTML = '';
   for(let i = 0; i < totalSlides; i++){
@@ -1719,16 +801,10 @@ function renderTrainingModule(){
     dot.style.cssText = `width:${i === currentSlide ? '24px' : '8px'};height:8px;border-radius:4px;background:${i === currentSlide ? '#E4002B' : '#E0E0E0'};transition:all 0.3s;`;
     dotsEl.appendChild(dot);
   }
-
-  // Update slide counter
   document.getElementById('slide-counter').textContent = (currentSlide + 1) + ' / ' + totalSlides;
-
-  // Update nav buttons
   document.getElementById('btn-prev').style.opacity = currentSlide === 0 ? '0.3' : '1';
   document.getElementById('btn-prev').disabled = currentSlide === 0;
   document.getElementById('btn-next').textContent = currentSlide === totalSlides - 1 ? 'Done' : 'Next →';
-
-  // Render slide content
   const body = document.getElementById('training-body');
   body.style.opacity = '0';
   setTimeout(()=>{
@@ -1737,49 +813,11 @@ function renderTrainingModule(){
       const scoreKey = ['pitch','objection_handling','product_knowledge','closing'][currentSlide] || 'pitch';
       const score = scores[scoreKey] || 50;
       const color = score >= 70 ? '#34C759' : score >= 50 ? '#FF9500' : '#E4002B';
-      body.innerHTML = `
-        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;">
-          <div style="background:#FEF0F2;color:#E4002B;font-size:11px;font-weight:800;padding:4px 10px;border-radius:6px;text-transform:uppercase;letter-spacing:0.5px;">Gap Area ${currentSlide + 1}</div>
-          <div style="font-size:24px;font-weight:800;color:${color};">${score}<span style="font-size:13px;font-weight:400;color:#999;">/100</span></div>
-        </div>
-        <div style="font-size:20px;font-weight:800;color:#1A1A1A;margin-bottom:16px;">${gap.area}</div>
-        <div style="background:#FFF8F9;border-left:3px solid #E4002B;border-radius:0 10px 10px 0;padding:12px 14px;margin-bottom:14px;">
-          <div style="font-size:10px;font-weight:800;color:#E4002B;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:5px;">What happened in your call</div>
-          <div style="font-size:13px;color:#3A3A3A;line-height:1.6;">${gap.what_happened}</div>
-        </div>
-        <div style="background:#F0F4FF;border-left:3px solid #5065EA;border-radius:0 10px 10px 0;padding:12px 14px;margin-bottom:14px;">
-          <div style="font-size:10px;font-weight:800;color:#5065EA;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:5px;">What to say instead</div>
-          <div style="font-size:13px;color:#3A3A3A;line-height:1.6;">${gap.what_to_say}</div>
-        </div>
-        <div style="background:#F0F9F4;border-left:3px solid #34C759;border-radius:0 10px 10px 0;padding:12px 14px;">
-          <div style="font-size:10px;font-weight:800;color:#34C759;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:5px;">Example script</div>
-          <div style="font-size:13px;color:#3A3A3A;line-height:1.6;font-style:italic;">"${gap.example}"</div>
-        </div>`;
+      body.innerHTML = `<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;"><div style="background:#FEF0F2;color:#E4002B;font-size:11px;font-weight:800;padding:4px 10px;border-radius:6px;text-transform:uppercase;letter-spacing:0.5px;">Gap Area ${currentSlide + 1}</div><div style="font-size:24px;font-weight:800;color:${color};">${score}<span style="font-size:13px;font-weight:400;color:#999;">/100</span></div></div><div style="font-size:20px;font-weight:800;color:#1A1A1A;margin-bottom:16px;">${gap.area}</div><div style="background:#FFF8F9;border-left:3px solid #E4002B;border-radius:0 10px 10px 0;padding:12px 14px;margin-bottom:14px;"><div style="font-size:10px;font-weight:800;color:#E4002B;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:5px;">What happened in your call</div><div style="font-size:13px;color:#3A3A3A;line-height:1.6;">${gap.what_happened}</div></div><div style="background:#F0F4FF;border-left:3px solid #5065EA;border-radius:0 10px 10px 0;padding:12px 14px;margin-bottom:14px;"><div style="font-size:10px;font-weight:800;color:#5065EA;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:5px;">What to say instead</div><div style="font-size:13px;color:#3A3A3A;line-height:1.6;">${gap.what_to_say}</div></div><div style="background:#F0F9F4;border-left:3px solid #34C759;border-radius:0 10px 10px 0;padding:12px 14px;"><div style="font-size:10px;font-weight:800;color:#34C759;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:5px;">Example script</div><div style="font-size:13px;color:#3A3A3A;line-height:1.6;font-style:italic;">"${gap.example}"</div></div>`;
     } else if(isMCQSlide){
       renderMCQ(body, mcq);
     } else if(isCoachSlide){
-      body.innerHTML = `
-        <div style="text-align:center;padding:20px 0;">
-          <div style="width:72px;height:72px;background:linear-gradient(135deg,#5065EA,#3A4ED4);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-size:28px;">🎓</div>
-          <div style="font-size:20px;font-weight:800;color:#1A1A1A;margin-bottom:8px;">Speak to your AI Coach</div>
-          <div style="font-size:13px;color:#6C6C70;line-height:1.6;margin-bottom:24px;">Your coach has reviewed this call and will walk you through the gaps, then do a live practice roleplay with you.</div>
-          <div style="background:#F2F2F7;border-radius:12px;padding:14px;margin-bottom:20px;text-align:left;">
-            <div style="font-size:11px;font-weight:800;color:#6C6C70;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:8px;">Your scores this call</div>
-            ${Object.entries(scores).map(([k,v])=>`
-              <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;">
-                <span style="font-size:12px;color:#3A3A3A;text-transform:capitalize;">${k.replace(/_/g,' ')}</span>
-                <div style="display:flex;align-items:center;gap:8px;">
-                  <div style="width:80px;height:4px;background:#E0E0E0;border-radius:2px;overflow:hidden;">
-                    <div style="height:100%;width:${v}%;background:${v>=70?'#34C759':v>=50?'#FF9500':'#E4002B'};border-radius:2px;"></div>
-                  </div>
-                  <span style="font-size:12px;font-weight:800;color:${v>=70?'#34C759':v>=50?'#FF9500':'#E4002B'};">${v}</span>
-                </div>
-              </div>`).join('')}
-          </div>
-          <button onclick="callCoachFromModule()" style="width:100%;height:52px;background:#5065EA;color:white;border:none;border-radius:12px;font-size:15px;font-weight:800;font-family:inherit;cursor:pointer;">
-            📞 Call Coach Now
-          </button>
-        </div>`;
+      body.innerHTML = `<div style="text-align:center;padding:20px 0;"><div style="width:72px;height:72px;background:linear-gradient(135deg,#5065EA,#3A4ED4);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-size:28px;">🎓</div><div style="font-size:20px;font-weight:800;color:#1A1A1A;margin-bottom:8px;">Speak to your AI Coach</div><div style="font-size:13px;color:#6C6C70;line-height:1.6;margin-bottom:24px;">Your coach has reviewed this call and will walk you through the gaps, then do a live practice roleplay with you.</div><div style="background:#F2F2F7;border-radius:12px;padding:14px;margin-bottom:20px;text-align:left;"><div style="font-size:11px;font-weight:800;color:#6C6C70;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:8px;">Your scores this call</div>${Object.entries(scores).map(([k,v])=>`<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;"><span style="font-size:12px;color:#3A3A3A;text-transform:capitalize;">${k.replace(/_/g,' ')}</span><div style="display:flex;align-items:center;gap:8px;"><div style="width:80px;height:4px;background:#E0E0E0;border-radius:2px;overflow:hidden;"><div style="height:100%;width:${v}%;background:${v>=70?'#34C759':v>=50?'#FF9500':'#E4002B'};border-radius:2px;"></div></div><span style="font-size:12px;font-weight:800;color:${v>=70?'#34C759':v>=50?'#FF9500':'#E4002B'};">${v}</span></div></div>`).join('')}</div><button onclick="callCoachFromModule()" style="width:100%;height:52px;background:#5065EA;color:white;border:none;border-radius:12px;font-size:15px;font-weight:800;font-family:inherit;cursor:pointer;">📞 Call Coach Now</button></div>`;
     }
     body.style.opacity = '1';
     body.style.transition = 'opacity 0.25s ease';
@@ -1792,49 +830,21 @@ let mcqSubmitted = false;
 function renderMCQ(body, mcq){
   mcqAnswers = {};
   mcqSubmitted = false;
-  let html = `
-    <div style="font-size:11px;font-weight:800;color:#E4002B;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:4px;">Certification Check</div>
-    <div style="font-size:18px;font-weight:800;color:#1A1A1A;margin-bottom:20px;">Test your understanding</div>`;
-
+  let html = `<div style="font-size:11px;font-weight:800;color:#E4002B;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:4px;">Certification Check</div><div style="font-size:18px;font-weight:800;color:#1A1A1A;margin-bottom:20px;">Test your understanding</div>`;
   mcq.forEach((q, qi)=>{
-    html += `
-      <div style="margin-bottom:20px;">
-        <div style="font-size:13px;font-weight:700;color:#1A1A1A;margin-bottom:10px;line-height:1.5;">Q${qi+1}. ${q.question}</div>
-        <div id="mcq-options-${qi}">
-          ${q.options.map((opt, oi)=>`
-            <div id="mcq-opt-${qi}-${oi}" onclick="selectMCQ(${qi},${oi},${q.correct})"
-              style="padding:10px 14px;border:1.5px solid #E5E5EA;border-radius:10px;margin-bottom:6px;font-size:13px;cursor:pointer;transition:all 0.15s;">
-              ${String.fromCharCode(65+oi)}. ${opt}
-            </div>`).join('')}
-        </div>
-      </div>`;
+    html += `<div style="margin-bottom:20px;"><div style="font-size:13px;font-weight:700;color:#1A1A1A;margin-bottom:10px;line-height:1.5;">Q${qi+1}. ${q.question}</div><div id="mcq-options-${qi}">${q.options.map((opt, oi)=>`<div id="mcq-opt-${qi}-${oi}" onclick="selectMCQ(${qi},${oi},${q.correct})" style="padding:10px 14px;border:1.5px solid #E5E5EA;border-radius:10px;margin-bottom:6px;font-size:13px;cursor:pointer;transition:all 0.15s;">${String.fromCharCode(65+oi)}. ${opt}</div>`).join('')}</div></div>`;
   });
-
-  html += `<button id="mcq-submit-btn" onclick="submitMCQ(${JSON.stringify(mcq).replace(/"/g,'&quot;')})" disabled
-    style="width:100%;height:48px;background:#E0E0E0;color:white;border:none;border-radius:10px;font-size:14px;font-weight:800;font-family:inherit;cursor:not-allowed;margin-top:4px;">
-    Submit Answers
-  </button>`;
-
+  html += `<button id="mcq-submit-btn" onclick="submitMCQ(${JSON.stringify(mcq).replace(/"/g,'&quot;')})" disabled style="width:100%;height:48px;background:#E0E0E0;color:white;border:none;border-radius:10px;font-size:14px;font-weight:800;font-family:inherit;cursor:not-allowed;margin-top:4px;">Submit Answers</button>`;
   body.innerHTML = html;
 }
 
 function selectMCQ(qi, oi, correct){
   if(mcqSubmitted) return;
   mcqAnswers[qi] = oi;
-  // Highlight selected
   const container = document.getElementById('mcq-options-' + qi);
-  container.querySelectorAll('div[id^="mcq-opt-"]').forEach(el => {
-    el.style.background = '';
-    el.style.borderColor = '#E5E5EA';
-    el.style.color = '';
-  });
+  container.querySelectorAll('div[id^="mcq-opt-"]').forEach(el => { el.style.background = ''; el.style.borderColor = '#E5E5EA'; el.style.color = ''; });
   const sel = document.getElementById('mcq-opt-' + qi + '-' + oi);
-  if(sel){
-    sel.style.background = '#EEF0FD';
-    sel.style.borderColor = '#5065EA';
-    sel.style.color = '#2A3A9A';
-  }
-  // Enable submit if all answered
+  if(sel){ sel.style.background = '#EEF0FD'; sel.style.borderColor = '#5065EA'; sel.style.color = '#2A3A9A'; }
   if(feedbackData && Object.keys(mcqAnswers).length === feedbackData.mcq.length){
     const btn = document.getElementById('mcq-submit-btn');
     if(btn){ btn.disabled = false; btn.style.background = '#1A1A1A'; btn.style.cursor = 'pointer'; }
@@ -1850,38 +860,22 @@ function submitMCQ(mcq){
     const isCorrect = chosen === q.correct;
     if(isCorrect) correct++;
     const opts = document.getElementById('mcq-options-' + qi);
-    if(opts){
-      opts.querySelectorAll('div[id^="mcq-opt-"]').forEach((el, oi)=>{
-        if(oi === q.correct){ el.style.background = '#E8F8ED'; el.style.borderColor = '#34C759'; el.style.color = '#1A7A35'; }
-        else if(oi === chosen && chosen !== q.correct){ el.style.background = '#FEE2E2'; el.style.borderColor = '#E4002B'; el.style.color = '#B91C1C'; }
-      });
-    }
+    if(opts){ opts.querySelectorAll('div[id^="mcq-opt-"]').forEach((el, oi)=>{ if(oi === q.correct){ el.style.background = '#E8F8ED'; el.style.borderColor = '#34C759'; el.style.color = '#1A7A35'; } else if(oi === chosen && chosen !== q.correct){ el.style.background = '#FEE2E2'; el.style.borderColor = '#E4002B'; el.style.color = '#B91C1C'; } }); }
   });
   const btn = document.getElementById('mcq-submit-btn');
   const pct = Math.round((correct/mcq.length)*100);
-  if(btn){
-    btn.textContent = `${correct}/${mcq.length} correct (${pct}%) — ${pct>=70?'✓ Passed':'Keep practising'}`;
-    btn.style.background = pct>=70 ? '#34C759' : '#FF9500';
-  }
+  if(btn){ btn.textContent = `${correct}/${mcq.length} correct (${pct}%) — ${pct>=70?'✓ Passed':'Keep practising'}`; btn.style.background = pct>=70 ? '#34C759' : '#FF9500'; }
   toast(pct>=70 ? '✅' : '📝', `${correct}/${mcq.length} correct — ${pct>=70?'Certification passed!':'Review and try again'}`);
 }
 
 function nextSlide(){
   if(!feedbackData) return;
   const totalSlides = feedbackData.gaps.length + 2;
-  if(currentSlide < totalSlides - 1){
-    currentSlide++;
-    renderTrainingModule();
-  } else {
-    closeTrainingModule();
-  }
+  if(currentSlide < totalSlides - 1){ currentSlide++; renderTrainingModule(); } else { closeTrainingModule(); }
 }
 
 function prevSlide(){
-  if(currentSlide > 0){
-    currentSlide--;
-    renderTrainingModule();
-  }
+  if(currentSlide > 0){ currentSlide--; renderTrainingModule(); }
 }
 
 async function callCoachFromModule(){
@@ -1893,88 +887,40 @@ function showCoachPrompt(){
   if(!activeTask) return;
   const card = document.getElementById('card-' + activeTask.id);
   if(!card) return;
-
   const existing = document.getElementById('coach-prompt');
   if(existing) existing.remove();
-
   const div = document.createElement('div');
   div.id = 'coach-prompt';
   div.style.cssText = 'background:#EEF0FD;border:1.5px solid #5065EA;border-radius:14px;padding:16px;margin-bottom:12px;animation:cardIn 0.4s ease;';
-
-  const title = document.createElement('div');
-  title.style.cssText = 'font-size:13px;font-weight:800;color:#2A3A9A;margin-bottom:4px;';
-  title.textContent = 'TrainingGPT Coach is ready';
-
-  const desc = document.createElement('div');
-  desc.style.cssText = 'font-size:12px;color:#3D52A0;margin-bottom:12px;line-height:1.5;';
-  desc.textContent = 'Your call has been evaluated. Speak to your AI coach to review gaps and practise before your next lead.';
-
-  const btn = document.createElement('button');
-  btn.style.cssText = 'width:100%;height:44px;background:#5065EA;color:white;border:none;border-radius:10px;font-size:13px;font-weight:700;font-family:inherit;cursor:pointer;';
-  btn.textContent = 'Call Coach Now';
-  btn.onclick = callCoach;
-
-  div.appendChild(title);
-  div.appendChild(desc);
-  div.appendChild(btn);
+  const title = document.createElement('div'); title.style.cssText = 'font-size:13px;font-weight:800;color:#2A3A9A;margin-bottom:4px;'; title.textContent = 'TrainingGPT Coach is ready';
+  const desc = document.createElement('div'); desc.style.cssText = 'font-size:12px;color:#3D52A0;margin-bottom:12px;line-height:1.5;'; desc.textContent = 'Your call has been evaluated. Speak to your AI coach to review gaps and practise before your next lead.';
+  const btn = document.createElement('button'); btn.style.cssText = 'width:100%;height:44px;background:#5065EA;color:white;border:none;border-radius:10px;font-size:13px;font-weight:700;font-family:inherit;cursor:pointer;'; btn.textContent = 'Call Coach Now'; btn.onclick = callCoach;
+  div.appendChild(title); div.appendChild(desc); div.appendChild(btn);
   card.after(div);
   div.scrollIntoView({ behavior: 'smooth', block: 'center' });
 }
 
-
 async function callCoach(){
   const rawNumber = currentUser.number.replace(/\D/g, '');
-  const agentNumber = rawNumber.startsWith('91')
-    ? '+' + rawNumber
-    : '+91' + rawNumber.slice(-10);
-
+  const agentNumber = rawNumber.startsWith('91') ? '+' + rawNumber : '+91' + rawNumber.slice(-10);
   toast('🎓', 'Connecting you to TrainingGPT Coach…');
-
-  // Remove coach prompt
   const prompt = document.getElementById('coach-prompt');
   if(prompt) prompt.remove();
-
   try{
-    const resp = await fetch(MAKE_VAPI_WEBHOOK, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        assistantId:  VAPI_COACH_AGENT,
-        agentNumber:  agentNumber,
-        agentName:    currentUser.name,
-        customerName: activeTask ? activeTask.customer : 'the customer',
-        planInterest: activeTask ? activeTask.plan : ''
-      })
-    });
-
-    if(resp.ok){
-      toast('✓', 'Coach calling you now — answer your phone');
-    } else {
-      toast('⚠', 'Coach webhook error: ' + resp.status);
-    }
-  } catch(e){
-    toast('⚠', 'Coach call failed: ' + e.message);
-    console.error('Coach call error:', e);
-  }
+    const resp = await fetch(MAKE_VAPI_WEBHOOK, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ assistantId: VAPI_COACH_AGENT, agentNumber, agentName: currentUser.name, customerName: activeTask ? activeTask.customer : 'the customer', planInterest: activeTask ? activeTask.plan : '' }) });
+    if(resp.ok){ toast('✓', 'Coach calling you now — answer your phone'); } else { toast('⚠', 'Coach webhook error: ' + resp.status); }
+  } catch(e){ toast('⚠', 'Coach call failed: ' + e.message); }
 }
 
-// ── NAVIGATE ──────────────────────────────────
-function navigate(addr){
-  const url = 'https://maps.google.com/?q=' + encodeURIComponent(addr);
-  window.open(url, '_blank');
-}
-
-// ── BACK ──────────────────────────────────────
+function navigate(addr){ window.open('https://maps.google.com/?q=' + encodeURIComponent(addr), '_blank'); }
 function goBack(){ showPage('page-dashboard'); }
 
-// ── PAGE SWITCHER ─────────────────────────────
 function showPage(id){
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.getElementById(id).classList.add('active');
   window.scrollTo(0,0);
 }
 
-// ── TOAST ─────────────────────────────────────
 function toast(icon, msg){
   const t = document.getElementById('toast');
   document.getElementById('t-icon').textContent = icon;
@@ -1983,12 +929,10 @@ function toast(icon, msg){
   setTimeout(()=> t.classList.remove('show'), 3500);
 }
 
-// ── ENTER KEY ON LOGIN ────────────────────────
 document.addEventListener('keydown', e => {
   if(e.key === 'Enter' && document.getElementById('page-login').classList.contains('active')) doLogin();
 });
 
-// ── LIVE CLOCK IN STATUS BAR ──────────────────
 function updateClock(){
   const now = new Date();
   let h = now.getHours(), m = now.getMinutes();
@@ -2000,23 +944,6 @@ function updateClock(){
 }
 updateClock();
 setInterval(updateClock, 1000);
-
-// ── STATUS BAR THEME CHANGE BY PAGE ──────────────
-const origShowPage = showPage;
-window.showPage = function(pageId){
-  origShowPage(pageId);
-  const sb = document.getElementById('status-bar');
-  if(!sb) return;
-  const darkPages = ['page-login'];
-  if(darkPages.includes(pageId)){
-    sb.style.setProperty('--psb-color','#1C1C1E');
-  } else {
-    sb.style.setProperty('--psb-color','#1C1C1E');
-  }
-};
-
-// ── FIX: reassign-notification stays inside phone ──
-const origAssignNotif = showTrainingAssignedNotification;
 </script>
 </body>
 </html>

@@ -50,7 +50,7 @@ html,body{
 .psb-icons{display:flex;align-items:center;gap:5px;}
 .phone-home-bar{position:absolute;bottom:8px;left:50%;transform:translateX(-50%);width:130px;height:5px;background:rgba(0,0,0,0.2);border-radius:3px;z-index:200;}
 .phone-app{position:absolute;inset:0;overflow:hidden;}.assign-banner-host{position:absolute;inset:0;z-index:8888;pointer-events:none;overflow:visible;}
-.call-modal-overlay,.training-overlay{position:absolute !important;inset:0 !important;z-index:800 !important;}
+.call-modal-overlay{position:absolute !important;inset:0 !important;z-index:800 !important;}
 .page{display:none;width:100%;height:100%;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;}
 .page.active{display:flex;flex-direction:column;}
 .page::-webkit-scrollbar{display:none;}
@@ -249,7 +249,7 @@ html,body{
   .tile{width:148px;height:148px;}
 }
 .training-overlay{position:absolute;inset:0;background:var(--white);z-index:900;display:none;flex-direction:column;overflow:hidden;}
-.training-overlay.open{display:flex;}
+.training-overlay.open{display:flex !important;}
 .training-header{padding:12px 18px;border-bottom:1px solid var(--border);flex-shrink:0;display:flex;flex-direction:column;gap:10px;padding-top:62px;}
 .training-header-top{display:flex;align-items:center;justify-content:space-between;}
 .training-title{font-size:14px;font-weight:800;color:var(--gray-900);}
@@ -404,7 +404,6 @@ html,body{
 </div>
 
 <div class="training-overlay" id="training-overlay">
-  <div class="training-sheet">
     <div class="training-header">
       <div class="training-handle"></div>
       <div class="training-header-top">
@@ -909,8 +908,8 @@ function renderTrainingModule(){
   document.getElementById('btn-prev').disabled = currentSlide === 0;
   document.getElementById('btn-next').textContent = currentSlide === totalSlides - 1 ? 'Done' : 'Next →';
   const body = document.getElementById('training-body');
-  body.style.opacity = '0';
-  setTimeout(()=>{
+  body.style.opacity = '1';
+  {
     if(isGapSlide){
       const gap = gaps[currentSlide];
       const scoreKey = ['pitch','objection_handling','product_knowledge','closing'][currentSlide] || 'pitch';
@@ -935,9 +934,7 @@ function renderTrainingModule(){
           '</button>' +
         '</div>';
     }
-    body.style.opacity = '1';
-    body.style.transition = 'opacity 0.25s ease';
-  }, 150);
+  }
 }
 
 let mcqAnswers = {};

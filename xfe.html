@@ -134,15 +134,15 @@ html,body{
 .new-badge{display:inline-flex;align-items:center;gap:4px;background:var(--gray-900);color:white;font-size:9px;font-weight:800;padding:2px 6px;border-radius:4px;letter-spacing:0.5px;text-transform:uppercase;animation:badgePulse 1.5s ease-in-out infinite;}
 @keyframes badgePulse{0%,100%{opacity:1;}50%{opacity:0.7;}}
 .new-dot{width:5px;height:5px;border-radius:50%;background:white;}
-#page-tasks{background:var(--gray-100);height:100%;}
-.task-nav{background:var(--white);border-bottom:1px solid var(--border);height:56px;padding:0 20px;display:flex;align-items:center;gap:14px;position:sticky;top:0;z-index:100;}
+#page-tasks{background:var(--gray-100);height:100%;padding-top:50px;}
+.task-nav{background:var(--white);border-bottom:1px solid var(--border);height:50px;padding:0 16px;display:flex;align-items:center;gap:10px;position:sticky;top:50px;z-index:100;}
 .back-btn{width:34px;height:34px;border-radius:50%;background:var(--gray-100);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--gray-700);flex-shrink:0;}
 .task-nav-title{font-size:16px;font-weight:800;color:var(--gray-900);flex:1;text-align:center;}
 .task-nav-more{width:34px;height:34px;border-radius:50%;background:var(--gray-100);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--gray-500);}
 .task-filters{background:var(--white);padding:12px 20px;display:flex;gap:8px;border-bottom:1px solid var(--border);overflow-x:auto;}
 .filter-chip{display:flex;align-items:center;gap:5px;background:var(--gray-100);border:1px solid var(--border);border-radius:20px;padding:5px 12px;font-size:12px;font-weight:700;color:var(--gray-700);cursor:pointer;white-space:nowrap;flex-shrink:0;}
 .filter-chip svg{width:12px;height:12px;}
-.task-body{padding:16px 20px;flex:1;}
+.task-body{padding:14px 16px;flex:1;overflow-y:auto;}
 .task-section-label{font-size:11px;font-weight:800;color:var(--gray-500);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:12px;display:flex;align-items:center;gap:6px;}
 .task-section-label span{background:var(--gray-300);color:var(--white);font-size:10px;padding:1px 6px;border-radius:10px;}
 .task-card{background:var(--white);border-radius:8px;border:1.5px solid var(--border);padding:16px;margin-bottom:12px;animation:cardIn 0.3s ease;box-shadow:0 1px 4px rgba(0,0,0,0.06);transition:box-shadow 0.18s,border-color 0.18s;}.task-card:hover{box-shadow:0 6px 20px rgba(0,0,0,0.13);border-color:#B0B8D0;}
@@ -250,7 +250,7 @@ html,body{
 }
 .training-overlay{position:absolute;inset:0;background:var(--white);z-index:900;display:none;flex-direction:column;}
 .training-overlay.open{display:flex;}
-.training-header{padding:12px 18px;border-bottom:1px solid var(--border);flex-shrink:0;display:flex;flex-direction:column;gap:10px;}
+.training-header{padding:12px 18px;border-bottom:1px solid var(--border);flex-shrink:0;display:flex;flex-direction:column;gap:10px;margin-top:50px;}
 .training-header-top{display:flex;align-items:center;justify-content:space-between;}
 .training-title{font-size:14px;font-weight:800;color:var(--gray-900);}
 .training-close{width:28px;height:28px;border-radius:50%;background:var(--gray-100);border:none;cursor:pointer;font-size:14px;color:var(--gray-500);}
@@ -408,8 +408,11 @@ html,body{
     <div class="training-header">
       <div class="training-handle"></div>
       <div class="training-header-top">
-        <div class="training-title" id="training-title-text">TrainingGPT · Training</div>
-        <button class="training-close" onclick="closeTrainingModule()">✕</button>
+        <button class="back-btn" onclick="closeTrainingModule()" style="flex-shrink:0;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+        </button>
+        <div class="training-title" id="training-title-text" style="flex:1;text-align:center;">TrainingGPT · Training</div>
+        <div style="width:34px;"></div>
       </div>
       <div class="training-dots" id="training-dots"></div>
     </div>
@@ -474,13 +477,17 @@ function doLogin(){
   startAssignmentPolling();
 }
 
-// Assignment queue — multiple certs handled one at a time
-let assignmentQueue = [];
 let activeAssignment = null;
+let sessionTrainingDone = false; // one training per session
 
 function startAssignmentPolling(){
   if(assignPollInterval) clearInterval(assignPollInterval);
   assignPollInterval = setInterval(async ()=>{
+    // Don't poll if training already shown this session
+    if(sessionTrainingDone) return;
+    // Don't poll if training currently active
+    if(activeAssignment) return;
+
     try {
       const resp = await fetch(
         'https://api.jsonbin.io/v3/b/' + JSONBIN_ID + '/latest',
@@ -491,34 +498,31 @@ function startAssignmentPolling(){
       const record = data.record || {};
       const assignments = Array.isArray(record.assignments) ? record.assignments
         : Array.isArray(record) ? [] : [];
-      if(!Array.isArray(assignments)) return;
+      if(!Array.isArray(assignments) || assignments.length === 0) return;
 
-      // Collect all new assignments for this agent into queue
-      for(let i = assignments.length - 1; i >= 0; i--){
-        const a = assignments[i];
-        const phone = (a.phone || '').replace(/\D/g,'').slice(-10);
-        const key = a.assignedAt + '_' + phone;
-        if(phone === currentUser.number && !seenAssignments.has(key)){
-          seenAssignments.add(key);
-          assignmentQueue.push({
-            trainingName: a.trainingName || 'Training Module',
-            contentType: a.contentType || 'Video',
-            certRequired: a.certRequired || false,
-            coachRequired: a.coachRequired || false,
-            assignedAt: a.assignedAt || new Date().toISOString()
-          });
-        }
-      }
+      // Find the LATEST assignment for this agent only
+      const myPhone = currentUser.number;
+      const myAssignments = assignments.filter(a =>
+        (a.phone || '').replace(/\D/g,'').slice(-10) === myPhone
+      );
+      if(myAssignments.length === 0) return;
 
-      // Show first queued if no active assignment showing
-      if(assignmentQueue.length > 0 && !activeAssignment){
-        activeAssignment = assignmentQueue.shift();
+      // Sort by date descending — take only the latest one
+      myAssignments.sort((a,b) => new Date(b.assignedAt||0) - new Date(a.assignedAt||0));
+      const latest = myAssignments[0];
+      const key = latest.assignedAt + '_' + myPhone;
+
+      // Only show if not seen this session
+      if(!seenAssignments.has(key)){
+        seenAssignments.add(key);
+        activeAssignment = {
+          trainingName: latest.trainingName || 'Training Module',
+          contentType: latest.contentType || 'Video',
+          certRequired: latest.certRequired || false,
+          coachRequired: latest.coachRequired || false,
+          assignedAt: latest.assignedAt || new Date().toISOString()
+        };
         showTrainingAssignedNotification(activeAssignment);
-      }
-
-      // Re-show banner if assignment active but banner was dismissed
-      if(activeAssignment && !document.getElementById('assign-notif')){
-        showTrainingBannerOnly(activeAssignment);
       }
 
     } catch(e){ /* silent */ }
@@ -661,6 +665,14 @@ function togglePwd(){
 }
 
 function logout(){
+  // Reset session state
+  if(assignPollInterval) clearInterval(assignPollInterval);
+  seenAssignments = new Set();
+  activeAssignment = null;
+  pendingAssignment = null;
+  sessionTrainingDone = false;
+  const banner = document.getElementById('assign-notif');
+  if(banner) banner.remove();
   showPage('page-login');
   document.getElementById('login-userid').value = '';
   document.getElementById('login-password').value = '';
@@ -856,6 +868,9 @@ function receiveFeedback(data){
 function openTrainingModule(){
   if(!feedbackData) return;
   currentSlide = 0;
+  // Close call modal if open
+  const callModal = document.getElementById('call-modal');
+  if(callModal) callModal.classList.remove('open');
   // Set training name in header
   const titleEl = document.getElementById('training-title-text');
   if(titleEl) titleEl.textContent = feedbackData.trainingName || 'Training Module';
@@ -865,6 +880,9 @@ function openTrainingModule(){
 
 function closeTrainingModule(){
   document.getElementById('training-overlay').classList.remove('open');
+  // Ensure call modal is also closed
+  const callModal = document.getElementById('call-modal');
+  if(callModal) callModal.classList.remove('open');
 }
 
 function renderTrainingModule(){
@@ -1047,19 +1065,12 @@ function prevSlide(){
 async function callCoachFromModule(){
   closeTrainingModule();
   await callCoach();
-  // Mark cert complete
+  // Mark session training as done — no more notifications this session
   activeAssignment = null;
   pendingAssignment = null;
-  // Show completion toast
+  sessionTrainingDone = true;
+  if(assignPollInterval) clearInterval(assignPollInterval);
   toast('🎉', 'Training complete! Great work.');
-  // Show next from queue if any
-  setTimeout(()=>{
-    if(assignmentQueue.length > 0){
-      activeAssignment = assignmentQueue.shift();
-      pendingAssignment = activeAssignment;
-      showTrainingAssignedNotification(activeAssignment);
-    }
-  }, 2000);
 }
 
 function showCoachPrompt(){

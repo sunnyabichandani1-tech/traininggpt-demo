@@ -439,7 +439,12 @@ const VAPI_COACH_AGENT    = 'fb3b7682-5602-454c-b3f6-1dfce9949fdd';
 const SHEET_ID            = '1LmtVPNQNzOHJhhtGlhKaOtFHEdY3O44dUz4_UvwXzak';
 const SHEET_API_KEY       = '';
 const POLL_INTERVAL_MS    = 5000;
-const ASSIGN_POLL_MS      = 4000;
+const ASSIGN_POLL_MS      = 3000;
+
+// JSONbin for real-time assignment sync
+const JSONBIN_ID       = '6a2a90f8da38895dfeaca333';
+const JSONBIN_KEY      = '$2a$10$ynONZ6vAYBRLuR0s6aRwDOaGL2pZFyJkNeOiuR12nKtBR.Fjgd6gq';
+const ASSIGN_JSONBIN_KEY = 'assignments';
 
 let currentUser = { id: '', name: '', number: '' };
 let callTimerInterval = null;
@@ -472,31 +477,34 @@ function doLogin(){
 
 function startAssignmentPolling(){
   if(assignPollInterval) clearInterval(assignPollInterval);
-  if(!SHEET_API_KEY){ return; }
   assignPollInterval = setInterval(async ()=>{
     try {
-      const url = `https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/Assignments!A:H?key=${SHEET_API_KEY}`;
-      const r = await fetch(url);
-      const d = await r.json();
-      const rows = (d.values || []).slice(1);
-      for(let i = rows.length - 1; i >= 0; i--){
-        const row = rows[i];
-        const phone = row[0] || '';
-        const rowKey = phone + '_' + (row[6] || i);
-        if(phone.includes(currentUser.number) && !seenAssignments.has(rowKey)){
-          seenAssignments.add(rowKey);
+      // Read assignments from Cloudflare Worker (CORS-safe)
+      const resp = await fetch('https://traininggpt-eval.sunnyabichandani1.workers.dev/assignments', {
+        method: 'GET'
+      });
+      if(!resp.ok) return;
+      const assignments = await resp.json();
+      if(!Array.isArray(assignments)) return;
+
+      // Find assignments for this agent
+      for(let i = assignments.length - 1; i >= 0; i--){
+        const a = assignments[i];
+        const phone = (a.phone || '').replace(/\D/g,'').slice(-10);
+        const key = a.assignedAt + '_' + phone;
+        if(phone === currentUser.number && !seenAssignments.has(key)){
+          seenAssignments.add(key);
           showTrainingAssignedNotification({
-            trainingName: row[1] || 'Training',
-            contentType: row[2] || 'Video',
-            contentFile: row[3] || '',
-            certRequired: row[4] === 'true' || row[4] === 'TRUE',
-            coachRequired: row[5] === 'true' || row[5] === 'TRUE',
-            assignedAt: row[6] || new Date().toISOString()
+            trainingName: a.trainingName || 'Training Module',
+            contentType: a.contentType || 'Video',
+            certRequired: a.certRequired || false,
+            coachRequired: a.coachRequired || false,
+            assignedAt: a.assignedAt || new Date().toISOString()
           });
           break;
         }
       }
-    } catch(e){ console.warn('Assignment poll error:', e); }
+    } catch(e){ /* silent */ }
   }, ASSIGN_POLL_MS);
 }
 
@@ -513,38 +521,66 @@ function triggerDemoAssignment(data){
 
 function showTrainingAssignedNotification(assignment){
   pendingAssignment = assignment;
+
+  // Play notification chime
+  try{
+    const ctx = new (window.AudioContext || window.webkitAudioContext)();
+    [880,1100,880].forEach((freq,i)=>{
+      const o=ctx.createOscillator(), g=ctx.createGain();
+      o.connect(g); g.connect(ctx.destination);
+      o.frequency.value = freq;
+      g.gain.setValueAtTime(0.25, ctx.currentTime + i*0.12);
+      g.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + i*0.12 + 0.15);
+      o.start(ctx.currentTime + i*0.12);
+      o.stop(ctx.currentTime + i*0.12 + 0.15);
+    });
+  }catch(e){}
+
+  // Remove existing banner
   const existing = document.getElementById('assign-notif');
   if(existing) existing.remove();
+
+  // Add slide-in animation style once
+  if(!document.getElementById('assign-anim-style')){
+    const s = document.createElement('style');
+    s.id = 'assign-anim-style';
+    s.textContent = '@keyframes assignSlide{from{transform:translateY(-100%);opacity:0;}to{transform:translateY(0);opacity:1;}}';
+    document.head.appendChild(s);
+  }
+
+  // Create floating banner — stays until cert completed
   const notif = document.createElement('div');
   notif.id = 'assign-notif';
-  const phoneApp = document.getElementById('phone-app');
-  notif.style.cssText = 'position:absolute;top:0;left:0;right:0;z-index:9999;background:linear-gradient(135deg,#1565C0,#0D47A1);color:white;padding:0;box-shadow:0 4px 20px rgba(0,0,0,0.3);animation:assignSlide 0.4s cubic-bezier(0.16,1,0.3,1);';
-  if(phoneApp){ phoneApp.style.position='relative'; }
-  notif.innerHTML = `
-    <style>@keyframes assignSlide{from{transform:translateY(-100%);}to{transform:translateY(0);}}</style>
-    <div style="padding:12px 16px 14px;">
-      <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
-        <span style="font-size:20px;">🎓</span>
-        <div style="flex:1;">
-          <div style="font-size:13px;font-weight:700;">Training Assigned by Trainer</div>
-          <div style="font-size:11px;opacity:0.75;margin-top:1px;">Just now — action required</div>
-        </div>
-        <button onclick="document.getElementById('assign-notif').remove()" style="background:rgba(255,255,255,0.15);border:none;color:white;width:24px;height:24px;border-radius:50%;cursor:pointer;font-size:12px;">✕</button>
-      </div>
-      <div style="background:rgba(255,255,255,0.12);border-radius:8px;padding:10px 12px;margin-bottom:10px;">
-        <div style="font-size:13px;font-weight:700;margin-bottom:5px;">${assignment.trainingName}</div>
-        <div style="display:flex;gap:5px;flex-wrap:wrap;">
-          <span style="background:rgba(255,255,255,0.2);border-radius:4px;padding:2px 8px;font-size:10px;font-weight:600;">${assignment.contentType}</span>
-          ${assignment.certRequired ? '<span style="background:rgba(255,255,255,0.2);border-radius:4px;padding:2px 8px;font-size:10px;font-weight:600;">📝 Certification Required</span>' : ''}
-          ${assignment.coachRequired ? '<span style="background:rgba(255,255,255,0.2);border-radius:4px;padding:2px 8px;font-size:10px;font-weight:600;">🤖 AI Coach Mandatory</span>' : ''}
-        </div>
-      </div>
-      <button onclick="startAssignedTraining()" style="width:100%;background:white;color:#1565C0;border:none;border-radius:8px;padding:10px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;">Start Training Now →</button>
-    </div>
-  `;
+  notif.style.cssText = 'position:absolute;top:50px;left:10px;right:10px;z-index:9999;background:linear-gradient(135deg,#1565C0,#0D47A1);color:white;border-radius:12px;box-shadow:0 4px 20px rgba(0,0,0,0.35);animation:assignSlide 0.4s cubic-bezier(0.16,1,0.3,1);';
+
+  notif.innerHTML =
+    '<div style="padding:11px 14px;">' +
+      '<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">' +
+        '<span style="font-size:18px;">&#127891;</span>' +
+        '<div style="flex:1;">' +
+          '<div style="font-size:12px;font-weight:800;color:white;">New Training Assigned!</div>' +
+          '<div style="font-size:10.5px;opacity:0.8;margin-top:1px;">' + (assignment.trainingName||'Training') + '</div>' +
+        '</div>' +
+      '</div>' +
+      '<div style="display:flex;gap:6px;">' +
+        '<button onclick="startAssignedTraining()" style="flex:1;background:white;color:#1565C0;border:none;border-radius:7px;padding:7px;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit;">Start Now</button>' +
+        '<button onclick="dismissTrainingBanner()" style="background:rgba(255,255,255,0.15);color:white;border:none;border-radius:7px;padding:7px 10px;font-size:12px;cursor:pointer;">Later</button>' +
+      '</div>' +
+    '</div>';
+
   const targetEl = document.getElementById('phone-app') || document.body;
+  targetEl.style.position = 'relative';
   targetEl.appendChild(notif);
-  toast('🎓', 'Training assigned: ' + assignment.trainingName);
+}
+
+function dismissTrainingBanner(){
+  // Banner dismissed but not completed — keep pendingAssignment
+  const b = document.getElementById('assign-notif');
+  if(b) b.remove();
+  // Remind after 30 seconds
+  setTimeout(()=>{
+    if(pendingAssignment) showTrainingAssignedNotification(pendingAssignment);
+  }, 30000);
 }
 
 function startAssignedTraining(){

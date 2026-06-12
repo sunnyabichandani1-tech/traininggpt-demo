@@ -49,7 +49,7 @@ html,body{
 .psb-time{font-size:15px;font-weight:700;color:var(--gray-900);letter-spacing:-0.3px;}
 .psb-icons{display:flex;align-items:center;gap:5px;}
 .phone-home-bar{position:absolute;bottom:8px;left:50%;transform:translateX(-50%);width:130px;height:5px;background:rgba(0,0,0,0.2);border-radius:3px;z-index:200;}
-.phone-app{position:absolute;inset:0;overflow:hidden;}
+.phone-app{position:absolute;inset:0;overflow:hidden;}.assign-banner-host{position:absolute;inset:0;z-index:8888;pointer-events:none;overflow:visible;}
 .call-modal-overlay,.training-overlay{position:absolute !important;inset:0 !important;z-index:800 !important;}
 .page{display:none;width:100%;height:100%;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;}
 .page.active{display:flex;flex-direction:column;}
@@ -577,32 +577,25 @@ function showTrainingBannerOnly(assignment){
   const existing = document.getElementById('assign-notif');
   if(existing) existing.remove();
 
-  if(!document.getElementById('assign-anim-style')){
-    const s = document.createElement('style');
-    s.id = 'assign-anim-style';
-    s.textContent = '@keyframes assignSlide{from{transform:translateY(-100%);opacity:0;}to{transform:translateY(0);opacity:1;}}';
-    document.head.appendChild(s);
-  }
-
   const notif = document.createElement('div');
   notif.id = 'assign-notif';
-  notif.style.cssText = 'position:absolute;top:50px;left:10px;right:10px;z-index:9999;background:linear-gradient(135deg,#1565C0,#0D47A1);color:white;border-radius:12px;box-shadow:0 4px 20px rgba(0,0,0,0.35);animation:assignSlide 0.4s cubic-bezier(0.16,1,0.3,1);';
+  // Same style as original working version
+  notif.style.cssText = 'position:absolute;top:50px;left:10px;right:10px;z-index:9999;background:linear-gradient(135deg,#1565C0,#0D47A1);color:white;border-radius:12px;box-shadow:0 4px 20px rgba(0,0,0,0.35);';
 
   notif.innerHTML =
     '<div style="padding:11px 14px;">' +
       '<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">' +
         '<span style="font-size:18px;">&#127891;</span>' +
         '<div style="flex:1;">' +
-          '<div style="font-size:12px;font-weight:800;color:white;">Training Assigned' + (queueCount > 0 ? ' (+' + queueCount + ' more)' : '') + '</div>' +
+          '<div style="font-size:12px;font-weight:800;color:white;">Training Assigned</div>' +
           '<div style="font-size:10.5px;opacity:0.85;margin-top:2px;font-weight:600;">' + (assignment.trainingName||'Training') + '</div>' +
         '</div>' +
       '</div>' +
       '<button onclick="startAssignedTraining()" style="width:100%;background:white;color:#1565C0;border:none;border-radius:7px;padding:8px;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit;">Start Training Now &#8594;</button>' +
     '</div>';
 
-  // Banner is permanent — no dismiss button
+  // Append to phone-app — same as original working version
   const targetEl = document.getElementById('phone-app') || document.body;
-  targetEl.style.position = 'relative';
   targetEl.appendChild(notif);
 }
 

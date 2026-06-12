@@ -1560,23 +1560,39 @@ async function doPush(){
     assignedAt: new Date().toISOString()
   };
 
-  // 1. Send to Cloudflare Worker /assign → XFE polls and gets notified
-  for(const phone of agentPhones){
-    try {
-      await fetch('https://traininggpt-eval.sunnyabichandani1.workers.dev/assign', {
-        method: 'POST',
-        headers: {'Content-Type':'application/json'},
-        body: JSON.stringify({
-          phone: phone,
-          trainingName: assignmentPayload.trainingName,
-          contentType: assignmentPayload.contentType,
-          certRequired: assignmentPayload.certRequired,
-          coachRequired: assignmentPayload.coachRequired,
-          assignedBy: 'Trainer'
-        })
-      });
-    } catch(e){ console.warn('Worker assign error:', e); }
-  }
+  // 1. Write assignments directly to JSONbin — XFE polls and gets notified
+  const JBIN_ID  = '6a2a90f8da38895dfeaca333';
+  const JBIN_KEY = '$2a$10$ynONZ6vAYBRLuR0s6aRwDOaGL2pZFyJkNeOiuR12nKtBR.Fjgd6gq';
+  try {
+    // Read current bin
+    const readR = await fetch('https://api.jsonbin.io/v3/b/' + JBIN_ID + '/latest', {
+      headers: { 'X-Master-Key': JBIN_KEY, 'X-Bin-Versioning': 'false' }
+    });
+    const readD = await readR.json();
+    const rec = readD.record || {};
+    const existingAssignments = Array.isArray(rec.assignments) ? rec.assignments : [];
+    const existingEvals = Array.isArray(rec.evaluations) ? rec.evaluations
+      : Array.isArray(rec) ? rec.filter(r => r && r.phone && !r.init) : [];
+
+    // Add new assignments for each agent
+    const newAssignments = [...agentPhones.map(phone => ({
+      phone: phone.replace(/\D/g,'').slice(-10),
+      trainingName: assignmentPayload.trainingName,
+      contentType: assignmentPayload.contentType || 'Video',
+      certRequired: assignmentPayload.certRequired || false,
+      coachRequired: assignmentPayload.coachRequired || false,
+      assignedAt: new Date().toISOString(),
+      assignedBy: 'Trainer'
+    })), ...existingAssignments].slice(0, 100);
+
+    // Write back
+    await fetch('https://api.jsonbin.io/v3/b/' + JBIN_ID, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json', 'X-Master-Key': JBIN_KEY, 'X-Bin-Versioning': 'false' },
+      body: JSON.stringify({ assignments: newAssignments, evaluations: existingEvals })
+    });
+    console.log('Assignment written to JSONbin for', agentPhones.length, 'agent(s)');
+  } catch(e){ console.warn('JSONbin assign error:', e); }
 
   // 2. Also send to Make.com Scenario 4 → writes to Google Sheet Assignments tab
   const agentPhones = Array.from(sel).map(i => AGENTS[i].id);

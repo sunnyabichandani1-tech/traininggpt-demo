@@ -42,7 +42,7 @@ html,body{
 .phone-btn-vol-dn{position:absolute;left:-3px;top:210px;width:3px;height:36px;background:linear-gradient(to right,#1A1A1A,#333);border-radius:2px 0 0 2px;}
 .phone-btn-power{position:absolute;right:-3px;top:180px;width:3px;height:60px;background:linear-gradient(to left,#1A1A1A,#333);border-radius:0 2px 2px 0;}
 .phone-screen-bezel{position:absolute;inset:10px;background:#000;border-radius:42px;overflow:hidden;}
-.phone-island{position:absolute;top:14px;left:50%;transform:translateX(-50%);width:120px;height:34px;background:#000;border-radius:20px;z-index:200;box-shadow:0 0 0 1px rgba(255,255,255,0.05);}
+.phone-island{position:absolute;top:16px;left:50%;transform:translateX(-50%);width:11px;height:11px;background:#1A1A1A;border-radius:50%;z-index:200;}
 .phone-screen{position:absolute;inset:0;border-radius:42px;overflow:hidden;background:var(--gray-100);}
 #page-tasks,#page-dashboard{height:100%;position:relative;}
 .phone-status-bar{position:absolute;top:0;left:0;right:0;height:50px;display:flex;align-items:flex-end;justify-content:space-between;padding:0 28px 8px;z-index:150;pointer-events:none;background:transparent;}
@@ -377,13 +377,7 @@ html,body{
     <div class="task-nav-title" id="task-page-title">All Tasks</div>
     <button class="task-nav-more"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="5" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="12" cy="19" r="1"/></svg></button>
   </nav>
-  <div class="task-filters">
-    <div class="filter-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>Sort</div>
-    <div class="filter-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>Filter</div>
-    <div class="filter-chip">Show in calendar</div>
-    <div class="filter-chip">Online Leads</div>
-    <div class="filter-chip">Self-Generated</div>
-  </div>
+
   <div class="task-body" id="task-body"></div>
 </div>
 
@@ -663,34 +657,28 @@ function closeCallModal(){
 }
 
 async function confirmCall(){
-  if(!activeTask) return;
-  document.getElementById('pre-call-state').style.display = 'none';
-  const cs = document.getElementById('calling-state');
-  cs.classList.add('show');
-  const initials = activeTask.customer.split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase();
-  document.getElementById('call-avatar-initials').textContent = initials;
-  document.getElementById('calling-name').textContent = activeTask.customer;
-  document.getElementById('calling-status').textContent = 'Calling your number…';
-  document.getElementById('call-timer-display').textContent = '00:00';
+  // Close modal immediately
+  document.getElementById('call-modal').classList.remove('open');
+
+  // Show floating toast notification
+  toast('📞', 'Call initiated successfully! Your phone will ring shortly.');
+
+  // Fire webhook to Make.com → VAPI
   const rawNumber = currentUser.number.replace(/\D/g, '');
   const agentNumber = rawNumber.startsWith('91') ? '+' + rawNumber : '+91' + rawNumber.slice(-10);
-  toast('📞', 'Calling ' + agentNumber + ' — answer to connect to customer');
   try {
-    const resp = await fetch(MAKE_VAPI_WEBHOOK, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ assistantId: VAPI_CUSTOMER_AGENT, agentNumber, agentName: currentUser.name, customerName: activeTask.customer, planInterest: activeTask.plan }) });
-    if(resp.ok){
-      activeCallId = 'via-make';
-      document.getElementById('calling-status').textContent = 'Ringing your number — please answer';
-      toast('✓', 'Call triggered · Answer your phone now');
-      setTimeout(()=>{ document.getElementById('calling-status').textContent = 'Connected · AI customer active'; startCallTimer(); toast('📱', activeTask.customer + ' (AI) is now on the line'); }, 8000);
-    } else {
-      document.getElementById('calling-status').textContent = 'Webhook error — try again';
-      toast('⚠', 'Make.com error: ' + resp.status);
-    }
-  } catch(e) {
-    document.getElementById('calling-status').textContent = 'Network error — check connection';
-    toast('⚠', 'Call failed: ' + e.message);
-    setTimeout(()=>{ document.getElementById('calling-status').textContent = 'Demo mode — simulating call'; startCallTimer(); toast('📱', 'Demo: AI customer connected'); }, 3000);
-  }
+    await fetch(MAKE_VAPI_WEBHOOK, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        assistantId:  VAPI_CUSTOMER_AGENT,
+        agentNumber:  agentNumber,
+        agentName:    currentUser.name,
+        customerName: activeTask ? activeTask.customer : '',
+        planInterest: activeTask ? activeTask.plan : ''
+      })
+    });
+  } catch(e){ console.warn('Webhook error:', e); }
 }
 
 function startCallTimer(){

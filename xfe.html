@@ -584,7 +584,6 @@ function showTrainingBannerOnly(assignment){
     document.head.appendChild(s);
   }
 
-  const queueCount = assignmentQueue.length;
   const notif = document.createElement('div');
   notif.id = 'assign-notif';
   notif.style.cssText = 'position:absolute;top:50px;left:10px;right:10px;z-index:9999;background:linear-gradient(135deg,#1565C0,#0D47A1);color:white;border-radius:12px;box-shadow:0 4px 20px rgba(0,0,0,0.35);animation:assignSlide 0.4s cubic-bezier(0.16,1,0.3,1);';
@@ -1127,7 +1126,7 @@ function toast(icon, msg){
   document.getElementById('t-icon').textContent = icon;
   document.getElementById('t-msg').textContent = msg;
   t.classList.add('show');
-  setTimeout(()=> t.classList.remove('show'), 3500);
+  setTimeout(()=> t.classList.remove('show'), 3500) ;
 }
 
 document.addEventListener('keydown', e => {

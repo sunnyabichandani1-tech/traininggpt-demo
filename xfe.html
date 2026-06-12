@@ -34,6 +34,19 @@ html,body{
   align-items:center;
   justify-content:center;
 }
+/* Scale phone to fit any screen */
+@media (max-height: 900px){
+  .phone-shell{ transform:scale(0.92); transform-origin:center center; }
+}
+@media (max-height: 820px){
+  .phone-shell{ transform:scale(0.84); transform-origin:center center; }
+}
+@media (max-height: 750px){
+  .phone-shell{ transform:scale(0.76); transform-origin:center center; }
+}
+@media (max-height: 680px){
+  .phone-shell{ transform:scale(0.68); transform-origin:center center; }
+}
 .desktop-bg{position:fixed;inset:0;background:linear-gradient(135deg,#0F0F1E 0%,#1A1A2E 40%,#16213E 100%);display:flex;align-items:center;justify-content:center;z-index:0;}
 .desktop-bg::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle at 20% 50%,rgba(80,101,234,0.08) 0%,transparent 50%),radial-gradient(circle at 80% 20%,rgba(228,0,43,0.06) 0%,transparent 40%);}
 .phone-shell{position:relative;width:390px;height:844px;flex-shrink:0;z-index:10;}

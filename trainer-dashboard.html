@@ -1560,7 +1560,25 @@ async function doPush(){
     assignedAt: new Date().toISOString()
   };
 
-  // 1. Send to Make.com Scenario 4 → writes to Google Sheet Assignments tab
+  // 1. Send to Cloudflare Worker /assign → XFE polls and gets notified
+  for(const phone of agentPhones){
+    try {
+      await fetch('https://traininggpt-eval.sunnyabichandani1.workers.dev/assign', {
+        method: 'POST',
+        headers: {'Content-Type':'application/json'},
+        body: JSON.stringify({
+          phone: phone,
+          trainingName: assignmentPayload.trainingName,
+          contentType: assignmentPayload.contentType,
+          certRequired: assignmentPayload.certRequired,
+          coachRequired: assignmentPayload.coachRequired,
+          assignedBy: 'Trainer'
+        })
+      });
+    } catch(e){ console.warn('Worker assign error:', e); }
+  }
+
+  // 2. Also send to Make.com Scenario 4 → writes to Google Sheet Assignments tab
   const agentPhones = Array.from(sel).map(i => AGENTS[i].id);
   try {
     await fetch(PUSH_WEBHOOK, {

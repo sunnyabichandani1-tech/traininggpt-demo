@@ -623,6 +623,9 @@ async function startAssignedTraining(){
   // Try to load real gaps from latest call evaluation in JSONbin
   let gaps = null;
   let scores = null;
+  let realOverallScore = null;
+  let realFatal = false;
+  let realFatalReason = '';
   try {
     const resp = await fetch(
       'https://api.jsonbin.io/v3/b/' + JSONBIN_ID + '/latest',
@@ -633,12 +636,16 @@ async function startAssignedTraining(){
       const record = data.record || {};
       const evals = Array.isArray(record.evaluations) ? record.evaluations
         : Array.isArray(record) ? record.filter(r=>r&&r.phone&&!r.init) : [];
-      // Find latest eval for this agent
+      // Find LATEST eval for this agent (evals are newest-first from Worker)
       const myPhone = currentUser.number;
       const myEval = evals.find(e => (e.phone||'').replace(/\D/g,'').slice(-10) === myPhone);
-      if(myEval && Array.isArray(myEval.gaps) && myEval.gaps.length > 0){
-        gaps = myEval.gaps;
+      if(myEval){
+        if(Array.isArray(myEval.gaps) && myEval.gaps.length > 0) gaps = myEval.gaps;
         scores = myEval.scores || {};
+        // overallScore is the TRUSTED top-level real score — scores.overall can be 0 on short/fatal calls
+        realOverallScore = (typeof myEval.overallScore === 'number') ? myEval.overallScore : (parseInt(myEval.score) || null);
+        realFatal = myEval.fatal === true;
+        realFatalReason = myEval.fatalReason || myEval.fatalCategory || '';
       }
     }
   } catch(e){ /* use defaults */ }
@@ -664,10 +671,18 @@ async function startAssignedTraining(){
         example: 'Practice with AI Coach Viraj after completing this module to lock in the learning.'
       }];
 
+  // Never trust scores.overall blindly (Worker sends 0 there on short/fatal calls) —
+  // always prefer the dedicated top-level overallScore field, fallback to a neutral 50, never an optimistic guess.
+  const finalOverall = (realOverallScore !== null) ? realOverallScore
+    : (scores && typeof scores.overall === 'number' && scores.overall > 0) ? scores.overall
+    : 50;
+
   feedbackData = {
     trainingName: pendingAssignment.trainingName,
-    scores: scores || { pitch:62, objection_handling:45, product_knowledge:78, closing:55, overall:60 },
+    scores: Object.assign({ pitch:62, objection_handling:45, product_knowledge:78, closing:55 }, scores || {}, { overall: finalOverall }),
     gaps: gapSlides,
+    fatal: realFatal,
+    fatalReason: realFatalReason,
     mcq:[
       { question:'When a customer says Jio is cheaper, what is the BEST first response?', options:["Offer a discount to match Jio's price","Acknowledge and anchor on OTT bundle value","End the call politely","Ask for a supervisor"], correct:1 },
       { question:'What is the key differentiator between Airtel Fiber and Jio Fiber?', options:['Airtel is always cheaper','Dedicated vs shared bandwidth','Airtel has more plans','Jio has better coverage'], correct:1 },
@@ -1111,12 +1126,49 @@ function showCoachPrompt(){
 async function callCoach(){
   const rawNumber = currentUser.number.replace(/\D/g, '');
   const agentNumber = rawNumber.startsWith('91') ? '+' + rawNumber : '+91' + rawNumber.slice(-10);
-  toast('🎓', 'Connecting you to TrainingGPT Coach…');
+  toast('🎓', 'Connecting you to Coach Viraj…');
   const prompt = document.getElementById('coach-prompt');
   if(prompt) prompt.remove();
+
+  // Build real gap summary from feedbackData — Viraj must coach on THESE, not generic content
+  let gapAreas = [];
+  let gapDetailLines = [];
+  if(feedbackData && Array.isArray(feedbackData.gaps) && feedbackData.gaps.length > 0){
+    feedbackData.gaps.forEach(g => {
+      const area = typeof g === 'string' ? g : (g.area || '');
+      if(area) gapAreas.push(area);
+      if(typeof g === 'object' && g.what_happened){
+        gapDetailLines.push(area + ': ' + g.what_happened);
+      }
+    });
+  }
+  const gapSummary = gapAreas.join(', ') || (feedbackData ? feedbackData.trainingName : 'General improvement');
+  const gapDetail = gapDetailLines.join(' | ');
+  // GUARANTEED real score — feedbackData.scores.overall was already resolved correctly in startAssignedTraining()
+  const overallScore = feedbackData && typeof feedbackData.scores?.overall === 'number' ? feedbackData.scores.overall : 50;
+  const isFatal = feedbackData ? (feedbackData.fatal === true) : false;
+  const fatalReason = feedbackData ? (feedbackData.fatalReason || '') : '';
+
   try{
-    const resp = await fetch(MAKE_VAPI_WEBHOOK, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ assistantId: VAPI_COACH_AGENT, agentNumber, agentName: currentUser.name, customerName: activeTask ? activeTask.customer : 'the customer', planInterest: activeTask ? activeTask.plan : '' }) });
-    if(resp.ok){ toast('✓', 'Coach calling you now — answer your phone'); } else { toast('⚠', 'Coach webhook error: ' + resp.status); }
+    const resp = await fetch(MAKE_VAPI_WEBHOOK, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        assistantId:   VAPI_COACH_AGENT,
+        agentNumber,
+        agentName:     currentUser.name,
+        customerName:  activeTask ? activeTask.customer : 'the customer',
+        planInterest:  activeTask ? activeTask.plan : '',
+        agentGaps:     gapSummary,
+        gapDetail:     gapDetail,
+        overallScore:  String(overallScore),
+        isFatal:       isFatal,
+        fatalReason:   fatalReason,
+        trainingName:  feedbackData ? feedbackData.trainingName : ''
+      })
+    });
+    if(resp.ok){ toast('✓', 'Coach Viraj calling you now — answer your phone'); }
+    else { toast('⚠', 'Coach webhook error: ' + resp.status); }
   } catch(e){ toast('⚠', 'Coach call failed: ' + e.message); }
 }
 

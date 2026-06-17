@@ -430,6 +430,30 @@ body{font-family:var(--font);background:var(--gray-50);color:var(--gray-900);min
 ::-webkit-scrollbar{width:4px;}
 ::-webkit-scrollbar-track{background:transparent;}
 ::-webkit-scrollbar-thumb{background:var(--gray-200);border-radius:2px;}
+
+.kpi-tab{font-size:12px;padding:8px 14px;color:#6C7A99;cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;font-weight:500;}
+.kpi-tab.active{color:#1565C0;border-bottom:2px solid #1565C0;}
+.kpi-tab-content{display:none;}
+.kpi-tab-content.active{display:block;}
+.funnel-row{background:white;border:1px solid #DDE3F0;border-radius:10px;margin-bottom:6px;overflow:hidden;cursor:pointer;transition:box-shadow 0.15s;}
+.funnel-row:hover{box-shadow:0 2px 12px rgba(21,101,192,0.12);border-color:#B8CAE8;}
+.funnel-row-header{display:flex;align-items:center;padding:11px 14px;gap:10px;}
+.funnel-step-name{flex:1;font-size:12px;font-weight:600;color:#1A1A2E;}
+.funnel-people{font-size:13px;font-weight:700;color:#1A1A2E;}
+.funnel-pct{font-size:11px;color:#6C7A99;width:36px;text-align:right;}
+.funnel-bar-wrap{height:4px;background:#F0F2F8;margin:0 14px 10px;}
+.funnel-bar-fill{height:100%;border-radius:2px;}
+.funnel-drill{display:none;border-top:1px solid #EEF2FF;padding:10px 14px;background:#F8FAFF;}
+.funnel-drill.open{display:block;}
+.dim-bar-row{display:flex;align-items:center;gap:7px;margin-bottom:7px;}
+.dim-bar-label{font-size:10px;color:#6C7A99;width:100px;flex-shrink:0;}
+.dim-bar-track{flex:1;height:5px;background:#F0F2F8;border-radius:3px;overflow:hidden;}
+.dim-bar-fill{height:100%;border-radius:3px;}
+.dim-bar-val{font-size:10px;font-weight:700;width:22px;text-align:right;}
+.safety-row{display:flex;align-items:center;justify-content:space-between;padding:6px 0;border-bottom:1px solid #F0F2F8;}
+.safety-row:last-child{border-bottom:none;}
+.safety-label{font-size:11px;color:#4A5568;display:flex;align-items:center;gap:6px;}
+.safety-dot{width:6px;height:6px;border-radius:50%;}
 </style>
 </head>
 <body>
@@ -488,7 +512,13 @@ body{font-family:var(--font);background:var(--gray-50);color:var(--gray-900);min
       <div class="nav-item active" id="nav-dash" onclick="showV('home',this);renderROTable(loadObservations());">
         <span class="nav-icon">⊞</span> Dashboard
       </div>
+      <div class="nav-item" id="nav-dash2" onclick="showV('home-v2',this);setTimeout(renderKPI,50);">
+        <span class="nav-icon">📊</span> Dashboard v2
+      </div>
 
+      <div class="nav-item" id="nav-induction" onclick="showV('induction',this);setTimeout(renderInduction,50);">
+        <span class="nav-icon">🎓</span> New Joiner Induction
+      </div>
       <div class="nav-item" id="nav-content" onclick="showV('content-library',this)">
         <span class="nav-icon">📚</span> Training Content
       </div>
@@ -627,6 +657,218 @@ body{font-family:var(--font);background:var(--gray-50);color:var(--gray-900);min
       
 
       <!-- AGENT LIST -->
+
+      <div class="view" id="view-home-v2">
+<div style="padding:16px 24px 24px;">
+
+<!-- TOP BAR: ROLE FILTER -->
+<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;">
+  <div style="display:flex;align-items:center;gap:10px;">
+    <span style="font-size:12px;font-weight:600;color:#6C7A99;">Role:</span>
+    <select id="role-filter" onchange="renderKPI()" style="font-size:12px;padding:5px 10px;border:1px solid #DDE3F0;border-radius:7px;background:white;color:#1A1A2E;cursor:pointer;">
+      <option value="XFE">XFE — Xstream Fiber Express</option>
+      <option value="ENG">Field Engineer</option>
+      <option value="CC">Call Center Agent</option>
+      <option value="HDO">HDO — Home Delivery Officer</option>
+      <option value="MR">Market Representative</option>
+    </select>
+    <select id="period-filter" onchange="renderKPI()" style="font-size:12px;padding:5px 10px;border:1px solid #DDE3F0;border-radius:7px;background:white;color:#1A1A2E;cursor:pointer;">
+      <option>This month</option><option>Last 7 days</option><option>Last 30 days</option><option>Last quarter</option>
+    </select>
+  </div>
+  <div style="font-size:11px;color:#6C7A99;">Jun 2026 · <span style="color:#1D9E75;font-weight:600;">● Live</span></div>
+</div>
+
+<!-- SECTION 1: PERFORMANCE FUNNEL -->
+<div style="font-size:13px;font-weight:700;color:#1A1A2E;margin-bottom:4px;">Section 1 — Performance funnel</div>
+<div style="font-size:11px;color:#6C7A99;margin-bottom:14px;">People-based. Each card shows a stage in the training journey.</div>
+<div id="perf-funnel" style="display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:8px;margin-bottom:8px;"></div>
+<!-- Quality threshold legend -->
+<div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:20px;padding:10px 14px;background:#F8FAFF;border-radius:8px;border:1px solid #EEF2FF;">
+  <div style="width:100%;font-size:10px;font-weight:700;color:#AAB4CC;letter-spacing:0.5px;margin-bottom:4px;">QUALITY THRESHOLD = 70 — AIRTEL STANDARD</div>
+  <div style="font-size:10px;padding:2px 8px;border-radius:4px;background:#E8F5E9;color:#1B5E20;font-weight:600;">85–100 Elite</div>
+  <div style="font-size:10px;padding:2px 8px;border-radius:4px;background:#F1F8E9;color:#33691E;font-weight:600;">70–84 Proficient</div>
+  <div style="font-size:10px;padding:2px 8px;border-radius:4px;background:#FFF8E1;color:#E65100;font-weight:600;">55–69 Developing</div>
+  <div style="font-size:10px;padding:2px 8px;border-radius:4px;background:#FFEBEE;color:#B71C1C;font-weight:600;">40–54 At Risk</div>
+  <div style="font-size:10px;padding:2px 8px;border-radius:4px;background:#FFCDD2;color:#7F0000;font-weight:600;">&lt;40 Critical</div>
+</div>
+
+<!-- SECTION 2: KPI IMPROVEMENT -->
+<div style="font-size:13px;font-weight:700;color:#1A1A2E;margin-bottom:4px;">Section 2 — KPI improvement post training</div>
+<div style="font-size:11px;color:#6C7A99;margin-bottom:14px;">Top KPIs where training interventions showed measurable impact this month.</div>
+<div id="kpi-impact-cards" style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:20px;"></div>
+
+<!-- SECTION 3: CONTENT PERFORMANCE -->
+<div style="font-size:13px;font-weight:700;color:#1A1A2E;margin-bottom:4px;">Section 3 — Content performance</div>
+<div style="font-size:11px;color:#6C7A99;margin-bottom:14px;">How content in the library is performing against training outcomes.</div>
+
+<!-- Content funnel pills -->
+<div id="content-funnel-pills" style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-bottom:16px;"></div>
+
+<!-- Best + Bottom performed -->
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:16px;">
+  <div>
+    <div style="font-size:11px;font-weight:700;color:#1D9E75;margin-bottom:8px;">🏆 Best performed content — top 5</div>
+    <div id="best-content" style="background:white;border:1px solid #DDE3F0;border-radius:10px;overflow:hidden;"></div>
+  </div>
+  <div>
+    <div style="font-size:11px;font-weight:700;color:#E24B4A;margin-bottom:8px;">⚠ Needs attention — bottom 5</div>
+    <div id="bottom-content" style="background:white;border:1px solid #DDE3F0;border-radius:10px;overflow:hidden;"></div>
+  </div>
+</div>
+
+<!-- TNA without content -->
+<div style="font-size:11px;font-weight:700;color:#1A1A2E;margin-bottom:8px;">TNA gaps — content not yet created</div>
+<div style="background:white;border:1px solid #DDE3F0;border-radius:10px;overflow:hidden;margin-bottom:20px;">
+  <div style="display:grid;grid-template-columns:2fr 1fr 80px 70px 100px;gap:0;padding:8px 14px;background:#F8FAFF;border-bottom:1px solid #EEF2FF;">
+    <div style="font-size:10px;font-weight:700;color:#6C7A99;">TNA Name</div>
+    <div style="font-size:10px;font-weight:700;color:#6C7A99;">Fleet identified</div>
+    <div style="font-size:10px;font-weight:700;color:#6C7A99;">Severity</div>
+    <div style="font-size:10px;font-weight:700;color:#6C7A99;">Avg score</div>
+    <div style="font-size:10px;font-weight:700;color:#6C7A99;">Action</div>
+  </div>
+  <div id="tna-no-content"></div>
+  <div id="tna-show-more" style="padding:10px;text-align:center;border-top:1px solid #EEF2FF;">
+    <button onclick="showMoreTNA()" style="font-size:11px;color:#1565C0;background:none;border:none;cursor:pointer;font-weight:600;">Show more ▾</button>
+  </div>
+</div>
+
+</div>
+</div><!-- end view-home-v2 -->
+
+
+      <div class="view" id="view-induction">
+<div style="padding:20px 24px;">
+
+<!-- HEADER -->
+<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;">
+  <div>
+    <div style="font-size:16px;font-weight:700;color:#1A1A2E;">New Joiner Induction Program</div>
+    <div style="font-size:11px;color:#6C7A99;margin-top:2px;">Track new joiners from onboarding → certification → first productive day</div>
+  </div>
+  <div style="font-size:11px;color:#6C7A99;">Jun 2026 · <span style="color:#1D9E75;font-weight:600;">● Live</span></div>
+</div>
+
+<!-- FUNNEL CARDS -->
+<div style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:20px;">
+  <div style="background:white;border:1px solid #DDE3F0;border-radius:12px;padding:16px;position:relative;overflow:hidden;">
+    <div style="position:absolute;top:0;left:0;right:0;height:3px;background:#378ADD;"></div>
+    <div style="font-size:10px;font-weight:700;color:#6C7A99;text-transform:uppercase;letter-spacing:0.4px;margin-bottom:8px;">New joiners this month</div>
+    <div style="font-size:28px;font-weight:700;color:#1A1A2E;margin-bottom:4px;">1,247</div>
+    <div style="font-size:10px;color:#6C7A99;">↑ 18% vs last month</div>
+    <div style="margin-top:10px;font-size:10px;color:#6C7A99;">Faridabad · Delhi NCR</div>
+  </div>
+  <div style="background:white;border:1px solid #DDE3F0;border-radius:12px;padding:16px;position:relative;overflow:hidden;">
+    <div style="position:absolute;top:0;left:0;right:0;height:3px;background:#1976D2;"></div>
+    <div style="font-size:10px;font-weight:700;color:#6C7A99;text-transform:uppercase;letter-spacing:0.4px;margin-bottom:8px;">Attempted induction training</div>
+    <div style="font-size:28px;font-weight:700;color:#1A1A2E;margin-bottom:4px;">1,089 <span style="font-size:14px;color:#6C7A99;">/ 1,247</span></div>
+    <div style="font-size:10px;color:#1D9E75;font-weight:600;">87% attempt rate</div>
+    <div style="margin-top:10px;height:4px;background:#F0F2F8;border-radius:2px;"><div style="width:87%;height:100%;background:#1976D2;border-radius:2px;"></div></div>
+  </div>
+  <div style="background:white;border:1px solid #DDE3F0;border-radius:12px;padding:16px;position:relative;overflow:hidden;">
+    <div style="position:absolute;top:0;left:0;right:0;height:3px;background:#1D9E75;"></div>
+    <div style="font-size:10px;font-weight:700;color:#6C7A99;text-transform:uppercase;letter-spacing:0.4px;margin-bottom:8px;">Certified (passed induction)</div>
+    <div style="font-size:28px;font-weight:700;color:#1A1A2E;margin-bottom:4px;">874 <span style="font-size:14px;color:#6C7A99;">/ 1,089</span></div>
+    <div style="font-size:10px;color:#1D9E75;font-weight:600;">80% pass rate · 1st attempt</div>
+    <div style="margin-top:10px;height:4px;background:#F0F2F8;border-radius:2px;"><div style="width:80%;height:100%;background:#1D9E75;border-radius:2px;"></div></div>
+  </div>
+  <div style="background:white;border:1px solid #DDE3F0;border-radius:12px;padding:16px;position:relative;overflow:hidden;">
+    <div style="position:absolute;top:0;left:0;right:0;height:3px;background:#E24B4A;"></div>
+    <div style="font-size:10px;font-weight:700;color:#6C7A99;text-transform:uppercase;letter-spacing:0.4px;margin-bottom:8px;">Training failed (not yet certified)</div>
+    <div style="font-size:28px;font-weight:700;color:#E24B4A;margin-bottom:4px;">215</div>
+    <div style="font-size:10px;color:#E24B4A;font-weight:600;">Need re-attempt or escalation</div>
+    <div style="margin-top:10px;font-size:10px;color:#6C7A99;">Avg attempts: 2.3 · Max: 3</div>
+  </div>
+</div>
+
+<!-- DAYS TO PRODUCTIVE -->
+<div style="background:linear-gradient(135deg,#1A237E,#283593);border-radius:12px;padding:20px 24px;margin-bottom:20px;color:white;">
+  <div style="font-size:11px;font-weight:700;color:rgba(255,255,255,0.6);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;">Days to Productive</div>
+  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:20px;">
+    <div>
+      <div style="font-size:36px;font-weight:700;color:white;">6.4</div>
+      <div style="font-size:11px;color:rgba(255,255,255,0.7);">Avg days: joining → first task</div>
+      <div style="font-size:10px;color:rgba(255,255,255,0.5);margin-top:4px;">Target: 5 days</div>
+    </div>
+    <div>
+      <div style="font-size:36px;font-weight:700;color:#81C784;">4.1</div>
+      <div style="font-size:11px;color:rgba(255,255,255,0.7);">Best performers (certified day 1–2)</div>
+      <div style="font-size:10px;color:rgba(255,255,255,0.5);margin-top:4px;">Top 20% of cohort</div>
+    </div>
+    <div>
+      <div style="font-size:36px;font-weight:700;color:#FFB74D;">8.2</div>
+      <div style="font-size:11px;color:rgba(255,255,255,0.7);">Avg for failed 1st attempt</div>
+      <div style="font-size:10px;color:rgba(255,255,255,0.5);margin-top:4px;">2.3× longer to productive</div>
+    </div>
+    <div>
+      <div style="font-size:36px;font-weight:700;color:#EF9A9A;">14+</div>
+      <div style="font-size:11px;color:rgba(255,255,255,0.7);">At risk (failed 3 attempts)</div>
+      <div style="font-size:10px;color:rgba(255,255,255,0.5);margin-top:4px;">28 joiners · escalate now</div>
+    </div>
+  </div>
+</div>
+
+<!-- ATTEMPT BREAKDOWN + MODULE PERFORMANCE -->
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:20px;">
+  <div style="background:white;border:1px solid #DDE3F0;border-radius:10px;padding:16px;">
+    <div style="font-size:12px;font-weight:700;color:#1A1A2E;margin-bottom:12px;">Induction attempt breakdown</div>
+    ${['Passed — 1st attempt','Passed — 2nd attempt','Passed — 3rd attempt','Failed — 3 attempts','Not yet attempted'].map((l,i)=>{
+      const vals=['874 (80%)','142 (13%)','58 (5%)','28 (2.6%)','158 (15%)'];
+      const colors=['#1D9E75','#639922','#EF9F27','#E24B4A','#AAB4CC'];
+      return `<div style="display:flex;align-items:center;justify-content:space-between;padding:7px 0;border-bottom:1px solid #F0F2F8;">
+        <div style="display:flex;align-items:center;gap:6px;font-size:11px;color:#4A5568;"><div style="width:6px;height:6px;border-radius:50%;background:${colors[i]};"></div>${l}</div>
+        <div style="font-size:11px;font-weight:700;color:${colors[i]};">${vals[i]}</div>
+      </div>`;
+    }).join('')}
+  </div>
+  <div style="background:white;border:1px solid #DDE3F0;border-radius:10px;padding:16px;">
+    <div style="font-size:12px;font-weight:700;color:#1A1A2E;margin-bottom:12px;">Module performance — induction path</div>
+    ${[
+      {n:'Product knowledge',pass:92,color:'#1D9E75'},
+      {n:'Call etiquette basics',pass:88,color:'#1D9E75'},
+      {n:'Compliance & ethics',pass:96,color:'#1D9E75'},
+      {n:'Objection handling',pass:71,color:'#639922'},
+      {n:'Value anchoring',pass:64,color:'#EF9F27'},
+      {n:'Closing techniques',pass:58,color:'#E24B4A'}
+    ].map(m=>`<div style="margin-bottom:8px;">
+      <div style="display:flex;justify-content:space-between;margin-bottom:3px;">
+        <div style="font-size:11px;color:#4A5568;">${m.n}</div>
+        <div style="font-size:10px;font-weight:700;color:${m.color};">${m.pass}% pass</div>
+      </div>
+      <div style="height:4px;background:#F0F2F8;border-radius:2px;"><div style="width:${m.pass}%;height:100%;background:${m.color};border-radius:2px;"></div></div>
+    </div>`).join('')}
+  </div>
+</div>
+
+<!-- COHORT TABLE -->
+<div style="font-size:12px;font-weight:700;color:#1A1A2E;margin-bottom:10px;">Recent joiner cohorts — performance snapshot</div>
+<div style="background:white;border:1px solid #DDE3F0;border-radius:10px;overflow:hidden;">
+  <div style="display:grid;grid-template-columns:100px 80px 80px 80px 80px 100px 1fr;padding:8px 14px;background:#F8FAFF;border-bottom:1px solid #EEF2FF;">
+    ${['Joining week','Joiners','Attempted','Certified','Failed','Avg days','Status'].map(h=>`<div style="font-size:10px;font-weight:700;color:#6C7A99;">${h}</div>`).join('')}
+  </div>
+  ${[
+    {w:'Jun 9–13',j:312,a:287,c:241,f:46,d:5.8,s:'On track'},
+    {w:'Jun 2–6',j:298,a:271,c:218,f:53,d:6.1,s:'On track'},
+    {w:'May 26–30',j:341,a:298,c:224,f:74,d:7.2,s:'Review'},
+    {w:'May 19–23',j:296,a:233,c:191,f:42,d:6.8,s:'Completed'},
+  ].map(r=>{
+    const sc=r.s==='On track'?'#1D9E75':r.s==='Review'?'#EF9F27':'#AAB4CC';
+    const sb=r.s==='On track'?'#E8F5E9':r.s==='Review'?'#FFF8E1':'#F0F2F8';
+    return `<div style="display:grid;grid-template-columns:100px 80px 80px 80px 80px 100px 1fr;padding:8px 14px;border-bottom:1px solid #F0F2F8;align-items:center;">
+      <div style="font-size:11px;color:#1A1A2E;">${r.w}</div>
+      <div style="font-size:11px;font-weight:600;color:#1A1A2E;">${r.j}</div>
+      <div style="font-size:11px;color:#4A5568;">${r.a}</div>
+      <div style="font-size:11px;color:#1D9E75;font-weight:600;">${r.c}</div>
+      <div style="font-size:11px;color:#E24B4A;">${r.f}</div>
+      <div style="font-size:11px;color:#4A5568;">${r.d} days</div>
+      <div><span style="font-size:10px;padding:2px 8px;border-radius:4px;background:${sb};color:${sc};font-weight:600;">${r.s}</span></div>
+    </div>`;
+  }).join('')}
+</div>
+
+</div>
+      </div><!-- end view-induction -->
+
       <div class="view" id="view-agent-list">
         <div class="breadcrumb">
           <span class="bc-item" onclick="showV('home',document.getElementById('nav-dash'))">Dashboard</span>
@@ -2278,5 +2520,203 @@ window.addEventListener('load', function(){
   if(urlEl) urlEl.textContent = window.location.href.split('?')[0] + '?callId=xxx&phone=+91xxx&score=72&gaps=Objection,Closing&transcript=...';
 });
 </script>
+
+<script>
+const RANDOM_NAMES=['Amit Sharma','Priya Singh','Rahul Verma','Sunita Gupta','Deepak Kumar','Neha Yadav','Vikram Patel','Anjali Mishra','Rajesh Tiwari','Pooja Joshi','Manoj Dubey','Rekha Chauhan','Suresh Rawat','Kavita Soni','Arun Mehta','Divya Kapoor','Rajan Nair','Meena Pillai','Sunil Rao','Anita Desai','Karan Malhotra','Sonal Trivedi','Harish Bhatia','Ritu Arora','Gaurav Saxena','Mamta Pandey','Vinod Shukla','Geeta Bajaj','Sanjay Dixit','Lalita Aggarwal','Nitin Choudhary','Seema Kulkarni','Dinesh Iyer','Usha Nambiar','Prakash Reddy','Sarita Patil','Bhupesh Jain','Manju Bhatt','Rohit Sinha','Chandrika Das'];
+
+const ROLE_DATA={
+  XFE:{label:'XFE — Xstream Fiber Express',baseline:51,postTraining:73,identified:38490,pushed:29110,completed:24760,preScore:51,postScore:73,atRisk:8240,
+    dims:[{name:'Needs assessment',score:44},{name:'Objection handling',score:48},{name:'Value anchoring',score:52},{name:'Closing',score:55},{name:'Competition',score:61},{name:'Product knowledge',score:67},{name:'Call etiquette',score:74},{name:'Greeting',score:78}],
+    safety:[{label:'Abusive language',count:2,color:'#E24B4A'},{label:'Financial misconduct',count:1,color:'#E24B4A'},{label:'Wrong plan pitched',count:5,color:'#EF9F27'},{label:'Install misrepresentation',count:4,color:'#EF9F27'},{label:'Pressure tactics',count:0,color:'#1D9E75'}]},
+  ENG:{label:'Field Engineer',baseline:58,postTraining:76,identified:12400,pushed:9800,completed:8200,preScore:58,postScore:76,atRisk:2400,dims:[{name:'Safety protocol',score:72},{name:'First-time resolution',score:64},{name:'Customer handling',score:58},{name:'Documentation',score:81},{name:'Technical accuracy',score:77},{name:'SLA adherence',score:69},{name:'Escalation handling',score:55},{name:'Tools usage',score:83}],safety:[{label:'Safety violation',count:0,color:'#1D9E75'},{label:'Customer complaint',count:3,color:'#EF9F27'},{label:'Repeat visit',count:8,color:'#EF9F27'},{label:'SLA breach',count:11,color:'#E24B4A'}]},
+  CC:{label:'Call Center Agent',baseline:54,postTraining:71,identified:9620,pushed:7400,completed:6200,preScore:54,postScore:71,atRisk:2960,dims:[{name:'Call opening',score:66},{name:'Needs identification',score:51},{name:'Product knowledge',score:59},{name:'Empathy',score:63},{name:'Resolution rate',score:57},{name:'Call closing',score:48},{name:'Compliance',score:71},{name:'Call etiquette',score:74}],safety:[{label:'Abusive language',count:4,color:'#E24B4A'},{label:'Misinformation',count:6,color:'#E24B4A'},{label:'Compliance breach',count:3,color:'#E24B4A'}]},
+  HDO:{label:'HDO',baseline:61,postTraining:78,identified:4920,pushed:4100,completed:3600,preScore:61,postScore:78,atRisk:738,dims:[{name:'On-time delivery',score:79},{name:'Customer greeting',score:82},{name:'Upsell attempt',score:48},{name:'Payment handling',score:77},{name:'Documentation',score:84},{name:'Product pitch',score:52}],safety:[{label:'Payment misconduct',count:0,color:'#1D9E75'},{label:'Delivery miss',count:2,color:'#EF9F27'},{label:'Customer complaint',count:1,color:'#EF9F27'}]},
+  MR:{label:'Market Representative',baseline:49,postTraining:69,identified:7436,pushed:5720,completed:4576,preScore:49,postScore:69,atRisk:2002,dims:[{name:'Territory coverage',score:71},{name:'Retailer engagement',score:58},{name:'Product demo',score:52},{name:'Order booking',score:64},{name:'Competition awareness',score:47},{name:'Scheme knowledge',score:55}],safety:[{label:'Scheme misrepresentation',count:3,color:'#E24B4A'},{label:'Cash handling issue',count:2,color:'#E24B4A'}]}
+};
+
+const FLEET_TOTAL = 103000;
+
+function fmtN(n){if(n>=100000)return(n/100000).toFixed(1).replace(/\.0$/,'')+'L';if(n>=1000)return(n/1000).toFixed(1).replace(/\.0$/,'')+'K';return n.toString();}
+function getRole(){const el=document.getElementById('role-filter');return el?el.value:'XFE';}
+function scoreColor(s){return s>=70?'#1D9E75':s>=55?'#EF9F27':'#E24B4A';}
+function scoreLabel(s){return s>=85?'Elite':s>=70?'Proficient':s>=55?'Developing':s>=40?'At Risk':'Critical';}
+function scoreBg(s){return s>=85?'#E8F5E9':s>=70?'#F1F8E9':s>=55?'#FFF8E1':s>=40?'#FFEBEE':'#FFCDD2';}
+
+function renderKPI(){
+  const role=getRole();
+  const d=ROLE_DATA[role];
+  if(!d)return;
+
+  // ── SECTION 1: PERFORMANCE FUNNEL ──
+  const funnel=[
+    {label:'Total Fleet',val:FLEET_TOTAL,sub:'All fleet · all LOBs',color:'#3C4A6B',click:null,note:''},
+    {label:'Fleet Baseline Score',val:d.baseline,sub:'Avg score · pre-training',color:'#5C6BC0',click:null,note:'/100',isScore:true},
+    {label:'Identified for Training',val:d.identified,sub:'Groq gap detected',color:'#EF9F27',click:null,note:''},
+    {label:'Training Pushed',val:d.pushed,sub:'Trainer assigned',color:'#1976D2',click:null,note:''},
+    {label:'Training Completed',val:d.completed,sub:'Agent completed',color:'#0D47A1',click:null,note:''},
+    {label:'Pre-training Score',val:d.preScore,sub:'Avg before training',color:'#E24B4A',click:null,note:'/100',isScore:true},
+    {label:'Post-training Score',val:d.postScore,sub:'Avg after training',color:'#1D9E75',click:null,note:'/100',isScore:true},
+    {label:'Fleet at Risk',val:d.atRisk,sub:'Not improving · escalate',color:'#A32D2D',click:'switchKPITabV2(1)',note:'⚠'}
+  ];
+
+  const pf=document.getElementById('perf-funnel');
+  if(pf){
+    pf.innerHTML=funnel.map((f,i)=>{
+      const pct=i===0?null:i===1||i===5||i===6?null:Math.round(f.val/funnel[2].val*100);
+      const arrow=i<funnel.length-1?'<div style="position:absolute;right:-8px;top:50%;transform:translateY(-50%);font-size:14px;color:#DDE3F0;z-index:1;">→</div>':'';
+      const valDisplay=f.isScore?`<span style="font-size:22px;font-weight:700;color:${scoreColor(f.val)};">${f.val}</span><span style="font-size:11px;color:#AAB4CC;">${f.note}</span>`:
+        `<span style="font-size:22px;font-weight:700;color:${f.color};">${fmtN(f.val)}</span>`;
+      const clickAttr=f.click?`onclick="${f.click}" style="cursor:pointer;"`:''
+      return `<div class="funnel-card" ${clickAttr} style="background:white;border:1px solid #DDE3F0;border-radius:10px;padding:12px 10px;position:relative;${f.click?'border-color:'+f.color+';':''}" ${f.click?'title="Click to see supervisor view"':''}>
+        ${arrow}
+        <div style="width:4px;height:4px;border-radius:50%;background:${f.color};margin-bottom:6px;"></div>
+        <div style="font-size:10px;font-weight:700;color:#6C7A99;margin-bottom:6px;line-height:1.3;">${f.label}</div>
+        <div style="margin-bottom:4px;">${valDisplay}</div>
+        ${pct!==null?`<div style="font-size:9px;color:${pct>80?'#1D9E75':pct>60?'#EF9F27':'#E24B4A'};font-weight:700;">${pct}% of identified</div>`:''}
+        <div style="font-size:9px;color:#AAB4CC;margin-top:2px;">${f.sub}</div>
+        ${f.isScore?`<div style="margin-top:4px;height:3px;background:#F0F2F8;border-radius:2px;"><div style="width:${f.val}%;height:100%;background:${scoreColor(f.val)};border-radius:2px;"></div></div>`:''}
+      </div>`;
+    }).join('');
+  }
+
+  // ── SECTION 2: KPI IMPACT CARDS ──
+  const kpis=[
+    {name:'Lead to Activation',icon:'🎯',people:Math.round(d.identified*0.6),avgKPI:'8%',jump:'+0.5%',notImproved:Math.round(d.atRisk*0.3),color:'#1976D2',bg:'#E3F2FD',desc:'L2A rate improvement post training'},
+    {name:'First Time Resolution',icon:'✅',people:Math.round(d.identified*0.4),avgKPI:'80%',jump:'+5%',notImproved:Math.round(d.atRisk*0.2),color:'#1D9E75',bg:'#E8F5E9',desc:'FTR rate for field interactions'},
+    {name:'Cross-sell on Call',icon:'📈',people:Math.round(d.identified*0.5),avgKPI:'65%',jump:'+10%',notImproved:Math.round(d.atRisk*0.25),color:'#EF9F27',bg:'#FFF8E1',desc:'% agents pitching cross-sell'},
+    {name:'Product Knowledge Score',icon:'📚',people:Math.round(d.identified*0.7),avgKPI:'85%',jump:'+5pts',notImproved:Math.round(d.atRisk*0.15),color:'#7B1FA2',bg:'#F3E5F5',desc:'DKT product knowledge test score'}
+  ];
+
+  const kic=document.getElementById('kpi-impact-cards');
+  if(kic){
+    kic.innerHTML=kpis.map(k=>`<div style="background:white;border:1px solid #DDE3F0;border-radius:12px;padding:16px;border-top:3px solid ${k.color};">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;">
+        <span style="font-size:20px;">${k.icon}</span>
+        <div style="font-size:12px;font-weight:700;color:#1A1A2E;">${k.name}</div>
+      </div>
+      <div style="font-size:10px;color:#6C7A99;margin-bottom:10px;">${k.desc}</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px;">
+        <div style="background:${k.bg};border-radius:6px;padding:8px;">
+          <div style="font-size:10px;color:#6C7A99;margin-bottom:2px;">Avg KPI</div>
+          <div style="font-size:16px;font-weight:700;color:${k.color};">${k.avgKPI}</div>
+        </div>
+        <div style="background:#E8F5E9;border-radius:6px;padding:8px;">
+          <div style="font-size:10px;color:#6C7A99;margin-bottom:2px;">Post-training jump</div>
+          <div style="font-size:16px;font-weight:700;color:#1D9E75;">${k.jump}</div>
+        </div>
+      </div>
+      <div style="display:flex;justify-content:space-between;padding-top:8px;border-top:1px solid #F0F2F8;">
+        <div><div style="font-size:10px;color:#6C7A99;">Fleet in this TNA</div><div style="font-size:13px;font-weight:700;color:#1A1A2E;">${fmtN(k.people)}</div></div>
+        <div style="text-align:right;"><div style="font-size:10px;color:#6C7A99;">Not yet improved</div><div style="font-size:13px;font-weight:700;color:#E24B4A;">${fmtN(k.notImproved)}</div></div>
+      </div>
+    </div>`).join('');
+  }
+
+  // ── SECTION 3: CONTENT FUNNEL PILLS ──
+  const cfp=document.getElementById('content-funnel-pills');
+  if(cfp){
+    cfp.innerHTML=[
+      {label:'Total content available',val:'124',sub:'Video: 48 · Image: 36 · Voice: 28 · Doc: 12 · 8 languages',color:'#1976D2',bg:'#E3F2FD'},
+      {label:'Content yet to create',val:'37',sub:'For identified TNAs with no content',color:'#EF9F27',bg:'#FFF8E1'},
+      {label:'Content improved scores',val:'68',sub:'Led to measurable fleet improvement',color:'#1D9E75',bg:'#E8F5E9'},
+      {label:'Content not improving',val:'19',sub:'No score lift detected · needs attention',color:'#E24B4A',bg:'#FFEBEE'}
+    ].map(c=>`<div style="background:${c.bg};border:1px solid ${c.color}22;border-radius:10px;padding:14px;border-left:3px solid ${c.color};">
+      <div style="font-size:10px;font-weight:700;color:#6C7A99;margin-bottom:6px;">${c.label}</div>
+      <div style="font-size:24px;font-weight:700;color:${c.color};margin-bottom:4px;">${c.val}</div>
+      <div style="font-size:10px;color:#6C7A99;">${c.sub}</div>
+    </div>`).join('');
+  }
+
+  // ── BEST + BOTTOM CONTENT ──
+  const contentHeader=`<div style="display:grid;grid-template-columns:2fr 1fr 80px;padding:7px 14px;background:#F8FAFF;border-bottom:1px solid #EEF2FF;font-size:10px;font-weight:700;color:#6C7A99;">
+    <div>TNA Name</div><div>Fleet consumed</div><div>Score lift</div></div>`;
+
+  const bestContent=[
+    {tna:'FEEL-FELT-FOUND Objection',fleet:24800,lift:'+24 pts'},{tna:'OTT Value Anchor Script',fleet:19400,lift:'+21 pts'},
+    {tna:'Assumptive Close Technique',fleet:16200,lift:'+18 pts'},{tna:'Jio Counter Comparison',fleet:12600,lift:'+14 pts'},
+    {tna:'Discovery Questions Audio',fleet:9800,lift:'+9 pts'}
+  ];
+  const bottomContent=[
+    {tna:'Generic Greeting Module',fleet:8400,lift:'+2 pts'},{tna:'Installation Process Doc',fleet:6200,lift:'+4 pts'},
+    {tna:'Basic Product Overview',fleet:5800,lift:'+3 pts'},{tna:'Hindi Compliance Guide',fleet:4200,lift:'+2 pts'},
+    {tna:'Old Jio Counter (2024)',fleet:3100,lift:'+1 pt'}
+  ];
+
+  const renderContentRows=(data,color)=>data.map(r=>`<div style="display:grid;grid-template-columns:2fr 1fr 80px;padding:7px 14px;border-bottom:1px solid #F0F2F8;align-items:center;">
+    <div style="font-size:11px;color:#1A1A2E;">${r.tna}</div>
+    <div style="font-size:11px;color:#4A5568;">${fmtN(r.fleet)}</div>
+    <div style="font-size:11px;font-weight:700;color:${color};">${r.lift}</div>
+  </div>`).join('');
+
+  const bc=document.getElementById('best-content');
+  if(bc)bc.innerHTML=contentHeader+renderContentRows(bestContent,'#1D9E75');
+  const btc=document.getElementById('bottom-content');
+  if(btc)btc.innerHTML=contentHeader+renderContentRows(bottomContent,'#E24B4A');
+
+  // ── TNA WITHOUT CONTENT ──
+  renderTNANoContent(0);
+}
+
+const TNA_NO_CONTENT=[
+  {name:'Needs Assessment Probing',fleet:18040,sev:'Critical',score:44},{name:'Competition — Local ISPs',fleet:12300,sev:'High',score:52},
+  {name:'Value Anchoring — DTH Bundle',fleet:9800,sev:'High',score:55},{name:'WhatsApp Follow-up Script',fleet:8400,sev:'Medium',score:61},
+  {name:'Post-call Disposition',fleet:7200,sev:'Medium',score:63},{name:'ARP Discount Explanation',fleet:6100,sev:'Medium',score:58},
+  {name:'Router Setup Guidance',fleet:5400,sev:'Low',score:67},{name:'Billing Query Handling',fleet:4800,sev:'Low',score:64},
+  {name:'Escalation Protocol',fleet:3900,sev:'Medium',score:59},{name:'OTT Activation Help',fleet:3200,sev:'Low',score:68},
+  {name:'Speed Test Objection',fleet:2800,sev:'Low',score:66},{name:'Multi-device Pitch',fleet:2400,sev:'Medium',score:57}
+];
+let tnaShowCount=10;
+
+function renderTNANoContent(from){
+  const el=document.getElementById('tna-no-content');
+  if(!el)return;
+  const sevColor={Critical:'#E24B4A',High:'#EF9F27',Medium:'#1976D2',Low:'#6C7A99'};
+  const sevBg={Critical:'#FFEBEE',High:'#FFF8E1',Medium:'#E3F2FD',Low:'#F0F2F8'};
+  const rows=TNA_NO_CONTENT.slice(0,tnaShowCount);
+  el.innerHTML=rows.map(r=>`<div style="display:grid;grid-template-columns:2fr 1fr 80px 70px 100px;padding:8px 14px;border-bottom:1px solid #F0F2F8;align-items:center;">
+    <div style="font-size:11px;color:#1A1A2E;">${r.name}</div>
+    <div style="font-size:11px;font-weight:600;color:#1A1A2E;">${fmtN(r.fleet)}</div>
+    <div><span style="font-size:10px;padding:2px 7px;border-radius:4px;background:${sevBg[r.sev]};color:${sevColor[r.sev]};font-weight:600;">${r.sev}</span></div>
+    <div style="font-size:11px;font-weight:700;color:${scoreColor(r.score)};">${r.score}/100</div>
+    <div><button onclick="goCreateContent('${r.name}')" style="font-size:10px;padding:3px 8px;background:#1565C0;color:white;border:none;border-radius:4px;cursor:pointer;font-weight:600;">Create content</button></div>
+  </div>`).join('');
+  const sm=document.getElementById('tna-show-more');
+  if(sm)sm.style.display=tnaShowCount>=TNA_NO_CONTENT.length?'none':'block';
+}
+
+function showMoreTNA(){
+  tnaShowCount=TNA_NO_CONTENT.length;
+  renderTNANoContent(0);
+}
+
+function goCreateContent(tnaName){
+  showV('content-library',document.getElementById('nav-content'));
+  // Pre-fill content creation after nav
+  setTimeout(()=>{
+    const nameEl=document.getElementById('new-content-name');
+    const gapEl=document.getElementById('new-content-gap');
+    const promptEl=document.getElementById('new-content-prompt');
+    const idEl=document.getElementById('new-content-id');
+    if(nameEl)nameEl.value=tnaName+' — Training Module';
+    if(idEl)idEl.value='CNT-'+Math.floor(1000+Math.random()*9000);
+    if(gapEl)gapEl.value=tnaName;
+    if(promptEl)promptEl.value='Create a 60-second training module for Airtel XFE agents addressing the gap: "'+tnaName+'". Format: Video. Language: Hinglish. Tone: Professional but conversational. Include 1 real-world scenario, the correct technique with example script, and a key takeaway.';
+    // Open create panel if exists
+    const panel=document.getElementById('create-content-panel');
+    if(panel)panel.style.display='block';
+  },200);
+}
+
+function switchKPITabV2(n){
+  // Switch to supervisor tab in v2
+  document.querySelectorAll('.kpi-tab').forEach((t,i)=>t.classList.toggle('active',i===n));
+  document.querySelectorAll('.kpi-tab-content').forEach((v,i)=>v.classList.toggle('active',i===n));
+}
+
+function renderInduction(){
+  // Already rendered in HTML - nothing dynamic needed for demo
+}
+</script>
+
 </body>
 </html>

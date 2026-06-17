@@ -471,6 +471,7 @@ let seenAssignments = new Set();
 let feedbackData = null;
 let currentSlide = 0;
 let pendingAssignment = null;
+let loginTimestamp = null; // only assignments pushed AFTER this count as new
 
 function doLogin(){
   const uid = document.getElementById('login-userid').value.trim();
@@ -486,6 +487,7 @@ function doLogin(){
   document.getElementById('welcome-name').textContent = currentUser.name + ',';
   showPage('page-dashboard');
   toast('👋', 'Welcome! Logged in as ' + currentUser.number);
+  loginTimestamp = new Date(); // mark login time — only pushes AFTER this will notify
   startAssignmentPolling();
 }
 
@@ -512,19 +514,21 @@ function startAssignmentPolling(){
         : Array.isArray(record) ? [] : [];
       if(!Array.isArray(assignments) || assignments.length === 0) return;
 
-      // Find the LATEST assignment for this agent only
+      // Find assignments for this agent PUSHED AFTER LOGIN ONLY
       const myPhone = currentUser.number;
-      const myAssignments = assignments.filter(a =>
-        (a.phone || '').replace(/\D/g,'').slice(-10) === myPhone
-      );
-      if(myAssignments.length === 0) return;
+      const myAssignments = assignments.filter(a => {
+        const phoneMatch = (a.phone || '').replace(/\D/g,'').slice(-10) === myPhone;
+        const pushedAfterLogin = loginTimestamp && new Date(a.assignedAt || 0) > loginTimestamp;
+        return phoneMatch && pushedAfterLogin;
+      });
+      if(myAssignments.length === 0) return; // no fresh push yet — stay silent
 
-      // Sort by date descending — take only the latest one
+      // Sort by date descending — take only the latest fresh one
       myAssignments.sort((a,b) => new Date(b.assignedAt||0) - new Date(a.assignedAt||0));
       const latest = myAssignments[0];
       const key = latest.assignedAt + '_' + myPhone;
 
-      // Only show if not seen this session
+      // Only show if not already shown this session
       if(!seenAssignments.has(key)){
         seenAssignments.add(key);
         activeAssignment = {
@@ -686,6 +690,7 @@ function logout(){
   activeAssignment = null;
   pendingAssignment = null;
   sessionTrainingDone = false;
+  loginTimestamp = null;
   const banner = document.getElementById('assign-notif');
   if(banner) banner.remove();
   showPage('page-login');

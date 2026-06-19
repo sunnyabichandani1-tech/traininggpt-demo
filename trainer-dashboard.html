@@ -516,10 +516,7 @@ body{font-family:var(--font);background:var(--gray-50);color:var(--gray-900);min
         <span class="nav-icon">📊</span> Dashboard v2
       </div>
 
-      <div class="nav-item" id="nav-induction" onclick="showV('induction',this);setTimeout(renderInduction,50);">
-        <span class="nav-icon">🎓</span> New Joiner Induction
-      </div>
-      <div class="nav-item" id="nav-content" onclick="showV('content-library',this)">
+      <div class="nav-item" id="nav-content" onclick="showV('content-library',this);window.scrollTo({top:0,behavior:'instant'});document.documentElement.scrollTop=0;document.body.scrollTop=0;ensureGenPromptFilled();">
         <span class="nav-icon">📚</span> Training Content
       </div>
       <div class="nav-item" id="nav-bulk" onclick="showV('bulk-push',this)">
@@ -578,80 +575,35 @@ body{font-family:var(--font);background:var(--gray-50);color:var(--gray-900);min
           </div>
         </div>
 
-        <!-- TRAINING QUEUE CARDS -->
-        <div class="sec-hdr" style="margin-bottom:14px;">
-          <div class="sec-title">Training Queue</div>
-        </div>
-        <div class="tc-grid" style="grid-template-columns:repeat(3,1fr);margin-bottom:20px;">
-          <div class="tc" onclick="showAgentList('Objection Handling','Critical',847)">
-            <div class="tc-top"><div class="tc-icon r">🛡️</div><div class="sev crit">Critical</div></div>
-            <div class="tc-name">Objection Handling</div>
-            <div class="tc-desc">Agents failing to counter Jio price objections and losing leads at pitch stage.</div>
-            <div class="tc-foot"><div><div class="tc-count">847</div><div class="tc-lbl">agents identified</div></div><div class="tc-arr">→</div></div>
-          </div>
-          <div class="tc" onclick="showAgentList('Value Anchoring','High',534)">
-            <div class="tc-top"><div class="tc-icon a">⚓</div><div class="sev high">High</div></div>
-            <div class="tc-name">Value Anchoring</div>
-            <div class="tc-desc">Agents quoting speed without connecting to customer-specific benefits.</div>
-            <div class="tc-foot"><div><div class="tc-count">534</div><div class="tc-lbl">agents identified</div></div><div class="tc-arr">→</div></div>
-          </div>
-          <div class="tc" onclick="showAgentList('Closing Technique','High',412)">
-            <div class="tc-top"><div class="tc-icon b">🎯</div><div class="sev high">High</div></div>
-            <div class="tc-name">Closing Technique</div>
-            <div class="tc-desc">Agents asking permission to close instead of using assumptive close.</div>
-            <div class="tc-foot"><div><div class="tc-count">412</div><div class="tc-lbl">agents identified</div></div><div class="tc-arr">→</div></div>
-          </div>
-          <div class="tc" onclick="showAgentList('Product Knowledge','Medium',389)">
-            <div class="tc-top"><div class="tc-icon r">📡</div><div class="sev med">Medium</div></div>
-            <div class="tc-name">Product Knowledge</div>
-            <div class="tc-desc">Gaps in OTT bundle knowledge and plan comparison vs Jio offerings.</div>
-            <div class="tc-foot"><div><div class="tc-count">389</div><div class="tc-lbl">agents identified</div></div><div class="tc-arr">→</div></div>
-          </div>
-          <div class="tc" onclick="showAgentList('Communication Skills','Medium',265)">
-            <div class="tc-top"><div class="tc-icon a">💬</div><div class="sev med">Medium</div></div>
-            <div class="tc-name">Communication Skills</div>
-            <div class="tc-desc">Agents reading from scripts instead of natural conversational selling.</div>
-            <div class="tc-foot"><div><div class="tc-count">265</div><div class="tc-lbl">agents identified</div></div><div class="tc-arr">→</div></div>
-          </div>
-          <!-- 6th card - Fatal - highlighted red -->
-          <div class="tc" onclick="showAgentList('Fatal Errors','Fatal',43)" style="border:2px solid var(--red);background:#FFF5F5;">
-            <div class="tc-top"><div class="tc-icon r">🚨</div><div class="sev crit" style="background:#E4002B;color:white;">FATAL</div></div>
-            <div class="tc-name" style="color:var(--red);">Fatal Errors</div>
-            <div class="tc-desc">Agents making critical compliance or misrepresentation errors on calls.</div>
-            <div class="tc-foot"><div><div class="tc-count" style="color:var(--red);">43</div><div class="tc-lbl">agents flagged</div></div><div class="tc-arr" style="background:var(--red-soft);color:var(--red);">→</div></div>
-          </div>
-        </div>
-
-        <!-- RECENT OBSERVATIONS in Training Queue -->
-      <div class="ro-wrap" id="ro-section">
-        <div class="ro-header">
-          <div style="display:flex;align-items:center;">
-            <div class="ro-title">Recent Observations</div>
-            <span class="ro-count" id="ro-count">— 0 records</span>
-          </div>
-          <div style="display:flex;align-items:center;gap:8px;">
-            <button class="btn-outline" onclick="refreshFromJSONbin()">🔄 Refresh</button>
-            <button class="btn-outline" onclick="deselectAllRO()">Deselect All</button>
-            <button class="btn-blue" id="ro-push-btn" onclick="openPushModal()" disabled>+ Push Training</button>
-          </div>
-        </div>
-        <div class="ro-filter-row">
-          <div><div class="checkbox" id="ro-sa-cb" onclick="toggleROSA()"></div></div>
-          <span>Date & Time</span>
-          <span>Agent</span>
-          <span>Number</span>
-          <span>Score</span>
-          <span>Gap Area</span>
-          <span>Action</span>
-        </div>
-        <div id="ro-rows">
-          <div class="ro-empty">
-            <div class="ro-empty-ico">📋</div>
-            <div>No observations yet. Observations will appear here after calls are evaluated.</div>
-          </div>
-        </div>
-      </div>
-
+<!-- RECENT OBSERVATIONS (moved back to Dashboard v1) -->
+<div class="ro-wrap" id="ro-section">
+  <div class="ro-header">
+    <div style="display:flex;align-items:center;">
+      <div class="ro-title">Recent Observations</div>
+      <span class="ro-count" id="ro-count">— 0 records</span>
+    </div>
+    <div style="display:flex;align-items:center;gap:8px;">
+      <button class="btn-outline" onclick="refreshFromJSONbin()">🔄 Refresh</button>
+      <button class="btn-outline" onclick="deselectAllRO()">Deselect All</button>
+      <button class="btn-blue" id="ro-push-btn" onclick="openPushModal()" disabled>+ Push Training</button>
+    </div>
+  </div>
+  <div class="ro-filter-row">
+    <div><div class="checkbox" id="ro-sa-cb" onclick="toggleROSA()"></div></div>
+    <span>Date & Time</span>
+    <span>Agent</span>
+    <span>Number</span>
+    <span>Score</span>
+    <span>Gap Area</span>
+    <span>Action</span>
+  </div>
+  <div id="ro-rows">
+    <div class="ro-empty">
+      <div class="ro-empty-ico">📋</div>
+      <div>No observations yet. Observations will appear here after calls are evaluated.</div>
+    </div>
+  </div>
+</div>
       </div>
 
       
@@ -682,24 +634,73 @@ body{font-family:var(--font);background:var(--gray-50);color:var(--gray-900);min
 <!-- SECTION 1: PERFORMANCE FUNNEL -->
 <div style="font-size:13px;font-weight:700;color:#1A1A2E;margin-bottom:4px;">Section 1 — Performance funnel</div>
 <div style="font-size:11px;color:#6C7A99;margin-bottom:14px;">People-based. Each card shows a stage in the training journey.</div>
-<div id="perf-funnel" style="display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:8px;margin-bottom:8px;"></div>
+<div id="perf-funnel" style="display:grid;grid-template-columns:repeat(9,minmax(0,1fr));gap:8px;margin-bottom:8px;"></div>
 <!-- Quality threshold legend -->
 <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:20px;padding:10px 14px;background:#F8FAFF;border-radius:8px;border:1px solid #EEF2FF;">
   <div style="width:100%;font-size:10px;font-weight:700;color:#AAB4CC;letter-spacing:0.5px;margin-bottom:4px;">QUALITY THRESHOLD = 70 — AIRTEL STANDARD</div>
-  <div style="font-size:10px;padding:2px 8px;border-radius:4px;background:#E8F5E9;color:#1B5E20;font-weight:600;">85–100 Elite</div>
-  <div style="font-size:10px;padding:2px 8px;border-radius:4px;background:#F1F8E9;color:#33691E;font-weight:600;">70–84 Proficient</div>
-  <div style="font-size:10px;padding:2px 8px;border-radius:4px;background:#FFF8E1;color:#E65100;font-weight:600;">55–69 Developing</div>
-  <div style="font-size:10px;padding:2px 8px;border-radius:4px;background:#FFEBEE;color:#B71C1C;font-weight:600;">40–54 At Risk</div>
-  <div style="font-size:10px;padding:2px 8px;border-radius:4px;background:#FFCDD2;color:#7F0000;font-weight:600;">&lt;40 Critical</div>
+  <div style="font-size:10px;padding:2px 8px;border-radius:4px;background:#EEF0F4;color:#1B5E20;font-weight:600;">85–100 Elite</div>
+  <div style="font-size:10px;padding:2px 8px;border-radius:4px;background:#EEF0F4;color:#33691E;font-weight:600;">70–84 Proficient</div>
+  <div style="font-size:10px;padding:2px 8px;border-radius:4px;background:#EEF0F4;color:#E65100;font-weight:600;">55–69 Developing</div>
+  <div style="font-size:10px;padding:2px 8px;border-radius:4px;background:#EEF0F4;color:#B71C1C;font-weight:600;">40–54 At Risk</div>
+  <div style="font-size:10px;padding:2px 8px;border-radius:4px;background:#EEF0F4;color:#7F0000;font-weight:600;">&lt;40 Critical</div>
 </div>
 
-<!-- SECTION 2: KPI IMPROVEMENT -->
-<div style="font-size:13px;font-weight:700;color:#1A1A2E;margin-bottom:4px;">Section 2 — KPI improvement post training</div>
+<!-- SECTION 2: TRAINING QUEUE -->
+<div style="font-size:13px;font-weight:700;color:#1A1A2E;margin-bottom:4px;">Section 2 — Training queue</div>
+<div style="font-size:11px;color:#6C7A99;margin-bottom:14px;">Top training gaps identified across the fleet this month, ranked by severity.</div>
+<div class="tc-grid" style="grid-template-columns:repeat(3,1fr);margin-bottom:20px;">
+  <div class="tc" onclick="showAgentList('Objection Handling','Critical',847)">
+    <div class="tc-top"><div class="tc-icon r">🛡️</div><div class="sev crit">Critical</div></div>
+    <div class="tc-name">Objection Handling</div>
+    <div class="tc-desc">Agents failing to counter Jio price objections and losing leads at pitch stage.</div>
+    <div class="tc-foot"><div><div class="tc-count">847</div><div class="tc-lbl">agents identified</div></div><div class="tc-arr">→</div></div>
+  </div>
+  <div class="tc" onclick="showAgentList('Value Anchoring','High',534)">
+    <div class="tc-top"><div class="tc-icon a">⚓</div><div class="sev high">High</div></div>
+    <div class="tc-name">Value Anchoring</div>
+    <div class="tc-desc">Agents quoting speed without connecting to customer-specific benefits.</div>
+    <div class="tc-foot"><div><div class="tc-count">534</div><div class="tc-lbl">agents identified</div></div><div class="tc-arr">→</div></div>
+  </div>
+  <div class="tc" onclick="showAgentList('Closing Technique','High',412)">
+    <div class="tc-top"><div class="tc-icon b">🎯</div><div class="sev high">High</div></div>
+    <div class="tc-name">Closing Technique</div>
+    <div class="tc-desc">Agents asking permission to close instead of using assumptive close.</div>
+    <div class="tc-foot"><div><div class="tc-count">412</div><div class="tc-lbl">agents identified</div></div><div class="tc-arr">→</div></div>
+  </div>
+  <div class="tc" onclick="showAgentList('Product Knowledge','Medium',389)">
+    <div class="tc-top"><div class="tc-icon r">📡</div><div class="sev med">Medium</div></div>
+    <div class="tc-name">Product Knowledge</div>
+    <div class="tc-desc">Gaps in OTT bundle knowledge and plan comparison vs Jio offerings.</div>
+    <div class="tc-foot"><div><div class="tc-count">389</div><div class="tc-lbl">agents identified</div></div><div class="tc-arr">→</div></div>
+  </div>
+  <div class="tc" onclick="showAgentList('Communication Skills','Medium',265)">
+    <div class="tc-top"><div class="tc-icon a">💬</div><div class="sev med">Medium</div></div>
+    <div class="tc-name">Communication Skills</div>
+    <div class="tc-desc">Agents reading from scripts instead of natural conversational selling.</div>
+    <div class="tc-foot"><div><div class="tc-count">265</div><div class="tc-lbl">agents identified</div></div><div class="tc-arr">→</div></div>
+  </div>
+  <!-- 6th card - Fatal - highlighted red -->
+  <div class="tc" onclick="showAgentList('Fatal Errors','Fatal',43)" style="border:2px solid var(--red);background:#FFF5F5;">
+    <div class="tc-top"><div class="tc-icon r">🚨</div><div class="sev crit" style="background:#E4002B;color:white;">FATAL</div></div>
+    <div class="tc-name" style="color:var(--red);">Fatal Errors</div>
+    <div class="tc-desc">Agents making critical compliance or misrepresentation errors on calls.</div>
+    <div class="tc-foot"><div><div class="tc-count" style="color:var(--red);">43</div><div class="tc-lbl">agents flagged</div></div><div class="tc-arr" style="background:var(--red-soft);color:var(--red);">→</div></div>
+  </div>
+</div>
+<div style="text-align:right;margin-bottom:20px;">
+  <button onclick="showV('tna-detail',null);renderTNADetail();" style="font-size:11px;color:#1565C0;background:none;border:none;cursor:pointer;font-weight:600;">View more ▸</button>
+</div>
+
+<!-- SECTION 3: KPI IMPROVEMENT -->
+<div style="font-size:13px;font-weight:700;color:#1A1A2E;margin-bottom:4px;">Section 3 — KPI improvement post training</div>
 <div style="font-size:11px;color:#6C7A99;margin-bottom:14px;">Top KPIs where training interventions showed measurable impact this month.</div>
-<div id="kpi-impact-cards" style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:20px;"></div>
+<div id="kpi-impact-cards" style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:10px;"></div>
+<div style="text-align:right;margin-bottom:20px;">
+  <button onclick="showV('kpi-detail',null);renderKPIDetail();" style="font-size:11px;color:#1565C0;background:none;border:none;cursor:pointer;font-weight:600;">View more ▸</button>
+</div>
 
 <!-- SECTION 3: CONTENT PERFORMANCE -->
-<div style="font-size:13px;font-weight:700;color:#1A1A2E;margin-bottom:4px;">Section 3 — Content performance</div>
+<div style="font-size:13px;font-weight:700;color:#1A1A2E;margin-bottom:4px;">Section 4 — Content performance</div>
 <div style="font-size:11px;color:#6C7A99;margin-bottom:14px;">How content in the library is performing against training outcomes.</div>
 
 <!-- Content funnel pills -->
@@ -714,6 +715,9 @@ body{font-family:var(--font);background:var(--gray-50);color:var(--gray-900);min
   <div>
     <div style="font-size:11px;font-weight:700;color:#E24B4A;margin-bottom:8px;">⚠ Needs attention — bottom 5</div>
     <div id="bottom-content" style="background:white;border:1px solid #DDE3F0;border-radius:10px;overflow:hidden;"></div>
+    <div style="text-align:right;margin-top:8px;">
+      <button onclick="showV('content-detail',null);renderContentDetail();" style="font-size:11px;color:#1565C0;background:none;border:none;cursor:pointer;font-weight:600;">View more ▸</button>
+    </div>
   </div>
 </div>
 
@@ -736,144 +740,94 @@ body{font-family:var(--font);background:var(--gray-50);color:var(--gray-900);min
 </div>
 </div><!-- end view-home-v2 -->
 
+      <div class="view" id="view-kpi-detail">
+<div style="padding:16px 24px 24px;">
+  <div style="display:flex;align-items:center;gap:10px;margin-bottom:4px;">
+    <button onclick="showV('home-v2',document.getElementById('nav-dash2'));setTimeout(renderKPI,50);" style="font-size:11px;color:#1565C0;background:none;border:none;cursor:pointer;font-weight:600;">◂ Back to Dashboard v2</button>
+  </div>
+  <div style="font-size:15px;font-weight:700;color:#1A1A2E;margin-bottom:4px;">KPI Improvement — Full View</div>
+  <div style="font-size:11px;color:#6C7A99;margin-bottom:16px;">All KPIs where training interventions showed measurable impact this month.</div>
 
-      <div class="view" id="view-induction">
-<div style="padding:20px 24px;">
+  <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
+    <input id="kpi-detail-search" type="text" placeholder="Search KPI name..." oninput="renderKPIDetail()" style="font-size:12px;padding:7px 12px;border:1px solid #DDE3F0;border-radius:7px;width:240px;">
+  </div>
 
-<!-- HEADER -->
-<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;">
-  <div>
-    <div style="font-size:16px;font-weight:700;color:#1A1A2E;">New Joiner Induction Program</div>
-    <div style="font-size:11px;color:#6C7A99;margin-top:2px;">Track new joiners from onboarding → certification → first productive day</div>
-  </div>
-  <div style="font-size:11px;color:#6C7A99;">Jun 2026 · <span style="color:#1D9E75;font-weight:600;">● Live</span></div>
-</div>
-
-<!-- FUNNEL CARDS -->
-<div style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:20px;">
-  <div style="background:white;border:1px solid #DDE3F0;border-radius:12px;padding:16px;position:relative;overflow:hidden;">
-    <div style="position:absolute;top:0;left:0;right:0;height:3px;background:#378ADD;"></div>
-    <div style="font-size:10px;font-weight:700;color:#6C7A99;text-transform:uppercase;letter-spacing:0.4px;margin-bottom:8px;">New joiners this month</div>
-    <div style="font-size:28px;font-weight:700;color:#1A1A2E;margin-bottom:4px;">1,247</div>
-    <div style="font-size:10px;color:#6C7A99;">↑ 18% vs last month</div>
-    <div style="margin-top:10px;font-size:10px;color:#6C7A99;">Faridabad · Delhi NCR</div>
-  </div>
-  <div style="background:white;border:1px solid #DDE3F0;border-radius:12px;padding:16px;position:relative;overflow:hidden;">
-    <div style="position:absolute;top:0;left:0;right:0;height:3px;background:#1976D2;"></div>
-    <div style="font-size:10px;font-weight:700;color:#6C7A99;text-transform:uppercase;letter-spacing:0.4px;margin-bottom:8px;">Attempted induction training</div>
-    <div style="font-size:28px;font-weight:700;color:#1A1A2E;margin-bottom:4px;">1,089 <span style="font-size:14px;color:#6C7A99;">/ 1,247</span></div>
-    <div style="font-size:10px;color:#1D9E75;font-weight:600;">87% attempt rate</div>
-    <div style="margin-top:10px;height:4px;background:#F0F2F8;border-radius:2px;"><div style="width:87%;height:100%;background:#1976D2;border-radius:2px;"></div></div>
-  </div>
-  <div style="background:white;border:1px solid #DDE3F0;border-radius:12px;padding:16px;position:relative;overflow:hidden;">
-    <div style="position:absolute;top:0;left:0;right:0;height:3px;background:#1D9E75;"></div>
-    <div style="font-size:10px;font-weight:700;color:#6C7A99;text-transform:uppercase;letter-spacing:0.4px;margin-bottom:8px;">Certified (passed induction)</div>
-    <div style="font-size:28px;font-weight:700;color:#1A1A2E;margin-bottom:4px;">874 <span style="font-size:14px;color:#6C7A99;">/ 1,089</span></div>
-    <div style="font-size:10px;color:#1D9E75;font-weight:600;">80% pass rate · 1st attempt</div>
-    <div style="margin-top:10px;height:4px;background:#F0F2F8;border-radius:2px;"><div style="width:80%;height:100%;background:#1D9E75;border-radius:2px;"></div></div>
-  </div>
-  <div style="background:white;border:1px solid #DDE3F0;border-radius:12px;padding:16px;position:relative;overflow:hidden;">
-    <div style="position:absolute;top:0;left:0;right:0;height:3px;background:#E24B4A;"></div>
-    <div style="font-size:10px;font-weight:700;color:#6C7A99;text-transform:uppercase;letter-spacing:0.4px;margin-bottom:8px;">Training failed (not yet certified)</div>
-    <div style="font-size:28px;font-weight:700;color:#E24B4A;margin-bottom:4px;">215</div>
-    <div style="font-size:10px;color:#E24B4A;font-weight:600;">Need re-attempt or escalation</div>
-    <div style="margin-top:10px;font-size:10px;color:#6C7A99;">Avg attempts: 2.3 · Max: 3</div>
-  </div>
-</div>
-
-<!-- DAYS TO PRODUCTIVE -->
-<div style="background:linear-gradient(135deg,#1A237E,#283593);border-radius:12px;padding:20px 24px;margin-bottom:20px;color:white;">
-  <div style="font-size:11px;font-weight:700;color:rgba(255,255,255,0.6);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;">Days to Productive</div>
-  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:20px;">
-    <div>
-      <div style="font-size:36px;font-weight:700;color:white;">6.4</div>
-      <div style="font-size:11px;color:rgba(255,255,255,0.7);">Avg days: joining → first task</div>
-      <div style="font-size:10px;color:rgba(255,255,255,0.5);margin-top:4px;">Target: 5 days</div>
+  <div style="background:white;border:1px solid #DDE3F0;border-radius:10px;overflow:hidden;">
+    <div style="display:grid;grid-template-columns:2.2fr 1fr 1fr 1fr 1fr;padding:8px 14px;background:#F8FAFF;border-bottom:1px solid #EEF2FF;">
+      <div style="font-size:10px;font-weight:700;color:#6C7A99;">KPI Name</div>
+      <div style="font-size:10px;font-weight:700;color:#6C7A99;">Avg KPI</div>
+      <div style="font-size:10px;font-weight:700;color:#6C7A99;">Post-training jump</div>
+      <div style="font-size:10px;font-weight:700;color:#6C7A99;">Fleet in this TNA</div>
+      <div style="font-size:10px;font-weight:700;color:#6C7A99;">Not yet improved</div>
     </div>
-    <div>
-      <div style="font-size:36px;font-weight:700;color:#81C784;">4.1</div>
-      <div style="font-size:11px;color:rgba(255,255,255,0.7);">Best performers (certified day 1–2)</div>
-      <div style="font-size:10px;color:rgba(255,255,255,0.5);margin-top:4px;">Top 20% of cohort</div>
-    </div>
-    <div>
-      <div style="font-size:36px;font-weight:700;color:#FFB74D;">8.2</div>
-      <div style="font-size:11px;color:rgba(255,255,255,0.7);">Avg for failed 1st attempt</div>
-      <div style="font-size:10px;color:rgba(255,255,255,0.5);margin-top:4px;">2.3× longer to productive</div>
-    </div>
-    <div>
-      <div style="font-size:36px;font-weight:700;color:#EF9A9A;">14+</div>
-      <div style="font-size:11px;color:rgba(255,255,255,0.7);">At risk (failed 3 attempts)</div>
-      <div style="font-size:10px;color:rgba(255,255,255,0.5);margin-top:4px;">28 joiners · escalate now</div>
-    </div>
+    <div id="kpi-detail-rows"></div>
   </div>
 </div>
+</div><!-- end view-kpi-detail -->
 
-<!-- ATTEMPT BREAKDOWN + MODULE PERFORMANCE -->
-<div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:20px;">
-  <div style="background:white;border:1px solid #DDE3F0;border-radius:10px;padding:16px;">
-    <div style="font-size:12px;font-weight:700;color:#1A1A2E;margin-bottom:12px;">Induction attempt breakdown</div>
-    ${['Passed — 1st attempt','Passed — 2nd attempt','Passed — 3rd attempt','Failed — 3 attempts','Not yet attempted'].map((l,i)=>{
-      const vals=['874 (80%)','142 (13%)','58 (5%)','28 (2.6%)','158 (15%)'];
-      const colors=['#1D9E75','#639922','#EF9F27','#E24B4A','#AAB4CC'];
-      return `<div style="display:flex;align-items:center;justify-content:space-between;padding:7px 0;border-bottom:1px solid #F0F2F8;">
-        <div style="display:flex;align-items:center;gap:6px;font-size:11px;color:#4A5568;"><div style="width:6px;height:6px;border-radius:50%;background:${colors[i]};"></div>${l}</div>
-        <div style="font-size:11px;font-weight:700;color:${colors[i]};">${vals[i]}</div>
-      </div>`;
-    }).join('')}
+      <div class="view" id="view-content-detail">
+<div style="padding:16px 24px 24px;">
+  <div style="display:flex;align-items:center;gap:10px;margin-bottom:4px;">
+    <button onclick="showV('home-v2',document.getElementById('nav-dash2'));setTimeout(renderKPI,50);" style="font-size:11px;color:#1565C0;background:none;border:none;cursor:pointer;font-weight:600;">◂ Back to Dashboard v2</button>
   </div>
-  <div style="background:white;border:1px solid #DDE3F0;border-radius:10px;padding:16px;">
-    <div style="font-size:12px;font-weight:700;color:#1A1A2E;margin-bottom:12px;">Module performance — induction path</div>
-    ${[
-      {n:'Product knowledge',pass:92,color:'#1D9E75'},
-      {n:'Call etiquette basics',pass:88,color:'#1D9E75'},
-      {n:'Compliance & ethics',pass:96,color:'#1D9E75'},
-      {n:'Objection handling',pass:71,color:'#639922'},
-      {n:'Value anchoring',pass:64,color:'#EF9F27'},
-      {n:'Closing techniques',pass:58,color:'#E24B4A'}
-    ].map(m=>`<div style="margin-bottom:8px;">
-      <div style="display:flex;justify-content:space-between;margin-bottom:3px;">
-        <div style="font-size:11px;color:#4A5568;">${m.n}</div>
-        <div style="font-size:10px;font-weight:700;color:${m.color};">${m.pass}% pass</div>
-      </div>
-      <div style="height:4px;background:#F0F2F8;border-radius:2px;"><div style="width:${m.pass}%;height:100%;background:${m.color};border-radius:2px;"></div></div>
-    </div>`).join('')}
-  </div>
-</div>
+  <div style="font-size:15px;font-weight:700;color:#1A1A2E;margin-bottom:4px;">Content Performance — Full View</div>
+  <div style="font-size:11px;color:#6C7A99;margin-bottom:16px;">All content in the library, sorted by score lift. Sort or search to find a specific piece.</div>
 
-<!-- COHORT TABLE -->
-<div style="font-size:12px;font-weight:700;color:#1A1A2E;margin-bottom:10px;">Recent joiner cohorts — performance snapshot</div>
-<div style="background:white;border:1px solid #DDE3F0;border-radius:10px;overflow:hidden;">
-  <div style="display:grid;grid-template-columns:100px 80px 80px 80px 80px 100px 1fr;padding:8px 14px;background:#F8FAFF;border-bottom:1px solid #EEF2FF;">
-    ${['Joining week','Joiners','Attempted','Certified','Failed','Avg days','Status'].map(h=>`<div style="font-size:10px;font-weight:700;color:#6C7A99;">${h}</div>`).join('')}
+  <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
+    <input id="content-detail-search" type="text" placeholder="Search content name..." oninput="renderContentDetail()" style="font-size:12px;padding:7px 12px;border:1px solid #DDE3F0;border-radius:7px;width:240px;">
+    <select id="content-detail-sort" onchange="renderContentDetail()" style="font-size:12px;padding:7px 10px;border:1px solid #DDE3F0;border-radius:7px;background:white;color:#1A1A2E;cursor:pointer;">
+      <option value="desc">Score lifted: High to low</option>
+      <option value="asc">Score lifted: Low to high</option>
+    </select>
   </div>
-  ${[
-    {w:'Jun 9–13',j:312,a:287,c:241,f:46,d:5.8,s:'On track'},
-    {w:'Jun 2–6',j:298,a:271,c:218,f:53,d:6.1,s:'On track'},
-    {w:'May 26–30',j:341,a:298,c:224,f:74,d:7.2,s:'Review'},
-    {w:'May 19–23',j:296,a:233,c:191,f:42,d:6.8,s:'Completed'},
-  ].map(r=>{
-    const sc=r.s==='On track'?'#1D9E75':r.s==='Review'?'#EF9F27':'#AAB4CC';
-    const sb=r.s==='On track'?'#E8F5E9':r.s==='Review'?'#FFF8E1':'#F0F2F8';
-    return `<div style="display:grid;grid-template-columns:100px 80px 80px 80px 80px 100px 1fr;padding:8px 14px;border-bottom:1px solid #F0F2F8;align-items:center;">
-      <div style="font-size:11px;color:#1A1A2E;">${r.w}</div>
-      <div style="font-size:11px;font-weight:600;color:#1A1A2E;">${r.j}</div>
-      <div style="font-size:11px;color:#4A5568;">${r.a}</div>
-      <div style="font-size:11px;color:#1D9E75;font-weight:600;">${r.c}</div>
-      <div style="font-size:11px;color:#E24B4A;">${r.f}</div>
-      <div style="font-size:11px;color:#4A5568;">${r.d} days</div>
-      <div><span style="font-size:10px;padding:2px 8px;border-radius:4px;background:${sb};color:${sc};font-weight:600;">${r.s}</span></div>
-    </div>`;
-  }).join('')}
-</div>
 
+  <div style="background:white;border:1px solid #DDE3F0;border-radius:10px;overflow:hidden;">
+    <div style="display:grid;grid-template-columns:2.2fr 1fr 1fr 1fr;padding:8px 14px;background:#F8FAFF;border-bottom:1px solid #EEF2FF;">
+      <div style="font-size:10px;font-weight:700;color:#6C7A99;">Content Name</div>
+      <div style="font-size:10px;font-weight:700;color:#6C7A99;">Content Created Date</div>
+      <div style="font-size:10px;font-weight:700;color:#6C7A99;">Fleet Consumers</div>
+      <div style="font-size:10px;font-weight:700;color:#6C7A99;">Score Lifted</div>
+    </div>
+    <div id="content-detail-rows"></div>
+  </div>
 </div>
-      </div><!-- end view-induction -->
+</div><!-- end view-content-detail -->
+
+      <div class="view" id="view-tna-detail">
+<div style="padding:16px 24px 24px;">
+  <div style="display:flex;align-items:center;gap:10px;margin-bottom:4px;">
+    <button onclick="showV('home-v2',document.getElementById('nav-dash2'));setTimeout(renderKPI,50);" style="font-size:11px;color:#1565C0;background:none;border:none;cursor:pointer;font-weight:600;">◂ Back to Dashboard v2</button>
+  </div>
+  <div style="font-size:15px;font-weight:700;color:#1A1A2E;margin-bottom:4px;">Training Queue — Full View</div>
+  <div style="font-size:11px;color:#6C7A99;margin-bottom:16px;">All TNA observations identified across the fleet this month. Sort or search to find a specific gap.</div>
+
+  <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
+    <input id="tna-detail-search" type="text" placeholder="Search TNA name..." oninput="renderTNADetail()" style="font-size:12px;padding:7px 12px;border:1px solid #DDE3F0;border-radius:7px;width:240px;">
+    <select id="tna-detail-sort" onchange="renderTNADetail()" style="font-size:12px;padding:7px 10px;border:1px solid #DDE3F0;border-radius:7px;background:white;color:#1A1A2E;cursor:pointer;">
+      <option value="severity">Severity: Critical first</option>
+      <option value="count-desc">Fleet identified: High to low</option>
+      <option value="count-asc">Fleet identified: Low to high</option>
+    </select>
+  </div>
+
+  <div style="background:white;border:1px solid #DDE3F0;border-radius:10px;overflow:hidden;">
+    <div style="display:grid;grid-template-columns:1.6fr 3fr 1fr 1fr;padding:8px 14px;background:#F8FAFF;border-bottom:1px solid #EEF2FF;">
+      <div style="font-size:10px;font-weight:700;color:#6C7A99;">TNA Name</div>
+      <div style="font-size:10px;font-weight:700;color:#6C7A99;">Description</div>
+      <div style="font-size:10px;font-weight:700;color:#6C7A99;">Severity</div>
+      <div style="font-size:10px;font-weight:700;color:#6C7A99;">Fleet Identified</div>
+    </div>
+    <div id="tna-detail-rows"></div>
+  </div>
+</div>
+</div><!-- end view-tna-detail -->
+
 
       <div class="view" id="view-agent-list">
         <div class="breadcrumb">
           <span class="bc-item" onclick="showV('home',document.getElementById('nav-dash'))">Dashboard</span>
           <span class="bc-sep">/</span>
-          <span class="bc-item" onclick="showV('home',document.getElementById('nav-dash'))">Training Queue</span>
+          <span class="bc-item" onclick="showV('home-v2',document.getElementById('nav-dash2'));setTimeout(renderKPI,50)">Training Queue</span>
           <span class="bc-sep">/</span>
           <span class="bc-item cur" id="bc-train">Objection Handling</span>
         </div>
@@ -907,7 +861,7 @@ body{font-family:var(--font);background:var(--gray-50);color:var(--gray-900);min
         <div class="breadcrumb">
           <span class="bc-item" onclick="showV('home',document.getElementById('nav-dash'))">Dashboard</span>
           <span class="bc-sep">/</span>
-          <span class="bc-item" onclick="showV('home',document.getElementById('nav-dash'))">Training Queue</span>
+          <span class="bc-item" onclick="showV('home-v2',document.getElementById('nav-dash2'));setTimeout(renderKPI,50)">Training Queue</span>
           <span class="bc-sep">/</span>
           <span class="bc-item" onclick="showV('agent-list',null)" id="bc-train2">Objection Handling</span>
           <span class="bc-sep">/</span>
@@ -1144,7 +1098,7 @@ body{font-family:var(--font);background:var(--gray-50);color:var(--gray-900);min
         <div class="breadcrumb">
           <span class="bc-item" onclick="showV('home',document.getElementById('nav-dash'))">Dashboard</span>
           <span class="bc-sep">/</span>
-          <span class="bc-item" onclick="showV('home',document.getElementById('nav-dash'))">Training Queue</span>
+          <span class="bc-item" onclick="showV('home-v2',document.getElementById('nav-dash2'));setTimeout(renderKPI,50)">Training Queue</span>
           <span class="bc-sep">/</span>
           <span class="bc-item cur" id="bc-obs-agent">Observation Detail</span>
         </div>
@@ -1267,12 +1221,12 @@ body{font-family:var(--font);background:var(--gray-50);color:var(--gray-900);min
             </div>
           </div>
           <div style="margin-bottom:14px;">
-            <div style="font-size:12px;font-weight:500;color:var(--gray-900);margin-bottom:5px;">Describe what you want to create</div>
+            <div style="font-size:12px;font-weight:500;color:var(--gray-900);margin-bottom:5px;">AI Prompt to generate content</div>
             <textarea id="gen-prompt" style="width:100%;height:72px;border:1.5px solid var(--gray-200);border-radius:var(--radius-sm);padding:10px 12px;font-size:13px;font-family:var(--font);resize:none;outline:none;color:var(--gray-900);" placeholder="e.g. A 5-minute video script showing how to handle the Jio price objection using real customer scenarios from Faridabad market..."></textarea>
           </div>
           <div style="display:flex;align-items:center;justify-content:space-between;">
-            <div style="font-size:11.5px;color:var(--gray-400);">AI will generate content tailored to your fleet's gap areas</div>
-            <button class="btn-blue" onclick="generateContent()" style="gap:6px;">🤖 Generate with AI</button>
+            <div style="font-size:11.5px;color:var(--gray-400);">Copy this prompt and paste it into your content creation AI agent.</div>
+            <button class="btn-outline" onclick="copyGenPrompt()" style="gap:6px;">📋 Copy Prompt</button>
           </div>
         </div>
 
@@ -1998,7 +1952,7 @@ function renderCallCard(data){
   const container = document.getElementById('live-feed-container');
   const sc = data.score >= 70 ? 'good' : data.score >= 55 ? 'avg' : 'poor';
   const initials = (data.phone || 'XF').slice(-4,-2).toUpperCase() || 'XF';
-  const gaps = Array.isArray(data.gaps) ? data.gaps : (data.gaps || '').split(',').filter(Boolean);
+  const gaps = normalizeGaps(data.gaps);
 
   // Parse transcript into lines
   let transcriptHtml = '';
@@ -2051,7 +2005,7 @@ function renderCallCard(data){
       <div class="call-card-section">
         <div class="call-section-title">Training Gaps Identified</div>
         <div class="gap-list">
-          ${gaps.length > 0 ? gaps.map(g=>`<div class="gap-item"><span class="gap-ico">⚠</span>${g.trim()}</div>`).join('') : '<div style="font-size:12px;color:var(--gray-400);">No gaps identified</div>'}
+          ${gaps.length > 0 ? gaps.map(g=>`<div class="gap-item"><span class="gap-ico">⚠</span>${g}</div>`).join('') : '<div style="font-size:12px;color:var(--gray-400);">No gaps identified</div>'}
         </div>
       </div>
       <div class="call-card-section">
@@ -2168,6 +2122,19 @@ function generateContent(){
   setTimeout(() => toast('✅ Content generated! Review in draft folder.'), 2500);
 }
 
+function copyGenPrompt(){
+  const promptEl = document.getElementById('gen-prompt');
+  const text = promptEl ? promptEl.value : '';
+  if(!text.trim()){ toast('Nothing to copy yet'); return; }
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(text).then(()=>toast('📋 Prompt copied — paste it into your content AI agent')).catch(()=>{
+      promptEl.select(); toast('Select-all done — copy with Ctrl+C / Cmd+C');
+    });
+  } else {
+    promptEl.select(); toast('Select-all done — copy with Ctrl+C / Cmd+C');
+  }
+}
+
 function filterContent(type){
   const titles = {all:'All Training Content (12)',video:'Videos (5)',ppt:'Presentations (4)',audio:'Audio Guides (3)'};
   toast('Showing: ' + (titles[type] || 'All Content'));
@@ -2208,6 +2175,12 @@ function processBulkUpload(){
 
 // ── RECENT OBSERVATIONS ─────────────────────────────────
 // Storage key for observations
+// Normalize gaps from any shape (array of objects with .area, array of strings, or comma-string) into plain trimmed strings
+function normalizeGaps(rawGaps){
+  const arr = Array.isArray(rawGaps) ? rawGaps : (rawGaps || '').split(',').filter(Boolean);
+  return arr.map(g => (typeof g === 'string' ? g : (g?.area || '')).trim()).filter(Boolean);
+}
+
 const RO_KEY = 'traininggpt_observations';
 var roSel = new Set();
 var currentObs = null;
@@ -2279,54 +2252,26 @@ function renderROTable(obs){
   if(countEl) countEl.textContent = `— ${obs.length} record${obs.length!==1?'s':''}`;
 
   container.innerHTML = obs.map((o, i) => {
-    let overallScore = 0;
-    try {
-      const parsed = parseGroqResponse(o.score);
-      overallScore = o.overallScore || parsed.scores?.pitch || parseInt(o.score) || 0;
-    } catch(e){ overallScore = o.overallScore || 0; }
+    const parsed = parseGroqResponse(o.score);
+    const overallScore = o.overallScore || parsed.scores?.pitch || parseInt(o.score) || 0;
     const sc = overallScore >= 70 ? 'good' : overallScore >= 55 ? 'avg' : 'poor';
-
-    // Gaps can be array of STRINGS (old format) or array of OBJECTS (Worker v4 format)
-    const gapsRaw = Array.isArray(o.gaps) ? o.gaps : (typeof o.gaps === 'string' ? o.gaps.split(',').filter(Boolean) : []);
-    const sevColor = {High:'#E24B4A', Medium:'#EF9F27', Low:'#1D9E75'};
-    const sevBg = {High:'#FFEBEE', Medium:'#FFF8E1', Low:'#E8F5E9'};
-    const gapStr = gapsRaw.slice(0,3).map(g => {
-      const isObj = g && typeof g === 'object';
-      const area = isObj ? (g.area || 'Gap') : String(g).trim();
-      const sev = isObj ? (g.severity || 'Medium') : 'Medium';
-      const col = sevColor[sev] || '#EF9F27';
-      const bg = sevBg[sev] || '#FFF8E1';
-      return `<span style="font-size:10px;padding:2px 7px;border-radius:4px;background:${bg};color:${col};font-weight:600;border:1px solid ${col}22;white-space:nowrap;display:inline-block;margin:1px;">${area}</span>`;
-    }).join('');
-
-    const fatalBanner = o.fatal ? `<span style="font-size:10px;padding:2px 7px;border-radius:4px;background:#FFEBEE;color:#B71C1C;font-weight:800;border:1px solid #E24B4A;margin-left:4px;display:inline-block;">⚠ FATAL</span>` : '';
-    const wrongPlanBanner = o.wrongPlan ? `<span style="font-size:10px;padding:2px 7px;border-radius:4px;background:#FFF8E1;color:#E65100;font-weight:700;border:1px solid #EF9F2744;margin-left:4px;display:inline-block;">Wrong plan</span>` : '';
-    const priority = o.coachingPriority ? `<div style="font-size:10px;color:#6C7A99;margin-top:3px;max-width:260px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;" title="${String(o.coachingPriority).replace(/"/g,'&quot;')}">▶ ${o.coachingPriority}</div>` : '';
-
+    const gaps = normalizeGaps(o.gaps);
+    const gapStr = gaps.slice(0,2).map(g => `<span class="gap-tag">${g}</span>`).join('');
     const phone = o.phone || '—';
     const isS = roSel.has(i);
     const agentName = getAgentName(phone);
     const nameDisplay = agentName.length > 10 ? agentName.slice(0,10) : agentName;
     const phoneDisplay = phone.slice(-10);
-
-    return `<div class="ro-row ${isS?'selected':''}" id="ro-row-${i}" style="${o.fatal?'border-left:3px solid #E24B4A;':''}">
+    return `<div class="ro-row ${isS?'selected':''}" id="ro-row-${i}">
       <div><div class="checkbox ${isS?'chk':''}" onclick="togROAgent(event,${i})">${isS?'✓':''}</div></div>
       <div style="font-size:11px;color:var(--gray-600);">${toIST(o.receivedAt)}</div>
       <div class="agent-cell" onclick="showObsDetail(${i})" style="cursor:pointer;">
-        <div class="av" style="background:${o.fatal?'#E24B4A':'var(--navy)'};width:24px;height:24px;font-size:9px;flex-shrink:0;">${agentName.slice(0,2).toUpperCase()}</div>
-        <div>
-          <div style="font-size:12px;font-weight:500;color:var(--gray-900);max-width:100px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${nameDisplay}</div>
-          ${o.fatal ? '<div style="font-size:9px;color:#E24B4A;font-weight:700;">FATAL FLAG</div>' : ''}
-        </div>
+        <div class="av" style="background:var(--navy);width:24px;height:24px;font-size:9px;flex-shrink:0;">${agentName.slice(0,2).toUpperCase()}</div>
+        <div style="font-size:12px;font-weight:500;color:var(--gray-900);max-width:80px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${nameDisplay}</div>
       </div>
       <div style="font-size:11.5px;color:var(--gray-600);">${phoneDisplay}</div>
-      <div style="display:flex;flex-direction:column;align-items:flex-start;gap:2px;">
-        <span class="score-pill ${sc}" style="font-size:11px;padding:2px 5px;">${overallScore}</span>
-      </div>
-      <div style="display:flex;flex-direction:column;gap:2px;max-width:280px;">
-        <div style="display:flex;flex-wrap:wrap;gap:2px;">${gapStr || '<span class="gap-tag">—</span>'}${fatalBanner}${wrongPlanBanner}</div>
-        ${priority}
-      </div>
+      <div><span class="score-pill ${sc}" style="font-size:11px;padding:2px 5px;">${overallScore}</span></div>
+      <div class="gap-tags" style="flex-wrap:wrap;">${gapStr || '<span class="gap-tag">—</span>'}</div>
       <div style="display:flex;align-items:center;gap:4px;">
         <button onclick="showObsDetail(${i})" style="height:24px;padding:0 8px;background:var(--blue-btn);color:white;border:none;border-radius:4px;font-size:10.5px;font-weight:500;cursor:pointer;font-family:inherit;">View</button>
         <button onclick="pushSingleObs(event,${i})" style="height:24px;padding:0 8px;background:white;color:var(--blue-btn);border:1px solid var(--blue-btn);border-radius:4px;font-size:10.5px;font-weight:500;cursor:pointer;font-family:inherit;">Push</button>
@@ -2362,9 +2307,8 @@ function pushSingleObs(e, i){
   e.stopPropagation();
   const obs = loadObservations();
   const o = obs[i];
-  const gapsRaw = Array.isArray(o.gaps) ? o.gaps : (typeof o.gaps==='string' ? o.gaps.split(',').filter(Boolean) : []);
-  const firstGap = gapsRaw[0];
-  curTrain = (firstGap && typeof firstGap === 'object') ? (firstGap.area || 'Training') : (firstGap || 'Training');
+  const gaps = normalizeGaps(o.gaps);
+  curTrain = gaps[0] || 'Training';
   roSel.clear();
   roSel.add(i);
   openPushModal();
@@ -2377,16 +2321,9 @@ function showObsDetail(i){
   const o = obs[i];
   currentObs = o;
 
-  let overallScore = 0;
-  try {
-    const parsed = parseGroqResponse(o.score);
-    overallScore = o.overallScore || parsed.scores?.pitch || parseInt(o.score) || 0;
-  } catch(e){ overallScore = o.overallScore || 0; }
-
-  // Gaps: handle both string array (legacy) and object array (Worker v4)
-  const gapsRaw = Array.isArray(o.gaps) ? o.gaps : (typeof o.gaps==='string' ? o.gaps.split(',').filter(Boolean) : []);
-  const gapAreaNames = gapsRaw.map(g => (g && typeof g==='object') ? (g.area||'Gap') : String(g).trim());
-
+  const parsed = parseGroqResponse(o.score);
+  const overallScore = o.overallScore || parsed.scores?.pitch || parseInt(o.score) || 0;
+  const gaps = normalizeGaps(o.gaps);
   const phone = o.phone || '—';
   const initials = phone.slice(-4,-2) || 'XF';
 
@@ -2400,20 +2337,8 @@ function showObsDetail(i){
   // Meta row
   document.getElementById('obs-phone').textContent = phone;
   document.getElementById('obs-time').textContent = toIST(o.receivedAt);
-  document.getElementById('obs-gap').textContent = gapAreaNames.slice(0,2).join(', ') || '—';
+  document.getElementById('obs-gap').textContent = gaps.slice(0,2).join(', ') || '—';
   document.getElementById('obs-callid').textContent = (o.callId || '—').slice(0,20);
-
-  // Fatal flag banner (if container exists)
-  const fatalEl = document.getElementById('obs-fatal-banner');
-  if(fatalEl){
-    if(o.fatal){
-      fatalEl.style.display = 'block';
-      fatalEl.innerHTML = '<div style="background:#FFEBEE;border:1px solid #E24B4A;border-radius:8px;padding:10px 14px;margin-bottom:12px;"><div style="font-size:12px;font-weight:800;color:#B71C1C;">⚠ FATAL FLAG DETECTED</div><div style="font-size:11px;color:#6C7A99;margin-top:3px;">' + (o.fatalReason || 'See transcript for details') + '</div></div>';
-    } else {
-      fatalEl.style.display = 'none';
-      fatalEl.innerHTML = '';
-    }
-  }
 
   // Transcript
   const transcriptEl = document.getElementById('obs-transcript');
@@ -2447,10 +2372,10 @@ function showObsDetail(i){
 
   // What's good / improvement — use real data from Groq evaluation
   const goodItems = Array.isArray(o.good) && o.good.length > 0
-    ? o.good.map(g => (g && typeof g==='object') ? (g.what_happened || g.area || 'Strength noted') : String(g))
+    ? o.good.map(g => (typeof g === 'string' ? g : (g?.what_happened || g?.area || ''))).filter(Boolean)
     : ['Professional tone maintained throughout the call.', 'Clear product introduction with plan details.', 'Proper greeting and Airtel context established.'];
-  const badItems = gapsRaw.length > 0
-    ? gapsRaw.map(g => (g && typeof g==='object') ? `${g.area}${g.what_to_say ? ' — ' + g.what_to_say : ''}` : String(g).trim())
+  const badItems = gaps.length > 0
+    ? gaps
     : ['Review call for improvement areas.'];
 
   const og=document.getElementById('obs-good'); if(og) og.innerHTML = goodItems.map(g =>
@@ -2487,7 +2412,7 @@ function showObsDetail(i){
 
 function openPushModalFromObs(){
   if(currentObs){
-    const gaps = Array.isArray(currentObs.gaps) ? currentObs.gaps : (currentObs.gaps||'').split(',').filter(Boolean);
+    const gaps = normalizeGaps(currentObs.gaps);
     curTrain = gaps[0] || 'Training';
   }
   openPushModal();
@@ -2566,20 +2491,40 @@ window.addEventListener('load', function(){
   // Show URL hint
   const urlEl = document.getElementById('lf-webhook-display');
   if(urlEl) urlEl.textContent = window.location.href.split('?')[0] + '?callId=xxx&phone=+91xxx&score=72&gaps=Objection,Closing&transcript=...';
+
+  // Pre-fill a default prompt so the trainer always has a ready-to-copy AI prompt rather than a blank box
+  ensureGenPromptFilled();
 });
+
+function ensureGenPromptFilled(){
+  const genPromptEl = document.getElementById('gen-prompt');
+  if(genPromptEl && !genPromptEl.value.trim()){
+    const defaultGap = document.getElementById('gen-gap')?.value || 'Objection Handling';
+    genPromptEl.value = 'Create a 60-second training module for Airtel XFE agents addressing the gap: "'+defaultGap+'". Format: Video. Language: Hinglish. Tone: Professional but conversational. Include 1 real-world scenario, the correct technique with example script, and a key takeaway.';
+  }
+}
 </script>
 
 <script>
 const RANDOM_NAMES=['Amit Sharma','Priya Singh','Rahul Verma','Sunita Gupta','Deepak Kumar','Neha Yadav','Vikram Patel','Anjali Mishra','Rajesh Tiwari','Pooja Joshi','Manoj Dubey','Rekha Chauhan','Suresh Rawat','Kavita Soni','Arun Mehta','Divya Kapoor','Rajan Nair','Meena Pillai','Sunil Rao','Anita Desai','Karan Malhotra','Sonal Trivedi','Harish Bhatia','Ritu Arora','Gaurav Saxena','Mamta Pandey','Vinod Shukla','Geeta Bajaj','Sanjay Dixit','Lalita Aggarwal','Nitin Choudhary','Seema Kulkarni','Dinesh Iyer','Usha Nambiar','Prakash Reddy','Sarita Patil','Bhupesh Jain','Manju Bhatt','Rohit Sinha','Chandrika Das'];
 
 const ROLE_DATA={
-  XFE:{label:'XFE — Xstream Fiber Express',baseline:51,postTraining:73,identified:38490,pushed:29110,completed:24760,preScore:51,postScore:73,atRisk:8240,
+  XFE:{label:'XFE — Xstream Fiber Express',baseline:78,postTraining:73,identified:38490,pushed:29110,completed:24760,preScore:70,postScore:74,atRisk:8240,
+    signals:{calls:31200,performance:9840,appSignal:4960},
     dims:[{name:'Needs assessment',score:44},{name:'Objection handling',score:48},{name:'Value anchoring',score:52},{name:'Closing',score:55},{name:'Competition',score:61},{name:'Product knowledge',score:67},{name:'Call etiquette',score:74},{name:'Greeting',score:78}],
     safety:[{label:'Abusive language',count:2,color:'#E24B4A'},{label:'Financial misconduct',count:1,color:'#E24B4A'},{label:'Wrong plan pitched',count:5,color:'#EF9F27'},{label:'Install misrepresentation',count:4,color:'#EF9F27'},{label:'Pressure tactics',count:0,color:'#1D9E75'}]},
-  ENG:{label:'Field Engineer',baseline:58,postTraining:76,identified:12400,pushed:9800,completed:8200,preScore:58,postScore:76,atRisk:2400,dims:[{name:'Safety protocol',score:72},{name:'First-time resolution',score:64},{name:'Customer handling',score:58},{name:'Documentation',score:81},{name:'Technical accuracy',score:77},{name:'SLA adherence',score:69},{name:'Escalation handling',score:55},{name:'Tools usage',score:83}],safety:[{label:'Safety violation',count:0,color:'#1D9E75'},{label:'Customer complaint',count:3,color:'#EF9F27'},{label:'Repeat visit',count:8,color:'#EF9F27'},{label:'SLA breach',count:11,color:'#E24B4A'}]},
-  CC:{label:'Call Center Agent',baseline:54,postTraining:71,identified:9620,pushed:7400,completed:6200,preScore:54,postScore:71,atRisk:2960,dims:[{name:'Call opening',score:66},{name:'Needs identification',score:51},{name:'Product knowledge',score:59},{name:'Empathy',score:63},{name:'Resolution rate',score:57},{name:'Call closing',score:48},{name:'Compliance',score:71},{name:'Call etiquette',score:74}],safety:[{label:'Abusive language',count:4,color:'#E24B4A'},{label:'Misinformation',count:6,color:'#E24B4A'},{label:'Compliance breach',count:3,color:'#E24B4A'}]},
-  HDO:{label:'HDO',baseline:61,postTraining:78,identified:4920,pushed:4100,completed:3600,preScore:61,postScore:78,atRisk:738,dims:[{name:'On-time delivery',score:79},{name:'Customer greeting',score:82},{name:'Upsell attempt',score:48},{name:'Payment handling',score:77},{name:'Documentation',score:84},{name:'Product pitch',score:52}],safety:[{label:'Payment misconduct',count:0,color:'#1D9E75'},{label:'Delivery miss',count:2,color:'#EF9F27'},{label:'Customer complaint',count:1,color:'#EF9F27'}]},
-  MR:{label:'Market Representative',baseline:49,postTraining:69,identified:7436,pushed:5720,completed:4576,preScore:49,postScore:69,atRisk:2002,dims:[{name:'Territory coverage',score:71},{name:'Retailer engagement',score:58},{name:'Product demo',score:52},{name:'Order booking',score:64},{name:'Competition awareness',score:47},{name:'Scheme knowledge',score:55}],safety:[{label:'Scheme misrepresentation',count:3,color:'#E24B4A'},{label:'Cash handling issue',count:2,color:'#E24B4A'}]}
+  ENG:{label:'Field Engineer',baseline:66,postTraining:76,identified:12400,pushed:9800,completed:8200,preScore:58,postScore:76,atRisk:2400,
+    signals:{calls:8200,performance:5100,appSignal:2300},
+    dims:[{name:'Safety protocol',score:72},{name:'First-time resolution',score:64},{name:'Customer handling',score:58},{name:'Documentation',score:81},{name:'Technical accuracy',score:77},{name:'SLA adherence',score:69},{name:'Escalation handling',score:55},{name:'Tools usage',score:83}],safety:[{label:'Safety violation',count:0,color:'#1D9E75'},{label:'Customer complaint',count:3,color:'#EF9F27'},{label:'Repeat visit',count:8,color:'#EF9F27'},{label:'SLA breach',count:11,color:'#E24B4A'}]},
+  CC:{label:'Call Center Agent',baseline:62,postTraining:71,identified:9620,pushed:7400,completed:6200,preScore:54,postScore:71,atRisk:2960,
+    signals:{calls:9620,performance:3100,appSignal:1450},
+    dims:[{name:'Call opening',score:66},{name:'Needs identification',score:51},{name:'Product knowledge',score:59},{name:'Empathy',score:63},{name:'Resolution rate',score:57},{name:'Call closing',score:48},{name:'Compliance',score:71},{name:'Call etiquette',score:74}],safety:[{label:'Abusive language',count:4,color:'#E24B4A'},{label:'Misinformation',count:6,color:'#E24B4A'},{label:'Compliance breach',count:3,color:'#E24B4A'}]},
+  HDO:{label:'HDO',baseline:69,postTraining:78,identified:4920,pushed:4100,completed:3600,preScore:61,postScore:78,atRisk:738,
+    signals:{calls:2100,performance:2600,appSignal:1100},
+    dims:[{name:'On-time delivery',score:79},{name:'Customer greeting',score:82},{name:'Upsell attempt',score:48},{name:'Payment handling',score:77},{name:'Documentation',score:84},{name:'Product pitch',score:52}],safety:[{label:'Payment misconduct',count:0,color:'#1D9E75'},{label:'Delivery miss',count:2,color:'#EF9F27'},{label:'Customer complaint',count:1,color:'#EF9F27'}]},
+  MR:{label:'Market Representative',baseline:57,postTraining:69,identified:7436,pushed:5720,completed:4576,preScore:49,postScore:69,atRisk:2002,
+    signals:{calls:4100,performance:2336,appSignal:1280},
+    dims:[{name:'Territory coverage',score:71},{name:'Retailer engagement',score:58},{name:'Product demo',score:52},{name:'Order booking',score:64},{name:'Competition awareness',score:47},{name:'Scheme knowledge',score:55}],safety:[{label:'Scheme misrepresentation',count:3,color:'#E24B4A'},{label:'Cash handling issue',count:2,color:'#E24B4A'}]}
 };
 
 const FLEET_TOTAL = 103000;
@@ -2596,13 +2541,15 @@ function renderKPI(){
   if(!d)return;
 
   // ── SECTION 1: PERFORMANCE FUNNEL ──
+  const totalSignals = d.signals.calls + d.signals.performance + d.signals.appSignal;
   const funnel=[
     {label:'Total Fleet',val:FLEET_TOTAL,sub:'All fleet · all LOBs',color:'#3C4A6B',click:null,note:''},
-    {label:'Fleet Baseline Score',val:d.baseline,sub:'Avg score · pre-training',color:'#5C6BC0',click:null,note:'/100',isScore:true},
-    {label:'Identified for Training',val:d.identified,sub:'Groq gap detected',color:'#EF9F27',click:null,note:''},
+    {label:'Total Signal Evaluated',val:totalSignals,sub:'Calls · Performance · App',color:'#6C63B5',click:null,note:'',signalBreakdown:d.signals},
+    {label:'Fleet Baseline Score',val:d.baseline,sub:'Avg score · all evaluated fleet',color:'#5C6BC0',click:null,note:'/100',isScore:true},
+    {label:'Identified for Training',val:d.identified,sub:'',color:'#EF9F27',click:null,note:''},
     {label:'Training Pushed',val:d.pushed,sub:'Trainer assigned',color:'#1976D2',click:null,note:''},
     {label:'Training Completed',val:d.completed,sub:'Agent completed',color:'#0D47A1',click:null,note:''},
-    {label:'Pre-training Score',val:d.preScore,sub:'Avg before training',color:'#E24B4A',click:null,note:'/100',isScore:true},
+    {label:'Pre-training Score',val:d.preScore,sub:'Avg · fleet identified for training',color:'#E24B4A',click:null,note:'/100',isScore:true},
     {label:'Post-training Score',val:d.postScore,sub:'Avg after training',color:'#1D9E75',click:null,note:'/100',isScore:true},
     {label:'Fleet at Risk',val:d.atRisk,sub:'Not improving · escalate',color:'#A32D2D',click:'switchKPITabV2(1)',note:'⚠'}
   ];
@@ -2610,19 +2557,23 @@ function renderKPI(){
   const pf=document.getElementById('perf-funnel');
   if(pf){
     pf.innerHTML=funnel.map((f,i)=>{
-      const pct=i===0?null:i===1||i===5||i===6?null:Math.round(f.val/funnel[2].val*100);
+      // Indices that should NOT show "% of identified": Total Fleet(0), Total Signal(1), Baseline Score(2), Pre-score(6), Post-score(7)
+      const noPctIdx=[0,1,2,6,7];
+      const pct=noPctIdx.includes(i)?null:Math.round(f.val/funnel[3].val*100);
       const arrow=i<funnel.length-1?'<div style="position:absolute;right:-8px;top:50%;transform:translateY(-50%);font-size:14px;color:#DDE3F0;z-index:1;">→</div>':'';
       const valDisplay=f.isScore?`<span style="font-size:22px;font-weight:700;color:${scoreColor(f.val)};">${f.val}</span><span style="font-size:11px;color:#AAB4CC;">${f.note}</span>`:
         `<span style="font-size:22px;font-weight:700;color:${f.color};">${fmtN(f.val)}</span>`;
-      const clickAttr=f.click?`onclick="${f.click}" style="cursor:pointer;"`:''
-      return `<div class="funnel-card" ${clickAttr} style="background:white;border:1px solid #DDE3F0;border-radius:10px;padding:12px 10px;position:relative;${f.click?'border-color:'+f.color+';':''}" ${f.click?'title="Click to see supervisor view"':''}>
+      const clickAttr=f.click?`onclick="${f.click}"`:''
+      const signalFooter=f.signalBreakdown?`<div style="margin-top:6px;padding-top:6px;border-top:1px solid #F0F2F8;font-size:8.5px;color:#8A8AA0;line-height:1.5;">Calls: ${fmtN(f.signalBreakdown.calls)}<br>Performance: ${fmtN(f.signalBreakdown.performance)}<br>App Signal: ${fmtN(f.signalBreakdown.appSignal)}</div>`:'';
+      return `<div class="funnel-card" ${clickAttr} style="background:white;border:1px solid #DDE3F0;border-radius:10px;padding:12px 10px;position:relative;${f.click?'border-color:'+f.color+';cursor:pointer;':''}" ${f.click?'title="Click to see supervisor view"':''}>
         ${arrow}
         <div style="width:4px;height:4px;border-radius:50%;background:${f.color};margin-bottom:6px;"></div>
         <div style="font-size:10px;font-weight:700;color:#6C7A99;margin-bottom:6px;line-height:1.3;">${f.label}</div>
         <div style="margin-bottom:4px;">${valDisplay}</div>
         ${pct!==null?`<div style="font-size:9px;color:${pct>80?'#1D9E75':pct>60?'#EF9F27':'#E24B4A'};font-weight:700;">${pct}% of identified</div>`:''}
-        <div style="font-size:9px;color:#AAB4CC;margin-top:2px;">${f.sub}</div>
+        ${f.sub?`<div style="font-size:9px;color:#AAB4CC;margin-top:2px;">${f.sub}</div>`:''}
         ${f.isScore?`<div style="margin-top:4px;height:3px;background:#F0F2F8;border-radius:2px;"><div style="width:${f.val}%;height:100%;background:${scoreColor(f.val)};border-radius:2px;"></div></div>`:''}
+        ${signalFooter}
       </div>`;
     }).join('');
   }
@@ -2635,6 +2586,7 @@ function renderKPI(){
     {name:'Product Knowledge Score',icon:'📚',people:Math.round(d.identified*0.7),avgKPI:'85%',jump:'+5pts',notImproved:Math.round(d.atRisk*0.15),color:'#7B1FA2',bg:'#F3E5F5',desc:'DKT product knowledge test score'}
   ];
 
+  window.LAST_KPIS = kpis;
   const kic=document.getElementById('kpi-impact-cards');
   if(kic){
     kic.innerHTML=kpis.map(k=>`<div style="background:white;border:1px solid #DDE3F0;border-radius:12px;padding:16px;border-top:3px solid ${k.color};">
@@ -2680,15 +2632,16 @@ function renderKPI(){
     <div>TNA Name</div><div>Fleet consumed</div><div>Score lift</div></div>`;
 
   const bestContent=[
-    {tna:'FEEL-FELT-FOUND Objection',fleet:24800,lift:'+24 pts'},{tna:'OTT Value Anchor Script',fleet:19400,lift:'+21 pts'},
-    {tna:'Assumptive Close Technique',fleet:16200,lift:'+18 pts'},{tna:'Jio Counter Comparison',fleet:12600,lift:'+14 pts'},
-    {tna:'Discovery Questions Audio',fleet:9800,lift:'+9 pts'}
+    {tna:'FEEL-FELT-FOUND Objection',fleet:24800,lift:'+24 pts',liftVal:24,created:'12 Apr 2026'},{tna:'OTT Value Anchor Script',fleet:19400,lift:'+21 pts',liftVal:21,created:'03 May 2026'},
+    {tna:'Assumptive Close Technique',fleet:16200,lift:'+18 pts',liftVal:18,created:'22 Mar 2026'},{tna:'Jio Counter Comparison',fleet:12600,lift:'+14 pts',liftVal:14,created:'15 May 2026'},
+    {tna:'Discovery Questions Audio',fleet:9800,lift:'+9 pts',liftVal:9,created:'28 Apr 2026'}
   ];
   const bottomContent=[
-    {tna:'Generic Greeting Module',fleet:8400,lift:'+2 pts'},{tna:'Installation Process Doc',fleet:6200,lift:'+4 pts'},
-    {tna:'Basic Product Overview',fleet:5800,lift:'+3 pts'},{tna:'Hindi Compliance Guide',fleet:4200,lift:'+2 pts'},
-    {tna:'Old Jio Counter (2024)',fleet:3100,lift:'+1 pt'}
+    {tna:'Generic Greeting Module',fleet:8400,lift:'+2 pts',liftVal:2,created:'04 Jan 2026'},{tna:'Installation Process Doc',fleet:6200,lift:'+4 pts',liftVal:4,created:'18 Feb 2026'},
+    {tna:'Basic Product Overview',fleet:5800,lift:'+3 pts',liftVal:3,created:'09 Jan 2026'},{tna:'Hindi Compliance Guide',fleet:4200,lift:'+2 pts',liftVal:2,created:'25 Feb 2026'},
+    {tna:'Old Jio Counter (2024)',fleet:3100,lift:'+1 pt',liftVal:1,created:'11 Nov 2024'}
   ];
+  window.ALL_CONTENT = bestContent.concat(bottomContent);
 
   const renderContentRows=(data,color)=>data.map(r=>`<div style="display:grid;grid-template-columns:2fr 1fr 80px;padding:7px 14px;border-bottom:1px solid #F0F2F8;align-items:center;">
     <div style="font-size:11px;color:#1A1A2E;">${r.tna}</div>
@@ -2739,30 +2692,102 @@ function showMoreTNA(){
 
 function goCreateContent(tnaName){
   showV('content-library',document.getElementById('nav-content'));
-  // Pre-fill content creation after nav
   setTimeout(()=>{
-    const nameEl=document.getElementById('new-content-name');
-    const gapEl=document.getElementById('new-content-gap');
-    const promptEl=document.getElementById('new-content-prompt');
-    const idEl=document.getElementById('new-content-id');
-    if(nameEl)nameEl.value=tnaName+' — Training Module';
-    if(idEl)idEl.value='CNT-'+Math.floor(1000+Math.random()*9000);
-    if(gapEl)gapEl.value=tnaName;
-    if(promptEl)promptEl.value='Create a 60-second training module for Airtel XFE agents addressing the gap: "'+tnaName+'". Format: Video. Language: Hinglish. Tone: Professional but conversational. Include 1 real-world scenario, the correct technique with example script, and a key takeaway.';
-    // Open create panel if exists
-    const panel=document.getElementById('create-content-panel');
-    if(panel)panel.style.display='block';
-  },200);
+    const gapEl = document.getElementById('gen-gap');
+    const promptEl = document.getElementById('gen-prompt');
+    if(gapEl){
+      // If this gap isn't already an option, add it so the dropdown reflects the real TNA gap
+      let found = Array.from(gapEl.options).some(o => o.value === tnaName || o.textContent === tnaName);
+      if(!found){
+        const opt = document.createElement('option');
+        opt.value = tnaName; opt.textContent = tnaName;
+        gapEl.insertBefore(opt, gapEl.firstChild);
+      }
+      gapEl.value = tnaName;
+    }
+    if(promptEl) promptEl.value = 'Create a 60-second training module for Airtel XFE agents addressing the gap: "'+tnaName+'". Format: Video. Language: Hinglish. Tone: Professional but conversational. Include 1 real-world scenario, the correct technique with example script, and a key takeaway.';
+    // Scroll to top AFTER content is injected (so the now-taller textarea doesn't push the scroll position),
+    // and do it on every available scroll target so it's bulletproof regardless of which element actually scrolls.
+    window.scrollTo({top:0, behavior:'instant'});
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
+    document.querySelectorAll('.main, .app, main').forEach(el=>{ if(el) el.scrollTop = 0; });
+    // Do NOT call .focus() here — focusing an element can cause the browser to auto-scroll it into view,
+    // which can re-introduce the very "lands at bottom" bug this is fixing.
+  },50);
+}
+
+function renderContentDetail(){
+  const el=document.getElementById('content-detail-rows');
+  if(!el)return;
+  const all=window.ALL_CONTENT||[];
+  const q=(document.getElementById('content-detail-search')?.value||'').toLowerCase().trim();
+  const sortDir=document.getElementById('content-detail-sort')?.value||'desc';
+  let rows=all.filter(r=>!q||r.tna.toLowerCase().includes(q));
+  rows=rows.slice().sort((a,b)=>sortDir==='desc'?b.liftVal-a.liftVal:a.liftVal-b.liftVal);
+  el.innerHTML=rows.map(r=>`<div style="display:grid;grid-template-columns:2.2fr 1fr 1fr 1fr;padding:10px 14px;border-bottom:1px solid #F0F2F8;align-items:center;">
+    <div style="font-size:12px;color:#1A1A2E;font-weight:600;">${r.tna}</div>
+    <div style="font-size:12px;color:#6C7A99;">${r.created}</div>
+    <div style="font-size:12px;color:#1A1A2E;">${fmtN(r.fleet)}</div>
+    <div style="font-size:12px;font-weight:700;color:${r.liftVal>=10?'#1D9E75':r.liftVal>=5?'#EF9F27':'#E24B4A'};">${r.lift}</div>
+  </div>`).join('') || '<div style="padding:20px;text-align:center;font-size:12px;color:#AAB4CC;">No matching content</div>';
+}
+
+const TNA_QUEUE_DATA=[
+  {name:'Objection Handling',sev:'Critical',count:847,desc:'Agents failing to counter Jio price objections and losing leads at pitch stage.'},
+  {name:'Value Anchoring',sev:'High',count:534,desc:'Agents quoting speed without connecting to customer-specific benefits.'},
+  {name:'Closing Technique',sev:'High',count:412,desc:'Agents asking permission to close instead of using assumptive close.'},
+  {name:'Product Knowledge',sev:'Medium',count:389,desc:'Gaps in OTT bundle knowledge and plan comparison vs Jio offerings.'},
+  {name:'Communication Skills',sev:'Medium',count:265,desc:'Agents reading from scripts instead of natural conversational selling.'},
+  {name:'Fatal Errors',sev:'Fatal',count:43,desc:'Agents making critical compliance or misrepresentation errors on calls.'}
+];
+const TNA_SEV_RANK={Fatal:0,Critical:1,High:2,Medium:3,Low:4};
+const TNA_SEV_STYLE={
+  Fatal:{fg:'#FFFFFF',bg:'#E4002B'}, Critical:{fg:'#B71C1C',bg:'#FFEBEE'},
+  High:{fg:'#B26A00',bg:'#FFF3E0'}, Medium:{fg:'#1565C0',bg:'#E3F2FD'}, Low:{fg:'#6C7A99',bg:'#F0F2F8'}
+};
+
+function renderTNADetail(){
+  const el=document.getElementById('tna-detail-rows');
+  if(!el)return;
+  const q=(document.getElementById('tna-detail-search')?.value||'').toLowerCase().trim();
+  const sortBy=document.getElementById('tna-detail-sort')?.value||'severity';
+  let rows=TNA_QUEUE_DATA.filter(r=>!q||r.name.toLowerCase().includes(q));
+  rows=rows.slice().sort((a,b)=>{
+    if(sortBy==='severity') return TNA_SEV_RANK[a.sev]-TNA_SEV_RANK[b.sev];
+    if(sortBy==='count-desc') return b.count-a.count;
+    return a.count-b.count;
+  });
+  el.innerHTML=rows.map(r=>{
+    const st=TNA_SEV_STYLE[r.sev]||TNA_SEV_STYLE.Medium;
+    return `<div style="display:grid;grid-template-columns:1.6fr 3fr 1fr 1fr;padding:10px 14px;border-bottom:1px solid #F0F2F8;align-items:center;">
+    <div style="font-size:12px;color:#1A1A2E;font-weight:600;">${r.name}</div>
+    <div style="font-size:11.5px;color:#6C7A99;">${r.desc}</div>
+    <div><span style="font-size:10px;padding:2px 8px;border-radius:4px;background:${st.bg};color:${st.fg};font-weight:700;">${r.sev}</span></div>
+    <div style="font-size:12px;font-weight:700;color:#1A1A2E;">${fmtN(r.count)}</div>
+  </div>`;
+  }).join('') || '<div style="padding:20px;text-align:center;font-size:12px;color:#AAB4CC;">No matching TNA gaps</div>';
+}
+
+function renderKPIDetail(){
+  const el=document.getElementById('kpi-detail-rows');
+  if(!el)return;
+  const kpis=window.LAST_KPIS||[];
+  const q=(document.getElementById('kpi-detail-search')?.value||'').toLowerCase().trim();
+  const rows=kpis.filter(k=>!q||k.name.toLowerCase().includes(q));
+  el.innerHTML=rows.map(k=>`<div style="display:grid;grid-template-columns:2.2fr 1fr 1fr 1fr 1fr;padding:10px 14px;border-bottom:1px solid #F0F2F8;align-items:center;">
+    <div style="font-size:12px;color:#1A1A2E;font-weight:600;display:flex;align-items:center;gap:6px;"><span>${k.icon}</span>${k.name}</div>
+    <div style="font-size:12px;font-weight:700;color:${k.color};">${k.avgKPI}</div>
+    <div style="font-size:12px;font-weight:700;color:#1D9E75;">${k.jump}</div>
+    <div style="font-size:12px;color:#1A1A2E;">${fmtN(k.people)}</div>
+    <div style="font-size:12px;font-weight:700;color:#E24B4A;">${fmtN(k.notImproved)}</div>
+  </div>`).join('') || '<div style="padding:20px;text-align:center;font-size:12px;color:#AAB4CC;">No matching KPIs</div>';
 }
 
 function switchKPITabV2(n){
   // Switch to supervisor tab in v2
   document.querySelectorAll('.kpi-tab').forEach((t,i)=>t.classList.toggle('active',i===n));
   document.querySelectorAll('.kpi-tab-content').forEach((v,i)=>v.classList.toggle('active',i===n));
-}
-
-function renderInduction(){
-  // Already rendered in HTML - nothing dynamic needed for demo
 }
 </script>
 

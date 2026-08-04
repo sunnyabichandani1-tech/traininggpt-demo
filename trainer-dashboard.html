@@ -858,242 +858,119 @@ body{font-family:var(--font);background:var(--gray-50);color:var(--gray-900);min
 
       <!-- AGENT DETAIL -->
       <div class="view" id="view-agent-detail">
-        <div class="breadcrumb">
-          <span class="bc-item" onclick="showV('home',document.getElementById('nav-dash'))">Dashboard</span>
-          <span class="bc-sep">/</span>
-          <span class="bc-item" onclick="showV('home-v2',document.getElementById('nav-dash2'));setTimeout(renderKPI,50)">Training Queue</span>
-          <span class="bc-sep">/</span>
-          <span class="bc-item" onclick="showV('agent-list',null)" id="bc-train2">Objection Handling</span>
-          <span class="bc-sep">/</span>
-          <span class="bc-item cur" id="bc-agent">Rahul Sharma</span>
-        </div>
-        <div class="detail-page">
-          <div class="detail-back">
-            <button class="back-btn" onclick="showV('agent-list',null)">◀ BACK</button>
-            <button class="refresh-btn">↻ REFRESH</button>
-          </div>
-          <div class="detail-tabs">
-            <div class="dtab active" onclick="switchTab(this,'tab-lead')">LEAD DETAILS</div>
-            <div class="dtab" onclick="switchTab(this,'tab-call')">CALL LOG</div>
-            <div class="dtab" onclick="switchTab(this,'tab-training')">TRAINING NEEDS</div>
-          </div>
-          <div class="detail-body">
+        <div style="padding:16px 28px 40px;max-width:1100px;">
 
-            <!-- LEAD DETAILS -->
-            <div id="tab-lead">
-              <div class="detail-section">
-                <div class="detail-section-title">Task Details</div>
-                <div class="detail-fields">
-                  <div><div class="df-label">Status</div><div class="df-value">CRO Assigned</div></div>
-                  <div><div class="df-label">Customer Name</div><div class="df-value" id="dd-name">Rahul Sharma</div></div>
-                  <div><div class="df-label">Mobile No</div><div class="df-value link">Click to Call</div></div>
-                  <div><div class="df-label">Address</div><div class="df-value nil">NIL</div></div>
-                  <div><div class="df-label">Lead ID</div><div class="df-value" id="dd-id">XFE-4821</div></div>
-                  <div><div class="df-label">Cart ID</div><div class="df-value nil">NIL</div></div>
-                  <div><div class="df-label">Task Type</div><div class="df-value">WALK_IN</div></div>
-                  <div><div class="df-label">Serviceability</div><div class="df-value nil">NIL</div></div>
-                  <div><div class="df-label">Payment</div><div class="df-value nil">NIL</div></div>
-                  <div><div class="df-label">Pincode</div><div class="df-value nil">NIL</div></div>
-                  <div><div class="df-label">Map</div><div class="df-value nil">NIL</div></div>
-                  <div><div class="df-label">Call Attempts</div><div class="df-value nil">NIL</div></div>
-                  <div><div class="df-label">Product Nature</div><div class="df-value nil">NIL</div></div>
-                  <div><div class="df-label">FeasibilityInfo</div><div class="df-value nil">NIL</div></div>
-                  <div></div>
-                </div>
-              </div>
-              <div class="detail-section">
-                <div class="detail-section-title">SLA Details</div>
-                <div class="detail-fields">
-                  <div><div class="df-label">Appointment Date</div><div class="df-value nil">NIL</div></div>
-                  <div><div class="df-label">Appointment Slot</div><div class="df-value nil">NIL</div></div>
-                  <div><div class="df-label">Request Source</div><div class="df-value">Self Generated</div></div>
-                  <div><div class="df-label">Request Date</div><div class="df-value">2026-06-08 17:16:34</div></div>
-                  <div></div>
-                </div>
-              </div>
-              <div class="detail-section">
-                <div class="detail-section-title">Product Details</div>
-                <div class="detail-fields">
-                  <div><div class="df-label">Product Plan</div><div class="df-value nil">NIL</div></div>
-                  <div><div class="df-label">Top-Up</div><div class="df-value nil">NIL</div></div>
-                  <div><div class="df-label">Product Type</div><div class="df-value">Priority Postpaid</div></div>
-                  <div><div class="df-label">Plan ID</div><div class="df-value nil">NIL</div></div>
-                  <div><div class="df-label">Plan Type</div><div class="df-value nil">NIL</div></div>
-                </div>
-              </div>
-              <div class="detail-footer">
-                <button class="btn-blue">REASSIGN BB AMBASSADOR</button>
-                <button class="btn-blue" style="background:white;color:var(--blue-btn);border:1px solid var(--blue-btn);">• • •</button>
+          <!-- Breadcrumb -->
+          <div style="font-size:12px;color:var(--gray-400);margin-bottom:18px;display:flex;align-items:center;gap:5px;">
+            <span class="bc-item" onclick="showV('home',document.getElementById('nav-dash'))" style="cursor:pointer;">Dashboard</span>
+            <span style="color:var(--gray-300);">›</span>
+            <span class="bc-item" onclick="showV('home-v2',document.getElementById('nav-dash2'));setTimeout(renderKPI,50)" style="cursor:pointer;">Training Queue</span>
+            <span style="color:var(--gray-300);">›</span>
+            <span class="bc-item" onclick="showV('agent-list',null)" id="bc-train2" style="cursor:pointer;">Objection Handling</span>
+            <span style="color:var(--gray-300);">›</span>
+            <span id="bc-agent" style="color:var(--gray-900);">Agent</span>
+          </div>
+
+          <!-- Hero banner -->
+          <div style="background:white;border:1px solid #E8EAF0;border-radius:12px;padding:16px 20px;display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
+            <div style="display:flex;align-items:center;gap:14px;">
+              <div id="ad-avatar" style="width:48px;height:48px;border-radius:50%;background:#E3F2FD;color:#1565C0;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:600;flex-shrink:0;">—</div>
+              <div>
+                <div id="ad-fse-name" style="font-size:15px;font-weight:600;color:#1A1A2E;margin-bottom:2px;">—</div>
+                <div id="ad-hero-meta" style="font-size:12px;color:var(--gray-400);">—</div>
               </div>
             </div>
+            <div style="display:flex;align-items:center;gap:12px;">
+              <button class="back-btn" onclick="showV('agent-list',null)" style="font-size:11px;">◀ Back</button>
+              <div style="text-align:center;padding:8px 20px;border-radius:10px;border:1px solid #E8EAF0;">
+                <div id="ad-overall-score" style="font-size:24px;font-weight:700;line-height:1;">—</div>
+                <div style="font-size:10px;color:var(--gray-400);margin-top:3px;text-transform:uppercase;letter-spacing:0.5px;">Call score</div>
+              </div>
+            </div>
+          </div>
 
-            <!-- CALL LOG -->
-            <div id="tab-call" style="display:none;">
-              <div class="call-log-item">
-                <div class="cli-header" onclick="toggleCLI(this)">
-                  <div class="cli-left">
-                    <div class="cli-num">1</div>
-                    <div>
-                      <div class="cli-date">08 Jun 2026, 2:14 PM</div>
-                      <div class="cli-meta">Duration: 4m 23s · Customer: Sunita Devi · Faridabad</div>
-                    </div>
+          <!-- Meta chips -->
+          <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px;" id="ad-chips">
+            <div style="display:flex;align-items:center;gap:5px;padding:4px 10px;border-radius:6px;border:1px solid #E8EAF0;background:#F8FAFF;font-size:11.5px;color:var(--gray-600);">📞 <strong id="ad-fse-num" style="color:#1A1A2E;">—</strong></div>
+            <div style="display:flex;align-items:center;gap:5px;padding:4px 10px;border-radius:6px;border:1px solid #E8EAF0;background:#F8FAFF;font-size:11.5px;color:var(--gray-600);">🆔 Call ID: <strong id="ad-call-id" style="color:#1A1A2E;">—</strong></div>
+            <div style="display:flex;align-items:center;gap:5px;padding:4px 10px;border-radius:6px;border:1px solid #E8EAF0;background:#F8FAFF;font-size:11.5px;color:var(--gray-600);">📅 Call: <strong id="ad-call-dt" style="color:#1A1A2E;">—</strong></div>
+            <div style="display:flex;align-items:center;gap:5px;padding:4px 10px;border-radius:6px;border:1px solid #E8EAF0;background:#F8FAFF;font-size:11.5px;color:var(--gray-600);">⚡ Evaluated: <strong id="ad-eval-dt" style="color:#1A1A2E;">—</strong></div>
+            <div style="display:flex;align-items:center;gap:5px;padding:4px 10px;border-radius:6px;border:1px solid #E8EAF0;background:#F8FAFF;font-size:11.5px;color:var(--gray-600);">📍 <strong id="ad-circle" style="color:#1A1A2E;">Delhi NCR</strong></div>
+          </div>
+
+          <!-- Fatal flag -->
+          <div id="ad-fatal-row" style="display:none;background:#FFF5F5;border:1px solid #FFCDD2;border-radius:8px;padding:10px 14px;margin-bottom:14px;display:none;">
+            <div style="font-size:11px;font-weight:700;color:#C62828;margin-bottom:3px;">⚠ Fatal flag triggered — Overall score overridden to 0</div>
+            <div id="ad-fatal-reason" style="font-size:12px;color:#5A1A1A;">—</div>
+          </div>
+
+          <!-- Compact score strip -->
+          <div style="display:flex;background:white;border:1px solid #E8EAF0;border-radius:8px;overflow:hidden;margin-bottom:20px;">
+            <div style="display:flex;align-items:center;padding:0 12px;background:#F8FAFF;border-right:1px solid #E8EAF0;flex-shrink:0;">
+              <div style="font-size:10px;font-weight:600;color:var(--gray-400);text-transform:uppercase;letter-spacing:0.6px;white-space:nowrap;">Pillar scores</div>
+            </div>
+            <div id="ad-score-strip" style="display:flex;flex:1;">
+              <!-- populated by showDetail() -->
+            </div>
+          </div>
+
+          <!-- Recording + Transcript (two columns) -->
+          <div style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.7px;color:var(--gray-400);margin-bottom:10px;display:flex;align-items:center;gap:8px;">
+            🎧 Call recording and transcript
+            <div style="flex:1;height:1px;background:#E8EAF0;"></div>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:22px;">
+
+            <!-- Recording -->
+            <div style="background:white;border:1px solid #E8EAF0;border-radius:12px;overflow:hidden;">
+              <div style="padding:10px 14px;border-bottom:1px solid #F0F2F8;font-size:12.5px;font-weight:600;color:#1A1A2E;">▶ Recording</div>
+              <div style="padding:14px;">
+                <div style="display:flex;align-items:center;gap:10px;padding:10px 14px;background:#F8FAFF;border-radius:8px;border:1px solid #E8EAF0;">
+                  <div style="width:34px;height:34px;border-radius:50%;background:#E3F2FD;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;border:none;">
+                    <span style="color:#1565C0;font-size:14px;">▶</span>
                   </div>
-                  <div class="cli-right">
-                    <span class="score-pill avg">62/100</span>
-                    <button class="btn-blue" style="height:26px;font-size:11px;padding:0 10px;">▶ Play</button>
-                    <span>▾</span>
+                  <div style="flex:1;height:32px;display:flex;align-items:center;gap:2px;" aria-hidden="true" id="ad-waveform">
+                    <!-- waveform bars injected by JS -->
                   </div>
+                  <div id="ad-duration" style="font-size:11px;color:var(--gray-400);white-space:nowrap;">—</div>
                 </div>
-                <div class="cli-body">
-                  <div class="cli-grid">
-                    <div><div class="cli-f-label">Call Status</div><div class="cli-f-val">Completed</div></div>
-                    <div><div class="cli-f-label">Plan Pitched</div><div class="cli-f-val">₹799 — 100 Mbps</div></div>
-                    <div><div class="cli-f-label">Outcome</div><div class="cli-f-val" style="color:#E65100;">WhatsApp Follow-up</div></div>
-                    <div><div class="cli-f-label">AI Score</div><div class="cli-f-val" style="color:#E65100;">62/100</div></div>
-                  </div>
-                  <div style="font-size:11px;color:var(--gray-400);margin-bottom:5px;">Voice Activity</div>
-                  <div class="waveform">
-                    <div class="wbar" style="height:8px"></div><div class="wbar" style="height:14px"></div>
-                    <div class="wbar" style="height:18px"></div><div class="wbar" style="height:10px"></div>
-                    <div class="wbar" style="height:16px"></div><div class="wbar" style="height:20px"></div>
-                    <div class="wbar" style="height:12px"></div><div class="wbar" style="height:18px"></div>
-                    <div class="wbar" style="height:14px"></div><div class="wbar" style="height:8px"></div>
-                    <div class="wbar" style="height:20px"></div><div class="wbar" style="height:16px"></div>
-                    <div class="wbar" style="height:10px"></div><div class="wbar" style="height:18px"></div>
-                    <div class="wbar" style="height:14px"></div><div class="wbar" style="height:12px"></div>
-                  </div>
-                </div>
-              </div>
-              <div class="call-log-item">
-                <div class="cli-header" onclick="toggleCLI(this)">
-                  <div class="cli-left">
-                    <div class="cli-num">2</div>
-                    <div>
-                      <div class="cli-date">07 Jun 2026, 11:30 AM</div>
-                      <div class="cli-meta">Duration: 6m 10s · Customer: Ramesh Gupta · Gurugram</div>
-                    </div>
-                  </div>
-                  <div class="cli-right">
-                    <span class="score-pill poor">54/100</span>
-                    <button class="btn-blue" style="height:26px;font-size:11px;padding:0 10px;">▶ Play</button>
-                    <span>▾</span>
-                  </div>
-                </div>
-                <div class="cli-body" style="display:none;">
-                  <div class="cli-grid">
-                    <div><div class="cli-f-label">Call Status</div><div class="cli-f-val">Completed</div></div>
-                    <div><div class="cli-f-label">Plan Pitched</div><div class="cli-f-val">₹599 — 50 Mbps</div></div>
-                    <div><div class="cli-f-label">Outcome</div><div class="cli-f-val" style="color:var(--red);">Not Interested</div></div>
-                    <div><div class="cli-f-label">AI Score</div><div class="cli-f-val" style="color:var(--red);">54/100</div></div>
-                  </div>
-                </div>
-              </div>
-              <div class="call-log-item">
-                <div class="cli-header" onclick="toggleCLI(this)">
-                  <div class="cli-left">
-                    <div class="cli-num">3</div>
-                    <div>
-                      <div class="cli-date">06 Jun 2026, 4:05 PM</div>
-                      <div class="cli-meta">Duration: 5m 44s · Customer: Priya Mehta · Noida</div>
-                    </div>
-                  </div>
-                  <div class="cli-right">
-                    <span class="score-pill good">71/100</span>
-                    <button class="btn-blue" style="height:26px;font-size:11px;padding:0 10px;">▶ Play</button>
-                    <span>▾</span>
-                  </div>
-                </div>
-                <div class="cli-body" style="display:none;">
-                  <div class="cli-grid">
-                    <div><div class="cli-f-label">Call Status</div><div class="cli-f-val">Completed</div></div>
-                    <div><div class="cli-f-label">Plan Pitched</div><div class="cli-f-val">₹799 — 100 Mbps</div></div>
-                    <div><div class="cli-f-label">Outcome</div><div class="cli-f-val" style="color:var(--green);">Interested — Follow-up</div></div>
-                    <div><div class="cli-f-label">AI Score</div><div class="cli-f-val" style="color:var(--green);">71/100</div></div>
-                  </div>
+                <div style="margin-top:10px;display:flex;font-size:11px;color:var(--gray-400);">
+                  <span id="ad-recording-meta">—</span>
                 </div>
               </div>
             </div>
 
-            <!-- TRAINING NEEDS -->
-            <div id="tab-training" style="display:none;">
-              <div class="tn-grid">
-                <div class="tn-card">
-                  <div class="tn-card-hdr">👤 Agent Profile &amp; Scores</div>
-                  <div class="tn-card-body">
-                    <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
-                      <div style="width:44px;height:44px;border-radius:50%;background:var(--red);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;color:white;flex-shrink:0;" id="tn-av">RS</div>
-                      <div><div style="font-size:14px;font-weight:600;color:var(--gray-900);" id="tn-name">Rahul Sharma</div><div style="font-size:11px;color:var(--gray-400);" id="tn-meta">XFE-4821 · Faridabad</div></div>
-                    </div>
-                    <div class="score-bars">
-                      <div class="sb-row"><div class="sb-lbl">Pitch</div><div class="sb-track"><div class="sb-fill" style="width:62%;background:#E65100"></div></div><div class="sb-val" style="color:#E65100">62</div></div>
-                      <div class="sb-row"><div class="sb-lbl">Objection Handling</div><div class="sb-track"><div class="sb-fill" style="width:45%;background:var(--red)"></div></div><div class="sb-val" style="color:var(--red)">45</div></div>
-                      <div class="sb-row"><div class="sb-lbl">Product Knowledge</div><div class="sb-track"><div class="sb-fill" style="width:78%;background:var(--green)"></div></div><div class="sb-val" style="color:var(--green)">78</div></div>
-                      <div class="sb-row"><div class="sb-lbl">Closing</div><div class="sb-track"><div class="sb-fill" style="width:55%;background:#E65100"></div></div><div class="sb-val" style="color:#E65100">55</div></div>
-                      <div class="sb-row"><div class="sb-lbl">Overall</div><div class="sb-track"><div class="sb-fill" style="width:60%;background:var(--navy)"></div></div><div class="sb-val" style="color:var(--navy)">60</div></div>
-                    </div>
-                  </div>
-                </div>
-                <div class="tn-card">
-                  <div class="tn-card-hdr">📞 Latest Call Transcript</div>
-                  <div class="tn-card-body">
-                    <div class="transcript-box">
-                      <div class="tl"><span class="ta">Agent:</span>Hello madam, main Airtel se bol raha hoon — aapne broadband inquiry daali thi.</div>
-                      <div class="tl"><span class="tc2">Customer:</span>Haan ji, hello?</div>
-                      <div class="tl"><span class="ta">Agent:</span>Madam, aapke liye ₹799 plan hai jisme 100 Mbps speed milegi...</div>
-                      <div class="tl"><span class="tc2">Customer:</span>Bhai mere paas toh Jio Fiber laga hua hai aur woh sasta bhi hai.</div>
-                      <div class="tl"><span class="ta">Agent:</span>Madam, Airtel ka network bahut achha hai...</div>
-                      <div class="tl"><span class="tc2">Customer:</span>Aap log bolte ho installation free hai, par baad mein charges aate hain.</div>
-                      <div class="tl"><span class="ta">Agent:</span>Nahi madam, koi hidden charges nahi hain...</div>
-                      <div class="tl"><span class="tc2">Customer:</span>Theek hai, details WhatsApp pe bhej do.</div>
-                    </div>
-                  </div>
-                </div>
-                <div class="tn-card">
-                  <div class="tn-card-hdr">✅ What He's Good At</div>
-                  <div class="tn-card-body">
-                    <div class="insight good"><span class="insight-ico">✓</span>Strong product knowledge — accurately quoted plan details and OTT inclusions.</div>
-                    <div class="insight good"><span class="insight-ico">✓</span>Professional tone throughout — never aggressive or dismissive with customer.</div>
-                    <div class="insight good"><span class="insight-ico">✓</span>Good opening — introduced himself clearly with Airtel context and purpose.</div>
-                  </div>
-                </div>
-                <div class="tn-card">
-                  <div class="tn-card-hdr">⚠️ Area of Improvement</div>
-                  <div class="tn-card-body">
-                    <div class="insight bad"><span class="insight-ico">✗</span>Dropped to price matching immediately when Jio objection came — should anchor value first.</div>
-                    <div class="insight bad"><span class="insight-ico">✗</span>Closed weakly — said "details bhej do" instead of attempting an assumptive close.</div>
-                    <div class="insight bad"><span class="insight-ico">✗</span>Never used OTT bundle value as a differentiator against Jio pricing.</div>
-                  </div>
-                </div>
-                <div class="tn-card full">
-                  <div class="tn-card-hdr">🎓 Training Requirement</div>
-                  <div class="tn-card-body">
-                    <div class="req-grid">
-                      <div class="req p1"><div class="req-pri">Priority 1</div><div class="req-name">Objection Handling</div><div class="req-desc">Jio price rebuttal script + value anchoring</div></div>
-                      <div class="req p2"><div class="req-pri">Priority 2</div><div class="req-name">Closing Techniques</div><div class="req-desc">Assumptive close + urgency creation script</div></div>
-                      <div class="req p3"><div class="req-pri">Priority 3</div><div class="req-name">OTT Bundle Pitch</div><div class="req-desc">How to position OTT value vs Jio pricing</div></div>
-                    </div>
-                  </div>
-                </div>
-                <div class="tn-card full">
-                  <div class="tn-card-hdr">📊 Overall Calling Behaviour</div>
-                  <div class="tn-card-body">
-                    <div class="beh-chart">
-                      <div class="beh-item"><div class="beh-bar-wrap"><div class="beh-bar" style="height:38px;background:var(--blue-btn)"></div></div><div class="beh-lbl">Avg Duration</div><div class="beh-val">5.2m</div></div>
-                      <div class="beh-item"><div class="beh-bar-wrap"><div class="beh-bar" style="height:50px;background:var(--green)"></div></div><div class="beh-lbl">Talk Ratio</div><div class="beh-val">68%</div></div>
-                      <div class="beh-item"><div class="beh-bar-wrap"><div class="beh-bar" style="height:24px;background:var(--red)"></div></div><div class="beh-lbl">Objections Lost</div><div class="beh-val">4/8</div></div>
-                      <div class="beh-item"><div class="beh-bar-wrap"><div class="beh-bar" style="height:18px;background:#E65100"></div></div><div class="beh-lbl">Closings Attempted</div><div class="beh-val">2/8</div></div>
-                      <div class="beh-item"><div class="beh-bar-wrap"><div class="beh-bar" style="height:44px;background:var(--navy)"></div></div><div class="beh-lbl">Avg Score</div><div class="beh-val">62</div></div>
-                    </div>
-                  </div>
-                </div>
+            <!-- Transcript -->
+            <div style="background:white;border:1px solid #E8EAF0;border-radius:12px;overflow:hidden;">
+              <div style="padding:10px 14px;border-bottom:1px solid #F0F2F8;font-size:12.5px;font-weight:600;color:#1A1A2E;">💬 Transcript</div>
+              <div style="padding:14px;max-height:220px;overflow-y:auto;" id="ad-transcript">
+                <div style="font-size:12px;color:var(--gray-400);">Transcript not available.</div>
               </div>
             </div>
 
           </div>
+
+          <!-- Gap detail card -->
+          <div style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.7px;color:var(--gray-400);margin-bottom:10px;display:flex;align-items:center;gap:8px;">
+            🎯 AI training recommendation — gap detail
+            <div style="flex:1;height:1px;background:#E8EAF0;"></div>
+          </div>
+          <div id="ad-training-needs" style="background:white;border:1px solid #E8EAF0;border-radius:12px;overflow:hidden;margin-bottom:20px;">
+            <div style="font-size:12px;color:var(--gray-400);padding:20px;">No training needs identified for this call.</div>
+          </div>
+
         </div>
       </div>
 
-      <!-- OBSERVATION DETAIL VIEW -->
+      <!-- PLACEHOLDER stubs kept for backward compatibility — not visible -->
+      <div id="tab-lead" style="display:none;"></div>
+      <div id="tab-call" style="display:none;"></div>
+      <div id="tab-training" style="display:none;"></div>
+      <div id="dd-name" style="display:none;"></div>
+      <div id="dd-id" style="display:none;"></div>
+      <div id="tn-av" style="display:none;"></div>
+      <div id="tn-name" style="display:none;"></div>
+      <div id="tn-meta" style="display:none;"></div>
       <div class="view" id="view-obs-detail">
         <div class="breadcrumb">
           <span class="bc-item" onclick="showV('home',document.getElementById('nav-dash'))">Dashboard</span>
@@ -1608,7 +1485,7 @@ function renderAgents(){
     const init = a.name.split(" ").map(n=>n[0]).join("");
     return `<div class="task-row ${isS?"selected":""}" id="tr-${i}">
       <div><div class="checkbox ${isS?"chk":""}" onclick="togAgent(event,${i})">${isS?"✓":""}</div></div>
-      <div class="agent-cell" onclick="showDetail('${a.name}','${a.id} · ${a.loc}')">
+      <div class="agent-cell" onclick="showAgentDetail(${i});">
         <div class="av" style="background:${a.color}">${init}</div>
         <div><div class="an">${a.name}</div><div class="aid">${a.id} · ${a.loc}</div></div>
       </div>
@@ -1645,20 +1522,203 @@ function updatePB(){
   btn.textContent=n>0?`+ Push Training (${n})`:"+ Push Training";
 }
 
-function showDetail(name,meta){
-  document.getElementById("bc-agent").textContent=name;
-  document.getElementById("dd-name").textContent=name;
-  document.getElementById("dd-id").textContent=meta.split(" · ")[0];
-  document.getElementById("tn-av").textContent=name.split(" ").map(n=>n[0]).join("");
-  document.getElementById("tn-name").textContent=name;
-  document.getElementById("tn-meta").textContent=meta;
-  // reset tabs
-  document.querySelectorAll(".dtab").forEach(t=>t.classList.remove("active"));
-  document.querySelector(".dtab").classList.add("active");
-  document.getElementById("tab-lead").style.display="";
-  document.getElementById("tab-call").style.display="none";
-  document.getElementById("tab-training").style.display="none";
-  showV("agent-detail",null);
+function showAgentDetail(i){
+  const a = AGENTS[i];
+  if(!a) return;
+  // Build a synthetic obs object from the agent's data so showDetail can populate all sections
+  const scoreBase = a.score || 60;
+  const obs = {
+    phone: a.phone,
+    callId: a.id + '-' + Date.now().toString(36),
+    leadId: a.id,
+    overallScore: scoreBase,
+    score: String(scoreBase),
+    fatal: false,
+    fatalReason: '',
+    scores: {
+      greeting_compliance: Math.min(100, scoreBase + 8),
+      needs_assessment:    Math.min(100, scoreBase - 5),
+      product_knowledge:   Math.min(100, scoreBase + 10),
+      competition_handling:Math.min(100, scoreBase - 3),
+      objection_handling:  Math.min(100, scoreBase - 12),
+      value_anchoring:     Math.min(100, scoreBase - 15),
+      closing:             Math.min(100, scoreBase - 8),
+      call_etiquette:      Math.min(100, scoreBase + 2),
+    },
+    gaps: (a.gaps||[]).map((g,gi) => ({
+      area: g,
+      gap_name: g,
+      severity: gi===0 ? 'Critical' : gi===1 ? 'High' : 'Medium',
+      what_happened: 'Agent did not use the correct technique for ' + g + ' during this call.',
+      what_to_say: 'Use the structured approach for ' + g + ' — acknowledge the customer concern first, then resolve.',
+      worked_example: 'Practice on the next 3 calls: acknowledge, normalise, then resolve the objection step by step.',
+    })),
+    good: [],
+    transcript: 'Agent: Hello madam, main Airtel se bol raha hoon.\nCustomer: Haan ji, bolo.\nAgent: Aapne broadband inquiry daali thi. Kya main 2 minute baat kar sakta hoon?\nCustomer: Haan, bolo.',
+    receivedAt: new Date().toISOString(),
+  };
+  showDetail(a.name, a.id + ' · ' + a.loc, obs);
+}
+
+function showDetail(name, meta, obs){
+  const o = obs || {};
+
+  // Breadcrumb + backward-compat stubs
+  document.getElementById('bc-agent').textContent = name;
+  const dn=document.getElementById('dd-name'); if(dn) dn.textContent=name;
+  const di=document.getElementById('dd-id');   if(di) di.textContent=meta?meta.split(' · ')[0]:'—';
+  const ta=document.getElementById('tn-av');   if(ta) ta.textContent=name.split(' ').map(n=>n[0]).join('');
+  const tn=document.getElementById('tn-name'); if(tn) tn.textContent=name;
+  const tm=document.getElementById('tn-meta'); if(tm) tm.textContent=meta||'';
+
+  function set(id,v){const el=document.getElementById(id);if(el)el.textContent=v||'—';}
+  function setH(id,v){const el=document.getElementById(id);if(el)el.innerHTML=v||'—';}
+
+  // ── Hero
+  const initials = name.split(' ').map(n=>n[0]).join('').slice(0,2).toUpperCase();
+  set('ad-avatar', initials);
+  set('ad-fse-name', name);
+  set('ad-hero-meta', [o.role||'XFE', o.circle||'Delhi NCR', o.leadId||meta?.split(' · ')[0]||''].filter(Boolean).join(' · '));
+
+  // ── Overall score
+  const ov = o.overallScore!=null ? o.overallScore : (o.score ? parseInt(o.score) : null);
+  const ovColor = ov==null ? '#AAB4CC' : ov>=70 ? '#1D9E75' : ov>=55 ? '#EF9F27' : '#E24B4A';
+  const ovEl = document.getElementById('ad-overall-score');
+  if(ovEl){ ovEl.textContent = ov!=null ? ov+'/100' : '—'; ovEl.style.color = ovColor; }
+
+  // ── Chips
+  set('ad-fse-num', o.phone||'—');
+  set('ad-call-id', o.callId||'—');
+  const dt = o.receivedAt ? new Date(o.receivedAt).toLocaleString('en-IN',{day:'2-digit',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit'}) : '—';
+  set('ad-call-dt', dt);
+  set('ad-eval-dt', dt);
+  set('ad-circle', o.circle||'Delhi NCR');
+
+  // ── Fatal flag
+  const fr=document.getElementById('ad-fatal-row');
+  if(fr){ fr.style.display = o.fatal ? '' : 'none'; }
+  set('ad-fatal-reason', o.fatalReason||'');
+
+  // ── Compact score strip
+  const strip = document.getElementById('ad-score-strip');
+  if(strip){
+    const sc = o.scores||{};
+    const pillars = [
+      ['Greeting', sc.greeting_compliance],
+      ['Needs', sc.needs_assessment],
+      ['Product', sc.product_knowledge],
+      ['Competition', sc.competition_handling],
+      ['Objection', sc.objection_handling],
+      ['Value', sc.value_anchoring],
+      ['Closing', sc.closing],
+      ['Etiquette', sc.call_etiquette],
+    ];
+    strip.innerHTML = pillars.map(([lbl,val],i) => {
+      const v = val!=null ? val : null;
+      const col = v==null?'#AAB4CC':v>=70?'#1D9E75':v>=55?'#EF9F27':'#E24B4A';
+      const border = i<pillars.length-1 ? 'border-right:1px solid #E8EAF0;' : '';
+      return `<div style="flex:1;padding:8px 6px;display:flex;flex-direction:column;align-items:center;gap:2px;${border}">
+        <div style="font-size:9.5px;color:var(--gray-400);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%;text-align:center;">${lbl}</div>
+        <div style="font-size:13px;font-weight:600;color:${col};">${v!=null?v:'—'}</div>
+      </div>`;
+    }).join('');
+  }
+
+  // ── Waveform
+  const wf = document.getElementById('ad-waveform');
+  if(wf){
+    const heights=[8,14,20,10,24,16,8,18,22,12,18,8,20,14,10,16,24,8,12,18];
+    wf.innerHTML = heights.map((h,i)=>
+      `<div style="width:3px;border-radius:2px;height:${h}px;background:${i<8?'#1976D2':'#DDE3F0'};"></div>`
+    ).join('');
+  }
+  set('ad-duration', o.duration ? Math.floor(o.duration/60)+'m '+(o.duration%60)+'s' : '—');
+  set('ad-recording-meta', o.receivedAt ? new Date(o.receivedAt).toLocaleString('en-IN',{day:'2-digit',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit'}) : '—');
+
+  // ── Transcript
+  const trEl = document.getElementById('ad-transcript');
+  if(trEl){
+    if(o.transcript){
+      const lines = o.transcript.split(/\n/).filter(l=>l.trim());
+      trEl.innerHTML = lines.map(l => {
+        if(l.startsWith('Agent:'))   return `<div style="display:flex;gap:6px;font-size:12px;line-height:1.6;margin-bottom:4px;"><span style="font-size:11px;font-weight:600;color:#1565C0;min-width:58px;padding-top:1px;flex-shrink:0;">Agent</span><span style="color:#1A1A2E;">${l.replace('Agent:','').trim()}</span></div>`;
+        if(l.startsWith('Customer:'))return `<div style="display:flex;gap:6px;font-size:12px;line-height:1.6;margin-bottom:4px;"><span style="font-size:11px;font-weight:600;color:var(--gray-400);min-width:58px;padding-top:1px;flex-shrink:0;">Customer</span><span style="color:#1A1A2E;">${l.replace('Customer:','').trim()}</span></div>`;
+        return `<div style="font-size:12px;line-height:1.6;margin-bottom:4px;color:#1A1A2E;">${l}</div>`;
+      }).join('');
+    } else {
+      trEl.innerHTML = '<div style="font-size:12px;color:var(--gray-400);">Transcript not available for this call.</div>';
+    }
+  }
+
+  // ── Training needs / gap card
+  const tnContainer = document.getElementById('ad-training-needs');
+  if(tnContainer){
+    const gaps = Array.isArray(o.gaps) ? o.gaps : [];
+    const gap = gaps[0]||null;
+    if(!gap){
+      tnContainer.innerHTML='<div style="font-size:12px;color:var(--gray-400);padding:20px;">No training gaps identified for this call.</div>';
+    } else {
+      const sevColors = {Critical:['#FFF5F5','#C62828','#FFCDD2'],High:['#FFF8E1','#B26A00','#FFE082'],Medium:['#E3F2FD','#1565C0','#BBDEFB']};
+      const [hdrBg,sevText,sevBorder] = sevColors[gap.severity]||sevColors.Medium;
+      const area = gap.area||gap.gap_name||'Gap';
+      const contentMap = {
+        'Objection Handling': {name:'FEEL-FELT-FOUND objection script', type:'Video', id:'OBJ.FFF.01'},
+        'Objection':          {name:'FEEL-FELT-FOUND objection script', type:'Video', id:'OBJ.FFF.01'},
+        'Value Anchoring':    {name:'OTT value anchoring guide', type:'Presentation', id:'VAL.OTT.01'},
+        'Closing':            {name:'Assumptive close technique', type:'Video', id:'CLO.PRM.01'},
+        'Product Knowledge':  {name:'Plan portfolio quick reference', type:'Document', id:'PRD.FEA.01'},
+        'Competition Handling':{name:'Jio counter script', type:'Audio', id:'CMP.JIO.01'},
+      };
+      const content = contentMap[area]||{name:'Content not yet mapped for this gap', type:'—', id:'—'};
+
+      tnContainer.innerHTML = `
+        <!-- Gap header -->
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 16px;background:${hdrBg};border-bottom:1px solid #F0F2F8;">
+          <div style="display:flex;align-items:center;gap:8px;">
+            <span style="font-size:16px;">⚠</span>
+            <span style="font-size:13px;font-weight:600;color:${sevText};">${area}</span>
+          </div>
+          <span style="font-size:11px;padding:3px 10px;border-radius:20px;font-weight:600;background:${hdrBg};color:${sevText};border:1px solid ${sevBorder};">${gap.severity||'High'}</span>
+        </div>
+
+        <!-- What happened -->
+        <div style="padding:14px 16px;border-bottom:1px solid #F0F2F8;">
+          <div style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:0.7px;color:var(--gray-400);margin-bottom:6px;">👁 What happened on this call</div>
+          <div style="font-size:13px;color:#1A1A2E;line-height:1.6;">${gap.what_happened||'—'}</div>
+        </div>
+
+        <!-- What to say instead -->
+        <div style="padding:14px 16px;border-bottom:1px solid #F0F2F8;">
+          <div style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:0.7px;color:#2E7D32;margin-bottom:6px;">✓ What to say instead</div>
+          <div style="background:#F1F8E9;border-left:3px solid #4CAF50;border-radius:0 6px 6px 0;padding:10px 14px;font-size:13px;color:#1A1A2E;line-height:1.6;font-style:italic;">"${gap.what_to_say||'—'}"</div>
+        </div>
+
+        <!-- Worked example -->
+        <div style="padding:14px 16px;border-bottom:1px solid #F0F2F8;">
+          <div style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:0.7px;color:var(--gray-400);margin-bottom:6px;">🎓 Worked example to practise</div>
+          <div style="font-size:13px;color:#1A1A2E;line-height:1.6;">${gap.worked_example||gap.example||'—'}</div>
+        </div>
+
+        <!-- Content suggestion -->
+        <div style="padding:14px 16px;background:#F8FAFF;">
+          <div style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:0.7px;color:var(--gray-400);margin-bottom:8px;">📚 Suggested training content</div>
+          <div style="display:flex;align-items:center;justify-content:space-between;background:white;border:1px solid #E8EAF0;border-radius:8px;padding:10px 14px;">
+            <div style="display:flex;align-items:center;gap:10px;">
+              <div style="width:36px;height:36px;border-radius:6px;background:#EDE7F6;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                <span style="font-size:16px;">${content.type==='Video'?'🎬':content.type==='Audio'?'🎧':content.type==='Presentation'?'📊':'📄'}</span>
+              </div>
+              <div>
+                <div style="font-size:12.5px;font-weight:600;color:#1A1A2E;">${content.name}</div>
+                <div style="font-size:11px;color:var(--gray-400);margin-top:2px;">${content.type} · ID: ${content.id}</div>
+              </div>
+            </div>
+            <button onclick="goCreateContent('${area}')" style="font-size:11px;padding:6px 14px;background:#1E2761;color:white;border:none;border-radius:6px;cursor:pointer;white-space:nowrap;">Open content</button>
+          </div>
+        </div>`;
+    }
+  }
+
+  showV('agent-detail', null);
 }
 
 function switchTab(el,tabId){

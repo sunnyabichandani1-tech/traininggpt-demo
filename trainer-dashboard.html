@@ -509,10 +509,12 @@ body{font-family:var(--font);background:var(--gray-50);color:var(--gray-900);min
       </div>
     </div>
     <nav class="sidebar-nav">
-      <div class="nav-item active" id="nav-dash" onclick="showV('home',this);renderROTable(loadObservations());">
+      <!-- Dashboard (v1) hidden from sidebar — page remains active in the background so the
+           Recent Observations data flow and gap-card breadcrumb navigation keep working -->
+      <div class="nav-item" id="nav-dash" style="display:none;" onclick="showV('home',this);renderROTable(loadObservations());">
         <span class="nav-icon">⊞</span> Dashboard
       </div>
-      <div class="nav-item" id="nav-dash2" onclick="showV('home-v2',this);setTimeout(renderKPI,50);">
+      <div class="nav-item active" id="nav-dash2" onclick="showV('home-v2',this);setTimeout(renderKPI,50);">
         <span class="nav-icon">📊</span> Dashboard v2
       </div>
 
@@ -548,7 +550,7 @@ body{font-family:var(--font);background:var(--gray-50);color:var(--gray-900);min
     <div class="content">
 
       <!-- DASHBOARD (combined home + training queue) -->
-      <div class="view active" id="view-home">
+      <div class="view" id="view-home">
         <!-- KPI CARDS -->
         <div class="stats-grid" style="margin-bottom:20px;">
           <div class="stat-card">
@@ -613,7 +615,7 @@ body{font-family:var(--font);background:var(--gray-50);color:var(--gray-900);min
 
       <!-- AGENT LIST -->
 
-      <div class="view" id="view-home-v2">
+      <div class="view active" id="view-home-v2">
 <div style="padding:16px 24px 24px;">
 
 <!-- TOP BAR: ROLE FILTER -->
@@ -1000,7 +1002,7 @@ body{font-family:var(--font);background:var(--gray-50);color:var(--gray-900);min
 
       <div class="view" id="view-agent-list">
         <div class="breadcrumb">
-          <span class="bc-item" onclick="showV('home',document.getElementById('nav-dash'))">Dashboard</span>
+          <span class="bc-item" onclick="showV('home-v2',document.getElementById('nav-dash2'));setTimeout(renderKPI,50)">Dashboard</span>
           <span class="bc-sep">/</span>
           <span class="bc-item" onclick="showV('home-v2',document.getElementById('nav-dash2'));setTimeout(renderKPI,50)">Training Queue</span>
           <span class="bc-sep">/</span>
@@ -1037,7 +1039,7 @@ body{font-family:var(--font);background:var(--gray-50);color:var(--gray-900);min
 
           <!-- Breadcrumb -->
           <div style="font-size:12px;color:var(--gray-400);margin-bottom:18px;display:flex;align-items:center;gap:5px;">
-            <span class="bc-item" onclick="showV('home',document.getElementById('nav-dash'))" style="cursor:pointer;">Dashboard</span>
+            <span class="bc-item" onclick="showV('home-v2',document.getElementById('nav-dash2'));setTimeout(renderKPI,50)" style="cursor:pointer;">Dashboard</span>
             <span style="color:var(--gray-300);">›</span>
             <span class="bc-item" onclick="showV('home-v2',document.getElementById('nav-dash2'));setTimeout(renderKPI,50)" style="cursor:pointer;">Training Queue</span>
             <span style="color:var(--gray-300);">›</span>
@@ -1162,7 +1164,7 @@ body{font-family:var(--font);background:var(--gray-50);color:var(--gray-900);min
       <div id="tn-meta" style="display:none;"></div>
       <div class="view" id="view-obs-detail">
         <div class="breadcrumb">
-          <span class="bc-item" onclick="showV('home',document.getElementById('nav-dash'))">Dashboard</span>
+          <span class="bc-item" onclick="showV('home-v2',document.getElementById('nav-dash2'));setTimeout(renderKPI,50)">Dashboard</span>
           <span class="bc-sep">/</span>
           <span class="bc-item" onclick="showV('home-v2',document.getElementById('nav-dash2'));setTimeout(renderKPI,50)">Training Queue</span>
           <span class="bc-sep">/</span>
@@ -1633,6 +1635,8 @@ function doLogin(){
   if(!id){alert("Please enter your mobile number");return;}
   document.getElementById("login-page").style.display="none";
   document.getElementById("app").classList.add("visible");
+  // Dashboard v2 is now the landing page (v1 is hidden from the sidebar)
+  setTimeout(function(){ try{ renderKPI(); }catch(e){} }, 50);
 }
 
 function doLogout(){

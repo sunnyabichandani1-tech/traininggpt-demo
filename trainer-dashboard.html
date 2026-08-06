@@ -516,6 +516,9 @@ body{font-family:var(--font);background:var(--gray-50);color:var(--gray-900);min
         <span class="nav-icon">📊</span> Dashboard v2
       </div>
 
+      <div class="nav-item" id="nav-dash3" onclick="showV('home-v3',this);setTimeout(renderKPIV3,50);">
+        <span class="nav-icon">🚀</span> Dashboard v3
+      </div>
       <div class="nav-item" id="nav-content" onclick="showV('content-library',this);window.scrollTo({top:0,behavior:'instant'});document.documentElement.scrollTop=0;document.body.scrollTop=0;ensureGenPromptFilled();">
         <span class="nav-icon">📚</span> Training Content
       </div>
@@ -739,6 +742,178 @@ body{font-family:var(--font);background:var(--gray-50);color:var(--gray-900);min
 
 </div>
 </div><!-- end view-home-v2 -->
+
+      <!-- ═══════════════ DASHBOARD V3 ═══════════════ -->
+      <div class="view" id="view-home-v3">
+<div style="padding:16px 24px 24px;">
+
+<!-- TOP BAR -->
+<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;">
+  <div style="display:flex;align-items:center;gap:10px;">
+    <span style="font-size:12px;font-weight:600;color:#6C7A99;">Role:</span>
+    <select id="role-filter-v3" onchange="renderKPIV3()" style="font-size:12px;padding:5px 10px;border:1px solid #DDE3F0;border-radius:7px;background:white;color:#1A1A2E;cursor:pointer;">
+      <option value="XFE">XFE — Xstream Fiber Express</option>
+      <option value="ENG">Field Engineer</option>
+      <option value="CC">Call Center Agent</option>
+      <option value="HDO">HDO — Home Delivery Officer</option>
+      <option value="MR">Market Representative</option>
+    </select>
+    <select id="period-filter-v3" onchange="renderKPIV3()" style="font-size:12px;padding:5px 10px;border:1px solid #DDE3F0;border-radius:7px;background:white;color:#1A1A2E;cursor:pointer;">
+      <option>This month</option><option>Last 7 days</option><option>Last 30 days</option><option>Last quarter</option>
+    </select>
+  </div>
+  <div style="font-size:11px;color:#6C7A99;">Jun 2026 · <span style="color:#1D9E75;font-weight:600;">● Live</span></div>
+</div>
+
+<!-- SECTION 1: PERFORMANCE FUNNEL -->
+<div style="font-size:13px;font-weight:700;color:#1A1A2E;margin-bottom:4px;">Section 1 — Performance funnel</div>
+<div style="font-size:11px;color:#6C7A99;margin-bottom:14px;">People-based. Each card shows a stage in the training journey.</div>
+<div id="perf-funnel-v3" style="display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:8px;margin-bottom:20px;"></div>
+
+<!-- SECTION 2: TRAINING QUEUE -->
+<div style="font-size:13px;font-weight:700;color:#1A1A2E;margin-bottom:4px;">Section 2 — Training queue</div>
+<div style="font-size:11px;color:#6C7A99;margin-bottom:14px;">Top training gaps identified across the fleet this month, ranked by severity.</div>
+<div class="tc-grid" style="grid-template-columns:repeat(3,1fr);margin-bottom:20px;">
+  <div class="tc" onclick="showAgentList('Objection Handling','Critical',847)">
+    <div class="tc-top"><div class="tc-icon r">🛡️</div><div class="sev crit">Critical</div></div>
+    <div class="tc-name">Objection Handling</div>
+    <div class="tc-desc">Agents failing to counter Jio price objections and losing leads at pitch stage.</div>
+    <div class="tc-foot"><div><div class="tc-count">847</div><div class="tc-lbl">agents identified</div></div><div class="tc-arr">→</div></div>
+  </div>
+  <div class="tc" onclick="showAgentList('Value Anchoring','High',534)">
+    <div class="tc-top"><div class="tc-icon a">⚓</div><div class="sev high">High</div></div>
+    <div class="tc-name">Value Anchoring</div>
+    <div class="tc-desc">Agents quoting speed without connecting to customer-specific benefits.</div>
+    <div class="tc-foot"><div><div class="tc-count">534</div><div class="tc-lbl">agents identified</div></div><div class="tc-arr">→</div></div>
+  </div>
+  <div class="tc" onclick="showAgentList('Closing Technique','High',412)">
+    <div class="tc-top"><div class="tc-icon b">🎯</div><div class="sev high">High</div></div>
+    <div class="tc-name">Closing Technique</div>
+    <div class="tc-desc">Agents asking permission to close instead of using assumptive close.</div>
+    <div class="tc-foot"><div><div class="tc-count">412</div><div class="tc-lbl">agents identified</div></div><div class="tc-arr">→</div></div>
+  </div>
+  <div class="tc" onclick="showAgentList('Product Knowledge','Medium',389)">
+    <div class="tc-top"><div class="tc-icon r">📡</div><div class="sev med">Medium</div></div>
+    <div class="tc-name">Product Knowledge</div>
+    <div class="tc-desc">Gaps in OTT bundle knowledge and plan comparison vs Jio offerings.</div>
+    <div class="tc-foot"><div><div class="tc-count">389</div><div class="tc-lbl">agents identified</div></div><div class="tc-arr">→</div></div>
+  </div>
+  <div class="tc" onclick="showAgentList('Communication Skills','Medium',265)">
+    <div class="tc-top"><div class="tc-icon a">💬</div><div class="sev med">Medium</div></div>
+    <div class="tc-name">Communication Skills</div>
+    <div class="tc-desc">Agents reading from scripts instead of natural conversational selling.</div>
+    <div class="tc-foot"><div><div class="tc-count">265</div><div class="tc-lbl">agents identified</div></div><div class="tc-arr">→</div></div>
+  </div>
+  <div class="tc" onclick="showAgentList('Fatal Errors','Fatal',43)" style="border:2px solid var(--red);background:#FFF5F5;">
+    <div class="tc-top"><div class="tc-icon r">🚨</div><div class="sev crit" style="background:#E4002B;color:white;">FATAL</div></div>
+    <div class="tc-name" style="color:var(--red);">Fatal Errors</div>
+    <div class="tc-desc">Agents making critical compliance or misrepresentation errors on calls.</div>
+    <div class="tc-foot"><div><div class="tc-count" style="color:var(--red);">43</div><div class="tc-lbl">agents flagged</div></div><div class="tc-arr" style="background:var(--red-soft);color:var(--red);">→</div></div>
+  </div>
+</div>
+<div style="text-align:right;margin-bottom:20px;">
+  <button onclick="showV('tna-detail',null);renderTNADetail();" style="font-size:11px;color:#1565C0;background:none;border:none;cursor:pointer;font-weight:600;">View more ▸</button>
+</div>
+
+<!-- SECTION 3: REPEAT AND AUTO CLOSED -->
+<div style="font-size:13px;font-weight:700;color:#1A1A2E;margin-bottom:4px;">Section 3 — Repeat and auto closed</div>
+<div style="font-size:11px;color:#6C7A99;margin-bottom:14px;">Agents flagged again for a gap that already has an open training — either pending with the trainer or not yet completed by the agent.</div>
+<div style="background:white;border:1px solid #DDE3F0;border-radius:10px;overflow:hidden;margin-bottom:10px;">
+  <div style="display:grid;grid-template-columns:1.4fr 1.4fr 1fr 1.3fr 1.2fr;padding:8px 14px;background:#F8FAFF;border-bottom:1px solid #EEF2FF;">
+    <div style="font-size:10px;font-weight:700;color:#6C7A99;">Agent</div>
+    <div style="font-size:10px;font-weight:700;color:#6C7A99;">Gap type</div>
+    <div style="font-size:10px;font-weight:700;color:#6C7A99;">Repeat count</div>
+    <div style="font-size:10px;font-weight:700;color:#6C7A99;">Pending with</div>
+    <div style="font-size:10px;font-weight:700;color:#6C7A99;">Pending since</div>
+  </div>
+  <div id="repeat-top5"></div>
+</div>
+<div style="text-align:right;margin-bottom:20px;">
+  <button onclick="showV('repeat-detail',null);renderRepeatDetail();" style="font-size:11px;color:#1565C0;background:none;border:none;cursor:pointer;font-weight:600;">View more ▸</button>
+</div>
+
+<!-- SECTION 4: CONTENT PERFORMANCE -->
+<div style="font-size:13px;font-weight:700;color:#1A1A2E;margin-bottom:4px;">Section 4 — Content performance</div>
+<div style="font-size:11px;color:#6C7A99;margin-bottom:14px;">How content in the library is performing against training outcomes.</div>
+<div id="content-funnel-pills-v3" style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-bottom:16px;"></div>
+
+<!-- TNA without content -->
+<div style="font-size:11px;font-weight:700;color:#1A1A2E;margin-bottom:8px;">TNA gaps — content not yet created</div>
+<div style="background:white;border:1px solid #DDE3F0;border-radius:10px;overflow:hidden;margin-bottom:20px;">
+  <div style="display:grid;grid-template-columns:2fr 1fr 80px 70px 100px;gap:0;padding:8px 14px;background:#F8FAFF;border-bottom:1px solid #EEF2FF;">
+    <div style="font-size:10px;font-weight:700;color:#6C7A99;">TNA Name</div>
+    <div style="font-size:10px;font-weight:700;color:#6C7A99;">Fleet identified</div>
+    <div style="font-size:10px;font-weight:700;color:#6C7A99;">Severity</div>
+    <div style="font-size:10px;font-weight:700;color:#6C7A99;">Avg score</div>
+    <div style="font-size:10px;font-weight:700;color:#6C7A99;">Action</div>
+  </div>
+  <div id="tna-no-content-v3"></div>
+</div>
+
+</div>
+</div><!-- end view-home-v3 -->
+
+      <!-- ═══════════════ REPEAT & AUTO CLOSED DETAIL ═══════════════ -->
+      <div class="view" id="view-repeat-detail">
+<div style="padding:16px 24px 24px;">
+  <div style="display:flex;align-items:center;gap:10px;margin-bottom:4px;">
+    <button onclick="showV('home-v3',document.getElementById('nav-dash3'));setTimeout(renderKPIV3,50);" style="font-size:11px;color:#1565C0;background:none;border:none;cursor:pointer;font-weight:600;">◂ Back to Dashboard v3</button>
+  </div>
+  <div style="font-size:15px;font-weight:700;color:#1A1A2E;margin-bottom:4px;">Repeat and auto closed — full view</div>
+  <div style="font-size:11px;color:#6C7A99;margin-bottom:16px;">Every instance where an agent was flagged again for a gap that already has an open training.</div>
+
+  <!-- Quick analytics -->
+  <div id="repeat-analytics" style="display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;margin-bottom:16px;"></div>
+
+  <!-- Filters aligned to columns -->
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
+    <div style="font-size:11px;font-weight:700;color:#1A1A2E;">Filter</div>
+    <span id="repeat-result-count" style="font-size:11px;color:#6C7A99;"></span>
+  </div>
+  <div style="display:grid;grid-template-columns:1.4fr 1.4fr 1fr 1.3fr 1.2fr;gap:8px;margin-bottom:10px;">
+    <input id="repeat-search" type="text" placeholder="Search agent name..." oninput="renderRepeatDetail()" style="font-size:11.5px;padding:6px 10px;border:1px solid #DDE3F0;border-radius:6px;width:100%;">
+    <select id="repeat-filter-gap" onchange="renderRepeatDetail()" style="font-size:11.5px;padding:6px 8px;border:1px solid #DDE3F0;border-radius:6px;background:white;color:#1A1A2E;cursor:pointer;width:100%;">
+      <option value="all">All gaps</option>
+      <option>Objection Handling</option>
+      <option>Value Anchoring</option>
+      <option>Closing Technique</option>
+      <option>Product Knowledge</option>
+      <option>Communication Skills</option>
+      <option>Fatal Errors</option>
+    </select>
+    <select id="repeat-filter-count" onchange="renderRepeatDetail()" style="font-size:11.5px;padding:6px 8px;border:1px solid #DDE3F0;border-radius:6px;background:white;color:#1A1A2E;cursor:pointer;width:100%;">
+      <option value="all">All counts</option>
+      <option value="2">2 times</option>
+      <option value="3">3 times</option>
+      <option value="4+">4+ times</option>
+    </select>
+    <select id="repeat-filter-pending" onchange="renderRepeatDetail()" style="font-size:11.5px;padding:6px 8px;border:1px solid #DDE3F0;border-radius:6px;background:white;color:#1A1A2E;cursor:pointer;width:100%;">
+      <option value="all">All</option>
+      <option value="Trainer">Trainer</option>
+      <option value="Learner">Learner</option>
+    </select>
+    <select id="repeat-filter-duration" onchange="renderRepeatDetail()" style="font-size:11.5px;padding:6px 8px;border:1px solid #DDE3F0;border-radius:6px;background:white;color:#1A1A2E;cursor:pointer;width:100%;">
+      <option value="all">Any duration</option>
+      <option value="0-3">0–3 days</option>
+      <option value="4-7">4–7 days</option>
+      <option value="8-14">8–14 days</option>
+      <option value="15+">15+ days</option>
+    </select>
+  </div>
+
+  <!-- Table -->
+  <div style="background:white;border:1px solid #DDE3F0;border-radius:10px;overflow:hidden;">
+    <div style="display:grid;grid-template-columns:1.4fr 1.4fr 1fr 1.3fr 1.2fr;padding:8px 14px;background:#F8FAFF;border-bottom:1px solid #EEF2FF;">
+      <div style="font-size:10px;font-weight:700;color:#6C7A99;">Agent</div>
+      <div style="font-size:10px;font-weight:700;color:#6C7A99;">Gap type</div>
+      <div style="font-size:10px;font-weight:700;color:#6C7A99;">Repeat count</div>
+      <div style="font-size:10px;font-weight:700;color:#6C7A99;">Pending with</div>
+      <div style="font-size:10px;font-weight:700;color:#6C7A99;">Pending since</div>
+    </div>
+    <div id="repeat-rows"></div>
+  </div>
+</div>
+</div><!-- end view-repeat-detail -->
 
       <div class="view" id="view-kpi-detail">
 <div style="padding:16px 24px 24px;">
@@ -1391,14 +1566,14 @@ const JSONBIN_URL = 'https://api.jsonbin.io/v3/b/' + JSONBIN_ID + '/latest';
 const AGENTS = [
   {name:"Sunny",id:"XFE-4821",phone:"9716299969",loc:"Faridabad",score:62,calls:8,last:"2h ago",status:"Pending",gaps:["Objection","Closing"],color:"#E4002B"},
   {name:"Ravi",id:"XFE-3302",phone:"9818673827",loc:"Gurugram",score:45,calls:6,last:"4h ago",status:"Pending",gaps:["Objection","Value"],color:"#1565C0"},
-  {name:"Rishab",id:"XFE-5190",phone:"9703070123",loc:"Noida",score:44,calls:5,last:"1h ago",status:"Pending",gaps:["Objection","Product"],color:"#F59E0B"},
-  {name:"Thulasi",id:"XFE-2211",phone:"9654495454",loc:"Delhi",score:58,calls:9,last:"30m ago",status:"Pending",gaps:["Objection"],color:"#7B1FA2"},
-  {name:"Varun",id:"XFE-1190",phone:"9205474250",loc:"Faridabad",score:39,calls:4,last:"5h ago",status:"Pending",gaps:["Objection","Value","Product"],color:"#E65100"},
-  {name:"Pradipt",id:"XFE-8820",phone:"9971118800",loc:"Noida",score:71,calls:11,last:"1h ago",status:"Pending",gaps:["Objection"],color:"#AD1457"},
-  {name:"Anant",id:"XFE-6644",phone:"9818891014",loc:"Ghaziabad",score:67,calls:7,last:"3h ago",status:"Pending",gaps:["Objection","Closing"],color:"#00897B"},
-  {name:"Manoj",id:"XFE-9901",phone:"9873182585",loc:"Faridabad",score:51,calls:5,last:"6h ago",status:"Pending",gaps:["Closing","Value"],color:"#0288D1"},
-  {name:"Chandan",id:"XFE-7712",phone:"9899577359",loc:"Delhi",score:48,calls:6,last:"3h ago",status:"Pending",gaps:["Product","Objection"],color:"#7B1FA2"},
-  {name:"Amit",id:"XFE-5533",phone:"9810202024",loc:"Noida",score:55,calls:8,last:"1h ago",status:"Pending",gaps:["Objection"],color:"#2E7D32"},
+  {name:"Kulkarni",id:"XFE-5190",phone:"9703070123",loc:"Noida",score:44,calls:5,last:"1h ago",status:"Pending",gaps:["Objection","Product"],color:"#F59E0B"},
+  {name:"Amir",id:"XFE-2211",phone:"9654495454",loc:"Delhi",score:58,calls:9,last:"30m ago",status:"Pending",gaps:["Objection"],color:"#7B1FA2"},
+  {name:"Sachin",id:"XFE-1190",phone:"9205474250",loc:"Faridabad",score:39,calls:4,last:"5h ago",status:"Pending",gaps:["Objection","Value","Product"],color:"#E65100"},
+  {name:"Vinit",id:"XFE-8820",phone:"9971118800",loc:"Noida",score:71,calls:11,last:"1h ago",status:"Pending",gaps:["Objection"],color:"#AD1457"},
+  {name:"Ravi",id:"XFE-6644",phone:"9818891014",loc:"Ghaziabad",score:67,calls:7,last:"3h ago",status:"Pending",gaps:["Objection","Closing"],color:"#00897B"},
+  {name:"Vinit",id:"XFE-9901",phone:"9873182585",loc:"Faridabad",score:51,calls:5,last:"6h ago",status:"Pending",gaps:["Closing","Value"],color:"#0288D1"},
+  {name:"Amir",id:"XFE-7712",phone:"9899577359",loc:"Delhi",score:48,calls:6,last:"3h ago",status:"Pending",gaps:["Product","Objection"],color:"#7B1FA2"},
+  {name:"Sachin",id:"XFE-5533",phone:"9810202024",loc:"Noida",score:55,calls:8,last:"1h ago",status:"Pending",gaps:["Objection"],color:"#2E7D32"},
 ];
 
 // Agent phone → name mapping
@@ -1409,30 +1584,30 @@ const AGENT_NAMES = {
   '9818673827': 'Ravi',
   '919818673827': 'Ravi',
   '+919818673827': 'Ravi',
-  '9703070123': 'Rishab',
-  '919703070123': 'Rishab',
-  '+919703070123': 'Rishab',
-  '9654495454': 'Thulasi',
-  '919654495454': 'Thulasi',
-  '+919654495454': 'Thulasi',
-  '9205474250': 'Varun',
-  '919205474250': 'Varun',
-  '+919205474250': 'Varun',
-  '997111800': 'Pradipt',
-  '9971118800': 'Pradipt',
-  '+919971118800': 'Pradipt',
-  '9818891014': 'Anant',
-  '919818891014': 'Anant',
-  '+919818891014': 'Anant',
-  '9873182585': 'Manoj',
-  '919873182585': 'Manoj',
-  '+919873182585': 'Manoj',
-  '9899577359': 'Chandan',
-  '919899577359': 'Chandan',
-  '+919899577359': 'Chandan',
-  '9810202024': 'Amit',
-  '919810202024': 'Amit',
-  '+919810202024': 'Amit',
+  '9703070123': 'Kulkarni',
+  '919703070123': 'Kulkarni',
+  '+919703070123': 'Kulkarni',
+  '9654495454': 'Amir',
+  '919654495454': 'Amir',
+  '+919654495454': 'Amir',
+  '9205474250': 'Sachin',
+  '919205474250': 'Sachin',
+  '+919205474250': 'Sachin',
+  '997111800': 'Vinit',
+  '9971118800': 'Vinit',
+  '+919971118800': 'Vinit',
+  '9818891014': 'Ravi',
+  '919818891014': 'Ravi',
+  '+919818891014': 'Ravi',
+  '9873182585': 'Vinit',
+  '919873182585': 'Vinit',
+  '+919873182585': 'Vinit',
+  '9899577359': 'Amir',
+  '919899577359': 'Amir',
+  '+919899577359': 'Amir',
+  '9810202024': 'Sachin',
+  '919810202024': 'Sachin',
+  '+919810202024': 'Sachin',
 };
 
 function getAgentName(phone){
@@ -2724,6 +2899,172 @@ function getRole(){const el=document.getElementById('role-filter');return el?el.
 function scoreColor(s){return s>=70?'#1D9E75':s>=55?'#EF9F27':'#E24B4A';}
 function scoreLabel(s){return s>=85?'Elite':s>=70?'Proficient':s>=55?'Developing':s>=40?'At Risk':'Critical';}
 function scoreBg(s){return s>=85?'#E8F5E9':s>=70?'#F1F8E9':s>=55?'#FFF8E1':s>=40?'#FFEBEE':'#FFCDD2';}
+
+// ═══════════════ DASHBOARD V3 — REPEAT & AUTO CLOSED ═══════════════
+const REPEAT_DATA = [
+  {name:'Sachin', gap:'Objection Handling',   count:4, pendingWith:'Learner', days:18, since:'17 May 2026, 10:12 am'},
+  {name:'Vinit',  gap:'Value Anchoring',      count:3, pendingWith:'Trainer', days:12, since:'23 May 2026, 03:40 pm'},
+  {name:'Ravi',   gap:'Objection Handling',   count:3, pendingWith:'Learner', days:9,  since:'26 May 2026, 09:05 am'},
+  {name:'Amir',   gap:'Closing Technique',    count:2, pendingWith:'Trainer', days:7,  since:'28 May 2026, 11:20 am'},
+  {name:'Kulkarni',gap:'Product Knowledge',   count:5, pendingWith:'Learner', days:22, since:'13 May 2026, 02:15 pm'},
+  {name:'Sachin', gap:'Communication Skills', count:2, pendingWith:'Trainer', days:5,  since:'30 May 2026, 04:55 pm'},
+  {name:'Ravi',   gap:'Fatal Errors',         count:2, pendingWith:'Trainer', days:3,  since:'01 Jun 2026, 08:30 am'},
+  {name:'Vinit',  gap:'Objection Handling',   count:4, pendingWith:'Learner', days:15, since:'20 May 2026, 12:00 pm'},
+  {name:'Amir',   gap:'Value Anchoring',      count:2, pendingWith:'Learner', days:6,  since:'29 May 2026, 05:10 pm'},
+  {name:'Kulkarni',gap:'Closing Technique',   count:3, pendingWith:'Trainer', days:11, since:'24 May 2026, 10:45 am'},
+  {name:'Sachin', gap:'Product Knowledge',    count:2, pendingWith:'Learner', days:2,  since:'02 Jun 2026, 01:30 pm'},
+  {name:'Ravi',   gap:'Value Anchoring',      count:3, pendingWith:'Learner', days:14, since:'21 May 2026, 09:50 am'},
+  {name:'Vinit',  gap:'Communication Skills', count:2, pendingWith:'Trainer', days:4,  since:'31 May 2026, 03:15 pm'},
+  {name:'Amir',   gap:'Objection Handling',   count:5, pendingWith:'Learner', days:25, since:'10 May 2026, 11:00 am'},
+  {name:'Kulkarni',gap:'Fatal Errors',        count:2, pendingWith:'Trainer', days:8,  since:'27 May 2026, 02:40 pm'},
+];
+
+function repeatRowHTML(r){
+  const pendCol = r.pendingWith === 'Trainer' ? '#1565C0' : '#B26A00';
+  const pendBg  = r.pendingWith === 'Trainer' ? '#E3F2FD' : '#FFF3E0';
+  const cntCol  = r.count >= 4 ? '#C62828' : r.count === 3 ? '#B26A00' : '#6C7A99';
+  const ageCol  = r.days >= 15 ? '#C62828' : r.days >= 8 ? '#B26A00' : '#6C7A99';
+  return `<div style="display:grid;grid-template-columns:1.4fr 1.4fr 1fr 1.3fr 1.2fr;padding:10px 14px;border-bottom:1px solid #F0F2F8;align-items:center;">
+    <div style="font-size:12px;font-weight:600;color:#1A1A2E;">${r.name}</div>
+    <div style="font-size:12px;color:#1A1A2E;">${r.gap}</div>
+    <div style="font-size:12px;font-weight:700;color:${cntCol};">${r.count}×</div>
+    <div><span style="font-size:10.5px;padding:2px 9px;border-radius:20px;font-weight:600;background:${pendBg};color:${pendCol};">${r.pendingWith}</span></div>
+    <div style="font-size:11.5px;color:${ageCol};">${r.since}<div style="font-size:10px;color:#AAB4CC;">${r.days} days</div></div>
+  </div>`;
+}
+
+function renderKPIV3(){
+  const roleSel = document.getElementById('role-filter-v3');
+  const role = roleSel ? roleSel.value : 'XFE';
+  const d = ROLE_DATA[role] || ROLE_DATA.XFE;
+  const totalSignals = d.signals.calls + d.signals.performance + d.signals.appSignal;
+  const repeatTotal = REPEAT_DATA.reduce((s,r)=>s+r.count,0);
+
+  // ── Funnel (6 cards: Fleet Baseline / Pre / Post removed, Repeat added)
+  const funnel = [
+    {label:'Total Fleet', val:FLEET_TOTAL, sub:'All fleet · all LOBs', color:'#3C4A6B', click:null},
+    {label:'Total Signal Evaluated', val:totalSignals, sub:'Calls · Performance · App', color:'#6C63B5', click:null, signalBreakdown:d.signals},
+    {label:'Identified for Training', val:d.identified, sub:'', color:'#EF9F27', click:null},
+    {label:'Training Pushed', val:d.pushed, sub:'Trainer assigned', color:'#1976D2', click:null},
+    {label:'Training Completed', val:d.completed, sub:'Agent completed', color:'#0D47A1', click:null},
+    {label:'Repeat and Auto Closed', val:repeatTotal, sub:'Gap flagged again · open training', color:'#C62828', click:"showV('repeat-detail',null);renderRepeatDetail();"},
+    {label:'Fleet at Risk', val:d.atRisk, sub:'Not improving · escalate', color:'#A32D2D', click:"switchKPITabV2(1)"},
+  ];
+  const pf = document.getElementById('perf-funnel-v3');
+  if(pf){
+    pf.innerHTML = funnel.map((f,i)=>{
+      const noPctIdx=[0,1,2];
+      const pct = noPctIdx.includes(i) ? null : Math.round(f.val/funnel[2].val*100);
+      const arrow = i<funnel.length-1 ? '<div style="position:absolute;right:-8px;top:50%;transform:translateY(-50%);font-size:14px;color:#DDE3F0;z-index:1;">→</div>' : '';
+      const clickAttr = f.click ? `onclick="${f.click}"` : '';
+      const sigFooter = f.signalBreakdown ? `<div style="margin-top:6px;padding-top:6px;border-top:1px solid #F0F2F8;font-size:8.5px;color:#8A8AA0;line-height:1.5;">Calls: ${fmtN(f.signalBreakdown.calls)}<br>Performance: ${fmtN(f.signalBreakdown.performance)}<br>App Signal: ${fmtN(f.signalBreakdown.appSignal)}</div>` : '';
+      return `<div class="funnel-card" ${clickAttr} style="background:white;border:1px solid #DDE3F0;border-radius:10px;padding:12px 10px;position:relative;${f.click?'border-color:'+f.color+';cursor:pointer;':''}" ${f.click?'title="Click to see full list"':''}>
+        ${arrow}
+        <div style="width:4px;height:4px;border-radius:50%;background:${f.color};margin-bottom:6px;"></div>
+        <div style="font-size:10px;font-weight:700;color:#6C7A99;margin-bottom:6px;line-height:1.3;">${f.label}</div>
+        <div style="margin-bottom:4px;"><span style="font-size:22px;font-weight:700;color:${f.color};">${fmtN(f.val)}</span></div>
+        ${pct!==null?`<div style="font-size:9px;color:${pct>80?'#1D9E75':pct>60?'#EF9F27':'#E24B4A'};font-weight:700;">${pct}% of identified</div>`:''}
+        ${f.sub?`<div style="font-size:9px;color:#AAB4CC;margin-top:2px;">${f.sub}</div>`:''}
+        ${sigFooter}
+      </div>`;
+    }).join('');
+  }
+
+  // ── Section 3: top 5 repeat rows
+  const top5 = document.getElementById('repeat-top5');
+  if(top5){
+    const sorted = REPEAT_DATA.slice().sort((a,b)=>b.count-a.count || b.days-a.days).slice(0,5);
+    top5.innerHTML = sorted.map(repeatRowHTML).join('');
+  }
+
+  // ── Section 4: content pills (3 cards — "Content improved scores" removed)
+  const cf = document.getElementById('content-funnel-pills-v3');
+  if(cf){
+    const pills = [
+      {label:'Total content available', val:124, sub:'Video: 48 · Image: 36 · Voice: 28 · Doc: 12 · 8 languages', color:'#1976D2', bg:'#E3F2FD'},
+      {label:'Content yet to create', val:37, sub:'For identified TNAs with no content', color:'#EF9F27', bg:'#FFF8E1'},
+      {label:'Content not improving', val:19, sub:'No score lift detected · needs attention', color:'#E24B4A', bg:'#FFEBEE'},
+    ];
+    cf.innerHTML = pills.map(p=>`<div style="background:${p.bg};border-left:3px solid ${p.color};border-radius:8px;padding:12px 14px;">
+      <div style="font-size:10.5px;font-weight:700;color:${p.color};margin-bottom:4px;">${p.label}</div>
+      <div style="font-size:24px;font-weight:700;color:${p.color};line-height:1;">${p.val}</div>
+      <div style="font-size:9.5px;color:#6C7A99;margin-top:5px;">${p.sub}</div>
+    </div>`).join('');
+  }
+
+  // ── Section 4: TNA no content (reuse same renderer target)
+  const tnaV3 = document.getElementById('tna-no-content-v3');
+  if(tnaV3){
+    const rows = TNA_NO_CONTENT.slice(0,10);
+    tnaV3.innerHTML = rows.map(t=>{
+      const sevCol = t.sev==='Critical'?'#C62828':t.sev==='High'?'#B26A00':t.sev==='Medium'?'#1565C0':'#6C7A99';
+      const sevBg  = t.sev==='Critical'?'#FDEAEA':t.sev==='High'?'#FFF3E0':t.sev==='Medium'?'#E3F2FD':'#F0F2F8';
+      const scCol  = t.score>=70?'#1D9E75':t.score>=55?'#EF9F27':'#E24B4A';
+      return `<div style="display:grid;grid-template-columns:2fr 1fr 80px 70px 100px;gap:0;padding:9px 14px;border-bottom:1px solid #F0F2F8;align-items:center;">
+        <div style="font-size:12px;color:#1A1A2E;">${t.name}</div>
+        <div style="font-size:12px;color:#1A1A2E;">${fmtN(t.fleet)}</div>
+        <div><span style="font-size:10px;padding:2px 8px;border-radius:4px;font-weight:700;background:${sevBg};color:${sevCol};">${t.sev}</span></div>
+        <div style="font-size:11.5px;font-weight:700;color:${scCol};">${t.score}/100</div>
+        <div><button onclick="goCreateContent('${t.name}')" style="font-size:10px;padding:4px 10px;background:#1565C0;color:white;border:none;border-radius:5px;cursor:pointer;">Create content</button></div>
+      </div>`;
+    }).join('');
+  }
+}
+
+function renderRepeatDetail(){
+  // ── Analytics cards
+  const totalInstances = REPEAT_DATA.reduce((s,r)=>s+r.count,0);
+  const uniqueAgents = new Set(REPEAT_DATA.map(r=>r.name)).size;
+  const withTrainer = REPEAT_DATA.filter(r=>r.pendingWith==='Trainer').reduce((s,r)=>s+r.count,0);
+  const withLearner = REPEAT_DATA.filter(r=>r.pendingWith==='Learner').reduce((s,r)=>s+r.count,0);
+  const avgAge = Math.round(REPEAT_DATA.reduce((s,r)=>s+r.days,0)/REPEAT_DATA.length);
+  const aged15 = REPEAT_DATA.filter(r=>r.days>=15).length;
+
+  const an = document.getElementById('repeat-analytics');
+  if(an){
+    const cards = [
+      {label:'Total repeat instances', val:totalInstances, sub:'Across all gaps', color:'#C62828'},
+      {label:'Agents affected', val:uniqueAgents, sub:'Unique agents repeating', color:'#6C63B5'},
+      {label:'Pending with trainer', val:withTrainer, sub:'Not yet pushed to agent', color:'#1565C0'},
+      {label:'Pending with learner', val:withLearner, sub:'Pushed but not completed', color:'#B26A00'},
+      {label:'Ageing beyond 15 days', val:aged15, sub:`Avg age ${avgAge} days · escalate`, color:'#E24B4A'},
+    ];
+    an.innerHTML = cards.map(c=>`<div style="background:white;border:1px solid #DDE3F0;border-radius:10px;padding:12px 14px;border-top:3px solid ${c.color};">
+      <div style="font-size:10px;font-weight:700;color:#6C7A99;margin-bottom:6px;">${c.label}</div>
+      <div style="font-size:24px;font-weight:700;color:${c.color};line-height:1;">${c.val}</div>
+      <div style="font-size:9.5px;color:#AAB4CC;margin-top:5px;">${c.sub}</div>
+    </div>`).join('');
+  }
+
+  // ── Filtered table
+  const q = (document.getElementById('repeat-search')?.value||'').toLowerCase().trim();
+  const fPend = document.getElementById('repeat-filter-pending')?.value||'all';
+  const fGap  = document.getElementById('repeat-filter-gap')?.value||'all';
+  const fDur  = document.getElementById('repeat-filter-duration')?.value||'all';
+  const fCnt  = document.getElementById('repeat-filter-count')?.value||'all';
+
+  let rows = REPEAT_DATA.filter(r=>{
+    if(q && !r.name.toLowerCase().includes(q)) return false;
+    if(fPend!=='all' && r.pendingWith!==fPend) return false;
+    if(fGap!=='all' && r.gap!==fGap) return false;
+    if(fCnt==='2' && r.count!==2) return false;
+    if(fCnt==='3' && r.count!==3) return false;
+    if(fCnt==='4+' && r.count<4) return false;
+    if(fDur==='0-3' && r.days>3) return false;
+    if(fDur==='4-7' && (r.days<4||r.days>7)) return false;
+    if(fDur==='8-14' && (r.days<8||r.days>14)) return false;
+    if(fDur==='15+' && r.days<15) return false;
+    return true;
+  }).sort((a,b)=>b.count-a.count || b.days-a.days);
+
+  const rc = document.getElementById('repeat-result-count');
+  if(rc) rc.textContent = rows.length + ' of ' + REPEAT_DATA.length + ' records';
+
+  const tbl = document.getElementById('repeat-rows');
+  if(tbl){
+    tbl.innerHTML = rows.map(repeatRowHTML).join('') || '<div style="padding:20px;text-align:center;font-size:12px;color:#AAB4CC;">No matching records</div>';
+  }
+}
 
 function renderKPI(){
   const role=getRole();

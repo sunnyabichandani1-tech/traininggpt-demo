@@ -454,6 +454,115 @@ body{font-family:var(--font);background:var(--gray-50);color:var(--gray-900);min
 .safety-row:last-child{border-bottom:none;}
 .safety-label{font-size:11px;color:#4A5568;display:flex;align-items:center;gap:6px;}
 .safety-dot{width:6px;height:6px;border-radius:50%;}
+
+/* ═══════════ DASHBOARD V4 ═══════════ */
+.v4-page{padding:18px 24px 34px;}
+.v4-panel{background:white;border:1px solid #E6E9F0;border-radius:12px;box-shadow:0 1px 3px rgba(20,30,60,0.05);margin-bottom:18px;overflow:hidden;}
+.v4-filterbar{display:flex;align-items:flex-end;justify-content:space-between;padding:16px 20px;}
+.v4-filter-group{display:flex;gap:16px;}
+.v4-filter-item label{display:block;font-size:11.5px;color:#8A93AB;margin-bottom:5px;}
+.v4-filter-item select{height:38px;min-width:180px;padding:0 12px;border:1px solid #DFE3EC;border-radius:8px;background:white;font-family:var(--font);font-size:13px;color:#1A1A2E;cursor:pointer;}
+.v4-filter-actions{display:flex;align-items:center;gap:10px;}
+.v4-icon-btn{width:34px;height:34px;border-radius:8px;border:1px solid #DFE3EC;background:white;color:#6C7A99;font-size:15px;cursor:pointer;display:flex;align-items:center;justify-content:center;}
+.v4-icon-btn:hover{background:#F2F4F9;}
+.v4-icon-btn-dark{background:#EDEFF5;}
+.v4-sec-hdr{padding:16px 20px 15px;background:linear-gradient(180deg,#FBFCFF 0%,#F0F3FB 100%);border-bottom:1px solid #EEF0F7;}
+.v4-sec-title{font-size:18px;font-weight:700;color:#141A2E;letter-spacing:-0.2px;}
+.v4-sec-sub{font-size:12.5px;color:#6C7A99;margin-top:4px;}
+.v4-funnel{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:12px;padding:18px 20px 22px;overflow-x:auto;}
+.v4-funnel > *{min-width:0;}
+.v4-card{background:white;border:1px solid #E6E9F0;border-radius:10px;padding:12px 13px;height:126px;display:flex;flex-direction:column;transition:box-shadow 0.15s,border-color 0.15s;}
+.v4-card.risk{border-color:#F2BFBF;}
+.v4-card.clickable{cursor:pointer;}
+.v4-card.clickable:hover{border-color:#8FB3E0;box-shadow:0 3px 14px rgba(21,101,192,0.12);}
+.v4-dot{width:7px;height:7px;border-radius:50%;margin-bottom:7px;flex-shrink:0;}
+.v4-card-label{font-size:11.5px;font-weight:700;color:#5B6A8C;line-height:1.3;margin-bottom:6px;}
+.v4-card-val{font-size:24px;font-weight:700;line-height:1;margin-bottom:8px;}
+.v4-card-sub{font-size:10.5px;color:#8A93AB;line-height:1.45;margin-top:auto;}
+.v4-card-sub.danger{color:#E24B4A;}
+.v4-queue{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:14px;padding:18px 20px 22px;}
+.v4-q-card{background:white;border:1px solid #E6E9F0;border-radius:10px;padding:14px 16px;cursor:pointer;transition:box-shadow 0.15s,border-color 0.15s;display:flex;flex-direction:column;min-height:200px;}
+.v4-q-card:hover{border-color:#B8CAE8;box-shadow:0 3px 14px rgba(21,101,192,0.1);}
+.v4-q-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:16px;}
+.v4-q-ico{width:34px;height:34px;border-radius:9px;background:#EEF3FF;display:flex;align-items:center;justify-content:center;font-size:15px;}
+.v4-q-sev{font-size:10px;font-weight:700;letter-spacing:0.5px;}
+.v4-q-name{font-size:14px;font-weight:700;color:#141A2E;flex:1;}
+.v4-q-foot{display:flex;align-items:flex-end;justify-content:space-between;padding-top:12px;border-top:1px solid #EEF0F7;margin-top:14px;}
+.v4-q-count{font-size:15px;font-weight:700;color:#141A2E;}
+.v4-q-lbl{font-size:11.5px;color:#8A93AB;margin-top:2px;}
+.v4-q-arr{width:28px;height:28px;border-radius:50%;background:#F2F4F9;color:#5B6A8C;display:flex;align-items:center;justify-content:center;font-size:13px;transition:all 0.12s;}
+.v4-q-card:hover .v4-q-arr{background:#1976D2;color:white;}
+.v4-content-tiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px;padding:18px 20px 22px;}
+.v4-tile{border-radius:10px;padding:16px 18px;}
+.v4-tile-label{font-size:12.5px;font-weight:700;margin-bottom:10px;}
+.v4-tile-val{font-size:30px;font-weight:700;line-height:1;margin-bottom:10px;}
+.v4-tile-sub{font-size:11.5px;color:#8A93AB;}
+
+/* v4 drill-down: selector cards, tables, detail */
+.v4-seltabs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;padding:18px 20px;}
+.v4-seltab{background:white;border:1px solid #E6E9F0;border-radius:10px;padding:12px 13px;height:104px;display:flex;flex-direction:column;cursor:pointer;transition:box-shadow 0.15s,border-color 0.15s,background 0.15s;}
+.v4-seltab:hover{border-color:#8FB3E0;box-shadow:0 3px 14px rgba(21,101,192,0.12);}
+.v4-seltab.active{border-color:#1976D2;background:#F6FAFF;box-shadow:0 0 0 1px #1976D2 inset;}
+.v4-seltab-dot{width:7px;height:7px;border-radius:50%;margin-bottom:7px;flex-shrink:0;}
+.v4-seltab-label{font-size:11.5px;font-weight:700;color:#5B6A8C;line-height:1.3;margin-bottom:6px;}
+.v4-seltab.active .v4-seltab-label{color:#1976D2;}
+.v4-seltab-val{font-size:24px;font-weight:700;line-height:1;margin-bottom:8px;}
+.v4-seltab-sub{font-size:10.5px;color:#8A93AB;line-height:1.45;margin-top:auto;}
+.v4-filters{display:flex;flex-wrap:wrap;gap:12px;padding:18px 20px 16px;align-items:flex-end;}
+.v4-filt label{display:block;font-size:11px;color:#8A93AB;margin-bottom:5px;}
+.v4-filt select,.v4-filt input{height:34px;min-width:160px;padding:0 11px;border:1px solid #DFE3EC;border-radius:8px;background:white;font-family:var(--font);font-size:12.5px;color:#1A1A2E;}
+.v4-filt select{cursor:pointer;}
+.v4-filt-count{margin-left:auto;font-size:11.5px;color:#8A93AB;padding-bottom:9px;}
+.v4-thead{display:grid;align-items:center;gap:10px;padding:10px 20px;background:#F7F9FD;border-bottom:1px solid #EEF0F7;font-size:10.5px;font-weight:700;color:#6C7A99;text-transform:uppercase;letter-spacing:0.3px;}
+.v4-trow{display:grid;align-items:center;gap:10px;padding:11px 20px;border-bottom:1px solid #F2F4F9;font-size:12.5px;color:#1A1A2E;cursor:pointer;transition:background 0.1s;}
+.v4-trow:hover{background:#F8FAFF;}
+.v4-trow.sel{background:#EEF3FF;}
+.v4-trow:last-child{border-bottom:none;}
+.v4-agent{display:flex;align-items:center;gap:9px;min-width:0;}
+.v4-av{width:30px;height:30px;border-radius:50%;color:white;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.v4-aname{font-size:12.5px;font-weight:600;color:#141A2E;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.v4-muted{color:#8A93AB;}
+.v4-pill{display:inline-block;padding:2px 9px;border-radius:5px;font-size:11.5px;font-weight:700;}
+.v4-yn{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:600;}
+.v4-empty{padding:26px 20px;text-align:center;font-size:12.5px;color:#8A93AB;}
+.v4-back{font-size:11.5px;color:#1565C0;background:none;border:none;cursor:pointer;font-weight:600;padding:0;margin-bottom:12px;font-family:var(--font);}
+.v4-hero{background:white;border:1px solid #E6E9F0;border-radius:12px;padding:15px 20px;display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:12px;}
+.v4-hero-l{display:flex;align-items:center;gap:13px;}
+.v4-hero-av{width:44px;height:44px;border-radius:50%;color:white;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.v4-hero-name{font-size:15px;font-weight:700;color:#141A2E;}
+.v4-hero-meta{font-size:12px;color:#8A93AB;margin-top:2px;}
+.v4-hero-score{text-align:right;padding:6px 16px;border-radius:10px;border:1px solid #E6E9F0;}
+.v4-hero-score-val{font-size:22px;font-weight:700;line-height:1;}
+.v4-hero-score-lbl{font-size:9.5px;color:#8A93AB;margin-top:4px;text-transform:uppercase;letter-spacing:0.6px;}
+.v4-chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px;}
+.v4-chip{display:flex;align-items:center;gap:6px;padding:5px 11px;border-radius:7px;border:1px solid #E6E9F0;background:white;font-size:11.5px;color:#8A93AB;}
+.v4-chip strong{color:#1A1A2E;font-weight:600;}
+.v4-two{display:grid;grid-template-columns:1fr 1fr;gap:14px;padding:18px 20px 22px;align-items:stretch;}
+.v4-col{display:flex;flex-direction:column;gap:14px;min-width:0;}
+.v4-rec{display:flex;align-items:center;gap:12px;padding:11px 14px;background:#F8FAFF;border:1px solid #E6E9F0;border-radius:9px;}
+.v4-rec-play{width:34px;height:34px;border-radius:50%;background:#E3F2FD;color:#1565C0;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;cursor:pointer;}
+.v4-rec-wave{flex:1;height:30px;display:flex;align-items:center;gap:2px;overflow:hidden;}
+.v4-rec-dur{font-size:11.5px;color:#8A93AB;white-space:nowrap;}
+.v4-two.one{grid-template-columns:1fr;}
+.v4-sub-card{background:white;border:1px solid #E6E9F0;border-radius:10px;overflow:hidden;}
+.v4-sub-hdr{padding:10px 14px;border-bottom:1px solid #F0F2F8;font-size:12.5px;font-weight:700;color:#141A2E;}
+.v4-sub-body{padding:14px;max-height:340px;overflow-y:auto;}
+.v4-tr-line{margin-bottom:11px;}
+.v4-tr-line:last-child{margin-bottom:0;}
+.v4-tr-spk{font-size:10.5px;font-weight:700;color:#1565C0;margin-bottom:3px;}
+.v4-tr-spk.cust{color:#8A93AB;}
+.v4-tr-txt{font-size:12px;color:#1A1A2E;line-height:1.55;}
+.v4-gap-hd{display:flex;align-items:center;justify-content:space-between;gap:10px;background:#FFF5F5;border:1px solid #FBDADA;border-radius:8px;padding:10px 13px;margin-bottom:14px;}
+.v4-gap-name{font-size:12.5px;font-weight:700;color:#C62828;display:flex;align-items:center;gap:7px;}
+.v4-lbl{font-size:9.5px;font-weight:700;text-transform:uppercase;letter-spacing:0.6px;color:#8A93AB;margin-bottom:6px;}
+.v4-lbl.ok{color:#2E7D32;}
+.v4-quote{background:#F1F8E9;border-left:3px solid #4CAF50;border-radius:0 6px 6px 0;padding:9px 12px;font-size:12px;color:#1A1A2E;line-height:1.55;font-style:italic;}
+.v4-banner{display:flex;align-items:center;gap:11px;border-radius:10px;padding:12px 16px;margin:0 20px 14px;}
+.v4-banner-ico{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;font-size:15px;flex-shrink:0;}
+.v4-beh{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;padding:0 20px;}
+.v4-beh-box{background:white;border:1px solid #E6E9F0;border-radius:9px;padding:11px 13px;}
+.v4-beh-lbl{font-size:10.5px;color:#8A93AB;margin-bottom:6px;}
+.v4-beh-val{font-size:13px;font-weight:700;color:#141A2E;display:flex;align-items:center;gap:6px;}
 </style>
 </head>
 <body>
@@ -514,12 +623,15 @@ body{font-family:var(--font);background:var(--gray-50);color:var(--gray-900);min
       <div class="nav-item" id="nav-dash" style="display:none;" onclick="showV('home',this);renderROTable(loadObservations());">
         <span class="nav-icon">⊞</span> Dashboard
       </div>
-      <div class="nav-item active" id="nav-dash2" onclick="showV('home-v2',this);setTimeout(renderKPI,50);">
+      <div class="nav-item" id="nav-dash2" onclick="showV('home-v2',this);setTimeout(renderKPI,50);">
         <span class="nav-icon">📊</span> Dashboard v2
       </div>
 
       <div class="nav-item" id="nav-dash3" onclick="showV('home-v3',this);setTimeout(renderKPIV3,50);">
         <span class="nav-icon">🚀</span> Dashboard v3
+      </div>
+      <div class="nav-item active" id="nav-dash4" onclick="showV('home-v4',this);setTimeout(renderKPIV4,50);">
+        <span class="nav-icon">🧭</span> Dashboard v4
       </div>
       <div class="nav-item" id="nav-content" onclick="showV('content-library',this);window.scrollTo({top:0,behavior:'instant'});document.documentElement.scrollTop=0;document.body.scrollTop=0;ensureGenPromptFilled();">
         <span class="nav-icon">📚</span> Training Content
@@ -615,7 +727,7 @@ body{font-family:var(--font);background:var(--gray-50);color:var(--gray-900);min
 
       <!-- AGENT LIST -->
 
-      <div class="view active" id="view-home-v2">
+      <div class="view" id="view-home-v2">
 <div style="padding:16px 24px 24px;">
 
 <!-- TOP BAR: ROLE FILTER -->
@@ -854,6 +966,475 @@ body{font-family:var(--font);background:var(--gray-50);color:var(--gray-900);min
 
 </div>
 </div><!-- end view-home-v3 -->
+
+      <!-- ═══════════════ DASHBOARD V4 ═══════════════ -->
+      <div class="view active" id="view-home-v4">
+<div class="v4-page">
+
+  <!-- FILTER BAR -->
+  <div class="v4-panel v4-filterbar">
+    <div class="v4-filter-group">
+      <div class="v4-filter-item">
+        <label>Role</label>
+        <select id="role-filter-v4" onchange="renderKPIV4()">
+          <option value="XFE">XFE</option>
+          <option value="ENG">Field Engineer</option>
+          <option value="CC">Call Center Agent</option>
+          <option value="HDO">HDO</option>
+          <option value="MR">Market Representative</option>
+        </select>
+      </div>
+      <div class="v4-filter-item">
+        <label>Period</label>
+        <select id="period-filter-v4" onchange="renderKPIV4()">
+          <option>This month</option><option>Last 7 days</option><option>Last 30 days</option><option>Last quarter</option>
+        </select>
+      </div>
+    </div>
+    <div class="v4-filter-actions">
+      <button class="v4-icon-btn" onclick="renderKPIV4();toast('Dashboard refreshed');" title="Refresh">⟳</button>
+      <button class="v4-icon-btn v4-icon-btn-dark" onclick="toast('Settings coming soon')" title="Settings">⚙</button>
+    </div>
+  </div>
+
+  <!-- PERFORMANCE FUNNEL -->
+  <div class="v4-panel">
+    <div class="v4-sec-hdr">
+      <div class="v4-sec-title">Performance Funnel</div>
+      <div class="v4-sec-sub">Each card shows a stage in the training funnel.</div>
+    </div>
+    <div class="v4-funnel" id="v4-funnel"></div>
+  </div>
+
+  <!-- TRAINING QUEUE -->
+  <div class="v4-panel">
+    <div class="v4-sec-hdr">
+      <div class="v4-sec-title">Training Queue</div>
+      <div class="v4-sec-sub">Top training gaps identified across the fleet this month, ranked by severity.</div>
+    </div>
+    <div class="v4-queue" id="v4-queue"></div>
+    <div style="padding:0 20px 18px;text-align:right;">
+      <button onclick="v4OpenIdentifiedList()" style="font-size:12px;color:#1565C0;background:none;border:none;cursor:pointer;font-weight:600;font-family:var(--font);">View more ▸</button>
+    </div>
+  </div>
+
+  <!-- CONTENT COVERAGE -->
+  <div class="v4-panel">
+    <div class="v4-sec-hdr">
+      <div class="v4-sec-title">Content Coverage</div>
+      <div class="v4-sec-sub">This section shows the training content coverage, and what is still to be created for the identified gaps.</div>
+    </div>
+    <div class="v4-content-tiles" id="v4-content"></div>
+  </div>
+
+</div>
+</div><!-- end view-home-v4 -->
+
+      <!-- ═══════════════ V4 SIGNAL DRILL DOWN ═══════════════ -->
+      <div class="view" id="view-v4-signal">
+<div class="v4-page">
+  <button class="v4-back" onclick="showV('home-v4',document.getElementById('nav-dash4'));setTimeout(renderKPIV4,30);">◂ Back to Dashboard v4</button>
+  <div class="v4-panel">
+    <div class="v4-sec-hdr">
+      <div class="v4-sec-title" id="v4-sig-title">Total Signal Evaluated</div>
+      <div class="v4-sec-sub" id="v4-sig-sub">Every signal evaluated this month, split by outcome.</div>
+    </div>
+    <div class="v4-seltabs" id="v4-sig-tabs"></div>
+    <div class="v4-filters" id="v4-sig-filters"></div>
+    <div id="v4-sig-table"></div>
+  </div>
+</div>
+</div><!-- end view-v4-signal -->
+
+      <!-- ═══════════════ V4 TRAINING PUSHED ═══════════════ -->
+      <div class="view" id="view-v4-pushed">
+<div class="v4-page">
+  <button class="v4-back" onclick="showV('home-v4',document.getElementById('nav-dash4'));setTimeout(renderKPIV4,30);">◂ Back to Dashboard v4</button>
+  <div class="v4-panel">
+    <div class="v4-sec-hdr">
+      <div class="v4-sec-title">Training Pushed</div>
+      <div class="v4-sec-sub">Every training assigned and published to the fleet in the selected period.</div>
+    </div>
+    <div class="v4-filters" id="v4-push-filters"></div>
+    <div id="v4-push-table"></div>
+  </div>
+</div>
+</div><!-- end view-v4-pushed -->
+
+      <!-- ═══════════════ V4 TRAINING IDENTIFIED ═══════════════ -->
+      <div class="view" id="view-v4-identified">
+<div class="v4-page">
+  <button class="v4-back" onclick="showV('home-v4',document.getElementById('nav-dash4'));setTimeout(renderKPIV4,30);">◂ Back to Dashboard v4</button>
+  <div class="v4-panel">
+    <div class="v4-sec-hdr" style="display:flex;align-items:flex-start;justify-content:space-between;gap:16px;">
+      <div>
+        <div class="v4-sec-title" id="v4-id-title">Training Identified</div>
+        <div class="v4-sec-sub" id="v4-id-sub">Every call where a gap was found and training is due for the fleet member.</div>
+      </div>
+      <div style="display:flex;gap:8px;flex-shrink:0;">
+        <button class="btn-outline" id="v4-id-reject" onclick="v4OpenReject()" disabled>Reject recommendation</button>
+        <button class="btn-blue" id="v4-id-push" onclick="v4StartPush()" disabled>Push training</button>
+      </div>
+    </div>
+    <div class="v4-filters" id="v4-id-filters"></div>
+    <div id="v4-id-table"></div>
+  </div>
+</div>
+</div><!-- end view-v4-identified -->
+
+      <!-- ═══════════════ V4 TRAINING COMPLETED ═══════════════ -->
+      <div class="view" id="view-v4-completed">
+<div class="v4-page">
+  <button class="v4-back" onclick="showV('home-v4',document.getElementById('nav-dash4'));setTimeout(renderKPIV4,30);">◂ Back to Dashboard v4</button>
+  <div class="v4-panel">
+    <div class="v4-sec-hdr">
+      <div class="v4-sec-title">Training Completed</div>
+      <div class="v4-sec-sub">Trainings the fleet member has finished, including the voice coaching session.</div>
+    </div>
+    <div class="v4-filters" id="v4-comp-filters"></div>
+    <div id="v4-comp-table"></div>
+  </div>
+</div>
+</div><!-- end view-v4-completed -->
+
+      <!-- ═══════════════ V4 FLEET AT RISK ═══════════════ -->
+      <div class="view" id="view-v4-risk">
+<div class="v4-page">
+  <button class="v4-back" onclick="showV('home-v4',document.getElementById('nav-dash4'));setTimeout(renderKPIV4,30);">◂ Back to Dashboard v4</button>
+  <div class="v4-panel">
+    <div class="v4-sec-hdr" style="display:flex;align-items:flex-start;justify-content:space-between;gap:16px;">
+      <div>
+        <div class="v4-sec-title">Fleet at Risk</div>
+        <div class="v4-sec-sub">Fleet members who are not improving after training and need trainer intervention.</div>
+      </div>
+      <button class="btn-blue" id="v4-risk-cta" onclick="v4OpenFeedback()" disabled style="flex-shrink:0;">Submit feedback</button>
+    </div>
+    <div class="v4-filters" id="v4-risk-filters"></div>
+    <div id="v4-risk-table"></div>
+  </div>
+</div>
+</div><!-- end view-v4-risk -->
+
+      <!-- ═══════════════ V4 TRAINING REJECTED ═══════════════ -->
+      <div class="view" id="view-v4-rejected">
+<div class="v4-page">
+  <button class="v4-back" onclick="showV('home-v4',document.getElementById('nav-dash4'));setTimeout(renderKPIV4,30);">◂ Back to Dashboard v4</button>
+  <div class="v4-panel">
+    <div class="v4-sec-hdr">
+      <div class="v4-sec-title">Training Rejected</div>
+      <div class="v4-sec-sub">Training recommendations the trainer rejected, with the reason recorded against each one.</div>
+    </div>
+    <div class="v4-filters" id="v4-rej-filters"></div>
+    <div id="v4-rej-table"></div>
+  </div>
+</div>
+</div><!-- end view-v4-rejected -->
+
+      <!-- ═══════════════ V4 REPEAT TRAINING ═══════════════ -->
+      <div class="view" id="view-v4-repeat">
+<div class="v4-page">
+  <button class="v4-back" onclick="showV('home-v4',document.getElementById('nav-dash4'));setTimeout(renderKPIV4,30);">◂ Back to Dashboard v4</button>
+  <div class="v4-panel">
+    <div class="v4-sec-hdr" style="display:flex;align-items:flex-start;justify-content:space-between;gap:16px;">
+      <div>
+        <div class="v4-sec-title">Repeat Training</div>
+        <div class="v4-sec-sub">Gaps parked because the trainee already has an open training, or the training is already with the trainer to assign.</div>
+      </div>
+      <button class="btn-blue" id="v4-rp-push" onclick="v4StartPush('repeat')" disabled style="flex-shrink:0;">Push training</button>
+    </div>
+    <div class="v4-filters" id="v4-rp-filters"></div>
+    <div id="v4-rp-table"></div>
+  </div>
+</div>
+</div><!-- end view-v4-repeat -->
+
+      <!-- ═══════════════ V4 CONTENT YET TO BE CREATED ═══════════════ -->
+      <div class="view" id="view-v4-content">
+<div class="v4-page">
+  <button class="v4-back" onclick="showV('home-v4',document.getElementById('nav-dash4'));setTimeout(renderKPIV4,30);">◂ Back to Dashboard v4</button>
+  <div class="v4-panel">
+    <div class="v4-sec-hdr">
+      <div class="v4-sec-title">Content yet to be created</div>
+      <div class="v4-sec-sub">Identified gaps that have no training content mapped to them yet.</div>
+    </div>
+    <div class="v4-filters" id="v4-ct-filters"></div>
+    <div id="v4-ct-table"></div>
+  </div>
+</div>
+</div><!-- end view-v4-content -->
+
+      <!-- ═══════════════ V4 TAG CONTENT ═══════════════ -->
+      <div class="view" id="view-v4-tag">
+<div class="v4-page">
+  <button class="v4-back" onclick="v4OpenContentList()">◂ Back to Content yet to be created</button>
+
+  <div class="v4-panel">
+    <div class="v4-sec-hdr">
+      <div class="v4-sec-title" id="v4-tag-title">GAP name</div>
+      <div class="v4-sec-sub" id="v4-tag-sub"></div>
+    </div>
+    <div class="v4-chips" id="v4-tag-chips" style="padding:16px 20px 18px;margin-bottom:0;"></div>
+  </div>
+
+  <div class="v4-panel">
+    <div class="v4-sec-hdr">
+      <div class="v4-sec-title">Tag the content</div>
+      <div class="v4-sec-sub">Create a new tag for this gap, or map it to a tag that already exists.</div>
+    </div>
+    <div class="v4-seltabs" style="grid-template-columns:repeat(2,minmax(0,1fr));" id="v4-tag-modes"></div>
+
+    <!-- create new tag -->
+    <div id="v4-tag-create" style="padding:0 20px 22px;">
+      <div style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:14px;">
+        <div class="v4-filt"><label>Type</label><input id="v4-tg-type" type="text" placeholder="e.g. Sales Skill" style="width:100%;"></div>
+        <div class="v4-filt"><label>Sub-Type</label><input id="v4-tg-sub" type="text" placeholder="e.g. Objection" style="width:100%;"></div>
+        <div class="v4-filt"><label>Sub-Sub-Type</label><input id="v4-tg-subsub" type="text" placeholder="e.g. Price objection" style="width:100%;"></div>
+        <div class="v4-filt"><label>Type of Content</label>
+          <select id="v4-tg-ctype" style="width:100%;"><option>Image</option><option>Video</option><option>PDF</option><option>Audio</option><option>Quiz</option><option>Web link</option></select>
+        </div>
+      </div>
+      <div class="v4-filt" style="margin-bottom:14px;">
+        <label>Description</label>
+        <textarea id="v4-tg-desc" placeholder="Describe what this content covers, so another trainer can tell it apart from similar tags." style="width:100%;height:76px;border:1px solid #DFE3EC;border-radius:8px;padding:10px 12px;font-size:13px;font-family:var(--font);resize:none;outline:none;color:#1A1A2E;"></textarea>
+      </div>
+      <div id="v4-tg-drop" onclick="document.getElementById('v4-tg-file').click()" style="border:2px dashed #DFE3EC;border-radius:10px;padding:28px;text-align:center;cursor:pointer;margin-bottom:14px;">
+        <div style="font-size:28px;margin-bottom:8px;">📎</div>
+        <div style="font-size:13px;font-weight:600;color:#141A2E;margin-bottom:4px;" id="v4-tg-fname">Click to upload the content file</div>
+        <div style="font-size:11.5px;color:#8A93AB;">Image, video, PDF, audio or quiz file</div>
+        <input type="file" id="v4-tg-file" style="display:none;" onchange="v4TagFilePicked(this)">
+      </div>
+      <div style="text-align:right;">
+        <button class="btn-blue" onclick="v4TagCreate()">Create TAG and Map with GAP</button>
+      </div>
+    </div>
+
+    <!-- map existing tag -->
+    <div id="v4-tag-map" style="padding:0 20px 22px;display:none;">
+      <div class="v4-filters" style="padding:0 0 14px;">
+        <div class="v4-filt"><label>Type</label><input id="v4-tm-type" list="v4-dl-type" type="text" placeholder="Search type" oninput="v4TagRenderExisting()"><datalist id="v4-dl-type"></datalist></div>
+        <div class="v4-filt"><label>Sub-Type</label><input id="v4-tm-sub" list="v4-dl-sub" type="text" placeholder="Search sub-type" oninput="v4TagRenderExisting()"><datalist id="v4-dl-sub"></datalist></div>
+        <div class="v4-filt"><label>Sub-Sub-Type</label><input id="v4-tm-subsub" list="v4-dl-subsub" type="text" placeholder="Search sub-sub-type" oninput="v4TagRenderExisting()"><datalist id="v4-dl-subsub"></datalist></div>
+        <div class="v4-filt"><label>Search tag</label><input id="v4-tm-q" type="text" placeholder="Content ID or description" oninput="v4TagRenderExisting()"></div>
+        <div class="v4-filt-count" id="v4-tm-count"></div>
+      </div>
+      <div id="v4-tm-table" style="border:1px solid #E6E9F0;border-radius:10px;overflow:hidden;"></div>
+      <div style="text-align:right;margin-top:14px;">
+        <button class="btn-blue" id="v4-tm-cta" onclick="v4TagMap()" disabled>Map TAG with GAP</button>
+      </div>
+    </div>
+  </div>
+  <div class="v4-panel">
+    <div class="v4-sec-hdr">
+      <div class="v4-sec-title">AI Content Generator</div>
+      <div class="v4-sec-sub">Copy this prompt and paste it into your content creation AI agent.</div>
+    </div>
+    <div style="padding:18px 20px 22px;">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;">
+        <div>
+          <div class="v4-filt"><label>Content Type</label>
+            <select id="v4-tag-gentype" style="width:100%;" onchange="v4TagFillPrompt()">
+              <option>Video Script</option><option>Presentation Deck</option><option>Audio Guide</option>
+              <option>Quick Reference Card</option><option>MCQ Quiz</option>
+            </select>
+          </div>
+        </div>
+        <div>
+          <div class="v4-filt"><label>Training Gap</label>
+            <input id="v4-tag-gengap" type="text" readonly style="width:100%;background:#F7F9FD;">
+          </div>
+        </div>
+      </div>
+      <div class="v4-filt" style="margin-bottom:12px;">
+        <label>AI Prompt to generate content</label>
+        <textarea id="v4-tag-prompt" style="width:100%;height:82px;border:1px solid #DFE3EC;border-radius:8px;padding:10px 12px;font-size:13px;font-family:var(--font);resize:none;outline:none;color:#1A1A2E;"></textarea>
+      </div>
+      <div style="text-align:right;">
+        <button class="btn-outline" onclick="v4TagCopyPrompt()">📋 Copy Prompt</button>
+      </div>
+    </div>
+  </div>
+
+</div>
+</div><!-- end view-v4-tag -->
+
+      <!-- ═══════════════ V4 TAG CONFIRM / CONTENT DETAIL ═══════════════ -->
+      <div class="view" id="view-v4-tagconfirm">
+<div class="v4-page">
+  <button class="v4-back" id="v4-tc-back">◂ Back</button>
+  <div class="v4-panel">
+    <div class="v4-sec-hdr">
+      <div class="v4-sec-title" id="v4-tc-title">Confirm the tag</div>
+      <div class="v4-sec-sub" id="v4-tc-subtitle"></div>
+    </div>
+    <div class="v4-chips" id="v4-tc-chips" style="padding:16px 20px 18px;margin-bottom:0;"></div>
+  </div>
+
+  <div class="v4-panel">
+    <div class="v4-sec-hdr">
+      <div class="v4-sec-title">Tag details</div>
+      <div class="v4-sec-sub" id="v4-tc-locknote">The tag structure cannot be changed once the content is created.</div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;padding:18px 20px 0;">
+      <div class="v4-filt"><label>Type</label><input id="v4-tc-type" type="text" readonly style="width:100%;background:#F7F9FD;"></div>
+      <div class="v4-filt"><label>Sub-Type</label><input id="v4-tc-sub" type="text" readonly style="width:100%;background:#F7F9FD;"></div>
+      <div class="v4-filt"><label>Sub-Sub-Type</label><input id="v4-tc-subsub" type="text" readonly style="width:100%;background:#F7F9FD;"></div>
+    </div>
+    <div style="padding:14px 20px 22px;">
+      <div class="v4-filt">
+        <label>Description</label>
+        <textarea id="v4-tc-desc" readonly style="width:100%;height:76px;border:1px solid #DFE3EC;border-radius:8px;padding:10px 12px;font-size:13px;font-family:var(--font);resize:none;outline:none;color:#1A1A2E;background:#F7F9FD;"></textarea>
+      </div>
+    </div>
+  </div>
+
+  <div class="v4-panel">
+    <div class="v4-sec-hdr">
+      <div class="v4-sec-title">Content</div>
+      <div class="v4-sec-sub">Preview the file mapped against this tag.</div>
+    </div>
+    <div style="padding:18px 20px 22px;">
+      <div id="v4-tc-content"></div>
+      <div id="v4-tc-upload" style="display:none;margin-top:14px;">
+        <div onclick="document.getElementById('v4-tc-file').click()" style="border:2px dashed #DFE3EC;border-radius:10px;padding:22px;text-align:center;cursor:pointer;">
+          <div style="font-size:24px;margin-bottom:6px;">📎</div>
+          <div style="font-size:13px;font-weight:600;color:#141A2E;" id="v4-tc-fname">Click to upload a new file for this tag</div>
+          <div style="font-size:11.5px;color:#8A93AB;margin-top:3px;">The tag structure stays the same, only the file changes</div>
+          <input type="file" id="v4-tc-file" style="display:none;" onchange="v4TcFilePicked(this)">
+        </div>
+      </div>
+      <div style="text-align:right;margin-top:16px;display:flex;gap:8px;justify-content:flex-end;">
+        <button class="btn-outline" id="v4-tc-edit" onclick="v4TcEdit()" style="display:none;">Edit</button>
+        <button class="btn-blue" id="v4-tc-cta" onclick="v4TcSubmit()">Submit</button>
+      </div>
+    </div>
+  </div>
+</div>
+</div><!-- end view-v4-tagconfirm -->
+
+      <!-- ═══════════════ V4 CONTENT LIBRARY ═══════════════ -->
+      <div class="view" id="view-v4-library">
+<div class="v4-page">
+  <button class="v4-back" onclick="showV('home-v4',document.getElementById('nav-dash4'));setTimeout(renderKPIV4,30);">◂ Back to Dashboard v4</button>
+  <div class="v4-panel">
+    <div class="v4-sec-hdr">
+      <div class="v4-sec-title">Total content available</div>
+      <div class="v4-sec-sub">Every piece of training content in the library, with the gap it is mapped to.</div>
+    </div>
+    <div class="v4-filters" id="v4-lib-filters"></div>
+    <div id="v4-lib-table"></div>
+  </div>
+</div>
+</div><!-- end view-v4-library -->
+
+      <!-- ═══════════════ V4 FLEET AT RISK DETAIL ═══════════════ -->
+      <div class="view" id="view-v4-risk-detail">
+<div class="v4-page">
+  <button class="v4-back" onclick="v4OpenRiskList()">◂ Back to Fleet at Risk</button>
+  <div id="v4-risk-hero"></div>
+  <div class="v4-chips" id="v4-risk-chips"></div>
+  <div class="v4-panel">
+    <div class="v4-sec-hdr">
+      <div class="v4-sec-title">Why this fleet member is at risk</div>
+      <div class="v4-sec-sub" id="v4-risk-why-sub"></div>
+    </div>
+    <div class="v4-two one" id="v4-risk-why"></div>
+  </div>
+  <div class="v4-panel">
+    <div class="v4-sec-hdr">
+      <div class="v4-sec-title" id="v4-risk-tbl-title"></div>
+      <div class="v4-sec-sub" id="v4-risk-tbl-sub"></div>
+    </div>
+    <div id="v4-risk-detail-table"></div>
+  </div>
+</div>
+</div><!-- end view-v4-risk-detail -->
+
+      <!-- ═══════════════ V4 TRAINING IDENTIFIED ═══════════════ -->
+      <div class="view" id="view-v4-identified">
+<div class="v4-page">
+  <button class="v4-back" onclick="showV('home-v4',document.getElementById('nav-dash4'));setTimeout(renderKPIV4,30);">◂ Back to Dashboard v4</button>
+  <div class="v4-panel">
+    <div class="v4-sec-hdr">
+      <div class="v4-sec-title">Training Identified</div>
+      <div class="v4-sec-sub">Fleet where a gap was found on the call and training is due.</div>
+    </div>
+    <div class="v4-filters" id="v4-id-filters"></div>
+    <div id="v4-id-table"></div>
+  </div>
+</div>
+</div><!-- end view-v4-identified -->
+
+      <!-- ═══════════════ V4 CALL DETAIL ═══════════════ -->
+      <div class="view" id="view-v4-call">
+<div class="v4-page">
+  <button class="v4-back" onclick="v4BackToSignal()">◂ Back to list</button>
+  <div id="v4-call-hero"></div>
+  <div class="v4-chips" id="v4-call-chips"></div>
+  <div class="v4-panel">
+    <div class="v4-sec-hdr">
+      <div class="v4-sec-title">Call Evaluation</div>
+      <div class="v4-sec-sub">What the AI found on the customer call</div>
+    </div>
+    <div class="v4-two one" id="v4-call-reason" style="padding-bottom:0;"></div>
+    <div class="v4-two one">
+      <div class="v4-sub-card">
+        <div class="v4-sub-hdr">💬 Call transcript</div>
+        <div class="v4-sub-body" id="v4-call-transcript"></div>
+      </div>
+    </div>
+  </div>
+</div>
+</div><!-- end view-v4-call -->
+
+      <!-- ═══════════════ V4 GAP DETAIL ═══════════════ -->
+      <div class="view" id="view-v4-gap">
+<div class="v4-page">
+  <button class="v4-back" onclick="v4GapBack()">◂ Back to list</button>
+  <div id="v4-gap-hero"></div>
+  <div class="v4-chips" id="v4-gap-chips"></div>
+  <div id="v4-gap-reject-top"></div>
+  <div class="v4-panel">
+    <div class="v4-sec-hdr">
+      <div class="v4-sec-title">Call Evaluation</div>
+      <div class="v4-sec-sub">What the AI found on the customer call</div>
+    </div>
+    <div class="v4-two">
+      <div class="v4-col">
+        <div class="v4-sub-card" style="flex:1;display:flex;flex-direction:column;">
+          <div class="v4-sub-hdr">Gap Identified</div>
+          <div class="v4-sub-body" id="v4-gap-detail" style="flex:1;"></div>
+        </div>
+        <div class="v4-sub-card">
+          <div class="v4-sub-hdr">🎧 Call Recording</div>
+          <div class="v4-sub-body" id="v4-gap-recording"></div>
+        </div>
+      </div>
+      <div class="v4-sub-card" style="display:flex;flex-direction:column;">
+        <div class="v4-sub-hdr">💬 Transcript</div>
+        <div class="v4-sub-body" id="v4-gap-transcript" style="flex:1;"></div>
+      </div>
+    </div>
+  </div>
+  <div class="v4-panel" style="padding-bottom:20px;">
+    <div class="v4-sec-hdr" style="margin-bottom:14px;">
+      <div class="v4-sec-title">Coaching Session Outcome</div>
+      <div class="v4-sec-sub">What happened when the coach addressed this gap</div>
+    </div>
+    <div id="v4-gap-banner"></div>
+    <div class="v4-beh" id="v4-gap-beh"></div>
+    <div class="v4-two">
+      <div class="v4-sub-card">
+        <div class="v4-sub-hdr">🎙 Coaching conversation</div>
+        <div class="v4-sub-body" id="v4-gap-coach"></div>
+      </div>
+      <div class="v4-sub-card">
+        <div class="v4-sub-hdr">👥 Role-play</div>
+        <div class="v4-sub-body" id="v4-gap-roleplay"></div>
+      </div>
+    </div>
+  </div>
+</div>
+</div><!-- end view-v4-gap -->
 
       <!-- ═══════════════ REPEAT & AUTO CLOSED DETAIL ═══════════════ -->
       <div class="view" id="view-repeat-detail">
@@ -1541,6 +2122,61 @@ body{font-family:var(--font);background:var(--gray-50);color:var(--gray-900);min
   </div>
 </div>
 
+<!-- REJECT TRAINING RECOMMENDATION MODAL -->
+<div class="modal-overlay" id="v4-rej-modal">
+  <div class="modal" style="width:480px;">
+    <div class="modal-hdr">
+      <div><div class="modal-title">Reject training recommendation</div><div class="modal-sub" id="v4-rej-sub">0 rows selected</div></div>
+      <button class="modal-close" onclick="v4CloseReject()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="ms">
+        <div class="ms-title">Reason</div>
+        <select id="v4-rej-reason" class="tl-select" style="width:100%;height:38px;">
+          <option>Gap not valid on this call</option>
+          <option>Already coached offline</option>
+          <option>Wrong fleet member tagged</option>
+          <option>Transcription quality too poor</option>
+          <option>Duplicate of an open training</option>
+        </select>
+      </div>
+      <div class="ms">
+        <div class="ms-title">Trainer remarks</div>
+        <textarea id="v4-rej-remarks" placeholder="Explain why this recommendation is being rejected." style="width:100%;height:100px;border:1.5px solid var(--gray-200);border-radius:var(--radius-sm);padding:10px 12px;font-size:13px;font-family:var(--font);resize:none;outline:none;color:var(--gray-900);"></textarea>
+      </div>
+      <div style="font-size:11.5px;color:var(--gray-400);line-height:1.6;">Rejected rows leave the training queue and move to Training Rejected.</div>
+    </div>
+    <div class="modal-ftr">
+      <button class="btn-outline" onclick="v4CloseReject()">Cancel</button>
+      <button class="btn-blue" onclick="v4DoReject()">Reject recommendation</button>
+    </div>
+  </div>
+</div>
+
+<!-- FLEET AT RISK FEEDBACK MODAL -->
+<div class="modal-overlay" id="v4-fb-modal">
+  <div class="modal" style="width:480px;">
+    <div class="modal-hdr">
+      <div><div class="modal-title">Submit feedback</div><div class="modal-sub" id="v4-fb-sub">0 fleet members selected</div></div>
+      <button class="modal-close" onclick="v4CloseFeedback()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="ms">
+        <div class="ms-title">Remarks</div>
+        <textarea id="v4-fb-remarks" placeholder="Why is this fleet member being closed or re-assigned? Add the context the next trainer will need." style="width:100%;height:110px;border:1.5px solid var(--gray-200);border-radius:var(--radius-sm);padding:10px 12px;font-size:13px;font-family:var(--font);resize:none;outline:none;color:var(--gray-900);"></textarea>
+      </div>
+      <div style="font-size:11.5px;color:var(--gray-400);line-height:1.6;">
+        Close removes the fleet member from the at risk list.<br>
+        Re-assign training moves them into Training Pushed and starts the training flow again.
+      </div>
+    </div>
+    <div class="modal-ftr">
+      <button class="btn-outline" onclick="v4FbClose()">Close</button>
+      <button class="btn-blue" onclick="v4FbReassign()">Re-assign training</button>
+    </div>
+  </div>
+</div>
+
 <!-- SUCCESS MODAL -->
 <div class="modal-overlay" id="succ-modal">
   <div class="success-modal-inner">
@@ -1550,7 +2186,6 @@ body{font-family:var(--font);background:var(--gray-50);color:var(--gray-900);min
     <button class="btn-blue" style="margin:0 auto;" onclick="closeSucc()">Done</button>
   </div>
 </div>
-
 <script>
 // Capture URL params immediately before anything clears them
 var _capturedParams = new URLSearchParams(window.location.search);
@@ -1635,8 +2270,8 @@ function doLogin(){
   if(!id){alert("Please enter your mobile number");return;}
   document.getElementById("login-page").style.display="none";
   document.getElementById("app").classList.add("visible");
-  // Dashboard v2 is now the landing page (v1 is hidden from the sidebar)
-  setTimeout(function(){ try{ renderKPI(); }catch(e){} }, 50);
+  // Dashboard v4 is the landing page
+  setTimeout(function(){ try{ renderKPIV4(); }catch(e){} }, 50);
 }
 
 function doLogout(){
@@ -2110,6 +2745,14 @@ const SHEET_API_KEY = ''; // Add Google Sheets API key for live mode
 let xfeWindow = null;
 
 async function doPush(){
+  if(typeof v4PushMode !== 'undefined' && v4PushMode){
+    closePushModal();
+    const ct = selCT || 'Content';
+    const moved = v4CompletePush();
+    document.getElementById("succ-msg").textContent = `${ct} pushed to ${moved} fleet member${moved!==1?'s':''}. They now appear under Training Pushed.`;
+    document.getElementById("succ-modal").classList.add("open");
+    return;
+  }
   closePushModal();
   const n = sel.size;
   const certOn = document.getElementById("cert-tog").classList.contains("on");
@@ -2200,6 +2843,7 @@ async function doPush(){
 
 function closeSucc(){
   document.getElementById("succ-modal").classList.remove("open");
+  if(typeof v4PushMode !== 'undefined' && v4PushMode){ v4PushMode = false; return; }
   sel.clear(); renderAgents();
 }
 
@@ -2255,6 +2899,8 @@ function toast(msg){
 
 document.getElementById("push-modal").addEventListener("click",function(e){if(e.target===this)closePushModal();});
 document.getElementById("succ-modal").addEventListener("click",function(e){if(e.target===this)closeSucc();});
+document.getElementById("v4-fb-modal").addEventListener("click",function(e){if(e.target===this)v4CloseFeedback();});
+document.getElementById("v4-rej-modal").addEventListener("click",function(e){if(e.target===this)v4CloseReject();});
 
 // ── LIVE FEED ──────────────────────────────────────────
 // This page has its own unique webhook URL
@@ -2873,7 +3519,6 @@ function ensureGenPromptFilled(){
   }
 }
 </script>
-
 <script>
 const RANDOM_NAMES=['Amit Sharma','Priya Singh','Rahul Verma','Sunita Gupta','Deepak Kumar','Neha Yadav','Vikram Patel','Anjali Mishra','Rajesh Tiwari','Pooja Joshi','Manoj Dubey','Rekha Chauhan','Suresh Rawat','Kavita Soni','Arun Mehta','Divya Kapoor','Rajan Nair','Meena Pillai','Sunil Rao','Anita Desai','Karan Malhotra','Sonal Trivedi','Harish Bhatia','Ritu Arora','Gaurav Saxena','Mamta Pandey','Vinod Shukla','Geeta Bajaj','Sanjay Dixit','Lalita Aggarwal','Nitin Choudhary','Seema Kulkarni','Dinesh Iyer','Usha Nambiar','Prakash Reddy','Sarita Patil','Bhupesh Jain','Manju Bhatt','Rohit Sinha','Chandrika Das'];
 
@@ -3012,6 +3657,1830 @@ function renderKPIV3(){
         <div><button onclick="goCreateContent('${t.name}')" style="font-size:10px;padding:4px 10px;background:#1565C0;color:white;border:none;border-radius:5px;cursor:pointer;">Create content</button></div>
       </div>`;
     }).join('');
+  }
+}
+
+// ═══════════════ DASHBOARD V4 ═══════════════
+const V4_DATA = {
+  XFE:{
+    fleet:5, signals:34, identified:12, pushed:5, atRisk:5, voice:4, completed:4, rejected:3, repeat:7, lowHealth:6,
+    queue:[
+      {name:'Closing and Next Steps', sev:'HIGH', icon:'🎯', count:1}
+    ],
+    content:{available:24, docs:0, images:18, quiz:6, links:0, pending:4}
+  },
+  ENG:{
+    fleet:9, signals:30, identified:9, pushed:4, atRisk:3, voice:3, completed:3, rejected:2, repeat:5, lowHealth:6,
+    queue:[
+      {name:'First Time Resolution', sev:'HIGH', icon:'🛠', count:3},
+      {name:'Customer Handling', sev:'MEDIUM', icon:'💬', count:2}
+    ],
+    content:{available:18, docs:6, images:8, quiz:4, links:0, pending:2}
+  },
+  CC:{
+    fleet:12, signals:45, identified:14, pushed:6, atRisk:6, voice:5, completed:4, rejected:4, repeat:9, lowHealth:9,
+    queue:[
+      {name:'Objection Handling', sev:'CRITICAL', icon:'🛡️', count:4},
+      {name:'Call Closing', sev:'HIGH', icon:'🎯', count:2},
+      {name:'Empathy and Tone', sev:'MEDIUM', icon:'💬', count:2}
+    ],
+    content:{available:31, docs:5, images:14, quiz:9, links:3, pending:4}
+  },
+  HDO:{
+    fleet:7, signals:22, identified:6, pushed:3, atRisk:2, voice:2, completed:2, rejected:1, repeat:3, lowHealth:4,
+    queue:[
+      {name:'Upsell at Doorstep', sev:'MEDIUM', icon:'📦', count:2}
+    ],
+    content:{available:12, docs:2, images:7, quiz:3, links:0, pending:1}
+  },
+  MR:{
+    fleet:10, signals:28, identified:10, pushed:4, atRisk:4, voice:3, completed:3, rejected:2, repeat:6, lowHealth:6,
+    queue:[
+      {name:'Scheme Knowledge', sev:'HIGH', icon:'📘', count:3},
+      {name:'Retailer Engagement', sev:'MEDIUM', icon:'🤝', count:2}
+    ],
+    content:{available:15, docs:3, images:9, quiz:3, links:0, pending:3}
+  }
+};
+
+// ── V4 signal records (low health / training identified / not identified) ──
+const V4_ROLE_LABEL = {XFE:'XFE', ENG:'Field Engineer', CC:'Call Center Agent', HDO:'HDO', MR:'Market Representative'};
+const V4_PEOPLE = [
+  {name:'Sunny',    phone:'9716299969', empId:'XFE-4821', color:'#4C6FE7'},
+  {name:'Ravi',     phone:'9818673827', empId:'XFE-3302', color:'#7B61C9'},
+  {name:'Kulkarni', phone:'9703070123', empId:'XFE-5190', color:'#E07C1F'},
+  {name:'Amir',     phone:'9654495454', empId:'XFE-2211', color:'#0F9D8F'},
+  {name:'Sachin',   phone:'9205474250', empId:'XFE-1190', color:'#C62828'},
+  {name:'Vinit',    phone:'9971118800', empId:'XFE-8820', color:'#1976D2'}
+];
+
+const V4_TRANSCRIPT = [
+  {s:'Agent',    t:'Namaste sir, main Airtel se bol raha hu. Aapne broadband ke liye lead daali thi, ussi baare mein baat karni thi.'},
+  {s:'Customer', t:'Namaste ji, boliye.'},
+  {s:'Agent',    t:'Humara 999 wala plan hai sir, 200 Mbps ki speed milti hai, bahut accha plan hai.'},
+  {s:'Customer', t:'Plan toh accha hai. Isme kaun kaun se OTT milte hai?'},
+  {s:'Agent',    t:'Isme Netflix, Amazon Prime, lagbhag sabhi OTT aate hai sir.'},
+  {s:'Customer', t:'Aap sure ho?'},
+  {s:'Agent',    t:'Haan ji sir.'},
+  {s:'Customer', t:'Accha, mujhe ek prepaid connection bhi lena hai. Aap help kar sakte ho?'},
+  {s:'Agent',    t:'Sir main prepaid nahi bechta hu.'},
+  {s:'Customer', t:'Ok, main soch ke batata hu.'},
+  {s:'Agent',    t:'Ok sir. Thank you.'}
+];
+
+const V4_GAP_POOL = [
+  {name:'Closing and Next Steps', sev:'HIGH',
+   module:'Assumptive close and slot booking', modType:'Video',
+   what:'Advisor ends the call without confirming a next step or blocking an installation slot.',
+   say:'"Sir, main aaj shaam 6 baje ka installation slot block kar deta hu, aap bas confirm kar dijiye."',
+   feedback:'The FSE closed with a clear next step and a time slot, showing good learning from the coaching.'},
+  {name:'No Upsell Attempt', sev:'HIGH',
+   module:'Higher tier plan pitch playbook', modType:'Document',
+   what:'Advisor does not propose a higher tier plan or additional services after discussing OTT.',
+   say:'"Agar aapko aur fast speed chahiye, humara 500 Mbps plan sirf 1499 rupees mein available hai, jisme sab OTT services shamil hain."',
+   feedback:'The FSE successfully incorporated the key upsell elements into a concise pitch, demonstrating good learning from the coaching.'},
+  {name:'Objection Handling', sev:'HIGH',
+   module:'FEEL FELT FOUND objection script', modType:'Video',
+   what:'Advisor does not counter the competitor price objection with any factual comparison.',
+   say:'"Main samajh sakta hu sir. Unka plan sasta lagta hai, lekin humare plan mein 6 OTT included hai, isliye total value zyada banti hai."',
+   feedback:'The FSE acknowledged the objection first and then countered with a fact, which is the correct sequence.'},
+  {name:'Value Anchoring', sev:'MEDIUM',
+   module:'OTT value anchoring quiz', modType:'Quiz',
+   what:'Advisor quotes speed numbers only, without linking them to the customer use case.',
+   say:'"Sir aap ghar se kaam karte hai, 200 Mbps par 4 devices ek saath bina buffering chalenge."',
+   feedback:'The FSE connected the speed to the work from home use case, which made the pitch far more relevant.'},
+  {name:'Product Knowledge', sev:'LOW',
+   module:'Plan portfolio quick reference', modType:'Document',
+   what:'Advisor is unsure which OTT apps are bundled and gives a vague answer to the customer.',
+   say:'"Sir is plan mein Netflix, Prime Video aur Airtel Xstream shamil hai, main aapko list WhatsApp kar deta hu."',
+   feedback:'The FSE recalled the exact bundle list without hesitation in the practice round.'}
+];
+
+const V4_GAP_ICON = {
+  'Closing and Next Steps':'🎯', 'No Upsell Attempt':'📈', 'Objection Handling':'🛡️',
+  'Value Anchoring':'⚓', 'Product Knowledge':'📡'
+};
+
+const V4_INELIGIBLE_REASONS = ['Audio unclear','Call short','Heavy noise','Network drop','Speaker overlap','Language mixed'];
+const V4_GOOD_POOL = ['Strong opening','Clear pitch','Good rapport','Correct pricing','Polite closing','Fast resolution'];
+
+function v4Pad(n){ return n<10 ? '0'+n : ''+n; }
+
+function v4MakeRec(role, bucket, i){
+  const p = V4_PEOPLE[(i*3 + bucket.length) % V4_PEOPLE.length];
+  const hour = 9 + (i % 9);
+  const min  = (i*17) % 60;
+  const sec  = (i*29) % 60;
+  const day  = 11 + (i % 7);
+  let call, ts;
+  if(bucket==='low'){        call = 26 + (i*7)%23;  ts = 41 + (i*9)%18; }
+  else if(bucket==='identified'){ call = 44 + (i*6)%25;  ts = 74 + (i*5)%20; }
+  else {                     call = 72 + (i*5)%21;  ts = 86 + (i*4)%13; }
+  const gap = V4_GAP_POOL[i % V4_GAP_POOL.length];
+  return {
+    bucket, idx:i,
+    name: p.name, phone: p.phone, color: p.color,
+    empId: p.empId,
+    role: V4_ROLE_LABEL[role] || role,
+    callScore: call,
+    transcriptScore: ts,
+    evalTime: '2026-08-'+v4Pad(day)+' '+v4Pad(hour)+':'+v4Pad(min)+':'+v4Pad(sec),
+    callTime: '2026-08-'+v4Pad(day)+' '+v4Pad(hour-1)+':'+v4Pad((min+7)%60)+':'+v4Pad(sec),
+    reason: V4_INELIGIBLE_REASONS[i % V4_INELIGIBLE_REASONS.length],
+    good: V4_GOOD_POOL[(i+2) % V4_GOOD_POOL.length],
+    assignedTime: '2026-08-'+v4Pad(day)+' '+v4Pad(hour+1)+':'+v4Pad((min+12)%60)+':'+v4Pad(sec),
+    pushedTime: '2026-08-'+v4Pad(day)+' '+v4Pad(hour+2)+':'+v4Pad((min+31)%60)+':'+v4Pad(sec),
+    pushedDate: '2026-08-'+v4Pad(day),
+    dueDate: '2026-08-'+v4Pad(day+7),
+    voiceCoach: i % 3 !== 2,
+    coachDone: i % 4 !== 3,
+    callId: 'call_id_test-'+v4Pad(i+1)+'-aaaa-bbbb-cccccccccccc',
+    gap: gap,
+    pushed: false,
+    completed: false,
+    coachPassed: i % 5 !== 4,
+    behaviour: {
+      engagement: i%3===2 ? 'Medium' : 'High',
+      seriousness: i%4===3 ? 'Low' : 'High',
+      questions: i % 3,
+      attentiveness: i%5===1 ? 'Medium' : 'High'
+    }
+  };
+}
+
+const V4_CACHE = {};
+function v4Recs(role){
+  if(V4_CACHE[role]) return V4_CACHE[role];
+  const d = V4_DATA[role] || V4_DATA.XFE;
+  const lowN = d.lowHealth || 0;
+  const idN  = d.identified || 0;
+  const notN = Math.max(0, d.signals - lowN - idN);
+  const out = {
+    low:          Array.from({length:lowN},  (_,i)=>v4MakeRec(role,'low',i)),
+    identified:   Array.from({length:idN},   (_,i)=>v4MakeRec(role,'identified',i)),
+    notIdentified:Array.from({length:notN},  (_,i)=>v4MakeRec(role,'notIdentified',i))
+  };
+  V4_CACHE[role] = out;
+  return out;
+}
+
+function v4ScoreColor(s){ return s>=70 ? '#1D9E75' : s>=55 ? '#EF9F27' : '#E24B4A'; }
+function v4ScoreBg(s){ return s>=70 ? '#E9F7F1' : s>=55 ? '#FFF7E6' : '#FDEDED'; }
+function v4Initial(n){ return n.slice(0,1).toUpperCase(); }
+function v4Role(){ const e=document.getElementById('role-filter-v4'); return e?e.value:'XFE'; }
+
+// ── Drill-down list page ──
+let v4Tab = 'low';
+let v4GapSource = 'identified';
+const V4_TAB_META = {
+  low:           {label:'Ineligible Call Transcription', key:'low',      color:'#E24B4A', sub:'Transcription could not be scored fully'},
+  identified:    {label:'Training Identified',     key:'identified',    color:'#EF9F27', sub:'A gap was found and training is due'},
+  notIdentified: {label:'Training Not Identified', key:'notIdentified', color:'#1D9E75', sub:'Call passed, no training needed'}
+};
+
+function v4OpenSignal(tab){
+  v4Tab = tab || 'low';
+  showV('v4-signal', null);
+  const nav=document.getElementById('nav-dash4'); if(nav) nav.classList.add('active');
+  renderV4Signal();
+  window.scrollTo({top:0,behavior:'instant'});
+}
+
+function v4SetTab(tab){
+  if(tab === 'identified'){ v4OpenIdentifiedList(); return; }
+  v4Tab = tab; renderV4Signal();
+}
+function v4GapBack(){
+  if(v4GapSource==='pushed'){ v4OpenPushedList(); }
+  else if(v4GapSource==='completed'){ v4OpenCompletedList(); }
+  else if(v4GapSource==='rejected'){ v4OpenRejectedList(); }
+  else if(v4GapSource==='repeat'){ v4OpenRepeatList(); }
+  else if(v4GapSource==='riskDetail'){ v4OpenRiskDetail(v4RiskCur); }
+  else if(v4GapSource==='identifiedPage'){ v4OpenIdentifiedList(); }
+  else { v4BackToSignal(); }
+}
+function v4BackToSignal(){ showV('v4-signal', null); const n=document.getElementById('nav-dash4'); if(n) n.classList.add('active'); renderV4Signal(); window.scrollTo({top:0,behavior:'instant'}); }
+
+function renderV4Signal(){
+  const role = v4Role();
+  const recs = v4Recs(role);
+
+  // selector cards
+  const tabsEl = document.getElementById('v4-sig-tabs');
+  if(tabsEl){
+    tabsEl.innerHTML = Object.keys(V4_TAB_META).map(k=>{
+      const m = V4_TAB_META[k];
+      const on = v4Tab===k;
+      return `<div class="v4-seltab${on?' active':''}" onclick="v4SetTab('${k}')">
+        <div class="v4-seltab-dot" style="background:${m.color};"></div>
+        <div class="v4-seltab-label">${m.label}</div>
+        <div class="v4-seltab-val" style="color:${m.color};">${recs[m.key].length}</div>
+        <div class="v4-seltab-sub">${m.sub}</div>
+      </div>`;
+    }).join('');
+  }
+
+  const all = recs[V4_TAB_META[v4Tab].key];
+  const fw = document.getElementById('v4-sig-filters');
+
+  // filters, rebuilt whenever the selected card changes
+  if(fw && fw.getAttribute('data-tab') !== v4Tab){
+    fw.setAttribute('data-tab', v4Tab);
+    const scoreSel = id => `<div class="v4-filt"><label>Call transcription score</label><select id="${id}" onchange="renderV4Signal()"><option value="all">Any score</option><option value="lt40">Below 40</option><option value="40to54">40 to 54</option><option value="gte55">55 and above</option></select></div>`;
+    if(v4Tab === 'low'){
+      const reasons = [...new Set(all.map(r=>r.reason))];
+      fw.innerHTML =
+        `<div class="v4-filt"><label>Search fleet member</label><input id="v4-sf-q" type="text" placeholder="Name or fleet number" oninput="renderV4Signal()"></div>` +
+        `<div class="v4-filt"><label>Remarks</label><select id="v4-sf-reason" onchange="renderV4Signal()"><option value="all">All remarks</option>${reasons.map(x=>`<option>${x}</option>`).join('')}</select></div>` +
+        scoreSel('v4-sf-score') +
+        `<div class="v4-filt-count" id="v4-sf-count"></div>`;
+    } else {
+      const goods = [...new Set(all.map(r=>r.good))];
+      fw.innerHTML =
+        `<div class="v4-filt"><label>Search fleet member</label><input id="v4-sf-q" type="text" placeholder="Name or fleet number" oninput="renderV4Signal()"></div>` +
+        `<div class="v4-filt"><label>What went good</label><select id="v4-sf-good" onchange="renderV4Signal()"><option value="all">All strengths</option>${goods.map(x=>`<option>${x}</option>`).join('')}</select></div>` +
+        `<div class="v4-filt"><label>Call score</label><select id="v4-sf-score" onchange="renderV4Signal()"><option value="all">Any score</option><option value="lt70">Below 70</option><option value="70to84">70 to 84</option><option value="gte85">85 and above</option></select></div>` +
+        `<div class="v4-filt-count" id="v4-sf-count"></div>`;
+    }
+  }
+
+  const q  = (document.getElementById('v4-sf-q')?.value||'').toLowerCase().trim();
+  const fr = document.getElementById('v4-sf-reason')?.value || 'all';
+  const fgd= document.getElementById('v4-sf-good')?.value   || 'all';
+  const fc = document.getElementById('v4-sf-score')?.value  || 'all';
+
+  const rows = all.filter(r=>{
+    if(q && !(r.name.toLowerCase().includes(q) || r.phone.includes(q))) return false;
+    if(fr!=='all' && r.reason!==fr) return false;
+    if(fgd!=='all' && r.good!==fgd) return false;
+    if(fc==='lt40'    && r.callScore>=40) return false;
+    if(fc==='40to54'  && (r.callScore<40 || r.callScore>54)) return false;
+    if(fc==='gte55'   && r.callScore<55) return false;
+    if(fc==='lt70'    && r.callScore>=70) return false;
+    if(fc==='70to84'  && (r.callScore<70 || r.callScore>84)) return false;
+    if(fc==='gte85'   && r.callScore<85) return false;
+    return true;
+  });
+
+  const cnt = document.getElementById('v4-sf-count');
+  if(cnt) cnt.textContent = rows.length + ' of ' + all.length + ' records';
+
+  const wrap = document.getElementById('v4-sig-table');
+  if(!wrap) return;
+  if(!rows.length){
+    wrap.innerHTML = '<div class="v4-empty">No records match the selected filters.</div>';
+    return;
+  }
+
+  const agentCell = r => `<div class="v4-agent">
+      <div class="v4-av" style="background:${r.color};">${v4Initial(r.name)}</div>
+      <div class="v4-aname">${r.name}</div>
+    </div>`;
+  const scorePill = s => `<span class="v4-pill" style="background:${v4ScoreBg(s)};color:${v4ScoreColor(s)};">${s}</span>`;
+
+  if(v4Tab === 'low'){
+    const g = 'grid-template-columns:1.2fr 1fr 1fr 1.3fr 1.3fr 1fr;';
+    wrap.innerHTML =
+      `<div class="v4-thead" style="${g}"><div>Name</div><div>Number</div><div>Role</div><div>Evaluation Time</div><div>Call Transcription Score</div><div>Remarks</div></div>` +
+      rows.map(r=>{
+        const i = all.indexOf(r);
+        return `<div class="v4-trow" style="${g}" onclick="v4OpenCall('low',${i})">
+          ${agentCell(r)}
+          <div class="v4-muted">${r.phone}</div>
+          <div class="v4-muted">${r.role}</div>
+          <div class="v4-muted">${r.evalTime}</div>
+          <div>${scorePill(r.callScore)}</div>
+          <div><span class="v4-pill" style="background:#FDEDED;color:#C62828;">${r.reason}</span></div>
+        </div>`;
+      }).join('');
+  }
+  else {
+    const g = 'grid-template-columns:1.2fr 1fr 1fr 1.3fr 1.3fr 0.9fr 1.1fr;';
+    wrap.innerHTML =
+      `<div class="v4-thead" style="${g}"><div>Name</div><div>Fleet Number</div><div>Role</div><div>Call Date &amp; Time</div><div>Evaluation Time</div><div>Call Score</div><div>What Good</div></div>` +
+      rows.map(r=>{
+        const i = all.indexOf(r);
+        return `<div class="v4-trow" style="${g}" onclick="v4OpenCall('notIdentified',${i})">
+          ${agentCell(r)}
+          <div class="v4-muted">${r.phone}</div>
+          <div class="v4-muted">${r.role}</div>
+          <div class="v4-muted">${r.callTime}</div>
+          <div class="v4-muted">${r.evalTime}</div>
+          <div>${scorePill(r.callScore)}</div>
+          <div><span class="v4-pill" style="background:#E9F7F1;color:#1D9E75;">${r.good}</span></div>
+        </div>`;
+      }).join('');
+  }
+}
+
+// ── Training Identified page ──
+let v4IdSel = new Set();
+let v4IdGapPre = null;
+
+function v4OpenIdentifiedList(gapName){
+  v4IdGapPre = gapName || null;
+  v4IdSel.clear();
+  showV('v4-identified', null);
+  const n=document.getElementById('nav-dash4'); if(n) n.classList.add('active');
+  const t=document.getElementById('v4-id-title');
+  const sub=document.getElementById('v4-id-sub');
+  if(t)   t.textContent = gapName ? 'Training Queue · ' + gapName : 'Training Identified';
+  if(sub) sub.textContent = gapName
+    ? 'Every fleet member identified for this gap. Select rows to push or reject the recommendation.'
+    : 'Every call where a gap was found and training is due for the fleet member.';
+  renderV4Identified(true);
+  window.scrollTo({top:0,behavior:'instant'});
+}
+
+function v4IdToggle(e,i){
+  e.stopPropagation();
+  if(v4IdSel.has(i)) v4IdSel.delete(i); else v4IdSel.add(i);
+  renderV4Identified(false);
+}
+function v4IdToggleAll(e, ids){
+  e.stopPropagation();
+  const list = ids.split(',').filter(x=>x!=='').map(Number);
+  const allOn = list.length>0 && list.every(i=>v4IdSel.has(i));
+  if(allOn) list.forEach(i=>v4IdSel.delete(i)); else list.forEach(i=>v4IdSel.add(i));
+  renderV4Identified(false);
+}
+
+function v4IdTakeSelected(){
+  const all = v4Recs(v4Role()).identified;
+  const picked = [...v4IdSel].sort((a,b)=>b-a).map(i=>({i, r:all[i]})).filter(x=>x.r);
+  picked.forEach(x=>all.splice(x.i,1));
+  v4IdSel.clear();
+  return picked.map(x=>x.r);
+}
+
+// push: reuse the existing content push modal, then move the rows on
+let v4PushMode = false;
+let v4PushSrc = 'identified';
+function v4StartPush(src){
+  v4PushSrc = src || 'identified';
+  const n = v4PushSrc==='repeat' ? v4RpSel.size : v4IdSel.size;
+  if(n===0) return;
+  v4PushMode = true;
+  curTrain = 'Training';
+  sel.clear();
+  openPushModal();
+  document.getElementById('push-sub').textContent = n + ' fleet member' + (n!==1?'s':'') + ' selected';
+}
+
+function v4RpTakeSelected(){
+  const all = v4RepeatRecs(v4Role());
+  const picked = [...v4RpSel].sort((a,b)=>b-a).map(i=>({i, r:all[i]})).filter(x=>x.r);
+  picked.forEach(x=>all.splice(x.i,1));
+  v4RpSel.clear();
+  return picked.map(x=>x.r);
+}
+
+function v4CompletePush(){
+  const role = v4Role();
+  const moved = v4PushSrc==='repeat' ? v4RpTakeSelected() : v4IdTakeSelected();
+  const pushList = v4PushedRecs(role);
+  moved.forEach(r=>{
+    r.pushed = true; r.completed = false; r.coachDone = false;
+    r.pushedDate = '2026-08-20'; r.dueDate = '2026-08-27'; r.pushedTime = '2026-08-20 10:00:00';
+    pushList.unshift(r);
+  });
+  v4PushMode = false;
+  if(v4PushSrc==='repeat') renderV4Repeat(true); else renderV4Identified(true);
+  v4PushSrc = 'identified';
+  return moved.length;
+}
+
+// reject
+function v4OpenReject(){
+  if(v4IdSel.size===0) return;
+  document.getElementById('v4-rej-sub').textContent = v4IdSel.size + ' row' + (v4IdSel.size!==1?'s':'') + ' selected';
+  document.getElementById('v4-rej-remarks').value = '';
+  document.getElementById('v4-rej-modal').classList.add('open');
+}
+function v4CloseReject(){ document.getElementById('v4-rej-modal').classList.remove('open'); }
+
+function v4DoReject(){
+  const remarks = document.getElementById('v4-rej-remarks').value.trim();
+  if(!remarks){ toast('Please add remarks before rejecting'); return; }
+  const reason = document.getElementById('v4-rej-reason').value;
+  const role = v4Role();
+  const moved = v4IdTakeSelected();
+  const rejList = v4RejectedRecs(role);
+  moved.forEach(r=>{
+    r.rejectReason = reason;
+    r.rejectRemarks = remarks;
+    r.rejectDate = '2026-08-20';
+    r.rejectedBy = 'Ravi Arora';
+    rejList.unshift(r);
+  });
+  v4CloseReject();
+  renderV4Identified(true);
+  toast(moved.length + ' recommendation' + (moved.length!==1?'s':'') + ' rejected. Moved to Training Rejected.');
+}
+
+// ── Repeat Training page ──
+const V4_PARK_REASONS = [
+  {key:'Open training exists',    desc:'The trainee already has an open training for this gap that is not yet completed.'},
+  {key:'Pending with trainer',    desc:'The recommendation is already sitting with the trainer, waiting to be assigned.'},
+  {key:'Same gap within 7 days',  desc:'The same gap was raised again within the cool off window, so it was parked instead of pushed.'}
+];
+
+function v4RepeatRecs(role){
+  if(!V4_CACHE['rep_'+role]){
+    const d = V4_DATA[role] || V4_DATA.XFE;
+    V4_CACHE['rep_'+role] = Array.from({length:d.repeat||0},(_,i)=>{
+      const r = v4MakeRec(role,'identified',i+4);
+      const per = V4_PEOPLE[i % V4_PEOPLE.length];
+      r.name = per.name; r.phone = per.phone; r.color = per.color; r.empId = per.empId;
+      r.park = V4_PARK_REASONS[i % V4_PARK_REASONS.length];
+      r.parkedSince = 2 + (i*4)%18;
+      r.repeatCount = 2 + (i%3);
+      return r;
+    });
+  }
+  return V4_CACHE['rep_'+role];
+}
+
+let v4RpSel = new Set();
+
+function v4OpenRepeatList(){
+  v4RpSel.clear();
+  showV('v4-repeat', null);
+  const n=document.getElementById('nav-dash4'); if(n) n.classList.add('active');
+  renderV4Repeat(true);
+  window.scrollTo({top:0,behavior:'instant'});
+}
+function v4RpToggle(e,i){ e.stopPropagation(); if(v4RpSel.has(i)) v4RpSel.delete(i); else v4RpSel.add(i); renderV4Repeat(false); }
+function v4RpToggleAll(e, ids){
+  e.stopPropagation();
+  const list = ids.split(',').filter(x=>x!=='').map(Number);
+  const allOn = list.length>0 && list.every(i=>v4RpSel.has(i));
+  if(allOn) list.forEach(i=>v4RpSel.delete(i)); else list.forEach(i=>v4RpSel.add(i));
+  renderV4Repeat(false);
+}
+
+function renderV4Repeat(rebuildFilters){
+  const role = v4Role();
+  const all = v4RepeatRecs(role);
+
+  const fw = document.getElementById('v4-rp-filters');
+  if(fw && (rebuildFilters || !fw.innerHTML.trim())){
+    const gaps = [...new Set(all.map(r=>r.gap.name))];
+    const parks = [...new Set(all.map(r=>r.park.key))];
+    fw.innerHTML = `
+      <div class="v4-filt"><label>Search fleet member</label><input id="v4-pf2-q" type="text" placeholder="Name or fleet number" oninput="renderV4Repeat(false)"></div>
+      <div class="v4-filt"><label>GAP name</label><select id="v4-pf2-gap" onchange="renderV4Repeat(false)"><option value="all">All gaps</option>${gaps.map(g=>`<option>${g}</option>`).join('')}</select></div>
+      <div class="v4-filt"><label>Why parked</label><select id="v4-pf2-park" onchange="renderV4Repeat(false)"><option value="all">All reasons</option>${parks.map(g=>`<option>${g}</option>`).join('')}</select></div>
+      <div class="v4-filt"><label>Severity</label><select id="v4-pf2-sev" onchange="renderV4Repeat(false)"><option value="all">All</option><option>HIGH</option><option>MEDIUM</option><option>LOW</option></select></div>
+      <div class="v4-filt-count" id="v4-pf2-count"></div>`;
+  }
+
+  const q  = (document.getElementById('v4-pf2-q')?.value||'').toLowerCase().trim();
+  const fg = document.getElementById('v4-pf2-gap')?.value  || 'all';
+  const fp = document.getElementById('v4-pf2-park')?.value || 'all';
+  const fs = document.getElementById('v4-pf2-sev')?.value  || 'all';
+
+  const rows = all.filter(r=>{
+    if(q && !(r.name.toLowerCase().includes(q) || r.phone.includes(q))) return false;
+    if(fg!=='all' && r.gap.name!==fg) return false;
+    if(fp!=='all' && r.park.key!==fp) return false;
+    if(fs!=='all' && r.gap.sev!==fs) return false;
+    return true;
+  });
+
+  const cnt = document.getElementById('v4-pf2-count');
+  if(cnt) cnt.textContent = rows.length + ' of ' + all.length + ' records';
+  const btn = document.getElementById('v4-rp-push');
+  if(btn){ btn.disabled = v4RpSel.size===0; btn.textContent = v4RpSel.size>0 ? `Push training (${v4RpSel.size})` : 'Push training'; }
+
+  const wrap = document.getElementById('v4-rp-table');
+  if(!wrap) return;
+  if(!rows.length){ wrap.innerHTML = '<div class="v4-empty">No parked trainings match the selected filters.</div>'; return; }
+
+  const ids = rows.map(r=>all.indexOf(r));
+  const allOn = ids.length>0 && ids.every(i=>v4RpSel.has(i));
+  const g = 'grid-template-columns:40px 1.05fr 0.95fr 1.15fr 1.2fr 0.8fr 0.75fr 1.3fr;';
+  wrap.innerHTML =
+    `<div class="v4-thead" style="${g}">
+      <div><div class="checkbox${allOn?' chk':''}" onclick="v4RpToggleAll(event,'${ids.join(',')}')">${allOn?'✓':''}</div></div>
+      <div>Name</div><div>Fleet Number</div><div>Call Date &amp; Time</div><div>GAP Name</div>
+      <div>Severity</div><div>Repeat</div><div>Why Parked</div>
+    </div>` +
+    rows.map(r=>{
+      const i = all.indexOf(r);
+      const on = v4RpSel.has(i);
+      return `<div class="v4-trow${on?' sel':''}" style="${g}" onclick="v4OpenRepeatDetail(${i})">
+        <div><div class="checkbox${on?' chk':''}" onclick="v4RpToggle(event,${i})">${on?'✓':''}</div></div>
+        <div class="v4-agent"><div class="v4-av" style="background:${r.color};">${v4Initial(r.name)}</div><div class="v4-aname">${r.name}</div></div>
+        <div class="v4-muted">${r.phone}</div>
+        <div class="v4-muted">${r.callTime}</div>
+        <div>${r.gap.name}</div>
+        <div>${v4SevPill(r.gap.sev)}</div>
+        <div style="font-weight:700;color:#C62828;">${r.repeatCount}×</div>
+        <div>
+          <span class="v4-pill" style="background:#FFF3E6;color:#E07C1F;">${r.park.key}</span>
+          <div style="font-size:10.5px;color:#8A93AB;margin-top:3px;">Parked ${r.parkedSince} days</div>
+        </div>
+      </div>`;
+    }).join('');
+}
+
+function v4OpenRepeatDetail(i){
+  const r = v4RepeatRecs(v4Role())[i];
+  if(r) v4RenderGapPage(r, 'repeat');
+}
+
+// ── Content yet to be created ──
+function v4ContentRecs(role){
+  if(!V4_CACHE['ct_'+role]){
+    const d = V4_DATA[role] || V4_DATA.XFE;
+    const n = (d.content && d.content.pending) || 0;
+    V4_CACHE['ct_'+role] = Array.from({length:n},(_,i)=>{
+      const g = V4_GAP_POOL[i % V4_GAP_POOL.length];
+      return {
+        gap: g,
+        evalTime: '2026-08-'+v4Pad(8+(i*3)%12)+' '+v4Pad(10+(i%7))+':'+v4Pad((i*17)%60)+':00',
+        fleet: 3 + (i*7)%24
+      };
+    });
+  }
+  return V4_CACHE['ct_'+role];
+}
+
+function v4OpenContentList(){
+  showV('v4-content', null);
+  const n=document.getElementById('nav-dash4'); if(n) n.classList.add('active');
+  renderV4Content(true);
+  window.scrollTo({top:0,behavior:'instant'});
+}
+
+function renderV4Content(rebuildFilters){
+  const role = v4Role();
+  const all = v4ContentRecs(role);
+
+  const fw = document.getElementById('v4-ct-filters');
+  if(fw && (rebuildFilters || !fw.innerHTML.trim())){
+    const gaps = [...new Set(all.map(r=>r.gap.name))];
+    fw.innerHTML = `
+      <div class="v4-filt"><label>Search GAP</label><input id="v4-cf2-q" type="text" placeholder="GAP name" oninput="renderV4Content(false)"></div>
+      <div class="v4-filt"><label>GAP name</label><select id="v4-cf2-gap" onchange="renderV4Content(false)"><option value="all">All gaps</option>${gaps.map(g=>`<option>${g}</option>`).join('')}</select></div>
+      <div class="v4-filt"><label>Severity</label><select id="v4-cf2-sev" onchange="renderV4Content(false)"><option value="all">All</option><option>HIGH</option><option>MEDIUM</option><option>LOW</option></select></div>
+      <div class="v4-filt-count" id="v4-cf2-count"></div>`;
+  }
+
+  const q  = (document.getElementById('v4-cf2-q')?.value||'').toLowerCase().trim();
+  const fg = document.getElementById('v4-cf2-gap')?.value || 'all';
+  const fs = document.getElementById('v4-cf2-sev')?.value || 'all';
+  const rows = all.filter(r=>{
+    if(q && !r.gap.name.toLowerCase().includes(q)) return false;
+    if(fg!=='all' && r.gap.name!==fg) return false;
+    if(fs!=='all' && r.gap.sev!==fs) return false;
+    return true;
+  });
+
+  const cnt = document.getElementById('v4-cf2-count');
+  if(cnt) cnt.textContent = rows.length + ' of ' + all.length + ' records';
+
+  const wrap = document.getElementById('v4-ct-table');
+  if(!wrap) return;
+  if(!rows.length){ wrap.innerHTML = '<div class="v4-empty">Every identified gap has content mapped to it.</div>'; return; }
+
+  const g = 'grid-template-columns:1.6fr 1.3fr 0.9fr 1.2fr 1fr;';
+  wrap.innerHTML =
+    `<div class="v4-thead" style="${g}">
+      <div>Identified GAP Name</div><div>Evaluation Date &amp; Time</div><div>Severity</div><div>Fleet Identified in GAP</div><div>Action</div>
+    </div>` +
+    rows.map(r=>{
+      const i = all.indexOf(r);
+      return `<div class="v4-trow" style="${g};cursor:default;">
+        <div style="font-weight:600;">${r.gap.name}</div>
+        <div class="v4-muted">${r.evalTime}</div>
+        <div>${v4SevPill(r.gap.sev)}</div>
+        <div>${r.fleet}</div>
+        <div><button class="btn-blue" style="height:28px;padding:0 12px;font-size:11.5px;" onclick="v4OpenTag(${i})">Tag Content</button></div>
+      </div>`;
+    }).join('');
+}
+
+// ── Tag content page ──
+const V4_TAG_LIB = [
+  {id:'SLS.OBJ.PRC.01', type:'Sales Skill', sub:'Objection',  subsub:'Price objection',    ctype:'Video', created:'2026-04-12', gap:'Objection Handling',
+   desc:'Three step FEEL FELT FOUND script for handling a competitor price objection, with two worked examples in Hinglish.'},
+  {id:'SLS.OBJ.CMP.01', type:'Sales Skill', sub:'Objection',  subsub:'Competitor compare', ctype:'PDF',   created:'2026-05-15', gap:'Objection Handling',
+   desc:'Side by side comparison of our fiber plans against the nearest competitor, with the three facts an advisor should quote.'},
+  {id:'SLS.CLO.ASM.01', type:'Sales Skill', sub:'Closing',    subsub:'Assumptive close',   ctype:'Video', created:'2026-03-22', gap:'Closing and Next Steps',
+   desc:'How to close by offering two installation slots instead of asking whether the customer wants to proceed.'},
+  {id:'SLS.UPS.HTP.01', type:'Sales Skill', sub:'Upsell',     subsub:'Higher tier plan',   ctype:'PDF',   created:'2026-05-03', gap:'No Upsell Attempt',
+   desc:'Playbook for moving a customer from the entry plan to the higher speed plan after the OTT conversation.'},
+  {id:'PRD.BBD.PLN.01', type:'Product',     sub:'Broadband',  subsub:'Plan portfolio',     ctype:'Image', created:'2026-02-18', gap:'Product Knowledge',
+   desc:'One page visual of the full plan portfolio with speed, price and bundled OTT for each plan.'},
+  {id:'PRD.BBD.OTT.01', type:'Product',     sub:'Broadband',  subsub:'OTT bundle',         ctype:'Quiz',  created:'2026-04-28', gap:'Value Anchoring',
+   desc:'Six question quiz that checks whether the advisor can anchor the OTT bundle value to a customer use case.'},
+  {id:'CMP.DIS.CHG.01', type:'Compliance',  sub:'Disclosure', subsub:'Charges disclosure', ctype:'PDF',   created:'2026-01-09', gap:'Closing and Next Steps',
+   desc:'Mandatory charges an advisor must disclose before taking a commitment, with the exact wording to use.'}
+];
+let v4TagIdx = -1, v4TagMode = 'create', v4TagPick = -1;
+
+function v4OpenTag(i){
+  const rec = v4ContentRecs(v4Role())[i];
+  if(!rec) return;
+  v4TagIdx = i; v4TagMode = 'create'; v4TagPick = -1;
+  document.getElementById('v4-tag-title').textContent = rec.gap.name;
+  document.getElementById('v4-tag-sub').textContent = 'Create or map content for this gap so it can move into the training queue.';
+  document.getElementById('v4-tag-chips').innerHTML = `
+    <div class="v4-chip">⚠ Severity: <strong style="color:${v4SevColor(rec.gap.sev)};">${rec.gap.sev}</strong></div>
+    <div class="v4-chip">👥 Fleet identified: <strong>${rec.fleet}</strong></div>
+    <div class="v4-chip">📅 Evaluated: <strong>${rec.evalTime}</strong></div>
+    <div class="v4-chip">📚 Content mapped: <strong style="color:#E07C1F;">None</strong></div>`;
+  document.getElementById('v4-tag-gengap').value = rec.gap.name;
+  v4TagFillPrompt();
+  document.getElementById('v4-tg-fname').textContent = 'Click to upload the content file';
+  ['v4-tg-type','v4-tg-sub','v4-tg-subsub','v4-tg-desc'].forEach(id=>{const e=document.getElementById(id); if(e) e.value='';});
+  v4TagRenderModes();
+  v4TagBuildExistingFilters();
+  showV('v4-tag', null);
+  const n=document.getElementById('nav-dash4'); if(n) n.classList.add('active');
+  window.scrollTo({top:0,behavior:'instant'});
+}
+
+function v4TagFillPrompt(){
+  const gap = document.getElementById('v4-tag-gengap').value;
+  const t = document.getElementById('v4-tag-gentype').value;
+  document.getElementById('v4-tag-prompt').value =
+    'Create a 60 second training module for Airtel field agents addressing the gap: "'+gap+'". Format: '+t+'. Language: Hinglish. Tone: professional but conversational. Include one real world scenario, the correct technique with an example script, and a key takeaway.';
+}
+function v4TagCopyPrompt(){
+  const el = document.getElementById('v4-tag-prompt');
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(el.value).then(()=>toast('📋 Prompt copied')).catch(()=>{el.select();toast('Select all done, copy with Ctrl+C');});
+  } else { el.select(); toast('Select all done, copy with Ctrl+C'); }
+}
+function v4TagFilePicked(inp){
+  const f = inp.files[0];
+  if(f) document.getElementById('v4-tg-fname').textContent = f.name;
+}
+
+function v4TagRenderModes(){
+  const modes = [
+    {k:'create', label:'Create new Tag',       sub:'Build a fresh tag and upload the content', color:'#1976D2'},
+    {k:'map',    label:'Map from existing Tag', sub:'Reuse a tag already in the library',      color:'#0F9D8F'}
+  ];
+  document.getElementById('v4-tag-modes').innerHTML = modes.map(m=>`
+    <div class="v4-seltab${v4TagMode===m.k?' active':''}" onclick="v4TagSetMode('${m.k}')">
+      <div class="v4-seltab-dot" style="background:${m.color};"></div>
+      <div class="v4-seltab-label">${m.label}</div>
+      <div class="v4-seltab-sub" style="margin-top:6px;">${m.sub}</div>
+    </div>`).join('');
+  document.getElementById('v4-tag-create').style.display = v4TagMode==='create' ? '' : 'none';
+  document.getElementById('v4-tag-map').style.display    = v4TagMode==='map'    ? '' : 'none';
+}
+function v4TagSetMode(m){ v4TagMode = m; v4TagPick = -1; v4TagRenderModes(); if(m==='map') v4TagRenderExisting(); }
+
+function v4TagBuildExistingFilters(){
+  const fill = (id, vals) => {
+    const e = document.getElementById(id);
+    if(e) e.innerHTML = vals.map(v=>`<option value="${v}">`).join('');
+  };
+  fill('v4-dl-type',   [...new Set(V4_TAG_LIB.map(t=>t.type))]);
+  fill('v4-dl-sub',    [...new Set(V4_TAG_LIB.map(t=>t.sub))]);
+  fill('v4-dl-subsub', [...new Set(V4_TAG_LIB.map(t=>t.subsub))]);
+  ['v4-tm-type','v4-tm-sub','v4-tm-subsub','v4-tm-q'].forEach(id=>{const e=document.getElementById(id); if(e) e.value='';});
+  v4TagRenderExisting();
+}
+
+function v4TagRenderExisting(){
+  const g1 = (document.getElementById('v4-tm-type')?.value||'').toLowerCase().trim();
+  const g2 = (document.getElementById('v4-tm-sub')?.value||'').toLowerCase().trim();
+  const g3 = (document.getElementById('v4-tm-subsub')?.value||'').toLowerCase().trim();
+  const q  = (document.getElementById('v4-tm-q')?.value||'').toLowerCase().trim();
+  const rows = V4_TAG_LIB.filter(t=>{
+    if(g1 && !t.type.toLowerCase().includes(g1)) return false;
+    if(g2 && !t.sub.toLowerCase().includes(g2)) return false;
+    if(g3 && !t.subsub.toLowerCase().includes(g3)) return false;
+    if(q && !(t.id.toLowerCase().includes(q) || t.desc.toLowerCase().includes(q))) return false;
+    return true;
+  });
+  const cnt = document.getElementById('v4-tm-count');
+  if(cnt) cnt.textContent = rows.length + ' of ' + V4_TAG_LIB.length + ' tags';
+  const wrap = document.getElementById('v4-tm-table');
+  const g = 'grid-template-columns:40px 1fr 1fr 1.2fr 1.4fr 0.8fr;';
+  wrap.innerHTML = rows.length ? (
+    `<div class="v4-thead" style="${g}"><div></div><div>Type</div><div>Sub-Type</div><div>Sub-Sub-Type</div><div>Content ID</div><div>Content Type</div></div>` +
+    rows.map(t=>{
+      const i = V4_TAG_LIB.indexOf(t);
+      const on = v4TagPick===i;
+      return `<div class="v4-trow${on?' sel':''}" style="${g}" onclick="v4TagPickRow(${i})">
+        <div><div class="checkbox${on?' chk':''}">${on?'✓':''}</div></div>
+        <div>${t.type}</div><div>${t.sub}</div><div>${t.subsub}</div>
+        <div style="font-weight:600;font-family:monospace;font-size:11.5px;">${t.id}</div>
+        <div><span class="v4-pill" style="background:#E9F1FD;color:#1565C0;">${t.ctype}</span></div>
+      </div>`;
+    }).join('')
+  ) : '<div class="v4-empty">No tag matches this search.</div>';
+  const cta = document.getElementById('v4-tm-cta');
+  if(cta) cta.disabled = v4TagPick < 0;
+}
+function v4TagPickRow(i){ v4TagPick = (v4TagPick===i ? -1 : i); v4TagRenderExisting(); }
+
+function v4TagDone(msg){
+  const role = v4Role();
+  const list = v4ContentRecs(role);
+  const rec = list[v4TagIdx];
+  if(rec) list.splice(v4TagIdx,1);
+  toast(msg);
+  v4OpenContentList();
+}
+
+function v4TagCreate(){
+  const t = document.getElementById('v4-tg-type').value.trim();
+  const sub = document.getElementById('v4-tg-sub').value.trim();
+  const subsub = document.getElementById('v4-tg-subsub').value.trim();
+  const ctype = document.getElementById('v4-tg-ctype').value;
+  const desc = document.getElementById('v4-tg-desc').value.trim();
+  if(!t || !sub || !subsub){ toast('Please fill Type, Sub-Type and Sub-Sub-Type'); return; }
+  if(!desc){ toast('Please add a description for this tag'); return; }
+  if(!document.getElementById('v4-tg-file').files.length){ toast('Please upload the content file'); return; }
+  const ab = x => x.replace(/[^A-Za-z]/g,'').slice(0,3).toUpperCase();
+  const rec = v4ContentRecs(v4Role())[v4TagIdx];
+  const tag = {
+    id: ab(t)+'.'+ab(sub)+'.'+ab(subsub)+'.'+v4Pad(V4_TAG_LIB.length+1),
+    type:t, sub:sub, subsub:subsub, ctype:ctype, desc:desc,
+    created:'2026-08-20', gap: rec ? rec.gap.name : '',
+    file: document.getElementById('v4-tg-fname').textContent
+  };
+  v4TcOpen(tag, 'create');
+}
+
+function v4TagMap(){
+  if(v4TagPick < 0){ toast('Please select a tag to map'); return; }
+  v4TcOpen(V4_TAG_LIB[v4TagPick], 'map');
+}
+
+// ── tag confirm / content detail page ──
+let v4TcTag = null, v4TcMode = 'map', v4TcEditing = false, v4TcNewFile = '';
+
+function v4TcIcon(ct){
+  return ct==='Video' ? '🎥' : ct==='PDF' ? '📄' : ct==='Image' ? '🖼️' : ct==='Quiz' ? '📝' : ct==='Audio' ? '🎧' : '🔗';
+}
+
+function v4TcOpen(tag, mode){
+  v4TcTag = tag; v4TcMode = mode; v4TcEditing = false; v4TcNewFile = '';
+  const isLib = mode==='library';
+  document.getElementById('v4-tc-title').textContent = isLib ? tag.id : 'Confirm the tag you picked';
+  document.getElementById('v4-tc-subtitle').textContent = isLib
+    ? 'Content detail. The tag structure is locked, the description and the file can be updated.'
+    : (mode==='map' ? 'Check the tag below, then submit to map it against the gap.' : 'Check the new tag below, then submit to create it and map it against the gap.');
+  document.getElementById('v4-tc-back').textContent = isLib ? '◂ Back to content library' : '◂ Back to tagging';
+  document.getElementById('v4-tc-back').onclick = isLib ? v4OpenLibrary : function(){ showV('v4-tag', null); };
+
+  document.getElementById('v4-tc-chips').innerHTML = `
+    <div class="v4-chip">🆔 Content ID: <strong style="font-family:monospace;">${tag.id}</strong></div>
+    <div class="v4-chip">🎯 Mapped GAP: <strong>${tag.gap || '—'}</strong></div>
+    <div class="v4-chip">📦 Content type: <strong>${tag.ctype}</strong></div>
+    <div class="v4-chip">📅 Created: <strong>${tag.created}</strong></div>`;
+
+  document.getElementById('v4-tc-type').value = tag.type;
+  document.getElementById('v4-tc-sub').value = tag.sub;
+  document.getElementById('v4-tc-subsub').value = tag.subsub;
+  document.getElementById('v4-tc-desc').value = tag.desc;
+
+  document.getElementById('v4-tc-edit').style.display = isLib ? '' : 'none';
+  document.getElementById('v4-tc-cta').textContent = isLib ? 'Save changes' : 'Submit';
+  document.getElementById('v4-tc-cta').style.display = isLib ? 'none' : '';
+  v4TcRenderContent();
+  v4TcSetEditing(false);
+
+  showV('v4-tagconfirm', null);
+  const n=document.getElementById('nav-dash4'); if(n) n.classList.add('active');
+  window.scrollTo({top:0,behavior:'instant'});
+}
+
+function v4TcRenderContent(){
+  const t = v4TcTag;
+  const fname = v4TcNewFile || t.file || (t.id.toLowerCase().replace(/\./g,'_') + (t.ctype==='Video'?'.mp4':t.ctype==='PDF'?'.pdf':t.ctype==='Image'?'.png':t.ctype==='Audio'?'.mp3':'.json'));
+  document.getElementById('v4-tc-content').innerHTML = `
+    <div style="display:flex;align-items:center;gap:14px;background:#F8FAFF;border:1px solid #E6E9F0;border-radius:10px;padding:14px 16px;">
+      <div style="width:46px;height:46px;border-radius:10px;background:#E9F1FD;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;">${v4TcIcon(t.ctype)}</div>
+      <div style="flex:1;min-width:0;">
+        <div style="font-size:13.5px;font-weight:700;color:#141A2E;">${fname}</div>
+        <div style="font-size:11.5px;color:#8A93AB;margin-top:3px;">${t.ctype} · mapped to ${t.gap || 'this gap'}</div>
+      </div>
+      <button class="btn-outline" onclick="toast('Preview is not wired in this prototype')">View content</button>
+    </div>`;
+}
+
+function v4TcSetEditing(on){
+  v4TcEditing = on;
+  const ro = !on;
+  const d = document.getElementById('v4-tc-desc');
+  d.readOnly = ro; d.style.background = ro ? '#F7F9FD' : 'white';
+  document.getElementById('v4-tc-upload').style.display = on ? '' : 'none';
+  const cta = document.getElementById('v4-tc-cta');
+  if(v4TcMode==='library'){
+    cta.style.display = on ? '' : 'none';
+    document.getElementById('v4-tc-edit').textContent = on ? 'Cancel' : 'Edit';
+  }
+}
+function v4TcEdit(){ v4TcSetEditing(!v4TcEditing); }
+function v4TcFilePicked(inp){
+  const f = inp.files[0];
+  if(f){ v4TcNewFile = f.name; document.getElementById('v4-tc-fname').textContent = f.name; v4TcRenderContent(); }
+}
+
+function v4TcSubmit(){
+  const t = v4TcTag;
+  if(v4TcMode==='library'){
+    t.desc = document.getElementById('v4-tc-desc').value.trim();
+    if(v4TcNewFile) t.file = v4TcNewFile;
+    v4TcSetEditing(false);
+    toast('Content updated. The tag structure is unchanged.');
+    return;
+  }
+  if(v4TcMode==='create') V4_TAG_LIB.push(t);
+  const list = v4ContentRecs(v4Role());
+  if(list[v4TagIdx]) list.splice(v4TagIdx,1);
+  toast('Tag ' + t.id + ' mapped. The gap has moved into the Training Queue.');
+  v4OpenContentList();
+}
+
+// ── content library page ──
+function v4OpenLibrary(){
+  showV('v4-library', null);
+  const n=document.getElementById('nav-dash4'); if(n) n.classList.add('active');
+  renderV4Library(true);
+  window.scrollTo({top:0,behavior:'instant'});
+}
+
+function renderV4Library(rebuildFilters){
+  const fw = document.getElementById('v4-lib-filters');
+  if(fw && (rebuildFilters || !fw.innerHTML.trim())){
+    const gaps = [...new Set(V4_TAG_LIB.map(t=>t.gap).filter(Boolean))];
+    const ctypes = [...new Set(V4_TAG_LIB.map(t=>t.ctype))];
+    fw.innerHTML = `
+      <div class="v4-filt"><label>Search</label><input id="v4-lb-q" type="text" placeholder="Content ID or description" oninput="renderV4Library(false)"></div>
+      <div class="v4-filt"><label>GAP name</label><select id="v4-lb-gap" onchange="renderV4Library(false)"><option value="all">All gaps</option>${gaps.map(g=>`<option>${g}</option>`).join('')}</select></div>
+      <div class="v4-filt"><label>Content type</label><select id="v4-lb-ct" onchange="renderV4Library(false)"><option value="all">All types</option>${ctypes.map(g=>`<option>${g}</option>`).join('')}</select></div>
+      <div class="v4-filt-count" id="v4-lb-count"></div>`;
+  }
+  const q  = (document.getElementById('v4-lb-q')?.value||'').toLowerCase().trim();
+  const fg = document.getElementById('v4-lb-gap')?.value || 'all';
+  const fc = document.getElementById('v4-lb-ct')?.value  || 'all';
+  const rows = V4_TAG_LIB.filter(t=>{
+    if(q && !(t.id.toLowerCase().includes(q) || t.desc.toLowerCase().includes(q))) return false;
+    if(fg!=='all' && t.gap!==fg) return false;
+    if(fc!=='all' && t.ctype!==fc) return false;
+    return true;
+  });
+  const cnt = document.getElementById('v4-lb-count');
+  if(cnt) cnt.textContent = rows.length + ' of ' + V4_TAG_LIB.length + ' records';
+
+  const wrap = document.getElementById('v4-lib-table');
+  if(!wrap) return;
+  if(!rows.length){ wrap.innerHTML = '<div class="v4-empty">No content matches the selected filters.</div>'; return; }
+  const g = 'grid-template-columns:1.5fr 1.3fr 1fr 1.2fr 0.9fr;';
+  wrap.innerHTML =
+    `<div class="v4-thead" style="${g}"><div>GAP Name</div><div>Triplet ID</div><div>Content Type</div><div>Content Creation Date</div><div>Action</div></div>` +
+    rows.map(t=>{
+      const i = V4_TAG_LIB.indexOf(t);
+      return `<div class="v4-trow" style="${g};cursor:default;">
+        <div style="font-weight:600;">${t.gap || '—'}</div>
+        <div style="font-family:monospace;font-size:11.5px;font-weight:600;">${t.id}</div>
+        <div><span class="v4-pill" style="background:#E9F1FD;color:#1565C0;">${t.ctype}</span></div>
+        <div class="v4-muted">${t.created}</div>
+        <div><button class="btn-outline" style="height:28px;padding:0 12px;font-size:11.5px;" onclick="v4TcOpen(V4_TAG_LIB[${i}],'library')">View More</button></div>
+      </div>`;
+    }).join('');
+}
+
+// ── Training Rejected page ──// ── Training Rejected page ──
+const V4_REJECT_SEED = [
+  {reason:'Gap not valid on this call',      remarks:'Customer had already been pitched the higher plan on an earlier call, so the gap does not apply here.'},
+  {reason:'Already coached offline',         remarks:'Covered in the Monday huddle with the whole team. No separate module needed.'},
+  {reason:'Transcription quality too poor',  remarks:'Half the call was inaudible. The gap call out is not reliable enough to act on.'},
+  {reason:'Duplicate of an open training',   remarks:'Same gap is already assigned and pending with the trainee from last week.'}
+];
+
+function v4RejectedRecs(role){
+  if(!V4_CACHE['rej_'+role]){
+    const d = V4_DATA[role] || V4_DATA.XFE;
+    V4_CACHE['rej_'+role] = Array.from({length:d.rejected||0},(_,i)=>{
+      const r = v4MakeRec(role,'identified',i+3);
+      const seed = V4_REJECT_SEED[i % V4_REJECT_SEED.length];
+      r.rejectReason = seed.reason;
+      r.rejectRemarks = seed.remarks;
+      r.rejectDate = '2026-08-'+v4Pad(9+(i*3)%10);
+      r.rejectedBy = 'Ravi Arora';
+      return r;
+    });
+  }
+  return V4_CACHE['rej_'+role];
+}
+
+function v4OpenRejectedList(){
+  showV('v4-rejected', null);
+  const n=document.getElementById('nav-dash4'); if(n) n.classList.add('active');
+  renderV4Rejected(true);
+  window.scrollTo({top:0,behavior:'instant'});
+}
+
+function renderV4Rejected(rebuildFilters){
+  const role = v4Role();
+  const all = v4RejectedRecs(role);
+
+  const fw = document.getElementById('v4-rej-filters');
+  if(fw && (rebuildFilters || !fw.innerHTML.trim())){
+    const gaps = [...new Set(all.map(r=>r.gap.name))];
+    const reasons = [...new Set(all.map(r=>r.rejectReason))];
+    fw.innerHTML = `
+      <div class="v4-filt"><label>Search fleet member</label><input id="v4-jf-q" type="text" placeholder="Name or fleet number" oninput="renderV4Rejected(false)"></div>
+      <div class="v4-filt"><label>GAP name</label><select id="v4-jf-gap" onchange="renderV4Rejected(false)"><option value="all">All gaps</option>${gaps.map(g=>`<option>${g}</option>`).join('')}</select></div>
+      <div class="v4-filt"><label>Rejection reason</label><select id="v4-jf-reason" onchange="renderV4Rejected(false)"><option value="all">All reasons</option>${reasons.map(x=>`<option>${x}</option>`).join('')}</select></div>
+      <div class="v4-filt"><label>Severity</label><select id="v4-jf-sev" onchange="renderV4Rejected(false)"><option value="all">All</option><option>HIGH</option><option>MEDIUM</option><option>LOW</option></select></div>
+      <div class="v4-filt-count" id="v4-jf-count"></div>`;
+  }
+
+  const q  = (document.getElementById('v4-jf-q')?.value||'').toLowerCase().trim();
+  const fg = document.getElementById('v4-jf-gap')?.value    || 'all';
+  const fr = document.getElementById('v4-jf-reason')?.value || 'all';
+  const fs = document.getElementById('v4-jf-sev')?.value    || 'all';
+
+  const rows = all.filter(r=>{
+    if(q && !(r.name.toLowerCase().includes(q) || r.phone.includes(q))) return false;
+    if(fg!=='all' && r.gap.name!==fg) return false;
+    if(fr!=='all' && r.rejectReason!==fr) return false;
+    if(fs!=='all' && r.gap.sev!==fs) return false;
+    return true;
+  });
+
+  const cnt = document.getElementById('v4-jf-count');
+  if(cnt) cnt.textContent = rows.length + ' of ' + all.length + ' records';
+
+  const wrap = document.getElementById('v4-rej-table');
+  if(!wrap) return;
+  if(!rows.length){
+    wrap.innerHTML = '<div class="v4-empty">No rejected recommendations match the selected filters.</div>';
+    return;
+  }
+
+  const g = 'grid-template-columns:1.1fr 1fr 1.25fr 1.2fr 0.85fr 1.5fr 1fr 1fr;';
+  wrap.innerHTML =
+    `<div class="v4-thead" style="${g}">
+      <div>Name</div><div>Fleet Number</div><div>Call Date &amp; Time</div><div>GAP Name</div>
+      <div>Severity</div><div>Rejection Reason</div><div>Rejection Date</div><div>Rejected By</div>
+    </div>` +
+    rows.map(r=>{
+      const i = all.indexOf(r);
+      return `<div class="v4-trow" style="${g}" onclick="v4OpenRejectedDetail(${i})">
+        <div class="v4-agent">
+          <div class="v4-av" style="background:${r.color};">${v4Initial(r.name)}</div>
+          <div class="v4-aname">${r.name}</div>
+        </div>
+        <div class="v4-muted">${r.phone}</div>
+        <div class="v4-muted">${r.callTime}</div>
+        <div>${r.gap.name}</div>
+        <div>${v4SevPill(r.gap.sev)}</div>
+        <div><span class="v4-pill" style="background:#F5EFE3;color:#8A6D3B;">${r.rejectReason}</span></div>
+        <div class="v4-muted">${r.rejectDate}</div>
+        <div class="v4-muted">${r.rejectedBy}</div>
+      </div>`;
+    }).join('');
+}
+
+function v4OpenRejectedDetail(i){
+  const r = v4RejectedRecs(v4Role())[i];
+  if(r) v4RenderGapPage(r, 'rejected');
+}
+
+function renderV4Identified(rebuildFilters){
+  const role = v4Role();
+  const all = v4Recs(role).identified;
+  const fw = document.getElementById('v4-id-filters');
+  if(fw && (rebuildFilters || !fw.innerHTML.trim())){
+    const gaps = [...new Set(all.map(r=>r.gap.name))];
+    fw.innerHTML = `
+      <div class="v4-filt"><label>Search fleet member</label><input id="v4-if-q" type="text" placeholder="Name or fleet number" oninput="renderV4Identified(false)"></div>
+      <div class="v4-filt"><label>GAP name</label><select id="v4-if-gap" onchange="renderV4Identified(false)"><option value="all">All gaps</option>${gaps.map(g=>`<option>${g}</option>`).join('')}</select></div>
+      <div class="v4-filt"><label>Severity</label><select id="v4-if-sev" onchange="renderV4Identified(false)"><option value="all">All</option><option>HIGH</option><option>MEDIUM</option><option>LOW</option></select></div>
+      <div class="v4-filt"><label>Call score</label><select id="v4-if-score" onchange="renderV4Identified(false)"><option value="all">Any score</option><option value="lt55">Below 55</option><option value="55to69">55 to 69</option><option value="gte70">70 and above</option></select></div>
+      <div class="v4-filt-count" id="v4-if-count"></div>`;
+  }
+
+  const q  = (document.getElementById('v4-if-q')?.value||'').toLowerCase().trim();
+  const fg = document.getElementById('v4-if-gap')?.value   || 'all';
+  const fs = document.getElementById('v4-if-sev')?.value   || 'all';
+  const fc = document.getElementById('v4-if-score')?.value || 'all';
+
+  const rows = all.filter(r=>{
+    if(v4IdGapPre && r.gap.name!==v4IdGapPre) return false;
+    if(q && !(r.name.toLowerCase().includes(q) || r.phone.includes(q))) return false;
+    if(fg!=='all' && r.gap.name!==fg) return false;
+    if(fs!=='all' && r.gap.sev!==fs) return false;
+    if(fc==='lt55'   && r.callScore>=55) return false;
+    if(fc==='55to69' && (r.callScore<55 || r.callScore>69)) return false;
+    if(fc==='gte70'  && r.callScore<70) return false;
+    return true;
+  });
+
+  const cnt = document.getElementById('v4-if-count');
+  if(cnt) cnt.textContent = rows.length + ' of ' + all.length + ' records';
+
+  const bPush = document.getElementById('v4-id-push');
+  const bRej  = document.getElementById('v4-id-reject');
+  if(bPush){ bPush.disabled = v4IdSel.size===0; bPush.textContent = v4IdSel.size>0 ? `Push training (${v4IdSel.size})` : 'Push training'; }
+  if(bRej){  bRej.disabled  = v4IdSel.size===0; bRej.textContent  = v4IdSel.size>0 ? `Reject recommendation (${v4IdSel.size})` : 'Reject recommendation'; }
+
+  const wrap = document.getElementById('v4-id-table');
+  if(!wrap) return;
+  if(!rows.length){
+    wrap.innerHTML = '<div class="v4-empty">No gaps match the selected filters.</div>';
+    return;
+  }
+
+  const scorePill = s => `<span class="v4-pill" style="background:${v4ScoreBg(s)};color:${v4ScoreColor(s)};">${s}</span>`;
+  const sevPill = v4SevPill;
+  const yn = v => v
+    ? '<span class="v4-yn" style="color:#1D9E75;">● Yes</span>'
+    : '<span class="v4-yn" style="color:#AAB4CC;">● No</span>';
+
+  const ids = rows.map(r=>all.indexOf(r));
+  const allOn = ids.length>0 && ids.every(i=>v4IdSel.has(i));
+  const g = 'grid-template-columns:40px 1.05fr 0.95fr 1.15fr 1.15fr 1.2fr 0.8fr 0.8fr 0.95fr;';
+  wrap.innerHTML =
+    `<div class="v4-thead" style="${g}">
+      <div><div class="checkbox${allOn?' chk':''}" onclick="v4IdToggleAll(event,'${ids.join(',')}')">${allOn?'✓':''}</div></div>
+      <div>Name</div><div>Fleet Number</div><div>Call Date &amp; Time</div><div>Evaluation Time</div><div>GAP Name</div>
+      <div>Severity</div><div>Call Score</div><div>Training Pushed</div>
+    </div>` +
+    rows.map(r=>{
+      const i = all.indexOf(r);
+      const on = v4IdSel.has(i);
+      return `<div class="v4-trow${on?' sel':''}" style="${g}" onclick="v4OpenGap(${i},'identifiedPage')">
+        <div><div class="checkbox${on?' chk':''}" onclick="v4IdToggle(event,${i})">${on?'✓':''}</div></div>
+        <div class="v4-agent">
+          <div class="v4-av" style="background:${r.color};">${v4Initial(r.name)}</div>
+          <div class="v4-aname">${r.name}</div>
+        </div>
+        <div class="v4-muted">${r.phone}</div>
+        <div class="v4-muted">${r.callTime}</div>
+        <div class="v4-muted">${r.evalTime}</div>
+        <div>${r.gap.name}</div>
+        <div>${sevPill(r.gap.sev)}</div>
+        <div>${scorePill(r.callScore)}</div>
+        <div>${yn(false)}</div>
+      </div>`;
+    }).join('');
+}
+
+// ── Fleet at Risk ──
+const V4_RISK_REASONS = [
+  {key:'Failed 3 attempts', desc:'The fleet member attempted the assigned training three times and failed the certification each time.', kind:'attempts'},
+  {key:'Training pending',  desc:'Training was pushed but has stayed untouched past its due date, so the gap is still open on live calls.', kind:'pending'},
+  {key:'Repeat gap',        desc:'The same gap was flagged again on a fresh call after the training was already completed.', kind:'pending'},
+  {key:'Coach call missed', desc:'The voice coach called on three scheduled slots and the fleet member did not take the call.', kind:'attempts'},
+  {key:'Score declining',   desc:'The call score has dropped across the last four evaluated calls despite training being completed.', kind:'pending'}
+];
+
+function v4RiskRecs(role){
+  if(!V4_CACHE['risk_'+role]){
+    const d = V4_DATA[role] || V4_DATA.XFE;
+    V4_CACHE['risk_'+role] = Array.from({length:d.atRisk||0},(_,i)=>{
+      const r = v4MakeRec(role,'low',i+1);
+      const per = V4_PEOPLE[i % V4_PEOPLE.length];
+      r.name = per.name; r.phone = per.phone; r.color = per.color; r.empId = per.empId;
+      r.risk = V4_RISK_REASONS[i % V4_RISK_REASONS.length];
+      r.gap = V4_GAP_POOL[(i*2+1) % V4_GAP_POOL.length];
+      r.callScore = 28 + (i*11)%25;
+      r.riskSince = 4 + (i*5)%22;
+      r.trainingResult = (r.risk.key==='Repeat gap' || r.risk.key==='Score declining') ? 'Pass' : 'Fail';
+      const rd = 6 + (i*3)%14;
+      r.callTime = '2026-08-'+v4Pad(rd)+' '+v4Pad(9+(i%8))+':'+v4Pad((i*13)%60)+':'+v4Pad((i*7)%60);
+      r.evalTime = '2026-08-'+v4Pad(rd)+' '+v4Pad(10+(i%8))+':'+v4Pad((i*19)%60)+':'+v4Pad((i*7)%60);
+      r.attempts = [1,2,3].map(n=>({
+        no:n,
+        module: V4_GAP_POOL[(i+n) % V4_GAP_POOL.length].module,
+        gap:    V4_GAP_POOL[(i+n) % V4_GAP_POOL.length].name,
+        date:   '2026-08-'+v4Pad(3+n*3+(i%3)),
+        score:  28 + (n*7 + i*3)%24,
+        result: 'Failed'
+      }));
+      r.pending = [0,1].map(n=>{
+        const pr = v4MakeRec(role,'identified',i+n+1);
+        pr.pushed = true; pr.completed = false; pr.name = r.name; pr.phone = r.phone; pr.color = r.color; pr.role = r.role;
+        return pr;
+      });
+      return r;
+    });
+  }
+  return V4_CACHE['risk_'+role];
+}
+
+let v4RiskSel = new Set();
+let v4RiskCur = -1;
+
+function v4OpenRiskList(){
+  showV('v4-risk', null);
+  const n=document.getElementById('nav-dash4'); if(n) n.classList.add('active');
+  renderV4Risk(true);
+  window.scrollTo({top:0,behavior:'instant'});
+}
+
+function v4RiskToggle(e,i){
+  e.stopPropagation();
+  if(v4RiskSel.has(i)) v4RiskSel.delete(i); else v4RiskSel.add(i);
+  renderV4Risk(false);
+}
+function v4RiskToggleAll(e, ids){
+  e.stopPropagation();
+  const list = ids.split(',').filter(x=>x!=='').map(Number);
+  const allOn = list.length>0 && list.every(i=>v4RiskSel.has(i));
+  if(allOn) list.forEach(i=>v4RiskSel.delete(i)); else list.forEach(i=>v4RiskSel.add(i));
+  renderV4Risk(false);
+}
+
+function renderV4Risk(rebuildFilters){
+  const role = v4Role();
+  const all = v4RiskRecs(role);
+
+  const fw = document.getElementById('v4-risk-filters');
+  if(fw && (rebuildFilters || !fw.innerHTML.trim())){
+    const reasons = [...new Set(all.map(r=>r.risk.key))];
+    fw.innerHTML = `
+      <div class="v4-filt"><label>Search fleet member</label><input id="v4-rf-q" type="text" placeholder="Name or fleet number" oninput="renderV4Risk(false)"></div>
+      <div class="v4-filt"><label>Why at risk</label><select id="v4-rf-why" onchange="renderV4Risk(false)"><option value="all">All reasons</option>${reasons.map(x=>`<option>${x}</option>`).join('')}</select></div>
+      <div class="v4-filt"><label>Severity</label><select id="v4-rf-sev" onchange="renderV4Risk(false)"><option value="all">All</option><option>HIGH</option><option>MEDIUM</option><option>LOW</option></select></div>
+      <div class="v4-filt"><label>Call score</label><select id="v4-rf-score" onchange="renderV4Risk(false)"><option value="all">Any score</option><option value="lt40">Below 40</option><option value="gte40">40 and above</option></select></div>
+      <div class="v4-filt"><label>Training result</label><select id="v4-rf-res" onchange="renderV4Risk(false)"><option value="all">All</option><option value="Pass">Pass</option><option value="Fail">Fail</option></select></div>
+      <div class="v4-filt-count" id="v4-rf-count"></div>`;
+  }
+
+  const q  = (document.getElementById('v4-rf-q')?.value||'').toLowerCase().trim();
+  const fy = document.getElementById('v4-rf-why')?.value   || 'all';
+  const fs = document.getElementById('v4-rf-sev')?.value   || 'all';
+  const fc = document.getElementById('v4-rf-score')?.value || 'all';
+  const fres = document.getElementById('v4-rf-res')?.value || 'all';
+
+  const rows = all.filter(r=>{
+    if(q && !(r.name.toLowerCase().includes(q) || r.phone.includes(q))) return false;
+    if(fy!=='all' && r.risk.key!==fy) return false;
+    if(fs!=='all' && r.gap.sev!==fs) return false;
+    if(fc==='lt40'  && r.callScore>=40) return false;
+    if(fc==='gte40' && r.callScore<40) return false;
+    if(fres!=='all' && r.trainingResult!==fres) return false;
+    return true;
+  });
+
+  const cnt = document.getElementById('v4-rf-count');
+  if(cnt) cnt.textContent = rows.length + ' of ' + all.length + ' records';
+
+  const cta = document.getElementById('v4-risk-cta');
+  if(cta){
+    cta.disabled = v4RiskSel.size===0;
+    cta.textContent = v4RiskSel.size>0 ? `Submit feedback (${v4RiskSel.size})` : 'Submit feedback';
+  }
+
+  const wrap = document.getElementById('v4-risk-table');
+  if(!wrap) return;
+  if(!rows.length){
+    wrap.innerHTML = '<div class="v4-empty">No fleet member is at risk for the selected role and filters.</div>';
+    return;
+  }
+
+  const ids = rows.map(r=>all.indexOf(r));
+  const allOn = ids.every(i=>v4RiskSel.has(i));
+  const scorePill = sc => `<span class="v4-pill" style="background:${v4ScoreBg(sc)};color:${v4ScoreColor(sc)};">${sc}</span>`;
+
+  const g = 'grid-template-columns:40px 1.05fr 1fr 0.9fr 1.1fr 1.1fr 0.8fr 0.85fr 0.9fr 1.15fr;';
+  wrap.innerHTML =
+    `<div class="v4-thead" style="${g}">
+      <div><div class="checkbox${allOn?' chk':''}" onclick="v4RiskToggleAll(event,'${ids.join(',')}')">${allOn?'✓':''}</div></div>
+      <div>Name</div><div>Fleet Number</div><div>Role</div><div>Call Date</div><div>Evaluation Time</div>
+      <div>Call Score</div><div>Severity</div><div>Training Result</div><div>Why at Risk</div>
+    </div>` +
+    rows.map(r=>{
+      const i = all.indexOf(r);
+      const on = v4RiskSel.has(i);
+      return `<div class="v4-trow${on?' sel':''}" style="${g}" onclick="v4OpenRiskDetail(${i})">
+        <div><div class="checkbox${on?' chk':''}" onclick="v4RiskToggle(event,${i})">${on?'✓':''}</div></div>
+        <div class="v4-agent">
+          <div class="v4-av" style="background:${r.color};">${v4Initial(r.name)}</div>
+          <div class="v4-aname">${r.name}</div>
+        </div>
+        <div class="v4-muted">${r.phone}</div>
+        <div class="v4-muted">${r.role}</div>
+        <div class="v4-muted">${r.callTime}</div>
+        <div class="v4-muted">${r.evalTime}</div>
+        <div>${scorePill(r.callScore)}</div>
+        <div>${v4SevPill(r.gap.sev)}</div>
+        <div><span class="v4-pill" style="background:${r.trainingResult==='Pass'?'#E9F7F1':'#FDEDED'};color:${r.trainingResult==='Pass'?'#1D9E75':'#C62828'};">${r.trainingResult}</span></div>
+        <div>
+          <span class="v4-pill" style="background:#FDEDED;color:#C62828;">${r.risk.key}</span>
+          <div style="font-size:10.5px;color:#8A93AB;margin-top:3px;">At risk for ${r.riskSince} days</div>
+        </div>
+      </div>`;
+    }).join('');
+}
+
+// feedback modal
+function v4OpenFeedback(){
+  if(v4RiskSel.size===0) return;
+  document.getElementById('v4-fb-sub').textContent = v4RiskSel.size + ' fleet member' + (v4RiskSel.size!==1?'s':'') + ' selected';
+  document.getElementById('v4-fb-remarks').value = '';
+  document.getElementById('v4-fb-modal').classList.add('open');
+}
+function v4CloseFeedback(){ document.getElementById('v4-fb-modal').classList.remove('open'); }
+
+function v4RiskTakeSelected(){
+  const role = v4Role();
+  const all = v4RiskRecs(role);
+  const picked = [...v4RiskSel].sort((a,b)=>b-a).map(i=>({i, r:all[i]})).filter(x=>x.r);
+  picked.forEach(x=>all.splice(x.i,1));
+  v4RiskSel.clear();
+  return picked.map(x=>x.r);
+}
+
+function v4FbClose(){
+  const n = v4RiskSel.size;
+  const remarks = document.getElementById('v4-fb-remarks').value.trim();
+  if(!remarks){ toast('Please add a remark before closing'); return; }
+  v4RiskTakeSelected();
+  v4CloseFeedback();
+  renderV4Risk(true);
+  toast('Feedback saved. ' + n + ' record' + (n!==1?'s':'') + ' closed and removed from Fleet at Risk.');
+}
+
+function v4FbReassign(){
+  const role = v4Role();
+  const remarks = document.getElementById('v4-fb-remarks').value.trim();
+  if(!remarks){ toast('Please add a remark before re-assigning'); return; }
+  const moved = v4RiskTakeSelected();
+  const pushList = v4PushedRecs(role);
+  moved.forEach(r=>{
+    const nr = Object.assign({}, r);
+    nr.pushed = true; nr.completed = false; nr.coachDone = false;
+    nr.pushedDate = '2026-08-20'; nr.dueDate = '2026-08-27';
+    nr.pushedTime = '2026-08-20 10:00:00';
+    pushList.unshift(nr);
+  });
+  v4CloseFeedback();
+  toast(moved.length + ' training re-assigned. Moved to Training Pushed.');
+  v4OpenPushedList();
+}
+
+// risk detail
+function v4OpenRiskDetail(i){
+  const role = v4Role();
+  const r = v4RiskRecs(role)[i];
+  if(!r) return;
+  v4RiskCur = i;
+  document.getElementById('v4-risk-hero').innerHTML = v4HeroHTML(r, 'Latest call score');
+  document.getElementById('v4-risk-chips').innerHTML = v4ChipsHTML(r) +
+    `<div class="v4-chip">⚠ Why at risk: <strong>${r.risk.key}</strong></div>
+     <div class="v4-chip">🎓 Training result: <strong style="color:${r.trainingResult==='Pass'?'#1D9E75':'#C62828'};">${r.trainingResult}</strong></div>`;
+  document.getElementById('v4-risk-why-sub').textContent = r.risk.key;
+  document.getElementById('v4-risk-why').innerHTML = `<div class="v4-sub-card">
+    <div class="v4-sub-hdr">⚠ ${r.risk.key}</div>
+    <div class="v4-sub-body">
+      <div class="v4-lbl">What triggered the risk flag</div>
+      <div class="v4-tr-txt" style="margin-bottom:14px;">${r.risk.desc}</div>
+      <div class="v4-lbl">Suggested trainer action</div>
+      <div class="v4-tr-txt">${r.risk.kind==='attempts'
+        ? 'Review the failed attempts below, then either close the case with a remark or re-assign a different training module.'
+        : 'Review the pending trainings below, then either close the case with a remark or re-assign the training with a new due date.'}</div>
+    </div>
+  </div>`;
+
+  const tbl = document.getElementById('v4-risk-detail-table');
+  if(r.risk.kind === 'attempts'){
+    document.getElementById('v4-risk-tbl-title').textContent = 'Failed training attempts';
+    document.getElementById('v4-risk-tbl-sub').textContent = 'Every attempt the fleet member made against the assigned training.';
+    const g = 'grid-template-columns:0.7fr 1.4fr 1.4fr 1fr 0.9fr 0.9fr;';
+    tbl.innerHTML =
+      `<div class="v4-thead" style="${g}"><div>Attempt</div><div>GAP Name</div><div>Training Module</div><div>Attempt Date</div><div>Score</div><div>Result</div></div>` +
+      r.attempts.map(a=>`<div class="v4-trow" style="${g};cursor:default;">
+        <div>Attempt ${a.no}</div>
+        <div>${a.gap}</div>
+        <div class="v4-muted">${a.module}</div>
+        <div class="v4-muted">${a.date}</div>
+        <div><span class="v4-pill" style="background:${v4ScoreBg(a.score)};color:${v4ScoreColor(a.score)};">${a.score}</span></div>
+        <div><span class="v4-pill" style="background:#FDEDED;color:#C62828;">${a.result}</span></div>
+      </div>`).join('');
+  } else {
+    document.getElementById('v4-risk-tbl-title').textContent = 'Pending trainings';
+    document.getElementById('v4-risk-tbl-sub').textContent = 'Trainings assigned to this fleet member that are still open. Click a row for the full gap detail.';
+    const g = 'grid-template-columns:1.3fr 1.5fr 1.15fr 0.9fr 0.9fr 0.9fr 1.1fr;';
+    tbl.innerHTML =
+      `<div class="v4-thead" style="${g}"><div>GAP Name</div><div>Training Module</div><div>Call Date &amp; Time</div><div>Pushed Date</div><div>Due Date</div><div>Severity</div><div>Status</div></div>` +
+      r.pending.map((pr,k)=>`<div class="v4-trow" style="${g}" onclick="v4OpenRiskPending(${i},${k})">
+        <div>${pr.gap.name}</div>
+        <div><div>${pr.gap.module}</div><div style="font-size:10.5px;color:#8A93AB;">${pr.gap.modType}</div></div>
+        <div class="v4-muted">${pr.callTime}</div>
+        <div class="v4-muted">${pr.pushedDate}</div>
+        <div class="v4-muted">${pr.dueDate}</div>
+        <div>${v4SevPill(pr.gap.sev)}</div>
+        <div><span class="v4-pill" style="background:#FFF3E6;color:#E07C1F;">Pending with Trainee</span></div>
+      </div>`).join('');
+  }
+
+  showV('v4-risk-detail', null);
+  const n=document.getElementById('nav-dash4'); if(n) n.classList.add('active');
+  window.scrollTo({top:0,behavior:'instant'});
+}
+
+function v4OpenRiskPending(i,k){
+  const r = v4RiskRecs(v4Role())[i];
+  if(r && r.pending[k]) v4RenderGapPage(r.pending[k], 'riskDetail');
+}
+
+// ── Training Completed page ──
+function v4CompletedRecs(role){
+  const d = V4_DATA[role] || V4_DATA.XFE;
+  if(!V4_CACHE['comp_'+role]){
+    V4_CACHE['comp_'+role] = Array.from({length:d.completed||0},(_,i)=>{
+      const r = v4MakeRec(role,'identified',i+2);
+      r.pushed = true; r.completed = true; r.coachDone = true;
+      return r;
+    });
+  }
+  return V4_CACHE['comp_'+role];
+}
+
+function v4OpenCompletedList(){
+  showV('v4-completed', null);
+  const n=document.getElementById('nav-dash4'); if(n) n.classList.add('active');
+  renderV4Completed(true);
+  window.scrollTo({top:0,behavior:'instant'});
+}
+
+function renderV4Completed(rebuildFilters){
+  const role = v4Role();
+  const all = v4CompletedRecs(role);
+
+  const fw = document.getElementById('v4-comp-filters');
+  if(fw && (rebuildFilters || !fw.innerHTML.trim())){
+    const gaps = [...new Set(all.map(r=>r.gap.name))];
+    const mods = [...new Set(all.map(r=>r.gap.module))];
+    fw.innerHTML = `
+      <div class="v4-filt"><label>Search trainee</label><input id="v4-cf-q" type="text" placeholder="Name or fleet number" oninput="renderV4Completed(false)"></div>
+      <div class="v4-filt"><label>GAP name</label><select id="v4-cf-gap" onchange="renderV4Completed(false)"><option value="all">All gaps</option>${gaps.map(g=>`<option>${g}</option>`).join('')}</select></div>
+      <div class="v4-filt"><label>Training module</label><select id="v4-cf-mod" onchange="renderV4Completed(false)"><option value="all">All modules</option>${mods.map(m=>`<option>${m}</option>`).join('')}</select></div>
+      <div class="v4-filt"><label>Severity</label><select id="v4-cf-sev" onchange="renderV4Completed(false)"><option value="all">All</option><option>HIGH</option><option>MEDIUM</option><option>LOW</option></select></div>
+      <div class="v4-filt"><label>Coaching result</label><select id="v4-cf-res" onchange="renderV4Completed(false)"><option value="all">All</option><option value="p">Passed</option><option value="f">Failed</option></select></div>
+      <div class="v4-filt-count" id="v4-cf-count"></div>`;
+  }
+
+  const q  = (document.getElementById('v4-cf-q')?.value||'').toLowerCase().trim();
+  const fg = document.getElementById('v4-cf-gap')?.value || 'all';
+  const fm = document.getElementById('v4-cf-mod')?.value || 'all';
+  const fs = document.getElementById('v4-cf-sev')?.value || 'all';
+  const fres = document.getElementById('v4-cf-res')?.value || 'all';
+
+  const rows = all.filter(r=>{
+    if(q && !(r.name.toLowerCase().includes(q) || r.phone.includes(q))) return false;
+    if(fg!=='all' && r.gap.name!==fg) return false;
+    if(fm!=='all' && r.gap.module!==fm) return false;
+    if(fs!=='all' && r.gap.sev!==fs) return false;
+    if(fres==='p' && !r.coachPassed) return false;
+    if(fres==='f' && r.coachPassed) return false;
+    return true;
+  });
+
+  const cnt = document.getElementById('v4-cf-count');
+  if(cnt) cnt.textContent = rows.length + ' of ' + all.length + ' records';
+
+  const wrap = document.getElementById('v4-comp-table');
+  if(!wrap) return;
+  if(!rows.length){
+    wrap.innerHTML = '<div class="v4-empty">No completed trainings match the selected filters.</div>';
+    return;
+  }
+
+  const sevPill = sv => {
+    const col = v4SevColor(sv);
+    const bg  = sv==='HIGH' ? '#FFF3E6' : sv==='MEDIUM' ? '#E9F1FD' : '#F0F2F8';
+    return `<span class="v4-pill" style="background:${bg};color:${col};">${sv}</span>`;
+  };
+
+  const g = 'grid-template-columns:1.1fr 1fr 1fr 1.2fr 1.4fr 1.25fr 0.85fr 0.85fr 0.85fr 1.15fr;';
+  wrap.innerHTML =
+    `<div class="v4-thead" style="${g}">
+      <div>Trainee Name</div><div>Fleet Number</div><div>Fleet / Role</div><div>GAP Name</div>
+      <div>Training Module</div><div>Call Date &amp; Time</div><div>Pushed Date</div><div>Due Date</div><div>Severity</div><div>Status</div>
+    </div>` +
+    rows.map(r=>{
+      const i = all.indexOf(r);
+      return `<div class="v4-trow" style="${g}" onclick="v4OpenCompletedDetail(${i})">
+        <div class="v4-agent">
+          <div class="v4-av" style="background:${r.color};">${v4Initial(r.name)}</div>
+          <div class="v4-aname">${r.name}</div>
+        </div>
+        <div class="v4-muted">${r.phone}</div>
+        <div class="v4-muted">${r.role}</div>
+        <div>${r.gap.name}</div>
+        <div><div>${r.gap.module}</div><div style="font-size:10.5px;color:#8A93AB;">${r.gap.modType} · Voice coach ${r.voiceCoach?'on':'off'}</div></div>
+        <div class="v4-muted">${r.callTime}</div>
+        <div class="v4-muted">${r.pushedDate}</div>
+        <div class="v4-muted">${r.dueDate}</div>
+        <div>${sevPill(r.gap.sev)}</div>
+        <div><span class="v4-pill" style="background:#E9F7F1;color:#1D9E75;">Completed</span></div>
+      </div>`;
+    }).join('');
+}
+
+function v4OpenCompletedDetail(i){
+  const r = v4CompletedRecs(v4Role())[i];
+  if(r) v4RenderGapPage(r, 'completed');
+}
+
+// ── Training Pushed page ──
+function v4PushedRecs(role){
+  const d = V4_DATA[role] || V4_DATA.XFE;
+  if(!V4_CACHE['push_'+role]){
+    V4_CACHE['push_'+role] = Array.from({length:d.pushed||0},(_,i)=>{
+      const r = v4MakeRec(role,'identified',i+1);
+      r.pushed = true; r.completed = (i % 3 === 0);
+      return r;
+    });
+  }
+  return V4_CACHE['push_'+role];
+}
+
+function v4OpenPushedList(){
+  showV('v4-pushed', null);
+  const n=document.getElementById('nav-dash4'); if(n) n.classList.add('active');
+  renderV4Pushed(true);
+  window.scrollTo({top:0,behavior:'instant'});
+}
+
+function renderV4Pushed(rebuildFilters){
+  const role = v4Role();
+  const all = v4PushedRecs(role);
+  // filters
+  const fw = document.getElementById('v4-push-filters');
+  if(fw && (rebuildFilters || !fw.innerHTML.trim())){
+    const gaps = [...new Set(all.map(r=>r.gap.name))];
+    const mods = [...new Set(all.map(r=>r.gap.module))];
+    fw.innerHTML = `
+      <div class="v4-filt"><label>Search trainee</label><input id="v4-pf-q" type="text" placeholder="Name or fleet number" oninput="renderV4Pushed(false)"></div>
+      <div class="v4-filt"><label>GAP name</label><select id="v4-pf-gap" onchange="renderV4Pushed(false)"><option value="all">All gaps</option>${gaps.map(g=>`<option>${g}</option>`).join('')}</select></div>
+      <div class="v4-filt"><label>Training module</label><select id="v4-pf-mod" onchange="renderV4Pushed(false)"><option value="all">All modules</option>${mods.map(m=>`<option>${m}</option>`).join('')}</select></div>
+      <div class="v4-filt"><label>Severity</label><select id="v4-pf-sev" onchange="renderV4Pushed(false)"><option value="all">All</option><option>HIGH</option><option>MEDIUM</option><option>LOW</option></select></div>
+      <div class="v4-filt"><label>Voice coach</label><select id="v4-pf-vc" onchange="renderV4Pushed(false)"><option value="all">All</option><option value="y">Enabled</option><option value="n">Not enabled</option></select></div>
+      <div class="v4-filt-count" id="v4-pf-count"></div>`;
+  }
+
+  const q   = (document.getElementById('v4-pf-q')?.value||'').toLowerCase().trim();
+  const fg  = document.getElementById('v4-pf-gap')?.value || 'all';
+  const fm  = document.getElementById('v4-pf-mod')?.value || 'all';
+  const fs  = document.getElementById('v4-pf-sev')?.value || 'all';
+  const fv  = document.getElementById('v4-pf-vc')?.value  || 'all';
+
+  const rows = all.filter(r=>{
+    if(q && !(r.name.toLowerCase().includes(q) || r.empId.toLowerCase().includes(q) || r.phone.includes(q))) return false;
+    if(fg!=='all' && r.gap.name!==fg) return false;
+    if(fm!=='all' && r.gap.module!==fm) return false;
+    if(fs!=='all' && r.gap.sev!==fs) return false;
+    if(fv==='y' && !r.voiceCoach) return false;
+    if(fv==='n' && r.voiceCoach) return false;
+    return true;
+  });
+
+  const cnt = document.getElementById('v4-pf-count');
+  if(cnt) cnt.textContent = rows.length + ' of ' + all.length + ' records';
+
+  const wrap = document.getElementById('v4-push-table');
+  if(!wrap) return;
+  if(!rows.length){
+    wrap.innerHTML = '<div class="v4-empty">No trainings match the selected filters.</div>';
+    return;
+  }
+
+  const sevPill = s => {
+    const col = v4SevColor(s);
+    const bg  = s==='HIGH' ? '#FFF3E6' : s==='MEDIUM' ? '#E9F1FD' : '#F0F2F8';
+    return `<span class="v4-pill" style="background:${bg};color:${col};">${s}</span>`;
+  };
+  const yn = v => v
+    ? '<span class="v4-yn" style="color:#1D9E75;">● Yes</span>'
+    : '<span class="v4-yn" style="color:#AAB4CC;">● No</span>';
+
+  const g = 'grid-template-columns:1.1fr 1fr 1fr 1.2fr 1.4fr 1.25fr 0.85fr 0.85fr 0.85fr 1.15fr;';
+  wrap.innerHTML =
+    `<div class="v4-thead" style="${g}">
+      <div>Trainee Name</div><div>Fleet Number</div><div>Fleet / Role</div><div>GAP Name</div>
+      <div>Training Module</div><div>Call Date &amp; Time</div><div>Pushed Date</div><div>Due Date</div><div>Severity</div><div>Status</div>
+    </div>` +
+    rows.map(r=>{
+      const i = all.indexOf(r);
+      return `<div class="v4-trow" style="${g}" onclick="v4OpenPushedDetail(${i})">
+        <div class="v4-agent">
+          <div class="v4-av" style="background:${r.color};">${v4Initial(r.name)}</div>
+          <div class="v4-aname">${r.name}</div>
+        </div>
+        <div class="v4-muted">${r.phone}</div>
+        <div class="v4-muted">${r.role}</div>
+        <div>${r.gap.name}</div>
+        <div><div>${r.gap.module}</div><div style="font-size:10.5px;color:#8A93AB;">${r.gap.modType} · Voice coach ${r.voiceCoach?'on':'off'}</div></div>
+        <div class="v4-muted">${r.callTime}</div>
+        <div class="v4-muted">${r.pushedDate}</div>
+        <div class="v4-muted">${r.dueDate}</div>
+        <div>${sevPill(r.gap.sev)}</div>
+        <div><span class="v4-pill" style="background:#FFF3E6;color:#E07C1F;">Pending with Trainee</span></div>
+      </div>`;
+    }).join('');
+}
+
+function v4OpenPushedDetail(i){
+  const r = v4PushedRecs(v4Role())[i];
+  if(r) v4RenderGapPage(r, 'pushed');
+}
+
+// ── shared detail pieces ──
+function v4HeroHTML(r, scoreLabel){
+  return `<div class="v4-hero">
+    <div class="v4-hero-l">
+      <div class="v4-hero-av" style="background:${r.color};">${v4Initial(r.name)}</div>
+      <div>
+        <div class="v4-hero-name">${r.name}</div>
+        <div class="v4-hero-meta">${r.role} · Delhi NCR</div>
+      </div>
+    </div>
+    <div class="v4-hero-score">
+      <div class="v4-hero-score-val" style="color:${v4ScoreColor(r.callScore)};">${r.callScore}/100</div>
+      <div class="v4-hero-score-lbl">${scoreLabel || 'Call score'}</div>
+    </div>
+  </div>`;
+}
+
+function v4ChipsHTML(r){
+  return `<div class="v4-chip">📞 <strong>${r.phone}</strong></div>
+    <div class="v4-chip">🆔 Call ID: <strong>${r.callId}</strong></div>
+    <div class="v4-chip">📅 Evaluated: <strong>${r.evalTime}</strong></div>
+    <div class="v4-chip">📍 <strong>Delhi NCR</strong></div>`;
+}
+
+function v4TranscriptHTML(){
+  return V4_TRANSCRIPT.map(l=>`<div class="v4-tr-line">
+    <div class="v4-tr-spk${l.s==='Customer'?' cust':''}">${l.s}</div>
+    <div class="v4-tr-txt">${l.t}</div>
+  </div>`).join('');
+}
+
+const V4_REASON_DETAIL = {
+  'Audio unclear':   'The recording audio was muffled for long stretches, so the speech to text engine could not resolve enough words to score every dimension.',
+  'Call short':      'The call ended before the pitch stage, so there was not enough conversation to evaluate the full scorecard.',
+  'Heavy noise':     'Continuous background noise on the field side masked the advisor speech, leaving several segments untranscribed.',
+  'Network drop':    'The line dropped part way through, so the second half of the conversation is missing from the recording.',
+  'Speaker overlap': 'The advisor and the customer spoke over each other for much of the call, so speaker separation failed on several turns.',
+  'Language mixed':  'The conversation switched between three languages, which the current transcription model could not follow end to end.'
+};
+
+function v4OpenCall(bucket, i){
+  const r = v4Recs(v4Role())[bucket][i];
+  if(!r) return;
+  const low = bucket === 'low';
+  document.getElementById('v4-call-hero').innerHTML = v4HeroHTML(r, low ? 'Call transcription score' : 'Call score');
+  document.getElementById('v4-call-chips').innerHTML = v4ChipsHTML(r) +
+    (low ? `<div class="v4-chip">⚠ Remarks: <strong>${r.reason}</strong></div>` : '');
+  const reasonEl = document.getElementById('v4-call-reason');
+  if(reasonEl){
+    reasonEl.style.display = low ? '' : 'none';
+    if(low){
+      reasonEl.innerHTML = `<div class="v4-sub-card">
+        <div class="v4-sub-hdr">⚠ Why the call quality score is incomplete</div>
+        <div class="v4-sub-body">
+          <div class="v4-gap-hd">
+            <div class="v4-gap-name">⚠ ${r.reason}</div>
+            <div style="font-size:10px;font-weight:700;color:#C62828;">INELIGIBLE</div>
+          </div>
+          <div class="v4-lbl">What went wrong</div>
+          <div class="v4-tr-txt" style="margin-bottom:14px;">${V4_REASON_DETAIL[r.reason] || 'The transcription could not be completed for this call.'}</div>
+          <div class="v4-lbl">Effect on scoring</div>
+          <div class="v4-tr-txt">Only part of the scorecard could be filled, so this call is not counted for training identification. It shows a partial transcription score of ${r.callScore} out of 100.</div>
+        </div>
+      </div>`;
+    }
+  }
+  document.getElementById('v4-call-transcript').innerHTML = v4TranscriptHTML();
+  showV('v4-call', null);
+  const n=document.getElementById('nav-dash4'); if(n) n.classList.add('active');
+  window.scrollTo({top:0,behavior:'instant'});
+}
+
+function v4OpenGap(i, src){
+  const r = v4Recs(v4Role()).identified[i];
+  if(r) v4RenderGapPage(r, src || 'identified');
+}
+
+function v4RenderGapPage(r, source){
+  const g = r.gap;
+  v4GapSource = source;
+  document.getElementById('v4-gap-hero').innerHTML = v4HeroHTML(r);
+  document.getElementById('v4-gap-chips').innerHTML = v4ChipsHTML(r) +
+    (source==='rejected' ? `<div class="v4-chip">🚫 Rejected: <strong>${r.rejectDate}</strong></div>` : '') +
+    (source==='pushed'
+      ? `<div class="v4-chip">📤 Pushed: <strong>${r.pushedTime}</strong></div>
+         <div class="v4-chip">⏳ Due: <strong>${r.dueDate}</strong></div>`
+      : '');
+  document.getElementById('v4-gap-transcript').innerHTML = v4TranscriptHTML();
+
+  const rt = document.getElementById('v4-gap-reject-top');
+  if(rt){
+    if(source==='rejected'){
+      rt.innerHTML = `<div class="v4-panel" style="border-left:4px solid #C8A96A;">
+        <div class="v4-sec-hdr" style="background:linear-gradient(180deg,#FDFAF4 0%,#F7F0E2 100%);">
+          <div class="v4-sec-title" style="color:#8A6D3B;">🚫 Recommendation rejected</div>
+          <div class="v4-sec-sub">This training was not pushed to the fleet member. The trainer recorded the reason below.</div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;padding:18px 20px 22px;">
+          <div class="v4-sub-card"><div class="v4-sub-hdr">Rejection reason</div>
+            <div class="v4-sub-body"><div style="font-size:15px;font-weight:700;color:#8A6D3B;">${r.rejectReason}</div></div></div>
+          <div class="v4-sub-card"><div class="v4-sub-hdr">Trainer remarks</div>
+            <div class="v4-sub-body"><div class="v4-tr-txt">${r.rejectRemarks}</div></div></div>
+          <div class="v4-sub-card"><div class="v4-sub-hdr">Rejected by</div>
+            <div class="v4-sub-body">
+              <div class="v4-tr-txt" style="font-weight:600;">${r.rejectedBy}</div>
+              <div style="font-size:11.5px;color:#8A93AB;margin-top:4px;">on ${r.rejectDate}</div>
+            </div></div>
+        </div>
+      </div>`;
+      rt.style.display = '';
+    } else { rt.innerHTML = ''; rt.style.display = 'none'; }
+  }
+
+  const heights=[9,15,22,11,26,17,9,19,24,13,19,9,21,15,11,17,26,9,13,19,23,12,16,10,20,14,25,11,18,9];
+  const durSec = 180 + (r.idx*23)%140;
+  document.getElementById('v4-gap-recording').innerHTML = `
+    <div class="v4-rec">
+      <div class="v4-rec-play" onclick="toast('Playback is not wired in this prototype')">▶</div>
+      <div class="v4-rec-wave">${heights.map((h,k)=>`<div style="width:3px;border-radius:2px;height:${h}px;background:${k<10?'#1976D2':'#DDE3F0'};"></div>`).join('')}</div>
+      <div class="v4-rec-dur">${Math.floor(durSec/60)}m ${v4Pad(durSec%60)}s</div>
+    </div>
+    <div style="display:flex;flex-wrap:wrap;gap:14px;margin-top:12px;">
+      <div><div class="v4-lbl" style="margin-bottom:3px;">Recorded on</div><div class="v4-tr-txt">${r.callTime}</div></div>
+      <div><div class="v4-lbl" style="margin-bottom:3px;">Language</div><div class="v4-tr-txt">Hinglish</div></div>
+      <div><div class="v4-lbl" style="margin-bottom:3px;">Channel</div><div class="v4-tr-txt">Outbound sales call</div></div>
+    </div>`;
+
+  document.getElementById('v4-gap-detail').innerHTML = `
+    <div class="v4-gap-hd">
+      <div class="v4-gap-name">⚠ ${g.name}</div>
+      <div style="font-size:10px;font-weight:700;color:${v4SevColor(g.sev)};">${g.sev}</div>
+    </div>
+    <div class="v4-lbl">👁 What happened</div>
+    <div class="v4-tr-txt" style="margin-bottom:14px;">${g.what}</div>
+    <div class="v4-lbl ok">✓ What to say instead</div>
+    <div class="v4-quote" style="margin-bottom:14px;">${g.say}</div>
+    <div class="v4-lbl">📚 Training module assigned</div>
+    <div class="v4-tr-txt"><strong>${g.module}</strong><span style="color:#8A93AB;"> · ${g.modType}</span></div>` +
+    (source==='rejected' ? `
+      <div style="margin-top:14px;padding-top:14px;border-top:1px solid #F0F2F8;">
+        <div class="v4-lbl" style="color:#8A6D3B;">🚫 Recommendation rejected</div>
+        <div style="background:#FBF7EF;border-left:3px solid #C8A96A;border-radius:0 6px 6px 0;padding:10px 12px;">
+          <div style="font-size:12px;font-weight:700;color:#8A6D3B;margin-bottom:6px;">${r.rejectReason}</div>
+          <div class="v4-tr-txt" style="margin-bottom:8px;">${r.rejectRemarks}</div>
+          <div style="font-size:10.5px;color:#8A93AB;">Rejected by ${r.rejectedBy} on ${r.rejectDate}</div>
+        </div>
+      </div>` : '');
+
+  // Section 4: coaching values print only on the Training Completed page
+  const started = source === 'completed';
+  const passed = r.coachPassed;
+  if(!started){
+    document.getElementById('v4-gap-banner').innerHTML = `
+      <div class="v4-banner" style="background:#F7F9FD;border:1px dashed #DFE3EC;">
+        <div class="v4-banner-ico" style="background:#AAB4CC;">⏳</div>
+        <div>
+          <div style="font-size:13.5px;font-weight:700;color:#5B6A8C;">Voice coaching not started yet</div>
+          <div style="font-size:11.5px;color:#8A93AB;margin-top:2px;">${source==='pushed' ? 'Training pushed on '+r.pushedTime+'. The coach call has not happened.' : 'Training has not been pushed yet, so the coach call has not happened.'}</div>
+        </div>
+      </div>`;
+    const ph = lbl => `<div class="v4-beh-box">
+        <div class="v4-beh-lbl">${lbl}</div>
+        <div class="v4-beh-val" style="color:#C4C9D9;"><span style="width:7px;height:7px;border-radius:50%;background:#DDE3F0;display:inline-block;"></span>&mdash;</div>
+      </div>`;
+    document.getElementById('v4-gap-beh').innerHTML =
+      ph('Engagement') + ph('Seriousness') + ph('Questions asked') + ph('Attentiveness');
+    document.getElementById('v4-gap-coach').innerHTML =
+      '<div class="v4-lbl">Coaching conversation</div><div class="v4-tr-txt v4-muted">&mdash;</div>';
+    document.getElementById('v4-gap-roleplay').innerHTML =
+      '<div class="v4-lbl">Coach feedback</div><div class="v4-tr-txt v4-muted">&mdash;</div>';
+    showV('v4-gap', null);
+    const n0=document.getElementById('nav-dash4'); if(n0) n0.classList.add('active');
+    window.scrollTo({top:0,behavior:'instant'});
+    return;
+  }
+
+  document.getElementById('v4-gap-banner').innerHTML = `
+    <div class="v4-banner" style="background:${passed?'#F1F8E9':'#FFF5F5'};border:1px solid ${passed?'#C5E1A5':'#FBDADA'};">
+      <div class="v4-banner-ico" style="background:${passed?'#4CAF50':'#E24B4A'};">${passed?'✓':'✕'}</div>
+      <div>
+        <div style="font-size:13.5px;font-weight:700;color:${passed?'#2E7D32':'#C62828'};">${passed?'Passed':'Failed'}</div>
+        <div style="font-size:11.5px;color:#8A93AB;margin-top:2px;">${r.evalTime}</div>
+      </div>
+    </div>`;
+
+  const b = r.behaviour;
+  const dotCol = v => v==='High' ? '#1D9E75' : v==='Medium' ? '#EF9F27' : '#E24B4A';
+  const box = (lbl,val,col) => `<div class="v4-beh-box">
+      <div class="v4-beh-lbl">${lbl}</div>
+      <div class="v4-beh-val"><span style="width:7px;height:7px;border-radius:50%;background:${col};display:inline-block;"></span>${val}</div>
+    </div>`;
+  document.getElementById('v4-gap-beh').innerHTML =
+    box('Engagement', b.engagement, dotCol(b.engagement)) +
+    box('Seriousness', b.seriousness, dotCol(b.seriousness)) +
+    box('Questions asked', b.questions, b.questions>0?'#EF9F27':'#AAB4CC') +
+    box('Attentiveness', b.attentiveness, dotCol(b.attentiveness));
+
+  document.getElementById('v4-gap-coach').innerHTML = v4TranscriptHTML();
+  document.getElementById('v4-gap-roleplay').innerHTML = `
+    <div class="v4-lbl">Coach feedback</div>
+    <div class="v4-tr-txt">${g.feedback}</div>`;
+
+  showV('v4-gap', null);
+  const n=document.getElementById('nav-dash4'); if(n) n.classList.add('active');
+  window.scrollTo({top:0,behavior:'instant'});
+}
+
+function v4SevPill(sv){
+  const col = v4SevColor(sv);
+  const bg  = sv==='CRITICAL' ? '#FDEDED' : sv==='HIGH' ? '#FFF3E6' : sv==='MEDIUM' ? '#E9F1FD' : '#F0F2F8';
+  return `<span class="v4-pill" style="background:${bg};color:${col};">${sv}</span>`;
+}
+
+function v4SevColor(sev){
+  if(sev==='CRITICAL') return '#C62828';
+  if(sev==='HIGH')     return '#E07C1F';
+  if(sev==='MEDIUM')   return '#1565C0';
+  if(sev==='FATAL')    return '#E4002B';
+  return '#6C7A99';
+}
+
+function renderKPIV4(){
+  const roleSel = document.getElementById('role-filter-v4');
+  const role = roleSel ? roleSel.value : 'XFE';
+  const d = V4_DATA[role] || V4_DATA.XFE;
+
+  // ── Performance funnel cards
+  const cards = [
+    {label:'Total Fleet',            val:d.fleet,      sub:'Active fleet in LOB',                 color:'#141A2E', noClick:true},
+    {label:'Total Signal Evaluated', val:d.signals,    sub:'Calls, performance and app signals',  color:'#6C63B5', tab:'low'},
+    {label:'Training Identified',    val:d.identified, sub:'Users identified for training',       color:'#EF9F27', tab:'identified', go:'v4OpenIdentifiedList()'},
+    {label:'Training Pushed',        val:d.pushed,     sub:'Training published for users',        color:'#1976D2', tab:'identified', go:'v4OpenPushedList()'},
+    {label:'Training Completed',     val:d.completed,  sub:'Users who completed training',        color:'#0D47A1', tab:'identified', go:'v4OpenCompletedList()'},
+    {label:'Fleet at Risk',          val:d.atRisk,     sub:'Not improving · escalate',            color:'#E24B4A', risk:true, tab:'low', go:'v4OpenRiskList()'},
+    {label:'Training Rejected',      val:v4RejectedRecs(role).length, sub:'Recommendation rejected by trainer', color:'#8A6D3B', tab:'identified', go:'v4OpenRejectedList()'},
+    {label:'Repeat Training',        val:d.repeat,     sub:'Parked, trainee already has an open training', color:'#EF9F27', go:'v4OpenRepeatList()'}
+  ];
+
+  const fn = document.getElementById('v4-funnel');
+  if(fn){
+    fn.innerHTML = cards.map(c=>`<div class="v4-card${c.noClick?'':' clickable'}${c.risk?' risk':''}" ${c.noClick?'':`onclick="${c.go || ("v4OpenSignal('"+c.tab+"')")}" title="Click to see the detailed list"`}>
+      <div class="v4-dot" style="background:${c.color};"></div>
+      <div class="v4-card-label">${c.label}</div>
+      <div class="v4-card-val" style="color:${c.color};">${c.val}</div>
+      <div class="v4-card-sub${c.risk?' danger':''}">${c.sub}</div>
+    </div>`).join('');
+  }
+
+  // ── Training queue: one card per gap dimension
+  const q = document.getElementById('v4-queue');
+  if(q){
+    const ident = v4Recs(role).identified;
+    q.innerHTML = V4_GAP_POOL.map(g=>{
+      const n = ident.filter(r=>r.gap.name===g.name).length;
+      const col = v4SevColor(g.sev);
+      return `<div class="v4-q-card" onclick="v4OpenIdentifiedList('${g.name.replace(/'/g,"\\'")}')">
+        <div class="v4-q-top">
+          <div class="v4-q-ico">${V4_GAP_ICON[g.name] || '🎯'}</div>
+          <div class="v4-q-sev" style="color:${col};">${g.sev}</div>
+        </div>
+        <div class="v4-q-name">${g.name}</div>
+        <div class="v4-q-foot">
+          <div>
+            <div class="v4-q-count">${n}</div>
+            <div class="v4-q-lbl">${n===1?'agent identified':'agents identified'}</div>
+          </div>
+          <div class="v4-q-arr">→</div>
+        </div>
+      </div>`;
+    }).join('');
+  }
+
+  // ── Content coverage
+  const c = d.content;
+  const ct = document.getElementById('v4-content');
+  if(ct){
+    ct.innerHTML = `
+      <div class="v4-tile" style="background:#E8F1FD;cursor:pointer;" onclick="v4OpenLibrary()" title="Click to see every content tag">
+        <div class="v4-tile-label" style="color:#2A3A5C;">Total content available</div>
+        <div class="v4-tile-val" style="color:#1976D2;">${V4_TAG_LIB.length}</div>
+        <div class="v4-tile-sub">${(()=>{const m={};V4_TAG_LIB.forEach(t=>m[t.ctype]=(m[t.ctype]||0)+1);return Object.keys(m).map(k=>k+': '+m[k]).join(' · ');})()}</div>
+      </div>
+      <div class="v4-tile" style="background:#FEF6E4;cursor:pointer;" onclick="v4OpenContentList()" title="Click to see the gaps waiting for content">
+        <div class="v4-tile-label" style="color:#2A3A5C;">Content yet to be created</div>
+        <div class="v4-tile-val" style="color:#EF9F27;">${v4ContentRecs(role).length}</div>
+        <div class="v4-tile-sub">For identified TNAs with no content</div>
+      </div>`;
   }
 }
 

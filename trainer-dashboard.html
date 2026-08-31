@@ -95,7 +95,7 @@ body{font-family:var(--font);background:var(--gray-50);color:var(--gray-900);min
 .su-role{font-size:10.5px;color:rgba(255,255,255,0.45);}
 
 /* ── MAIN ── */
-.main{margin-left:210px;flex:1;display:flex;flex-direction:column;}
+.main{margin-left:210px;flex:1;min-width:0;display:flex;flex-direction:column;}
 
 /* ── TOPBAR ── */
 .topbar{background:white;border-bottom:1px solid var(--gray-200);height:50px;padding:0 22px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:50;}
@@ -107,7 +107,7 @@ body{font-family:var(--font);background:var(--gray-50);color:var(--gray-900);min
 .tb-push-btn:hover{background:var(--blue-btn-hover);}
 
 /* ── CONTENT ── */
-.content{padding:18px 22px;flex:1;}
+.content{padding:18px 22px;flex:1;min-width:0;}
 .view{display:none;}
 .view.active{display:block;}
 
@@ -456,7 +456,7 @@ body{font-family:var(--font);background:var(--gray-50);color:var(--gray-900);min
 .safety-dot{width:6px;height:6px;border-radius:50%;}
 
 /* ═══════════ DASHBOARD V4 ═══════════ */
-.v4-page{padding:18px 24px 34px;}
+.v4-page{padding:18px 24px 18px;min-width:0;}
 .v4-panel{background:white;border:1px solid #E6E9F0;border-radius:12px;box-shadow:0 1px 3px rgba(20,30,60,0.05);margin-bottom:18px;overflow:hidden;}
 .v4-filterbar{display:flex;align-items:flex-end;justify-content:space-between;padding:16px 20px;}
 .v4-filter-group{display:flex;gap:16px;}
@@ -508,15 +508,42 @@ body{font-family:var(--font);background:var(--gray-50);color:var(--gray-900);min
 .v4-seltab.active .v4-seltab-label{color:#1976D2;}
 .v4-seltab-val{font-size:24px;font-weight:700;line-height:1;margin-bottom:8px;}
 .v4-seltab-sub{font-size:10.5px;color:#8A93AB;line-height:1.45;margin-top:auto;}
-.v4-filters{display:flex;flex-wrap:wrap;gap:12px;padding:18px 20px 16px;align-items:flex-end;}
+.v4-stephdr{display:flex;align-items:flex-start;gap:10px;padding:18px 20px 0;}
+.v4-stephdr.second{padding-top:16px;border-top:1px solid #F0F2F8;margin-top:14px;}
+.v4-stepnum{width:22px;height:22px;border-radius:50%;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;}
+.v4-stepnum.on{background:#1976D2;color:white;}
+.v4-stepnum.off{background:#E6E9F0;color:#8A93AB;}
+.v4-stepnum.done{background:#1D9E75;color:white;}
+.v4-steptitle{font-size:13px;font-weight:700;color:#141A2E;}
+.v4-stepsub{font-size:11.5px;color:#8A93AB;margin-top:2px;}
+.v4-stepsub b{color:#1565C0;font-weight:600;}
+.v4-rail{display:flex;align-items:center;gap:8px;padding:10px 20px 4px;flex-wrap:nowrap;overflow:hidden;}
+.v4-rail.expanded{flex-wrap:wrap;overflow:visible;row-gap:8px;}
+.v4-railmore{border-style:dashed;}
+.v4-railmore .nm{color:#1565C0;}
+.v4-crchip{display:flex;align-items:center;gap:8px;padding:7px 12px;border:1px solid #E2E6F0;border-radius:20px;background:white;cursor:pointer;white-space:nowrap;flex-shrink:0;transition:border-color 0.12s,background 0.12s,box-shadow 0.12s;}
+.v4-crchip:hover{border-color:#9FC0E8;box-shadow:0 2px 8px rgba(21,101,192,0.1);}
+.v4-crchip.active{border-color:#1976D2;background:#F2F8FF;box-shadow:0 0 0 1px #1976D2 inset;}
+.v4-crchip .dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;}
+.v4-crchip .nm{font-size:12.5px;font-weight:600;color:#3D4A66;}
+.v4-crchip.active .nm{color:#1565C0;}
+.v4-crchip .ct{font-size:11px;font-weight:700;color:#5B6A8C;background:#EEF1F7;border-radius:10px;padding:1px 7px;min-width:20px;text-align:center;}
+.v4-crchip.active .ct{background:#1976D2;color:white;}
+.v4-crchip.all .nm{color:#8A93AB;}
+.v4-crchip.all.active .nm{color:#1565C0;}
+.v4-railnote{padding:2px 20px 0;font-size:11.5px;color:#8A93AB;}
+.v4-railnote b{color:#1565C0;font-weight:600;}
+.v4-filters{display:flex;flex-wrap:wrap;gap:12px;padding:10px 20px 16px;align-items:flex-end;}
 .v4-filt label{display:block;font-size:11px;color:#8A93AB;margin-bottom:5px;}
 .v4-filt select,.v4-filt input{height:34px;min-width:160px;padding:0 11px;border:1px solid #DFE3EC;border-radius:8px;background:white;font-family:var(--font);font-size:12.5px;color:#1A1A2E;}
 .v4-filt select{cursor:pointer;}
 .v4-filt-count{margin-left:auto;font-size:11.5px;color:#8A93AB;padding-bottom:9px;}
-.v4-thead{display:grid;align-items:center;gap:10px;padding:10px 20px;background:#F7F9FD;border-bottom:1px solid #EEF0F7;font-size:10.5px;font-weight:700;color:#6C7A99;text-transform:uppercase;letter-spacing:0.3px;}
+.v4-thead{display:grid;align-items:center;gap:10px;padding:10px 20px;background:#F7F9FD;border-bottom:1px solid #EEF0F7;font-size:10.5px;font-weight:700;color:#6C7A99;text-transform:uppercase;letter-spacing:0.3px;position:sticky;top:0;z-index:2;}
 .v4-trow{display:grid;align-items:center;gap:10px;padding:11px 20px;border-bottom:1px solid #F2F4F9;font-size:12.5px;color:#1A1A2E;cursor:pointer;transition:background 0.1s;}
 .v4-trow:hover{background:#F8FAFF;}
 .v4-trow.sel{background:#EEF3FF;}
+.v4-thead > *, .v4-trow > *{min-width:0;}
+.v4-thead > *{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
 .v4-trow:last-child{border-bottom:none;}
 .v4-agent{display:flex;align-items:center;gap:9px;min-width:0;}
 .v4-av{width:30px;height:30px;border-radius:50%;color:white;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
@@ -1076,6 +1103,21 @@ body{font-family:var(--font);background:var(--gray-50);color:var(--gray-900);min
         <button class="btn-blue" id="v4-id-push" onclick="v4StartPush()" disabled>Push training</button>
       </div>
     </div>
+    <div class="v4-stephdr">
+      <div class="v4-stepnum on" id="v4-id-step1">1</div>
+      <div>
+        <div class="v4-steptitle">Choose the training content to push</div>
+        <div class="v4-stepsub" id="v4-id-hint"></div>
+      </div>
+    </div>
+    <div class="v4-rail" id="v4-id-cards"></div>
+    <div class="v4-stephdr second">
+      <div class="v4-stepnum off" id="v4-id-step2">2</div>
+      <div>
+        <div class="v4-steptitle">Narrow the fleet list, then select and push</div>
+        <div class="v4-stepsub">Filter by name, gap, severity or score. Tick the rows you want and use Push training.</div>
+      </div>
+    </div>
     <div class="v4-filters" id="v4-id-filters"></div>
     <div id="v4-id-table"></div>
   </div>
@@ -1141,6 +1183,21 @@ body{font-family:var(--font);background:var(--gray-50);color:var(--gray-900);min
         <div class="v4-sec-sub">Gaps parked because the trainee already has an open training, or the training is already with the trainer to assign.</div>
       </div>
       <button class="btn-blue" id="v4-rp-push" onclick="v4StartPush('repeat')" disabled style="flex-shrink:0;">Push training</button>
+    </div>
+    <div class="v4-stephdr">
+      <div class="v4-stepnum on" id="v4-rp-step1">1</div>
+      <div>
+        <div class="v4-steptitle">Choose the training content to push</div>
+        <div class="v4-stepsub" id="v4-rp-hint"></div>
+      </div>
+    </div>
+    <div class="v4-rail" id="v4-rp-cards"></div>
+    <div class="v4-stephdr second">
+      <div class="v4-stepnum off" id="v4-rp-step2">2</div>
+      <div>
+        <div class="v4-steptitle">Narrow the parked list, then select and push</div>
+        <div class="v4-stepsub">Filter by name, gap, reason or severity. Tick the rows you want and use Push training.</div>
+      </div>
     </div>
     <div class="v4-filters" id="v4-rp-filters"></div>
     <div id="v4-rp-table"></div>
@@ -3929,7 +3986,7 @@ function renderV4Signal(){
   if(!wrap) return;
   if(!rows.length){
     wrap.innerHTML = '<div class="v4-empty">No records match the selected filters.</div>';
-    return;
+    v4FitTable('v4-sig-table'); return;
   }
 
   const agentCell = r => `<div class="v4-agent">
@@ -3971,6 +4028,7 @@ function renderV4Signal(){
         </div>`;
       }).join('');
   }
+  v4FitTable('v4-sig-table');
 }
 
 // ── Training Identified page ──
@@ -3980,6 +4038,7 @@ let v4IdGapPre = null;
 function v4OpenIdentifiedList(gapName){
   v4IdGapPre = gapName || null;
   v4IdSel.clear();
+  v4IdLock = null;
   showV('v4-identified', null);
   const n=document.getElementById('nav-dash4'); if(n) n.classList.add('active');
   const t=document.getElementById('v4-id-title');
@@ -3992,13 +4051,24 @@ function v4OpenIdentifiedList(gapName){
   window.scrollTo({top:0,behavior:'instant'});
 }
 
+let v4IdLock = null;
+
+function v4IdPickContent(id){
+  v4IdLock = (!id || v4IdLock===id) ? null : id;
+  v4IdSel.clear();
+  renderV4Identified(false);
+}
+
 function v4IdToggle(e,i){
   e.stopPropagation();
+  if(!v4IdLock){ toast('Select a Content Name card first, then pick the fleet members.'); return; }
   if(v4IdSel.has(i)) v4IdSel.delete(i); else v4IdSel.add(i);
   renderV4Identified(false);
 }
+
 function v4IdToggleAll(e, ids){
   e.stopPropagation();
+  if(!v4IdLock){ toast('Select a Content Name card first, then pick the fleet members.'); return; }
   const list = ids.split(',').filter(x=>x!=='').map(Number);
   const allOn = list.length>0 && list.every(i=>v4IdSel.has(i));
   if(allOn) list.forEach(i=>v4IdSel.delete(i)); else list.forEach(i=>v4IdSel.add(i));
@@ -4006,6 +4076,7 @@ function v4IdToggleAll(e, ids){
 }
 
 function v4IdTakeSelected(){
+  v4IdLock = null;
   const all = v4Recs(v4Role()).identified;
   const picked = [...v4IdSel].sort((a,b)=>b-a).map(i=>({i, r:all[i]})).filter(x=>x.r);
   picked.forEach(x=>all.splice(x.i,1));
@@ -4024,10 +4095,13 @@ function v4StartPush(src){
   curTrain = 'Training';
   sel.clear();
   openPushModal();
-  document.getElementById('push-sub').textContent = n + ' fleet member' + (n!==1?'s':'') + ' selected';
+  const lock = v4PushSrc==='repeat' ? v4RpLock : v4IdLock;
+  const lockTag = lock ? V4_TAG_LIB.find(t=>t.id===lock) : null;
+  document.getElementById('push-sub').textContent = n + ' fleet member' + (n!==1?'s':'') + ' selected · ' + (lockTag ? v4CName(lockTag) : '—');
 }
 
 function v4RpTakeSelected(){
+  v4RpLock = null;
   const all = v4RepeatRecs(v4Role());
   const picked = [...v4RpSel].sort((a,b)=>b-a).map(i=>({i, r:all[i]})).filter(x=>x.r);
   picked.forEach(x=>all.splice(x.i,1));
@@ -4105,14 +4179,29 @@ let v4RpSel = new Set();
 
 function v4OpenRepeatList(){
   v4RpSel.clear();
+  v4RpLock = null;
+  const c=document.getElementById('v4-rp-cards'); if(c) c.innerHTML='';
   showV('v4-repeat', null);
   const n=document.getElementById('nav-dash4'); if(n) n.classList.add('active');
   renderV4Repeat(true);
   window.scrollTo({top:0,behavior:'instant'});
 }
-function v4RpToggle(e,i){ e.stopPropagation(); if(v4RpSel.has(i)) v4RpSel.delete(i); else v4RpSel.add(i); renderV4Repeat(false); }
+let v4RpLock = null;
+
+function v4RpPickContent(id){
+  v4RpLock = (!id || v4RpLock===id) ? null : id;
+  v4RpSel.clear();
+  renderV4Repeat(false);
+}
+function v4RpToggle(e,i){
+  e.stopPropagation();
+  if(!v4RpLock){ toast('Select a Content Name card first, then pick the fleet members.'); return; }
+  if(v4RpSel.has(i)) v4RpSel.delete(i); else v4RpSel.add(i);
+  renderV4Repeat(false);
+}
 function v4RpToggleAll(e, ids){
   e.stopPropagation();
+  if(!v4RpLock){ toast('Select a Content Name card first, then pick the fleet members.'); return; }
   const list = ids.split(',').filter(x=>x!=='').map(Number);
   const allOn = list.length>0 && list.every(i=>v4RpSel.has(i));
   if(allOn) list.forEach(i=>v4RpSel.delete(i)); else list.forEach(i=>v4RpSel.add(i));
@@ -4135,6 +4224,17 @@ function renderV4Repeat(rebuildFilters){
       <div class="v4-filt-count" id="v4-pf2-count"></div>`;
   }
 
+  const cardsEl = document.getElementById('v4-rp-cards');
+  if(cardsEl){ cardsEl.innerHTML = v4ContentCards(all, v4RpLock, 'v4RpPickContent'); v4RailFit('v4-rp-cards'); }
+  const hintEl = document.getElementById('v4-rp-hint');
+  const rpName = v4RpLock ? v4CName(V4_TAG_LIB.find(t=>t.id===v4RpLock)) : null;
+  if(hintEl) hintEl.innerHTML = v4RpLock
+    ? `Selected <b>${rpName}</b>. Only parked trainings for this content are listed below.`
+    : 'A training can only be pushed for one content at a time. Pick one below to unlock the list.';
+  const q1 = document.getElementById('v4-rp-step1'), q2 = document.getElementById('v4-rp-step2');
+  if(q1){ q1.className = 'v4-stepnum ' + (v4RpLock ? 'done' : 'on'); q1.textContent = v4RpLock ? '✓' : '1'; }
+  if(q2) q2.className = 'v4-stepnum ' + (v4RpLock ? 'on' : 'off');
+
   const q  = (document.getElementById('v4-pf2-q')?.value||'').toLowerCase().trim();
   const fg = document.getElementById('v4-pf2-gap')?.value  || 'all';
   const fp = document.getElementById('v4-pf2-park')?.value || 'all';
@@ -4142,6 +4242,7 @@ function renderV4Repeat(rebuildFilters){
 
   const rows = all.filter(r=>{
     if(q && !(r.name.toLowerCase().includes(q) || r.phone.includes(q))) return false;
+    if(v4RpLock && v4TrainingId(r)!==v4RpLock) return false;
     if(fg!=='all' && r.gap.name!==fg) return false;
     if(fp!=='all' && r.park.key!==fp) return false;
     if(fs!=='all' && r.gap.sev!==fs) return false;
@@ -4151,7 +4252,8 @@ function renderV4Repeat(rebuildFilters){
   const cnt = document.getElementById('v4-pf2-count');
   if(cnt) cnt.textContent = rows.length + ' of ' + all.length + ' records';
   const btn = document.getElementById('v4-rp-push');
-  if(btn){ btn.disabled = v4RpSel.size===0; btn.textContent = v4RpSel.size>0 ? `Push training (${v4RpSel.size})` : 'Push training'; }
+  const rpTag = v4RpLock ? V4_TAG_LIB.find(t=>t.id===v4RpLock) : null;
+  if(btn){ btn.disabled = v4RpSel.size===0; btn.textContent = v4RpSel.size>0 ? `Push training (${v4RpSel.size}) · ${v4CName(rpTag)}` : 'Push training'; }
 
   const wrap = document.getElementById('v4-rp-table');
   if(!wrap) return;
@@ -4159,22 +4261,22 @@ function renderV4Repeat(rebuildFilters){
 
   const ids = rows.map(r=>all.indexOf(r));
   const allOn = ids.length>0 && ids.every(i=>v4RpSel.has(i));
-  const g = 'grid-template-columns:40px 1.05fr 0.95fr 1.15fr 1.2fr 0.8fr 0.75fr 1.3fr;';
+  const g = 'grid-template-columns:40px 1fr 0.95fr 1.15fr 1.3fr 0.75fr 0.65fr 1.2fr;';
   wrap.innerHTML =
     `<div class="v4-thead" style="${g}">
-      <div><div class="checkbox${allOn?' chk':''}" onclick="v4RpToggleAll(event,'${ids.join(',')}')">${allOn?'✓':''}</div></div>
-      <div>Name</div><div>Fleet Number</div><div>Call Date &amp; Time</div><div>GAP Name</div>
+      <div><div class="checkbox${allOn && v4RpLock?' chk':''}" onclick="v4RpToggleAll(event,'${ids.join(',')}')">${allOn && v4RpLock?'✓':''}</div></div>
+      <div>Name</div><div>Fleet Number</div><div>Call Date &amp; Time</div><div>Content Name</div>
       <div>Severity</div><div>Repeat</div><div>Why Parked</div>
     </div>` +
     rows.map(r=>{
       const i = all.indexOf(r);
       const on = v4RpSel.has(i);
       return `<div class="v4-trow${on?' sel':''}" style="${g}" onclick="v4OpenRepeatDetail(${i})">
-        <div><div class="checkbox${on?' chk':''}" onclick="v4RpToggle(event,${i})">${on?'✓':''}</div></div>
+        <div><div class="checkbox${on?' chk':''}" style="${v4RpLock?'':'opacity:0.4;'}" onclick="v4RpToggle(event,${i})">${on?'✓':''}</div></div>
         <div class="v4-agent"><div class="v4-av" style="background:${r.color};">${v4Initial(r.name)}</div><div class="v4-aname">${r.name}</div></div>
         <div class="v4-muted">${r.phone}</div>
         <div class="v4-muted">${r.callTime}</div>
-        <div>${r.gap.name}</div>
+        ${v4TidCell(r)}
         <div>${v4SevPill(r.gap.sev)}</div>
         <div style="font-weight:700;color:#C62828;">${r.repeatCount}×</div>
         <div>
@@ -4183,6 +4285,7 @@ function renderV4Repeat(rebuildFilters){
         </div>
       </div>`;
     }).join('');
+  v4FitTable('v4-rp-table');
 }
 
 function v4OpenRepeatDetail(i){
@@ -4260,23 +4363,24 @@ function renderV4Content(rebuildFilters){
         <div><button class="btn-blue" style="height:28px;padding:0 12px;font-size:11.5px;" onclick="v4OpenTag(${i})">Tag Content</button></div>
       </div>`;
     }).join('');
+  v4FitTable('v4-ct-table');
 }
 
 // ── Tag content page ──
 const V4_TAG_LIB = [
-  {id:'SLS.OBJ.PRC.01', type:'Sales Skill', sub:'Objection',  subsub:'Price objection',    ctype:'Video', created:'2026-04-12', gap:'Objection Handling',
+  {id:'SLS.OBJ.PRC.01', cname:'Price Objection Handling', type:'Sales Skill', sub:'Objection',  subsub:'Price objection',    ctype:'Video', created:'2026-04-12', gap:'Objection Handling',
    desc:'Three step FEEL FELT FOUND script for handling a competitor price objection, with two worked examples in Hinglish.'},
-  {id:'SLS.OBJ.CMP.01', type:'Sales Skill', sub:'Objection',  subsub:'Competitor compare', ctype:'PDF',   created:'2026-05-15', gap:'Objection Handling',
+  {id:'SLS.OBJ.CMP.01', cname:'Jio Handling', type:'Sales Skill', sub:'Objection',  subsub:'Competitor compare', ctype:'PDF',   created:'2026-05-15', gap:'Objection Handling',
    desc:'Side by side comparison of our fiber plans against the nearest competitor, with the three facts an advisor should quote.'},
-  {id:'SLS.CLO.ASM.01', type:'Sales Skill', sub:'Closing',    subsub:'Assumptive close',   ctype:'Video', created:'2026-03-22', gap:'Closing and Next Steps',
+  {id:'SLS.CLO.ASM.01', cname:'Slot Booking Close', type:'Sales Skill', sub:'Closing',    subsub:'Assumptive close',   ctype:'Video', created:'2026-03-22', gap:'Closing and Next Steps',
    desc:'How to close by offering two installation slots instead of asking whether the customer wants to proceed.'},
-  {id:'SLS.UPS.HTP.01', type:'Sales Skill', sub:'Upsell',     subsub:'Higher tier plan',   ctype:'PDF',   created:'2026-05-03', gap:'No Upsell Attempt',
+  {id:'SLS.UPS.HTP.01', cname:'999 Plan Upgrade', type:'Sales Skill', sub:'Upsell',     subsub:'Higher tier plan',   ctype:'PDF',   created:'2026-05-03', gap:'No Upsell Attempt',
    desc:'Playbook for moving a customer from the entry plan to the higher speed plan after the OTT conversation.'},
-  {id:'PRD.BBD.PLN.01', type:'Product',     sub:'Broadband',  subsub:'Plan portfolio',     ctype:'Image', created:'2026-02-18', gap:'Product Knowledge',
+  {id:'PRD.BBD.PLN.01', cname:'Plan Portfolio Basics', type:'Product',     sub:'Broadband',  subsub:'Plan portfolio',     ctype:'Image', created:'2026-02-18', gap:'Product Knowledge',
    desc:'One page visual of the full plan portfolio with speed, price and bundled OTT for each plan.'},
-  {id:'PRD.BBD.OTT.01', type:'Product',     sub:'Broadband',  subsub:'OTT bundle',         ctype:'Quiz',  created:'2026-04-28', gap:'Value Anchoring',
+  {id:'PRD.BBD.OTT.01', cname:'OTT Bundle Value', type:'Product',     sub:'Broadband',  subsub:'OTT bundle',         ctype:'Quiz',  created:'2026-04-28', gap:'Value Anchoring',
    desc:'Six question quiz that checks whether the advisor can anchor the OTT bundle value to a customer use case.'},
-  {id:'CMP.DIS.CHG.01', type:'Compliance',  sub:'Disclosure', subsub:'Charges disclosure', ctype:'PDF',   created:'2026-01-09', gap:'Closing and Next Steps',
+  {id:'CMP.DIS.CHG.01', cname:'Charges Disclosure', type:'Compliance',  sub:'Disclosure', subsub:'Charges disclosure', ctype:'PDF',   created:'2026-01-09', gap:'Closing and Next Steps',
    desc:'Mandatory charges an advisor must disclose before taking a commitment, with the exact wording to use.'}
 ];
 let v4TagIdx = -1, v4TagMode = 'create', v4TagPick = -1;
@@ -4365,14 +4469,14 @@ function v4TagRenderExisting(){
   const wrap = document.getElementById('v4-tm-table');
   const g = 'grid-template-columns:40px 1fr 1fr 1.2fr 1.4fr 0.8fr;';
   wrap.innerHTML = rows.length ? (
-    `<div class="v4-thead" style="${g}"><div></div><div>Type</div><div>Sub-Type</div><div>Sub-Sub-Type</div><div>Content ID</div><div>Content Type</div></div>` +
+    `<div class="v4-thead" style="${g}"><div></div><div>Type</div><div>Sub-Type</div><div>Sub-Sub-Type</div><div>Content Name</div><div>Content Type</div></div>` +
     rows.map(t=>{
       const i = V4_TAG_LIB.indexOf(t);
       const on = v4TagPick===i;
       return `<div class="v4-trow${on?' sel':''}" style="${g}" onclick="v4TagPickRow(${i})">
         <div><div class="checkbox${on?' chk':''}">${on?'✓':''}</div></div>
         <div>${t.type}</div><div>${t.sub}</div><div>${t.subsub}</div>
-        <div style="font-weight:600;font-family:monospace;font-size:11.5px;">${t.id}</div>
+        <div><div style="font-weight:600;">${v4CName(t)}</div><div style="font-size:10.5px;color:#8A93AB;font-family:monospace;">${t.id}</div></div>
         <div><span class="v4-pill" style="background:#E9F1FD;color:#1565C0;">${t.ctype}</span></div>
       </div>`;
     }).join('')
@@ -4404,6 +4508,7 @@ function v4TagCreate(){
   const rec = v4ContentRecs(v4Role())[v4TagIdx];
   const tag = {
     id: ab(t)+'.'+ab(sub)+'.'+ab(subsub)+'.'+v4Pad(V4_TAG_LIB.length+1),
+    cname: subsub,
     type:t, sub:sub, subsub:subsub, ctype:ctype, desc:desc,
     created:'2026-08-20', gap: rec ? rec.gap.name : '',
     file: document.getElementById('v4-tg-fname').textContent
@@ -4434,6 +4539,7 @@ function v4TcOpen(tag, mode){
   document.getElementById('v4-tc-back').onclick = isLib ? v4OpenLibrary : function(){ showV('v4-tag', null); };
 
   document.getElementById('v4-tc-chips').innerHTML = `
+    <div class="v4-chip">📛 Content name: <strong>${v4CName(tag)}</strong></div>
     <div class="v4-chip">🆔 Content ID: <strong style="font-family:monospace;">${tag.id}</strong></div>
     <div class="v4-chip">🎯 Mapped GAP: <strong>${tag.gap || '—'}</strong></div>
     <div class="v4-chip">📦 Content type: <strong>${tag.ctype}</strong></div>
@@ -4517,7 +4623,7 @@ function renderV4Library(rebuildFilters){
     const gaps = [...new Set(V4_TAG_LIB.map(t=>t.gap).filter(Boolean))];
     const ctypes = [...new Set(V4_TAG_LIB.map(t=>t.ctype))];
     fw.innerHTML = `
-      <div class="v4-filt"><label>Search</label><input id="v4-lb-q" type="text" placeholder="Content ID or description" oninput="renderV4Library(false)"></div>
+      <div class="v4-filt"><label>Search</label><input id="v4-lb-q" type="text" placeholder="Content name, ID or description" oninput="renderV4Library(false)"></div>
       <div class="v4-filt"><label>GAP name</label><select id="v4-lb-gap" onchange="renderV4Library(false)"><option value="all">All gaps</option>${gaps.map(g=>`<option>${g}</option>`).join('')}</select></div>
       <div class="v4-filt"><label>Content type</label><select id="v4-lb-ct" onchange="renderV4Library(false)"><option value="all">All types</option>${ctypes.map(g=>`<option>${g}</option>`).join('')}</select></div>
       <div class="v4-filt-count" id="v4-lb-count"></div>`;
@@ -4526,7 +4632,7 @@ function renderV4Library(rebuildFilters){
   const fg = document.getElementById('v4-lb-gap')?.value || 'all';
   const fc = document.getElementById('v4-lb-ct')?.value  || 'all';
   const rows = V4_TAG_LIB.filter(t=>{
-    if(q && !(t.id.toLowerCase().includes(q) || t.desc.toLowerCase().includes(q))) return false;
+    if(q && !(t.id.toLowerCase().includes(q) || t.desc.toLowerCase().includes(q) || v4CName(t).toLowerCase().includes(q))) return false;
     if(fg!=='all' && t.gap!==fg) return false;
     if(fc!=='all' && t.ctype!==fc) return false;
     return true;
@@ -4537,19 +4643,21 @@ function renderV4Library(rebuildFilters){
   const wrap = document.getElementById('v4-lib-table');
   if(!wrap) return;
   if(!rows.length){ wrap.innerHTML = '<div class="v4-empty">No content matches the selected filters.</div>'; return; }
-  const g = 'grid-template-columns:1.5fr 1.3fr 1fr 1.2fr 0.9fr;';
+  const g = 'grid-template-columns:1.4fr 1.4fr 1.2fr 0.9fr 1.1fr 0.9fr;';
   wrap.innerHTML =
-    `<div class="v4-thead" style="${g}"><div>GAP Name</div><div>Triplet ID</div><div>Content Type</div><div>Content Creation Date</div><div>Action</div></div>` +
+    `<div class="v4-thead" style="${g}"><div>Content Name</div><div>GAP Name</div><div>Triplet ID</div><div>Content Type</div><div>Content Creation Date</div><div>Action</div></div>` +
     rows.map(t=>{
       const i = V4_TAG_LIB.indexOf(t);
       return `<div class="v4-trow" style="${g};cursor:default;">
-        <div style="font-weight:600;">${t.gap || '—'}</div>
+        <div style="font-weight:600;">${v4CName(t)}</div>
+        <div>${t.gap || '—'}</div>
         <div style="font-family:monospace;font-size:11.5px;font-weight:600;">${t.id}</div>
         <div><span class="v4-pill" style="background:#E9F1FD;color:#1565C0;">${t.ctype}</span></div>
         <div class="v4-muted">${t.created}</div>
         <div><button class="btn-outline" style="height:28px;padding:0 12px;font-size:11.5px;" onclick="v4TcOpen(V4_TAG_LIB[${i}],'library')">View More</button></div>
       </div>`;
     }).join('');
+  v4FitTable('v4-lib-table');
 }
 
 // ── Training Rejected page ──// ── Training Rejected page ──
@@ -4619,7 +4727,7 @@ function renderV4Rejected(rebuildFilters){
   if(!wrap) return;
   if(!rows.length){
     wrap.innerHTML = '<div class="v4-empty">No rejected recommendations match the selected filters.</div>';
-    return;
+    v4FitTable('v4-rej-table'); return;
   }
 
   const g = 'grid-template-columns:1.1fr 1fr 1.25fr 1.2fr 0.85fr 1.5fr 1fr 1fr;';
@@ -4644,6 +4752,7 @@ function renderV4Rejected(rebuildFilters){
         <div class="v4-muted">${r.rejectedBy}</div>
       </div>`;
     }).join('');
+  v4FitTable('v4-rej-table');
 }
 
 function v4OpenRejectedDetail(i){
@@ -4665,6 +4774,19 @@ function renderV4Identified(rebuildFilters){
       <div class="v4-filt-count" id="v4-if-count"></div>`;
   }
 
+  const scopeAll = v4IdGapPre ? all.filter(r=>r.gap.name===v4IdGapPre) : all;
+  const cardsEl = document.getElementById('v4-id-cards');
+  if(cardsEl){ cardsEl.innerHTML = v4ContentCards(scopeAll, v4IdLock, 'v4IdPickContent'); v4RailFit('v4-id-cards'); }
+  const hintEl = document.getElementById('v4-id-hint');
+  const lockName = v4IdLock ? v4CName(V4_TAG_LIB.find(t=>t.id===v4IdLock)) : null;
+  if(hintEl) hintEl.innerHTML = v4IdLock
+    ? `Selected <b>${lockName}</b>. Only fleet members needing this content are listed below.`
+    : 'A training can only be pushed for one content at a time. Pick one below to unlock the list.';
+  const s1 = document.getElementById('v4-id-step1'), s2 = document.getElementById('v4-id-step2');
+  if(s1) s1.className = 'v4-stepnum ' + (v4IdLock ? 'done' : 'on');
+  if(s1) s1.textContent = v4IdLock ? '✓' : '1';
+  if(s2) s2.className = 'v4-stepnum ' + (v4IdLock ? 'on' : 'off');
+
   const q  = (document.getElementById('v4-if-q')?.value||'').toLowerCase().trim();
   const fg = document.getElementById('v4-if-gap')?.value   || 'all';
   const fs = document.getElementById('v4-if-sev')?.value   || 'all';
@@ -4672,6 +4794,7 @@ function renderV4Identified(rebuildFilters){
 
   const rows = all.filter(r=>{
     if(v4IdGapPre && r.gap.name!==v4IdGapPre) return false;
+    if(v4IdLock && v4TrainingId(r)!==v4IdLock) return false;
     if(q && !(r.name.toLowerCase().includes(q) || r.phone.includes(q))) return false;
     if(fg!=='all' && r.gap.name!==fg) return false;
     if(fs!=='all' && r.gap.sev!==fs) return false;
@@ -4686,14 +4809,15 @@ function renderV4Identified(rebuildFilters){
 
   const bPush = document.getElementById('v4-id-push');
   const bRej  = document.getElementById('v4-id-reject');
-  if(bPush){ bPush.disabled = v4IdSel.size===0; bPush.textContent = v4IdSel.size>0 ? `Push training (${v4IdSel.size})` : 'Push training'; }
+  const lockTag = v4IdLock ? V4_TAG_LIB.find(t=>t.id===v4IdLock) : null;
+  if(bPush){ bPush.disabled = v4IdSel.size===0; bPush.textContent = v4IdSel.size>0 ? `Push training (${v4IdSel.size}) · ${v4CName(lockTag)}` : 'Push training'; }
   if(bRej){  bRej.disabled  = v4IdSel.size===0; bRej.textContent  = v4IdSel.size>0 ? `Reject recommendation (${v4IdSel.size})` : 'Reject recommendation'; }
 
   const wrap = document.getElementById('v4-id-table');
   if(!wrap) return;
   if(!rows.length){
     wrap.innerHTML = '<div class="v4-empty">No gaps match the selected filters.</div>';
-    return;
+    v4FitTable('v4-id-table'); return;
   }
 
   const scorePill = s => `<span class="v4-pill" style="background:${v4ScoreBg(s)};color:${v4ScoreColor(s)};">${s}</span>`;
@@ -4704,31 +4828,31 @@ function renderV4Identified(rebuildFilters){
 
   const ids = rows.map(r=>all.indexOf(r));
   const allOn = ids.length>0 && ids.every(i=>v4IdSel.has(i));
-  const g = 'grid-template-columns:40px 1.05fr 0.95fr 1.15fr 1.15fr 1.2fr 0.8fr 0.8fr 0.95fr;';
+  const g = 'grid-template-columns:38px 1fr 1fr 1.25fr 1.35fr 0.75fr 0.7fr 0.85fr;';
   wrap.innerHTML =
     `<div class="v4-thead" style="${g}">
-      <div><div class="checkbox${allOn?' chk':''}" onclick="v4IdToggleAll(event,'${ids.join(',')}')">${allOn?'✓':''}</div></div>
-      <div>Name</div><div>Fleet Number</div><div>Call Date &amp; Time</div><div>Evaluation Time</div><div>GAP Name</div>
+      <div><div class="checkbox${allOn && v4IdLock?' chk':''}" onclick="v4IdToggleAll(event,'${ids.join(',')}')">${allOn && v4IdLock?'✓':''}</div></div>
+      <div>Name</div><div>Fleet Number</div><div>Call Date &amp; Time</div><div>Content Name</div>
       <div>Severity</div><div>Call Score</div><div>Training Pushed</div>
     </div>` +
     rows.map(r=>{
       const i = all.indexOf(r);
       const on = v4IdSel.has(i);
       return `<div class="v4-trow${on?' sel':''}" style="${g}" onclick="v4OpenGap(${i},'identifiedPage')">
-        <div><div class="checkbox${on?' chk':''}" onclick="v4IdToggle(event,${i})">${on?'✓':''}</div></div>
+        <div><div class="checkbox${on?' chk':''}" style="${v4IdLock?'':'opacity:0.4;'}" onclick="v4IdToggle(event,${i})">${on?'✓':''}</div></div>
         <div class="v4-agent">
           <div class="v4-av" style="background:${r.color};">${v4Initial(r.name)}</div>
           <div class="v4-aname">${r.name}</div>
         </div>
         <div class="v4-muted">${r.phone}</div>
         <div class="v4-muted">${r.callTime}</div>
-        <div class="v4-muted">${r.evalTime}</div>
-        <div>${r.gap.name}</div>
+        ${v4TidCell(r)}
         <div>${sevPill(r.gap.sev)}</div>
         <div>${scorePill(r.callScore)}</div>
         <div>${yn(false)}</div>
       </div>`;
     }).join('');
+  v4FitTable('v4-id-table');
 }
 
 // ── Fleet at Risk ──
@@ -4842,7 +4966,7 @@ function renderV4Risk(rebuildFilters){
   if(!wrap) return;
   if(!rows.length){
     wrap.innerHTML = '<div class="v4-empty">No fleet member is at risk for the selected role and filters.</div>';
-    return;
+    v4FitTable('v4-risk-table'); return;
   }
 
   const ids = rows.map(r=>all.indexOf(r));
@@ -4878,6 +5002,7 @@ function renderV4Risk(rebuildFilters){
         </div>
       </div>`;
     }).join('');
+  v4FitTable('v4-risk-table');
 }
 
 // feedback modal
@@ -5019,8 +5144,10 @@ function renderV4Completed(rebuildFilters){
   if(fw && (rebuildFilters || !fw.innerHTML.trim())){
     const gaps = [...new Set(all.map(r=>r.gap.name))];
     const mods = [...new Set(all.map(r=>r.gap.module))];
+    const cnames = [...new Set(all.map(r=>v4ContentName(r)))];
     fw.innerHTML = `
       <div class="v4-filt"><label>Search trainee</label><input id="v4-cf-q" type="text" placeholder="Name or fleet number" oninput="renderV4Completed(false)"></div>
+      <div class="v4-filt"><label>Content Name</label><select id="v4-cf-cn" onchange="renderV4Completed(false)"><option value="all">All content</option>${cnames.map(g=>`<option>${g}</option>`).join('')}</select></div>
       <div class="v4-filt"><label>GAP name</label><select id="v4-cf-gap" onchange="renderV4Completed(false)"><option value="all">All gaps</option>${gaps.map(g=>`<option>${g}</option>`).join('')}</select></div>
       <div class="v4-filt"><label>Training module</label><select id="v4-cf-mod" onchange="renderV4Completed(false)"><option value="all">All modules</option>${mods.map(m=>`<option>${m}</option>`).join('')}</select></div>
       <div class="v4-filt"><label>Severity</label><select id="v4-cf-sev" onchange="renderV4Completed(false)"><option value="all">All</option><option>HIGH</option><option>MEDIUM</option><option>LOW</option></select></div>
@@ -5030,6 +5157,7 @@ function renderV4Completed(rebuildFilters){
 
   const q  = (document.getElementById('v4-cf-q')?.value||'').toLowerCase().trim();
   const fg = document.getElementById('v4-cf-gap')?.value || 'all';
+  const fcn2 = document.getElementById('v4-cf-cn')?.value || 'all';
   const fm = document.getElementById('v4-cf-mod')?.value || 'all';
   const fs = document.getElementById('v4-cf-sev')?.value || 'all';
   const fres = document.getElementById('v4-cf-res')?.value || 'all';
@@ -5037,6 +5165,7 @@ function renderV4Completed(rebuildFilters){
   const rows = all.filter(r=>{
     if(q && !(r.name.toLowerCase().includes(q) || r.phone.includes(q))) return false;
     if(fg!=='all' && r.gap.name!==fg) return false;
+    if(fcn2!=='all' && v4ContentName(r)!==fcn2) return false;
     if(fm!=='all' && r.gap.module!==fm) return false;
     if(fs!=='all' && r.gap.sev!==fs) return false;
     if(fres==='p' && !r.coachPassed) return false;
@@ -5051,7 +5180,7 @@ function renderV4Completed(rebuildFilters){
   if(!wrap) return;
   if(!rows.length){
     wrap.innerHTML = '<div class="v4-empty">No completed trainings match the selected filters.</div>';
-    return;
+    v4FitTable('v4-comp-table'); return;
   }
 
   const sevPill = sv => {
@@ -5063,7 +5192,7 @@ function renderV4Completed(rebuildFilters){
   const g = 'grid-template-columns:1.1fr 1fr 1fr 1.2fr 1.4fr 1.25fr 0.85fr 0.85fr 0.85fr 1.15fr;';
   wrap.innerHTML =
     `<div class="v4-thead" style="${g}">
-      <div>Trainee Name</div><div>Fleet Number</div><div>Fleet / Role</div><div>GAP Name</div>
+      <div>Trainee Name</div><div>Fleet Number</div><div>Content Name</div><div>GAP Name</div>
       <div>Training Module</div><div>Call Date &amp; Time</div><div>Pushed Date</div><div>Due Date</div><div>Severity</div><div>Status</div>
     </div>` +
     rows.map(r=>{
@@ -5074,7 +5203,7 @@ function renderV4Completed(rebuildFilters){
           <div class="v4-aname">${r.name}</div>
         </div>
         <div class="v4-muted">${r.phone}</div>
-        <div class="v4-muted">${r.role}</div>
+        <div style="font-weight:600;">${v4ContentName(r)}</div>
         <div>${r.gap.name}</div>
         <div><div>${r.gap.module}</div><div style="font-size:10.5px;color:#8A93AB;">${r.gap.modType} · Voice coach ${r.voiceCoach?'on':'off'}</div></div>
         <div class="v4-muted">${r.callTime}</div>
@@ -5084,6 +5213,7 @@ function renderV4Completed(rebuildFilters){
         <div><span class="v4-pill" style="background:#E9F7F1;color:#1D9E75;">Completed</span></div>
       </div>`;
     }).join('');
+  v4FitTable('v4-comp-table');
 }
 
 function v4OpenCompletedDetail(i){
@@ -5119,8 +5249,10 @@ function renderV4Pushed(rebuildFilters){
   if(fw && (rebuildFilters || !fw.innerHTML.trim())){
     const gaps = [...new Set(all.map(r=>r.gap.name))];
     const mods = [...new Set(all.map(r=>r.gap.module))];
+    const cnames = [...new Set(all.map(r=>v4ContentName(r)))];
     fw.innerHTML = `
       <div class="v4-filt"><label>Search trainee</label><input id="v4-pf-q" type="text" placeholder="Name or fleet number" oninput="renderV4Pushed(false)"></div>
+      <div class="v4-filt"><label>Content Name</label><select id="v4-pf-cn" onchange="renderV4Pushed(false)"><option value="all">All content</option>${cnames.map(g=>`<option>${g}</option>`).join('')}</select></div>
       <div class="v4-filt"><label>GAP name</label><select id="v4-pf-gap" onchange="renderV4Pushed(false)"><option value="all">All gaps</option>${gaps.map(g=>`<option>${g}</option>`).join('')}</select></div>
       <div class="v4-filt"><label>Training module</label><select id="v4-pf-mod" onchange="renderV4Pushed(false)"><option value="all">All modules</option>${mods.map(m=>`<option>${m}</option>`).join('')}</select></div>
       <div class="v4-filt"><label>Severity</label><select id="v4-pf-sev" onchange="renderV4Pushed(false)"><option value="all">All</option><option>HIGH</option><option>MEDIUM</option><option>LOW</option></select></div>
@@ -5130,6 +5262,7 @@ function renderV4Pushed(rebuildFilters){
 
   const q   = (document.getElementById('v4-pf-q')?.value||'').toLowerCase().trim();
   const fg  = document.getElementById('v4-pf-gap')?.value || 'all';
+  const fcn = document.getElementById('v4-pf-cn')?.value  || 'all';
   const fm  = document.getElementById('v4-pf-mod')?.value || 'all';
   const fs  = document.getElementById('v4-pf-sev')?.value || 'all';
   const fv  = document.getElementById('v4-pf-vc')?.value  || 'all';
@@ -5137,6 +5270,7 @@ function renderV4Pushed(rebuildFilters){
   const rows = all.filter(r=>{
     if(q && !(r.name.toLowerCase().includes(q) || r.empId.toLowerCase().includes(q) || r.phone.includes(q))) return false;
     if(fg!=='all' && r.gap.name!==fg) return false;
+    if(fcn!=='all' && v4ContentName(r)!==fcn) return false;
     if(fm!=='all' && r.gap.module!==fm) return false;
     if(fs!=='all' && r.gap.sev!==fs) return false;
     if(fv==='y' && !r.voiceCoach) return false;
@@ -5151,7 +5285,7 @@ function renderV4Pushed(rebuildFilters){
   if(!wrap) return;
   if(!rows.length){
     wrap.innerHTML = '<div class="v4-empty">No trainings match the selected filters.</div>';
-    return;
+    v4FitTable('v4-push-table'); return;
   }
 
   const sevPill = s => {
@@ -5166,7 +5300,7 @@ function renderV4Pushed(rebuildFilters){
   const g = 'grid-template-columns:1.1fr 1fr 1fr 1.2fr 1.4fr 1.25fr 0.85fr 0.85fr 0.85fr 1.15fr;';
   wrap.innerHTML =
     `<div class="v4-thead" style="${g}">
-      <div>Trainee Name</div><div>Fleet Number</div><div>Fleet / Role</div><div>GAP Name</div>
+      <div>Trainee Name</div><div>Fleet Number</div><div>Content Name</div><div>GAP Name</div>
       <div>Training Module</div><div>Call Date &amp; Time</div><div>Pushed Date</div><div>Due Date</div><div>Severity</div><div>Status</div>
     </div>` +
     rows.map(r=>{
@@ -5177,7 +5311,7 @@ function renderV4Pushed(rebuildFilters){
           <div class="v4-aname">${r.name}</div>
         </div>
         <div class="v4-muted">${r.phone}</div>
-        <div class="v4-muted">${r.role}</div>
+        <div style="font-weight:600;">${v4ContentName(r)}</div>
         <div>${r.gap.name}</div>
         <div><div>${r.gap.module}</div><div style="font-size:10.5px;color:#8A93AB;">${r.gap.modType} · Voice coach ${r.voiceCoach?'on':'off'}</div></div>
         <div class="v4-muted">${r.callTime}</div>
@@ -5187,6 +5321,7 @@ function renderV4Pushed(rebuildFilters){
         <div><span class="v4-pill" style="background:#FFF3E6;color:#E07C1F;">Pending with Trainee</span></div>
       </div>`;
     }).join('');
+  v4FitTable('v4-push-table');
 }
 
 function v4OpenPushedDetail(i){
@@ -5400,6 +5535,109 @@ function v4RenderGapPage(r, source){
   const n=document.getElementById('nav-dash4'); if(n) n.classList.add('active');
   window.scrollTo({top:0,behavior:'instant'});
 }
+
+function v4TagOf(r){
+  const tags = V4_TAG_LIB.filter(t=>t.gap === r.gap.name);
+  if(!tags.length) return null;
+  return tags[(r.idx||0) % tags.length];
+}
+function v4TrainingId(r){ const t = v4TagOf(r); return t ? t.id : '—'; }
+function v4CName(t){ return t ? (t.cname || t.subsub) : 'Not mapped'; }
+function v4ContentName(r){ return v4CName(v4TagOf(r)); }
+function v4TidCell(r){
+  const t = v4TagOf(r);
+  return `<div>
+    <div style="font-size:12.5px;font-weight:600;color:#141A2E;">${v4CName(t)}</div>
+    <div style="font-size:10.5px;color:#8A93AB;">${t?t.ctype:'—'}</div>
+  </div>`;
+}
+function v4ContentCards(scope, selectedId, onclickFn){
+  const seen = {};
+  const tags = scope.map(r=>v4TagOf(r)).filter(t=>t && !seen[t.id] && (seen[t.id]=1));
+  if(!tags.length) return '<div style="padding:14px 20px;font-size:12.5px;color:#8A93AB;">No content mapped for these gaps yet.</div>';
+  const countOf = t => scope.filter(r=>{const x=v4TagOf(r); return x && x.id===t.id;}).length;
+  tags.sort((a,b)=>{
+    if(selectedId){
+      if(a.id===selectedId) return -1;
+      if(b.id===selectedId) return 1;
+    }
+    return countOf(b) - countOf(a) || v4CName(a).localeCompare(v4CName(b));
+  });
+  const chips = tags.map(t=>{
+    const n = countOf(t);
+    const on = selectedId===t.id;
+    const gp = V4_GAP_POOL.find(g=>g.name===t.gap);
+    const col = v4SevColor(gp ? gp.sev : 'MEDIUM');
+    return `<div class="v4-crchip${on?' active':''}" onclick="${onclickFn}('${t.id}')" title="${t.ctype} · ${t.gap||''}">
+      <span class="dot" style="background:${col};"></span>
+      <span class="nm">${v4CName(t)}</span>
+      <span class="ct">${n}</span>
+    </div>`;
+  }).join('');
+  const allOn = !selectedId;
+  return `<div class="v4-crchip all${allOn?' active':''}" onclick="${onclickFn}(null)" title="Show every content">
+      <span class="nm">All content</span><span class="ct">${scope.length}</span>
+    </div>` + chips;
+}
+
+const V4_FIT_TABLES = ['v4-id-table','v4-rp-table','v4-push-table','v4-comp-table','v4-rej-table','v4-risk-table','v4-sig-table','v4-ct-table','v4-lib-table'];
+
+function v4FitTable(id){
+  const el = document.getElementById(id);
+  if(!el || !el.offsetParent) return;
+  el.style.overflowY = 'auto';
+  const top = el.getBoundingClientRect().top;
+  let h = Math.max(180, window.innerHeight - top - 30);
+  el.style.maxHeight = h + 'px';
+  // trim by whatever still overflows the page (panel padding, margins)
+  const over = Math.max(document.documentElement.scrollHeight - window.innerHeight, 0);
+  if(over > 0) el.style.maxHeight = Math.max(180, h - over) + 'px';
+}
+function v4FitAllTables(){ V4_FIT_TABLES.forEach(v4FitTable); }
+window.addEventListener('resize', v4FitAllTables);
+
+const v4RailOpen = {};
+function v4RailToggle(id){
+  v4RailOpen[id] = !v4RailOpen[id];
+  if(id==='v4-id-cards') renderV4Identified(false); else renderV4Repeat(false);
+}
+
+function v4RailFit(id){
+  const el = document.getElementById(id);
+  if(!el) return;
+  const open = !!v4RailOpen[id];
+  el.classList.toggle('expanded', open);
+  const old = el.querySelector('.v4-railmore');
+  if(old) old.remove();
+  const chips = [...el.querySelectorAll('.v4-crchip')];
+  chips.forEach(c=>c.style.display='');
+  if(!chips.length) return;
+  if(open){
+    el.insertAdjacentHTML('beforeend',
+      `<div class="v4-crchip v4-railmore" onclick="v4RailToggle('${id}')"><span class="nm">Show less</span></div>`);
+    return;
+  }
+  const avail = el.clientWidth - 40;
+  const reserve = 120;
+  let used = 0, cut = chips.length;
+  for(let i=0;i<chips.length;i++){
+    const need = used + chips[i].offsetWidth + (i ? 8 : 0);
+    if(i > 0 && need > avail - reserve){ cut = i; break; }
+    used = need;
+  }
+  if(cut < chips.length){
+    for(let i=cut;i<chips.length;i++) chips[i].style.display='none';
+    el.insertAdjacentHTML('beforeend',
+      `<div class="v4-crchip v4-railmore" onclick="v4RailToggle('${id}')"><span class="nm">+${chips.length-cut} more</span></div>`);
+  }
+}
+
+window.addEventListener('resize', function(){
+  ['v4-id-cards','v4-rp-cards'].forEach(id=>{
+    const el = document.getElementById(id);
+    if(el && el.offsetParent) v4RailFit(id);
+  });
+});
 
 function v4SevPill(sv){
   const col = v4SevColor(sv);

@@ -469,16 +469,16 @@ body{font-family:var(--font);background:var(--gray-50);color:var(--gray-900);min
 .v4-sec-hdr{padding:16px 20px 15px;background:linear-gradient(180deg,#FBFCFF 0%,#F0F3FB 100%);border-bottom:1px solid #EEF0F7;}
 .v4-sec-title{font-size:18px;font-weight:700;color:#141A2E;letter-spacing:-0.2px;}
 .v4-sec-sub{font-size:12.5px;color:#6C7A99;margin-top:4px;}
-.v4-funnel{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:12px;padding:18px 20px 22px;overflow-x:auto;}
+.v4-funnel{display:grid;grid-template-columns:repeat(9,minmax(0,1fr));gap:12px;padding:18px 20px 22px;overflow-x:auto;}
 .v4-funnel > *{min-width:0;}
-.v4-card{background:white;border:1px solid #E6E9F0;border-radius:10px;padding:12px 13px;height:126px;display:flex;flex-direction:column;transition:box-shadow 0.15s,border-color 0.15s;}
+.v4-card{background:white;border:1px solid #E6E9F0;border-radius:10px;padding:12px 13px;min-height:126px;display:flex;flex-direction:column;transition:box-shadow 0.15s,border-color 0.15s;}
 .v4-card.risk{border-color:#F2BFBF;}
 .v4-card.clickable{cursor:pointer;}
 .v4-card.clickable:hover{border-color:#8FB3E0;box-shadow:0 3px 14px rgba(21,101,192,0.12);}
 .v4-dot{width:7px;height:7px;border-radius:50%;margin-bottom:7px;flex-shrink:0;}
-.v4-card-label{font-size:11.5px;font-weight:700;color:#5B6A8C;line-height:1.3;margin-bottom:6px;}
-.v4-card-val{font-size:24px;font-weight:700;line-height:1;margin-bottom:8px;}
-.v4-card-sub{font-size:10.5px;color:#8A93AB;line-height:1.45;margin-top:auto;}
+.v4-card-label{font-size:10.5px;font-weight:700;color:#5B6A8C;line-height:1.25;margin-bottom:6px;word-break:break-word;}
+.v4-card-val{font-size:22px;font-weight:700;line-height:1;margin-bottom:6px;}
+.v4-card-sub{font-size:9.5px;color:#8A93AB;line-height:1.35;margin-top:auto;word-break:break-word;}
 .v4-card-sub.danger{color:#E24B4A;}
 .v4-queue{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:14px;padding:18px 20px 22px;}
 .v4-q-card{background:white;border:1px solid #E6E9F0;border-radius:10px;padding:14px 16px;cursor:pointer;transition:box-shadow 0.15s,border-color 0.15s;display:flex;flex-direction:column;min-height:200px;}
@@ -1087,6 +1087,21 @@ body{font-family:var(--font);background:var(--gray-50);color:var(--gray-900);min
   </div>
 </div>
 </div><!-- end view-v4-pushed -->
+
+      <!-- ═══════════════ V4 FATAL CASES ═══════════════ -->
+      <div class="view" id="view-v4-fatal">
+<div class="v4-page">
+  <button class="v4-back" onclick="showV('home-v4',document.getElementById('nav-dash4'));setTimeout(renderKPIV4,30);">◂ Back to Dashboard v4</button>
+  <div class="v4-panel">
+    <div class="v4-sec-hdr">
+      <div class="v4-sec-title">Fatal Cases</div>
+      <div class="v4-sec-sub">Calls flagged fatal for a critical compliance or misrepresentation error, split by reason.</div>
+    </div>
+    <div class="v4-filters" id="v4-fat-filters"></div>
+    <div id="v4-fat-table"></div>
+  </div>
+</div>
+</div><!-- end view-v4-fatal -->
 
       <!-- ═══════════════ V4 TRAINING IDENTIFIED ═══════════════ -->
       <div class="view" id="view-v4-identified">
@@ -3720,14 +3735,14 @@ function renderKPIV3(){
 // ═══════════════ DASHBOARD V4 ═══════════════
 const V4_DATA = {
   XFE:{
-    fleet:5, signals:34, identified:12, pushed:5, atRisk:5, voice:4, completed:4, rejected:3, repeat:7, lowHealth:6,
+    fleet:5, signals:34, identified:12, pushed:5, atRisk:5, voice:4, completed:4, rejected:3, repeat:7, lowHealth:6, fatal:2,
     queue:[
       {name:'Closing and Next Steps', sev:'HIGH', icon:'🎯', count:1}
     ],
     content:{available:24, docs:0, images:18, quiz:6, links:0, pending:4}
   },
   ENG:{
-    fleet:9, signals:30, identified:9, pushed:4, atRisk:3, voice:3, completed:3, rejected:2, repeat:5, lowHealth:6,
+    fleet:9, signals:30, identified:9, pushed:4, atRisk:3, voice:3, completed:3, rejected:2, repeat:5, lowHealth:6, fatal:1,
     queue:[
       {name:'First Time Resolution', sev:'HIGH', icon:'🛠', count:3},
       {name:'Customer Handling', sev:'MEDIUM', icon:'💬', count:2}
@@ -3735,7 +3750,7 @@ const V4_DATA = {
     content:{available:18, docs:6, images:8, quiz:4, links:0, pending:2}
   },
   CC:{
-    fleet:12, signals:45, identified:14, pushed:6, atRisk:6, voice:5, completed:4, rejected:4, repeat:9, lowHealth:9,
+    fleet:12, signals:45, identified:14, pushed:6, atRisk:6, voice:5, completed:4, rejected:4, repeat:9, lowHealth:9, fatal:3,
     queue:[
       {name:'Objection Handling', sev:'CRITICAL', icon:'🛡️', count:4},
       {name:'Call Closing', sev:'HIGH', icon:'🎯', count:2},
@@ -3744,14 +3759,14 @@ const V4_DATA = {
     content:{available:31, docs:5, images:14, quiz:9, links:3, pending:4}
   },
   HDO:{
-    fleet:7, signals:22, identified:6, pushed:3, atRisk:2, voice:2, completed:2, rejected:1, repeat:3, lowHealth:4,
+    fleet:7, signals:22, identified:6, pushed:3, atRisk:2, voice:2, completed:2, rejected:1, repeat:3, lowHealth:4, fatal:1,
     queue:[
       {name:'Upsell at Doorstep', sev:'MEDIUM', icon:'📦', count:2}
     ],
     content:{available:12, docs:2, images:7, quiz:3, links:0, pending:1}
   },
   MR:{
-    fleet:10, signals:28, identified:10, pushed:4, atRisk:4, voice:3, completed:3, rejected:2, repeat:6, lowHealth:6,
+    fleet:10, signals:28, identified:10, pushed:4, atRisk:4, voice:3, completed:3, rejected:2, repeat:6, lowHealth:6, fatal:2,
     queue:[
       {name:'Scheme Knowledge', sev:'HIGH', icon:'📘', count:3},
       {name:'Retailer Engagement', sev:'MEDIUM', icon:'🤝', count:2}
@@ -3914,6 +3929,7 @@ function v4GapBack(){
   else if(v4GapSource==='repeat'){ v4OpenRepeatList(); }
   else if(v4GapSource==='riskDetail'){ v4OpenRiskDetail(v4RiskCur); }
   else if(v4GapSource==='identifiedPage'){ v4OpenIdentifiedList(); }
+  else if(v4GapSource==='fatal'){ v4OpenFatalList(); }
   else { v4BackToSignal(); }
 }
 function v4BackToSignal(){ showV('v4-signal', null); const n=document.getElementById('nav-dash4'); if(n) n.classList.add('active'); renderV4Signal(); window.scrollTo({top:0,behavior:'instant'}); }
@@ -4684,6 +4700,97 @@ function v4RejectedRecs(role){
   return V4_CACHE['rej_'+role];
 }
 
+// ── Fatal Cases page ──
+const V4_FATAL_SEED = [
+  {name:'Misrepresentation of Plan',  desc:'Advisor told the customer a benefit that is not part of the plan, so the sale was made on wrong information.'},
+  {name:'Compliance Breach',          desc:'Advisor skipped the mandatory disclosure or consent step required for the call.'},
+  {name:'Abusive Language',           desc:'Advisor used language with the customer that is not acceptable on a call.'},
+  {name:'Data Privacy Violation',     desc:'Advisor shared or asked for customer data in a way that breaks the privacy policy.'}
+];
+
+function v4FatalRecs(role){
+  if(!V4_CACHE['fatal_'+role]){
+    const d = V4_DATA[role] || V4_DATA.XFE;
+    V4_CACHE['fatal_'+role] = Array.from({length:d.fatal||0},(_,i)=>{
+      const r = v4MakeRec(role,'identified',i+7);
+      const seed = V4_FATAL_SEED[i % V4_FATAL_SEED.length];
+      r.gap = {...r.gap, name:seed.name, sev:'FATAL', what:seed.desc};
+      r.fatalReason = seed.name;
+      r.fatalDesc = seed.desc;
+      r.flaggedDate = '2026-08-'+v4Pad(9+(i*4)%10);
+      return r;
+    });
+  }
+  return V4_CACHE['fatal_'+role];
+}
+
+function v4OpenFatalList(){
+  showV('v4-fatal', null);
+  const n=document.getElementById('nav-dash4'); if(n) n.classList.add('active');
+  renderV4Fatal(true);
+  window.scrollTo({top:0,behavior:'instant'});
+}
+
+function renderV4Fatal(rebuildFilters){
+  const role = v4Role();
+  const all = v4FatalRecs(role);
+
+  const fw = document.getElementById('v4-fat-filters');
+  if(fw && (rebuildFilters || !fw.innerHTML.trim())){
+    const reasons = [...new Set(all.map(r=>r.fatalReason))];
+    fw.innerHTML = `
+      <div class="v4-filt"><label>Search fleet member</label><input id="v4-ff-q" type="text" placeholder="Name or fleet number" oninput="renderV4Fatal(false)"></div>
+      <div class="v4-filt"><label>Fatal reason</label><select id="v4-ff-reason" onchange="renderV4Fatal(false)"><option value="all">All reasons</option>${reasons.map(x=>`<option>${x}</option>`).join('')}</select></div>
+      <div class="v4-filt-count" id="v4-ff-count"></div>`;
+  }
+
+  const q  = (document.getElementById('v4-ff-q')?.value||'').toLowerCase().trim();
+  const fr = document.getElementById('v4-ff-reason')?.value || 'all';
+
+  const rows = all.filter(r=>{
+    if(q && !(r.name.toLowerCase().includes(q) || r.phone.includes(q))) return false;
+    if(fr!=='all' && r.fatalReason!==fr) return false;
+    return true;
+  });
+
+  const cnt = document.getElementById('v4-ff-count');
+  if(cnt) cnt.textContent = rows.length + ' of ' + all.length + ' records';
+
+  const wrap = document.getElementById('v4-fat-table');
+  if(!wrap) return;
+  if(!rows.length){
+    wrap.innerHTML = '<div class="v4-empty">No fatal cases match the selected filters.</div>';
+    v4FitTable('v4-fat-table'); return;
+  }
+
+  const g = 'grid-template-columns:1.1fr 1fr 1.25fr 1.6fr 0.9fr 1fr;';
+  wrap.innerHTML =
+    `<div class="v4-thead" style="${g}">
+      <div>Name</div><div>Fleet Number</div><div>Call Date &amp; Time</div>
+      <div>Fatal Reason</div><div>Call Score</div><div>Flagged On</div>
+    </div>` +
+    rows.map(r=>{
+      const i = all.indexOf(r);
+      return `<div class="v4-trow" style="${g}" onclick="v4OpenFatalDetail(${i})">
+        <div class="v4-agent">
+          <div class="v4-av" style="background:${r.color};">${v4Initial(r.name)}</div>
+          <div class="v4-aname">${r.name}</div>
+        </div>
+        <div class="v4-muted">${r.phone}</div>
+        <div class="v4-muted">${r.callTime}</div>
+        <div><span class="v4-pill" style="background:#FDEDED;color:#E4002B;">${r.fatalReason}</span></div>
+        <div>${v4SevPill(r.gap.sev)}</div>
+        <div class="v4-muted">${r.flaggedDate}</div>
+      </div>`;
+    }).join('');
+  v4FitTable('v4-fat-table');
+}
+
+function v4OpenFatalDetail(i){
+  const r = v4FatalRecs(v4Role())[i];
+  if(r) v4RenderGapPage(r, 'fatal');
+}
+
 function v4OpenRejectedList(){
   showV('v4-rejected', null);
   const n=document.getElementById('nav-dash4'); if(n) n.classList.add('active');
@@ -4858,10 +4965,7 @@ function renderV4Identified(rebuildFilters){
 // ── Fleet at Risk ──
 const V4_RISK_REASONS = [
   {key:'Failed 3 attempts', desc:'The fleet member attempted the assigned training three times and failed the certification each time.', kind:'attempts'},
-  {key:'Training pending',  desc:'Training was pushed but has stayed untouched past its due date, so the gap is still open on live calls.', kind:'pending'},
-  {key:'Repeat gap',        desc:'The same gap was flagged again on a fresh call after the training was already completed.', kind:'pending'},
-  {key:'Coach call missed', desc:'The voice coach called on three scheduled slots and the fleet member did not take the call.', kind:'attempts'},
-  {key:'Score declining',   desc:'The call score has dropped across the last four evaluated calls despite training being completed.', kind:'pending'}
+  {key:'Training pending',  desc:'Training was pushed but has stayed untouched past its due date, so the gap is still open on live calls.', kind:'pending'}
 ];
 
 function v4RiskRecs(role){
@@ -4875,7 +4979,7 @@ function v4RiskRecs(role){
       r.gap = V4_GAP_POOL[(i*2+1) % V4_GAP_POOL.length];
       r.callScore = 28 + (i*11)%25;
       r.riskSince = 4 + (i*5)%22;
-      r.trainingResult = (r.risk.key==='Repeat gap' || r.risk.key==='Score declining') ? 'Pass' : 'Fail';
+      r.trainingResult = r.risk.kind==='attempts' ? 'Fail' : 'Pass';
       const rd = 6 + (i*3)%14;
       r.callTime = '2026-08-'+v4Pad(rd)+' '+v4Pad(9+(i%8))+':'+v4Pad((i*13)%60)+':'+v4Pad((i*7)%60);
       r.evalTime = '2026-08-'+v4Pad(rd)+' '+v4Pad(10+(i%8))+':'+v4Pad((i*19)%60)+':'+v4Pad((i*7)%60);
@@ -5663,11 +5767,12 @@ function renderKPIV4(){
     {label:'Total Fleet',            val:d.fleet,      sub:'Active fleet in LOB',                 color:'#141A2E', noClick:true},
     {label:'Total Signal Evaluated', val:d.signals,    sub:'Calls, performance and app signals',  color:'#6C63B5', tab:'low'},
     {label:'Training Identified',    val:d.identified, sub:'Users identified for training',       color:'#EF9F27', tab:'identified', go:'v4OpenIdentifiedList()'},
+    {label:'Fatal Cases',            val:d.fatal||0,   sub:'Critical errors flagged',             color:'#E4002B', risk:true, go:'v4OpenFatalList()'},
     {label:'Training Pushed',        val:d.pushed,     sub:'Training published for users',        color:'#1976D2', tab:'identified', go:'v4OpenPushedList()'},
     {label:'Training Completed',     val:d.completed,  sub:'Users who completed training',        color:'#0D47A1', tab:'identified', go:'v4OpenCompletedList()'},
     {label:'Fleet at Risk',          val:d.atRisk,     sub:'Not improving · escalate',            color:'#E24B4A', risk:true, tab:'low', go:'v4OpenRiskList()'},
-    {label:'Training Rejected',      val:v4RejectedRecs(role).length, sub:'Recommendation rejected by trainer', color:'#8A6D3B', tab:'identified', go:'v4OpenRejectedList()'},
-    {label:'Repeat Training',        val:d.repeat,     sub:'Parked, trainee already has an open training', color:'#EF9F27', go:'v4OpenRepeatList()'}
+    {label:'Training Rejected',      val:v4RejectedRecs(role).length, sub:'Rejected by trainer', color:'#8A6D3B', tab:'identified', go:'v4OpenRejectedList()'},
+    {label:'Repeat Training',        val:d.repeat,     sub:'Trainee has open training', color:'#EF9F27', go:'v4OpenRepeatList()'}
   ];
 
   const fn = document.getElementById('v4-funnel');

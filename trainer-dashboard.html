@@ -469,16 +469,16 @@ body{font-family:var(--font);background:var(--gray-50);color:var(--gray-900);min
 .v4-sec-hdr{padding:16px 20px 15px;background:linear-gradient(180deg,#FBFCFF 0%,#F0F3FB 100%);border-bottom:1px solid #EEF0F7;}
 .v4-sec-title{font-size:18px;font-weight:700;color:#141A2E;letter-spacing:-0.2px;}
 .v4-sec-sub{font-size:12.5px;color:#6C7A99;margin-top:4px;}
-.v4-funnel{display:grid;grid-template-columns:repeat(9,minmax(0,1fr));gap:12px;padding:18px 20px 22px;overflow-x:auto;}
+.v4-funnel{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:12px;padding:18px 20px 22px;overflow-x:auto;}
 .v4-funnel > *{min-width:0;}
-.v4-card{background:white;border:1px solid #E6E9F0;border-radius:10px;padding:12px 13px;min-height:126px;display:flex;flex-direction:column;transition:box-shadow 0.15s,border-color 0.15s;}
+.v4-card{background:white;border:1px solid #E6E9F0;border-radius:10px;padding:12px 13px;height:126px;display:flex;flex-direction:column;transition:box-shadow 0.15s,border-color 0.15s;}
 .v4-card.risk{border-color:#F2BFBF;}
 .v4-card.clickable{cursor:pointer;}
 .v4-card.clickable:hover{border-color:#8FB3E0;box-shadow:0 3px 14px rgba(21,101,192,0.12);}
 .v4-dot{width:7px;height:7px;border-radius:50%;margin-bottom:7px;flex-shrink:0;}
-.v4-card-label{font-size:10.5px;font-weight:700;color:#5B6A8C;line-height:1.25;margin-bottom:6px;word-break:break-word;}
-.v4-card-val{font-size:22px;font-weight:700;line-height:1;margin-bottom:6px;}
-.v4-card-sub{font-size:9.5px;color:#8A93AB;line-height:1.35;margin-top:auto;word-break:break-word;}
+.v4-card-label{font-size:11.5px;font-weight:700;color:#5B6A8C;line-height:1.3;margin-bottom:6px;}
+.v4-card-val{font-size:24px;font-weight:700;line-height:1;margin-bottom:8px;}
+.v4-card-sub{font-size:10.5px;color:#8A93AB;line-height:1.45;margin-top:auto;}
 .v4-card-sub.danger{color:#E24B4A;}
 .v4-queue{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:14px;padding:18px 20px 22px;}
 .v4-q-card{background:white;border:1px solid #E6E9F0;border-radius:10px;padding:14px 16px;cursor:pointer;transition:box-shadow 0.15s,border-color 0.15s;display:flex;flex-direction:column;min-height:200px;}
@@ -590,6 +590,48 @@ body{font-family:var(--font);background:var(--gray-50);color:var(--gray-900);min
 .v4-beh-box{background:white;border:1px solid #E6E9F0;border-radius:9px;padding:11px 13px;}
 .v4-beh-lbl{font-size:10.5px;color:#8A93AB;margin-bottom:6px;}
 .v4-beh-val{font-size:13px;font-weight:700;color:#141A2E;display:flex;align-items:center;gap:6px;}
+
+/* ═══════════ SALES COACH ANALYTICS ═══════════ */
+.sc-filterbar{display:flex;align-items:flex-end;gap:12px;padding:10px 16px;}
+.sc-f label{display:block;font-size:11px;color:#8A93AB;margin-bottom:4px;}
+.sc-ctl{height:32px;border:1px solid #DFE3EC;border-radius:7px;background:white;font-family:var(--font);font-size:12px;color:#1A1A2E;padding:0 9px;outline:none;box-sizing:border-box;}
+.sc-ctl:focus{border-color:#1976D2;}
+.sc-date{display:flex;align-items:center;gap:6px;height:32px;border:1px solid #DFE3EC;border-radius:7px;padding:0 8px;font-size:11.5px;color:#8A93AB;box-sizing:border-box;}
+.sc-date input{border:none;outline:none;font-family:var(--font);font-size:12px;color:#1A1A2E;background:transparent;width:112px;}
+.sc-f.grow{flex:1;min-width:0;}
+.sc-f.grow .sc-ctl{width:100%;}
+.sc-card-on{border-color:#1976D2 !important;background:#F6FAFF;box-shadow:0 0 0 1px #1976D2 inset;}
+.sc-hdr-row{display:flex;align-items:center;justify-content:space-between;gap:12px;}
+.sc-dl{height:32px;padding:0 12px;background:#E3F2FD;color:#1565C0;border:1px solid #90CAF9;border-radius:7px;font-size:12px;font-weight:600;cursor:pointer;font-family:var(--font);white-space:nowrap;}
+.sc-dl:hover{background:#D3E9FB;}
+.sc-grid{grid-template-columns:1.1fr 1.6fr 1fr 1fr 1fr .7fr .8fr;}
+.sc-more{color:#1565C0;font-weight:600;font-size:12px;text-align:right;}
+.sc-p-good{background:#E8F5E9;color:#2E7D32;}
+.sc-p-mid{background:#FFF3E0;color:#E65100;}
+.sc-p-bad{background:#FFF0F2;color:#C62828;}
+.sc-p-none{background:#F2F4F9;color:#6C7A99;}
+.sc-full{padding:18px 20px 0;}
+.sc-body{padding:14px;font-size:12.5px;line-height:1.65;color:#1A1A2E;}
+.sc-two{padding:14px 20px 0;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:14px;}
+.sc-two.last{padding-bottom:20px;}
+.sc-good-hdr{color:#2E7D32;background:#F3FAF4;}
+.sc-bad-hdr{color:#C62828;background:#FFF7F7;}
+.sc-list{margin:0;padding:0;list-style:none;}
+.sc-list li{padding-left:13px;position:relative;margin-bottom:6px;}
+.sc-list li:last-child{margin-bottom:0;}
+.sc-list li:before{content:"•";position:absolute;left:0;color:#8A93AB;}
+.sc-note{font-size:12px;color:#1A1A2E;line-height:1.55;margin-bottom:10px;}
+.sc-quote{background:#F8FAFF;border:1px solid #E6E9F0;border-radius:8px;padding:8px 10px;margin-top:8px;font-size:12px;line-height:1.5;color:#3C4A6B;}
+.sc-quote-l{font-size:9.5px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:#8A93AB;margin-bottom:3px;}
+.sc-sub-flex{display:flex;align-items:center;justify-content:space-between;gap:10px;}
+.sc-eng{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:12px;padding:18px 20px 22px;}
+.sc-eng-c{border:1px solid #E6E9F0;border-radius:10px;padding:12px 13px;}
+.sc-eng-l{font-size:11.5px;font-weight:700;color:#5B6A8C;line-height:1.3;margin-bottom:9px;min-height:30px;}
+.sc-legend{display:flex;gap:8px;align-items:center;}
+.sc-steps{padding:14px 20px 0;display:flex;flex-wrap:wrap;gap:8px;}
+.sc-rec-w{display:flex;align-items:center;gap:2px;}
+.sc-rec-w div{width:3px;border-radius:2px;}
+@media (max-width:1100px){.sc-eng{grid-template-columns:repeat(3,minmax(0,1fr));}}
 </style>
 </head>
 <body>
@@ -659,6 +701,9 @@ body{font-family:var(--font);background:var(--gray-50);color:var(--gray-900);min
       </div>
       <div class="nav-item active" id="nav-dash4" onclick="showV('home-v4',this);setTimeout(renderKPIV4,50);">
         <span class="nav-icon">🧭</span> Dashboard v4
+      </div>
+      <div class="nav-item" id="nav-sc" onclick="scOpen(this)">
+        <span class="nav-icon">🎙️</span> Sales_Coach_Analytics
       </div>
       <div class="nav-item" id="nav-content" onclick="showV('content-library',this);window.scrollTo({top:0,behavior:'instant'});document.documentElement.scrollTop=0;document.body.scrollTop=0;ensureGenPromptFilled();">
         <span class="nav-icon">📚</span> Training Content
@@ -1057,6 +1102,45 @@ body{font-family:var(--font);background:var(--gray-50);color:var(--gray-900);min
 </div>
 </div><!-- end view-home-v4 -->
 
+      <!-- ═══════════════ SALES COACH ANALYTICS ═══════════════ -->
+      <div class="view" id="view-sc">
+<div class="v4-page">
+  <div class="v4-panel">
+    <div class="v4-sec-hdr">
+      <div class="v4-sec-title">Certification Funnel</div>
+      <div class="v4-sec-sub">From certification initiated to final call status. Click a card to filter the calls below.</div>
+    </div>
+    <div class="v4-funnel" id="sc-funnel" style="grid-template-columns:repeat(7,minmax(0,1fr));"></div>
+  </div>
+  <div class="v4-panel sc-filterbar">
+    <div class="sc-f"><label for="sc-role">Role</label>
+      <select class="sc-ctl" id="sc-role" style="width:130px;" onchange="scChanged()">
+        <option value="XFE">XFE</option><option value="PP Champ">PP Champ</option><option value="Beat Trainer">Beat Trainer</option><option value="">All roles</option>
+      </select></div>
+    <div class="sc-f"><label>Date range</label>
+      <div class="sc-date"><input type="date" id="sc-start" value="2026-10-01" aria-label="Start date" onchange="scChanged()"> to <input type="date" id="sc-end" value="2026-10-31" aria-label="End date" onchange="scChanged()"></div></div>
+    <div class="sc-f grow"><label for="sc-search">Search</label>
+      <input class="sc-ctl" id="sc-search" placeholder="Number, manager, trainer" oninput="scChanged()"></div>
+    <button class="v4-icon-btn" title="Reset filters" onclick="scReset()">⟳</button>
+  </div>
+  <div class="v4-panel">
+    <div class="v4-sec-hdr sc-hdr-row">
+      <div><div class="v4-sec-title">Calls</div><div class="v4-sec-sub" id="sc-count"></div></div>
+      <button class="sc-dl" onclick="scDownload()">⬇ Download Excel</button>
+    </div>
+    <div class="v4-thead sc-grid"><div>Call date</div><div>Candidate</div><div>Fleet, circle</div><div>RM</div><div>Status</div><div>Score</div><div></div></div>
+    <div id="sc-rows"></div>
+  </div>
+</div>
+</div><!-- end view-sc -->
+
+      <div class="view" id="view-sc-detail">
+<div class="v4-page">
+  <button class="v4-back" onclick="scBack()">◂ Back to list</button>
+  <div id="sc-d"></div>
+</div>
+</div><!-- end view-sc-detail -->
+
       <!-- ═══════════════ V4 SIGNAL DRILL DOWN ═══════════════ -->
       <div class="view" id="view-v4-signal">
 <div class="v4-page">
@@ -1087,21 +1171,6 @@ body{font-family:var(--font);background:var(--gray-50);color:var(--gray-900);min
   </div>
 </div>
 </div><!-- end view-v4-pushed -->
-
-      <!-- ═══════════════ V4 FATAL CASES ═══════════════ -->
-      <div class="view" id="view-v4-fatal">
-<div class="v4-page">
-  <button class="v4-back" onclick="showV('home-v4',document.getElementById('nav-dash4'));setTimeout(renderKPIV4,30);">◂ Back to Dashboard v4</button>
-  <div class="v4-panel">
-    <div class="v4-sec-hdr">
-      <div class="v4-sec-title">Fatal Cases</div>
-      <div class="v4-sec-sub">Calls flagged fatal for a critical compliance or misrepresentation error, split by reason.</div>
-    </div>
-    <div class="v4-filters" id="v4-fat-filters"></div>
-    <div id="v4-fat-table"></div>
-  </div>
-</div>
-</div><!-- end view-v4-fatal -->
 
       <!-- ═══════════════ V4 TRAINING IDENTIFIED ═══════════════ -->
       <div class="view" id="view-v4-identified">
@@ -3735,14 +3804,14 @@ function renderKPIV3(){
 // ═══════════════ DASHBOARD V4 ═══════════════
 const V4_DATA = {
   XFE:{
-    fleet:5, signals:34, identified:12, pushed:5, atRisk:5, voice:4, completed:4, rejected:3, repeat:7, lowHealth:6, fatal:2,
+    fleet:5, signals:34, identified:12, pushed:5, atRisk:5, voice:4, completed:4, rejected:3, repeat:7, lowHealth:6,
     queue:[
       {name:'Closing and Next Steps', sev:'HIGH', icon:'🎯', count:1}
     ],
     content:{available:24, docs:0, images:18, quiz:6, links:0, pending:4}
   },
   ENG:{
-    fleet:9, signals:30, identified:9, pushed:4, atRisk:3, voice:3, completed:3, rejected:2, repeat:5, lowHealth:6, fatal:1,
+    fleet:9, signals:30, identified:9, pushed:4, atRisk:3, voice:3, completed:3, rejected:2, repeat:5, lowHealth:6,
     queue:[
       {name:'First Time Resolution', sev:'HIGH', icon:'🛠', count:3},
       {name:'Customer Handling', sev:'MEDIUM', icon:'💬', count:2}
@@ -3750,7 +3819,7 @@ const V4_DATA = {
     content:{available:18, docs:6, images:8, quiz:4, links:0, pending:2}
   },
   CC:{
-    fleet:12, signals:45, identified:14, pushed:6, atRisk:6, voice:5, completed:4, rejected:4, repeat:9, lowHealth:9, fatal:3,
+    fleet:12, signals:45, identified:14, pushed:6, atRisk:6, voice:5, completed:4, rejected:4, repeat:9, lowHealth:9,
     queue:[
       {name:'Objection Handling', sev:'CRITICAL', icon:'🛡️', count:4},
       {name:'Call Closing', sev:'HIGH', icon:'🎯', count:2},
@@ -3759,14 +3828,14 @@ const V4_DATA = {
     content:{available:31, docs:5, images:14, quiz:9, links:3, pending:4}
   },
   HDO:{
-    fleet:7, signals:22, identified:6, pushed:3, atRisk:2, voice:2, completed:2, rejected:1, repeat:3, lowHealth:4, fatal:1,
+    fleet:7, signals:22, identified:6, pushed:3, atRisk:2, voice:2, completed:2, rejected:1, repeat:3, lowHealth:4,
     queue:[
       {name:'Upsell at Doorstep', sev:'MEDIUM', icon:'📦', count:2}
     ],
     content:{available:12, docs:2, images:7, quiz:3, links:0, pending:1}
   },
   MR:{
-    fleet:10, signals:28, identified:10, pushed:4, atRisk:4, voice:3, completed:3, rejected:2, repeat:6, lowHealth:6, fatal:2,
+    fleet:10, signals:28, identified:10, pushed:4, atRisk:4, voice:3, completed:3, rejected:2, repeat:6, lowHealth:6,
     queue:[
       {name:'Scheme Knowledge', sev:'HIGH', icon:'📘', count:3},
       {name:'Retailer Engagement', sev:'MEDIUM', icon:'🤝', count:2}
@@ -3929,7 +3998,6 @@ function v4GapBack(){
   else if(v4GapSource==='repeat'){ v4OpenRepeatList(); }
   else if(v4GapSource==='riskDetail'){ v4OpenRiskDetail(v4RiskCur); }
   else if(v4GapSource==='identifiedPage'){ v4OpenIdentifiedList(); }
-  else if(v4GapSource==='fatal'){ v4OpenFatalList(); }
   else { v4BackToSignal(); }
 }
 function v4BackToSignal(){ showV('v4-signal', null); const n=document.getElementById('nav-dash4'); if(n) n.classList.add('active'); renderV4Signal(); window.scrollTo({top:0,behavior:'instant'}); }
@@ -4698,97 +4766,6 @@ function v4RejectedRecs(role){
     });
   }
   return V4_CACHE['rej_'+role];
-}
-
-// ── Fatal Cases page ──
-const V4_FATAL_SEED = [
-  {name:'Misrepresentation of Plan',  desc:'Advisor told the customer a benefit that is not part of the plan, so the sale was made on wrong information.'},
-  {name:'Compliance Breach',          desc:'Advisor skipped the mandatory disclosure or consent step required for the call.'},
-  {name:'Abusive Language',           desc:'Advisor used language with the customer that is not acceptable on a call.'},
-  {name:'Data Privacy Violation',     desc:'Advisor shared or asked for customer data in a way that breaks the privacy policy.'}
-];
-
-function v4FatalRecs(role){
-  if(!V4_CACHE['fatal_'+role]){
-    const d = V4_DATA[role] || V4_DATA.XFE;
-    V4_CACHE['fatal_'+role] = Array.from({length:d.fatal||0},(_,i)=>{
-      const r = v4MakeRec(role,'identified',i+7);
-      const seed = V4_FATAL_SEED[i % V4_FATAL_SEED.length];
-      r.gap = {...r.gap, name:seed.name, sev:'FATAL', what:seed.desc};
-      r.fatalReason = seed.name;
-      r.fatalDesc = seed.desc;
-      r.flaggedDate = '2026-08-'+v4Pad(9+(i*4)%10);
-      return r;
-    });
-  }
-  return V4_CACHE['fatal_'+role];
-}
-
-function v4OpenFatalList(){
-  showV('v4-fatal', null);
-  const n=document.getElementById('nav-dash4'); if(n) n.classList.add('active');
-  renderV4Fatal(true);
-  window.scrollTo({top:0,behavior:'instant'});
-}
-
-function renderV4Fatal(rebuildFilters){
-  const role = v4Role();
-  const all = v4FatalRecs(role);
-
-  const fw = document.getElementById('v4-fat-filters');
-  if(fw && (rebuildFilters || !fw.innerHTML.trim())){
-    const reasons = [...new Set(all.map(r=>r.fatalReason))];
-    fw.innerHTML = `
-      <div class="v4-filt"><label>Search fleet member</label><input id="v4-ff-q" type="text" placeholder="Name or fleet number" oninput="renderV4Fatal(false)"></div>
-      <div class="v4-filt"><label>Fatal reason</label><select id="v4-ff-reason" onchange="renderV4Fatal(false)"><option value="all">All reasons</option>${reasons.map(x=>`<option>${x}</option>`).join('')}</select></div>
-      <div class="v4-filt-count" id="v4-ff-count"></div>`;
-  }
-
-  const q  = (document.getElementById('v4-ff-q')?.value||'').toLowerCase().trim();
-  const fr = document.getElementById('v4-ff-reason')?.value || 'all';
-
-  const rows = all.filter(r=>{
-    if(q && !(r.name.toLowerCase().includes(q) || r.phone.includes(q))) return false;
-    if(fr!=='all' && r.fatalReason!==fr) return false;
-    return true;
-  });
-
-  const cnt = document.getElementById('v4-ff-count');
-  if(cnt) cnt.textContent = rows.length + ' of ' + all.length + ' records';
-
-  const wrap = document.getElementById('v4-fat-table');
-  if(!wrap) return;
-  if(!rows.length){
-    wrap.innerHTML = '<div class="v4-empty">No fatal cases match the selected filters.</div>';
-    v4FitTable('v4-fat-table'); return;
-  }
-
-  const g = 'grid-template-columns:1.1fr 1fr 1.25fr 1.6fr 0.9fr 1fr;';
-  wrap.innerHTML =
-    `<div class="v4-thead" style="${g}">
-      <div>Name</div><div>Fleet Number</div><div>Call Date &amp; Time</div>
-      <div>Fatal Reason</div><div>Call Score</div><div>Flagged On</div>
-    </div>` +
-    rows.map(r=>{
-      const i = all.indexOf(r);
-      return `<div class="v4-trow" style="${g}" onclick="v4OpenFatalDetail(${i})">
-        <div class="v4-agent">
-          <div class="v4-av" style="background:${r.color};">${v4Initial(r.name)}</div>
-          <div class="v4-aname">${r.name}</div>
-        </div>
-        <div class="v4-muted">${r.phone}</div>
-        <div class="v4-muted">${r.callTime}</div>
-        <div><span class="v4-pill" style="background:#FDEDED;color:#E4002B;">${r.fatalReason}</span></div>
-        <div>${v4SevPill(r.gap.sev)}</div>
-        <div class="v4-muted">${r.flaggedDate}</div>
-      </div>`;
-    }).join('');
-  v4FitTable('v4-fat-table');
-}
-
-function v4OpenFatalDetail(i){
-  const r = v4FatalRecs(v4Role())[i];
-  if(r) v4RenderGapPage(r, 'fatal');
 }
 
 function v4OpenRejectedList(){
@@ -5767,12 +5744,11 @@ function renderKPIV4(){
     {label:'Total Fleet',            val:d.fleet,      sub:'Active fleet in LOB',                 color:'#141A2E', noClick:true},
     {label:'Total Signal Evaluated', val:d.signals,    sub:'Calls, performance and app signals',  color:'#6C63B5', tab:'low'},
     {label:'Training Identified',    val:d.identified, sub:'Users identified for training',       color:'#EF9F27', tab:'identified', go:'v4OpenIdentifiedList()'},
-    {label:'Fatal Cases',            val:d.fatal||0,   sub:'Critical errors flagged',             color:'#E4002B', risk:true, go:'v4OpenFatalList()'},
     {label:'Training Pushed',        val:d.pushed,     sub:'Training published for users',        color:'#1976D2', tab:'identified', go:'v4OpenPushedList()'},
     {label:'Training Completed',     val:d.completed,  sub:'Users who completed training',        color:'#0D47A1', tab:'identified', go:'v4OpenCompletedList()'},
     {label:'Fleet at Risk',          val:d.atRisk,     sub:'Not improving · escalate',            color:'#E24B4A', risk:true, tab:'low', go:'v4OpenRiskList()'},
-    {label:'Training Rejected',      val:v4RejectedRecs(role).length, sub:'Rejected by trainer', color:'#8A6D3B', tab:'identified', go:'v4OpenRejectedList()'},
-    {label:'Repeat Training',        val:d.repeat,     sub:'Trainee has open training', color:'#EF9F27', go:'v4OpenRepeatList()'}
+    {label:'Training Rejected',      val:v4RejectedRecs(role).length, sub:'Recommendation rejected by trainer', color:'#8A6D3B', tab:'identified', go:'v4OpenRejectedList()'},
+    {label:'Repeat Training',        val:d.repeat,     sub:'Parked, trainee already has an open training', color:'#EF9F27', go:'v4OpenRepeatList()'}
   ];
 
   const fn = document.getElementById('v4-funnel');
@@ -6138,5 +6114,239 @@ function switchKPITabV2(n){
 }
 </script>
 
+<script>
+/* ═══════════ SALES COACH ANALYTICS: prototype with sample data ═══════════
+   Developer note: replace scData() with the live API. Each record uses the Excel column names as keys. */
+const SC_COLS=[
+["Call Details",["Call ID","Call Date","Call Duration Seconds","Candidate Mobile Number","Candidate Name","Module ID","Topic","Fleet Type","Circle","RM Name","Score out of 100","Doubts Raised","Call Status","Reason Not Completed","Last Stage Reached","Call Summary"]],
+["Fatal Error",["Fatal Error","Fatal Reason"]],
+["Knowledge Check Counts",["Total Questions Asked","Correct Answers","Incomplete Answers","Wrong Answers","Questions Result"]],
+["Role Play",["Role Play Done","Steps Covered","Steps Missed","Growth Area","Hook","Hook Rating (out of 5)","Probing","Probing Rating (out of 5)","Pitch","Pitch Rating (out of 5)","Objection Handling","Objection Handling Rating (out of 5)"]],
+["Engagement KPIs",["Engagement","Attentiveness","Seriousness","Active Listening (out of 5)","Receptiveness","Use of Words"]],
+["Overall Score",["Strength (Overall)","Area of Improvement"]],
+["Meta Data",["Transcript","Recording Link"]]];
+const SC_MON=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+const SC_N='Neha',SC_C='Neha as customer',SC_R='Rep';
+const SC_OPEN=n=>[[SC_N,`Namaste ${n}, main Neha, Airtel training team se. Aapki certification ke liye call kiya hai. Kya abhi baat ho sakti hai?`],[SC_R,'Haan ji, boliye.']];
+const SC_KC_GOOD=[[SC_N,'Fast Lane ka customer ko kya fayda hai?'],[SC_R,'Bheed wali jagah par bhi priority network milta hai, speed achhi rehti hai.'],[SC_N,'Sahi. Family plan mein kya batayenge?'],[SC_R,'Ek hi plan mein family ke SIM aa jaate hain, aur ek hi bill aata hai.']];
+const SC_KC_WEAK=[[SC_N,'Fast Lane ka customer ko kya fayda hai?'],[SC_R,'Bheed wali jagah par network fast rehta hai.'],[SC_N,'Plan ka price customer ko kya batayenge?'],[SC_R,'Exact yaad nahi hai, shayad thoda kam hai.']];
+function scRec(rep,k){
+  const n=rep.name,base={"Call ID":'SAMPLE'+String(rep.i+1).padStart(3,'0'),"Candidate Mobile Number":rep.mobile,"Candidate Name":n,"Module ID":28846,"Topic":"One Airtel Plan Spiel","Fleet Type":rep.role,"Circle":rep.circle,"RM Name":rep.rm,"Fatal Error":"No","Doubts Raised":0,"Role Play Done":"No",
+    _trainer:rep.trainer,_date:rep.date,_time:rep.time,_triggered:true,_qs:[],_t:[]};
+  const set=o=>Object.assign(base,o);
+  const eng=(a,b,c,d,e,f)=>({"Engagement":a,"Attentiveness":b,"Seriousness":c,"Active Listening (out of 5)":d,"Receptiveness":e,"Use of Words":f});
+  if(k==='strong'){
+    set({"Call Status":"Completed","Last Stage Reached":"Close","Score out of 100":78+rep.i%15,"Call Duration Seconds":412,"Doubts Raised":1,_qs:[['Fast Lane','Correct'],['Family plan','Correct'],['Single bill','Correct'],['Benefits','Correct'],['Price','Incomplete']],
+    "Call Summary":`${n} answered 4 of 5 questions correctly and missed one part of the price answer. In the role play, the rep asked about the customer's SIMs first: "Ghar mein kitne SIM chalte hain, aur mahine ka kharcha kitna hai?" The pitch was then built on that need, with a clear family plan example. When the customer worried about the bill, the rep stayed calm and explained the single bill. The next step is to practise the full price answer.`,
+    "Role Play Done":"Yes","Steps Covered":"Hook, Permission, Probing, Benefits, Objection, Close","Steps Missed":"Price","Growth Area":"Say the price clearly before the customer asks for it.",
+    "Hook":"Clear hook, linked to saving money for the family.","Hook Rating (out of 5)":4,"Probing":"Asked about SIM count and monthly spend before the pitch.","Probing Rating (out of 5)":5,"Pitch":"Benefits were linked to the customer's family, but price came late.","Pitch Rating (out of 5)":4,"Objection Handling":"Answered the bill worry directly with correct facts.","Objection Handling Rating (out of 5)":4,
+    "Strength (Overall)":"Probing before the pitch\nGood family plan example\nStayed calm on the bill worry","Area of Improvement":"Full price answer was missing\nPrice came late in the pitch",
+    ...eng('High','High','High',4,'High','High'),
+    _q:{Hook:'Aapke ghar ka mobile kharcha ek plan mein kam ho sakta hai. Do minute de sakte hain?',Probing:'Ghar mein kitne SIM chalte hain, aur mahine ka kharcha kitna hai?',Pitch:'Aapke char SIM hain, to family plan mein sab ek jagah aa jaate hain.',"Objection Handling":'Madam, sab ek hi bill mein aayega, alag alag bill ki tension nahi.'},_better:{Pitch:'Pehle price bataiye, phir family plan ka fayda.'},_obj:'Bill to zyada nahi aayega na?',
+    _t:[...SC_OPEN(n),...SC_KC_GOOD,[SC_N,'Ab role play karte hain. Main customer hoon.'],[SC_C,'Hello?'],[SC_R,'Aapke ghar ka mobile kharcha ek plan mein kam ho sakta hai. Do minute de sakte hain?'],[SC_C,'Haan, boliye.'],[SC_R,'Ghar mein kitne SIM chalte hain, aur mahine ka kharcha kitna hai?'],[SC_C,'Char SIM hain.'],[SC_R,'Aapke char SIM hain, to family plan mein sab ek jagah aa jaate hain.'],[SC_C,'Bill to zyada nahi aayega na?'],[SC_R,'Madam, sab ek hi bill mein aayega, alag alag bill ki tension nahi.'],[SC_C,'Theek hai, details bhejiye.']]});
+  } else if(k==='mid'||k==='weak'||k==='fatal'){
+    const wk=k!=='mid';
+    set({"Call Status":"Completed","Last Stage Reached":"Close","Score out of 100":k==="mid"?58+rep.i%10:(k==="fatal"?38:44),"Call Duration Seconds":k==='mid'?371:384,"Doubts Raised":wk?1:0,
+    _qs:k==='mid'?[['Fast Lane','Correct'],['Family plan','Correct'],['Price','Incomplete'],['Benefits','Correct'],['Single bill','Wrong']]:[['Fast Lane','Correct'],['Price','Wrong'],['Benefits','Incomplete'],['Family plan','Correct'],['Single bill','Correct']],
+    "Call Summary":k==='mid'
+      ?`${n} answered 3 of 5 questions correctly, and missed the single bill answer. In the role play, the rep asked for time, but gave only one probing question: "Aapka abhi kaunsa plan hai?" The benefits were correct, but were not linked to the customer. The customer's worry about charges was answered in part. The main action is to ask about family SIMs and spend before the pitch.`
+      :`${n} answered 3 of 5 questions correctly, but could not give the price in question 2. In the role play, the rep took permission: "Do minute lunga aapke." The rep then listed benefits before asking about usage, so the pitch did not fit the customer's need: "Pehle main benefits bata deta hoon." The worry about hidden charges was answered only in part. ${k==='fatal'?'The rep also promised a benefit that is not in the Knowledge Book. ':''}The main action is to ask about usage first.`,
+    "Fatal Error":k==='fatal'?'Yes':'No',"Fatal Reason":k==='fatal'?'Said: "Isme Netflix bhi free milega." This is not in the Knowledge Book.':'',
+    "Role Play Done":"Yes","Steps Covered":k==='mid'?"Hook, Permission, Benefits, Objection, Close":"Hook, Permission, Benefits, Objection, Close","Steps Missed":k==='mid'?"Probing, Price":"Probing, Price",
+    "Growth Area":"Ask about usage before talking about benefits.",
+    "Hook":"Hook was made, but not linked to the customer's need.","Hook Rating (out of 5)":3,"Probing":k==='mid'?"Asked about the current plan. Missed family SIMs and monthly spend.":"Asked about the current plan only after the benefits. Missed family SIMs and spend.","Probing Rating (out of 5)":k==='mid'?3:1,"Pitch":"Listed benefits without linking them to the customer. Price was not covered.","Pitch Rating (out of 5)":k==='mid'?3:2,"Objection Handling":"Answered the worry in part, and did not check if it helped.","Objection Handling Rating (out of 5)":3,
+    "Strength (Overall)":"Took permission to explain\nStayed on the call till the end"+(k==='mid'?"\nBenefits were correct":"\nFast Lane answer was correct"),"Area of Improvement":"Probing was weak\n"+(k==='mid'?"Single bill answer was wrong":"Price answer was wrong in question 2")+"\nBenefits were not linked to the customer"+(k==='fatal'?"\nPromised a benefit not in the Knowledge Book":""),
+    ...(k==='mid'?eng('High','Medium','High',3,'Medium','High'):eng('Medium','Medium','High',2,'Low','Medium')),
+    _q:{Hook:'Do minute lunga aapke.',Probing:'Aapka abhi kaunsa plan hai?',Pitch:k==='fatal'?'Isme Netflix bhi free milega.':'Pehle main benefits bata deta hoon.',"Objection Handling":'Nahi madam, sab clear hai.'},
+    _better:{Hook:'Aap kitna data use karte hain? Do minute mein aapke hisaab se plan samjhata hoon.',Probing:'Ghar mein kitne SIM hain, aur mahine ka kharcha kitna hai?'},_obj:'Hidden charge to nahi hai?',
+    _t:[...SC_OPEN(n),...SC_KC_WEAK,[SC_N,'Ab role play karte hain. Main customer hoon.'],[SC_C,'Hello?'],[SC_R,'Do minute lunga aapke.'],[SC_C,'Haan, boliye.'],[SC_R,k==='fatal'?'Isme Netflix bhi free milega.':'Pehle main benefits bata deta hoon.'],[SC_C,'Achha.'],[SC_R,'Aapka abhi kaunsa plan hai?'],[SC_C,'Prepaid hai. Hidden charge to nahi hai?'],[SC_R,'Nahi madam, sab clear hai.'],[SC_C,'Theek hai, sochti hoon.']]});
+    base._obj='Prepaid hai. Hidden charge to nahi hai?';
+  } else if(k==='dropKC'){
+    set({"Call Status":"Incomplete","Reason Not Completed":"Rep Dropped","Last Stage Reached":"Knowledge Check","Call Duration Seconds":96,_qs:[['Fast Lane','Correct'],['Price','Wrong']],
+    "Call Summary":`${n} answered 2 questions and then left the call: "Abhi customer aa gaya, baad mein baat karte hain." The first answer on Fast Lane was correct, and the price answer was wrong. The role play was not reached, so the call needs to be done again.`,
+    "Strength (Overall)":"Fast Lane answer was correct","Area of Improvement":"Price answer was wrong\nCall was not finished",...eng('Medium','Low','Medium',3,'','Medium'),
+    _t:[...SC_OPEN(n),...SC_KC_WEAK,[SC_R,'Abhi customer aa gaya, baad mein baat karte hain.']]});
+  } else if(k==='dropRP'){
+    set({"Call Status":"Incomplete","Reason Not Completed":"Rep Dropped","Last Stage Reached":"Role Play","Call Duration Seconds":214,_qs:[['Fast Lane','Correct'],['Family plan','Correct'],['Price','Incomplete'],['Benefits','Correct'],['Single bill','Correct']],
+    "Call Summary":`${n} did well in the knowledge check, with 4 of 5 answers correct. The rep started the role play well, then left the call before the pitch: "Sorry, network ja raha hai." Only the hook could be judged, so the call needs to be finished.`,
+    "Role Play Done":"Yes","Steps Covered":"Hook, Permission","Steps Missed":"","Growth Area":"Finish the role play to get full feedback.","Hook":"Clear opening, with a request for time.","Hook Rating (out of 5)":4,
+    "Strength (Overall)":"Strong knowledge check\nClear opening in the role play","Area of Improvement":"Role play was not finished\nPrice answer was part right",...eng('High','Medium','High',4,'','High'),
+    _q:{Hook:'Aapka mobile kharcha kam karne ka ek plan hai. Do minute de sakte hain?'},
+    _t:[...SC_OPEN(n),...SC_KC_GOOD,[SC_N,'Ab role play karte hain. Main customer hoon.'],[SC_C,'Hello?'],[SC_R,'Aapka mobile kharcha kam karne ka ek plan hai. Do minute de sakte hain?'],[SC_C,'Haan, boliye.'],[SC_R,'Sorry, network ja raha hai.']]});
+  } else if(k==='audio'){
+    set({"Call Status":"Incomplete","Reason Not Completed":"Network or Audio","Last Stage Reached":"Opening","Call Duration Seconds":102,
+    "Call Summary":`The call stopped at the opening because the audio was poor. Neha said: "Thoda voice break ho raha hai." No question was asked, so the rep has no score. The rep should get another call.`,
+    _t:[...SC_OPEN(n).slice(0,1),[SC_R,'Hello? Hello?'],[SC_N,'Thoda voice break ho raha hai. Kya aap meri awaaz sun pa rahe hain?'],[SC_R,'Hello?']]});
+  } else if(k==='busy'){
+    set({"Call Status":"Busy","Reason Not Completed":"Rep Not Available","Last Stage Reached":"Opening","Call Duration Seconds":31,
+    "Call Summary":`${n} said they were busy at the start of the call: "Abhi field mein hoon, nahi ho payega." No question was asked, so the rep has no score.`,
+    _t:[...SC_OPEN(n).slice(0,1),[SC_R,'Abhi field mein hoon, nahi ho payega.'],[SC_N,'Theek hai, dhanyavaad.']]});
+  } else if(k==='callback'){
+    set({"Call Status":"Callback Requested","Reason Not Completed":"Rep Not Available","Last Stage Reached":"Opening","Call Duration Seconds":38,
+    "Call Summary":`${n} asked for a call later: "Shaam ko chhe baje call kar lijiye." No question was asked, so the rep has no score.`,
+    _t:[...SC_OPEN(n).slice(0,1),[SC_R,'Shaam ko chhe baje call kar lijiye.'],[SC_N,'Theek hai, main try karungi us time call karne ki.']]});
+  } else if(k==='noconnect'){
+    set({"Call Status":"Not Connected","Reason Not Completed":"Rep Not Available","Last Stage Reached":"","Call Duration Seconds":0,"Call Summary":"The call was triggered, but the rep did not pick up.",_noRec:true});
+  } else { set({_triggered:false}); }
+  const c=r=>base._qs.filter(q=>q[1]===r).length;
+  base["Total Questions Asked"]=base._qs.length;base["Correct Answers"]=c('Correct');base["Incomplete Answers"]=c('Incomplete');base["Wrong Answers"]=c('Wrong');
+  base["Questions Result"]=base._qs.map((q,i)=>`Q${i+1} ${q[0]}: ${q[1]}`).join('\n');
+  const d=new Date(rep.date+'T00:00:00');
+  base["Call Date"]=`${d.getDate()} ${SC_MON[d.getMonth()]} ${d.getFullYear()}, ${rep.time}`;
+  base["Transcript"]=base._t.map(t=>(t[0]===SC_R?'Learner':'Coach')+'='+t[1]).join(';');
+  base["Recording Link"]=base._noRec?'':'https://recordings.example/'+base["Call ID"];
+  return base;
+}
+function scData(){
+  if(window._scD) return window._scD;
+  const names=['Aman Verma','Pooja Sharma','Ravi Kumar','Neeraj Gupta','Sana Khan','Vikas Yadav','Anjali Singh','Rohit Mehra','Deepak Rawat','Kiran Rao','Mohit Jain','Priya Nair','Suresh Reddy','Tarun Bansal','Meena Das','Arjun Patel','Nisha Malik','Gaurav Saini','Lata Iyer','Imran Ali','Ritu Tomar','Harish Negi','Komal Arora','Sachin Pal','Farhan Sheikh','Divya Menon','Nitin Dubey','Shweta Kaul','Ajay Thakur','Rekha Bose','Manish Goel','Sneha Kulkarni','Rahul Chauhan','Bhavna Shah','Kunal Kapoor','Tanvi Joshi','Prakash Hegde','Ayesha Siddiqui','Vivek Mishra','Jyoti Rana','Sandeep Bisht','Nandini Pillai','Abhishek Roy','Pallavi Desai','Yogesh Tiwari','Shalini Bhatt','Dinesh Choudhary','Reena Paul','Akash Saxena','Madhuri Naik','Pankaj Sethi','Swati Agarwal','Naveen Gowda','Heena Qureshi','Rajat Khanna','Geeta Lal','Vishal Sood','Ananya Ghosh','Tushar Pandey','Monika Rawal'];
+  const kinds=['strong','weak','mid','dropKC','strong','busy','mid','none','weak','dropRP','noconnect','strong','audio','mid','callback','fatal','none','strong','weak','mid','dropKC','strong','none','busy','mid','strong','noconnect','weak','mid','strong','mid','weak','strong','dropRP','none','mid','audio','strong','weak','callback','mid','strong','busy','dropKC','mid','noconnect','strong','weak','fatal','mid','none','strong','dropKC','mid','weak','strong','mid','strong','weak','mid'];
+  const roles=['XFE','XFE','XFE','PP Champ','XFE','XFE','Beat Trainer','XFE','PP Champ','XFE'];
+  const circles=['Delhi','UP East','Mumbai','AP','Delhi','Karnataka'];
+  const rms=['Rakesh Tyagi','Sunita Rao','Manoj Kumar'],trainers=['Ravi Arora','Seema Joshi'];
+  window._scD=names.map((name,i)=>scRec({i,name,mobile:'90000'+String(10000+i),role:roles[i%10],circle:circles[i%6],rm:rms[i%3],trainer:trainers[i%2],date:'2026-10-'+String(3+(i*7)%26).padStart(2,'0'),time:String(10+i%8).padStart(2,'0')+':'+String(10+(i*13)%50)},kinds[i]));
+  return window._scD;
+}
+let scCard=null,scCur=null,scTimer=null;
+const scEsc=s=>String(s==null?'':s).replace(/[&<>"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m]));
+function scBase(){
+  const role=document.getElementById('sc-role').value,st=document.getElementById('sc-start').value,en=document.getElementById('sc-end').value,q=document.getElementById('sc-search').value.trim().toLowerCase();
+  return scData().filter(r=>(!role||r["Fleet Type"]===role)&&(!st||r._date>=st)&&(!en||r._date<=en)&&(!q||r["Candidate Mobile Number"].includes(q)||r["RM Name"].toLowerCase().includes(q)||r._trainer.toLowerCase().includes(q)));
+}
+const SC_STAGES={
+ init:r=>true,trig:r=>r._triggered,conn:r=>r._triggered&&r["Call Status"]!=='Not Connected',rp:r=>r["Role Play Done"]==='Yes',
+ comp:r=>r["Call Status"]==='Completed',inc:r=>r["Call Status"]==='Incomplete',busy:r=>r["Call Status"]==='Busy'||r["Call Status"]==='Callback Requested'};
+function scCalls(){ const b=scBase().filter(r=>r._triggered&&(!scCard||SC_STAGES[scCard](r))); return b.sort((a,c)=>(c._date+c._time).localeCompare(a._date+a._time)); }
+function scPct(a,b){ return b?Math.round(a/b*100)+'%':'0%'; }
+function scRender(){
+  const b=scBase(),n=k=>b.filter(SC_STAGES[k]).length,ini=n('init'),tr=n('trig'),co=n('conn');
+  const cards=[
+   {k:'init',l:'Certification Initiated',v:ini,s:(ini-tr)+' not called yet',c:'#141A2E'},
+   {k:'trig',l:'Calls Triggered',v:tr,s:scPct(tr,ini)+' of initiated',c:'#6C63B5'},
+   {k:'conn',l:'Calls Connected',v:co,s:scPct(co,tr)+' of triggered',c:'#1976D2'},
+   {k:'rp',l:'Role Play Reached',v:n('rp'),s:scPct(n('rp'),co)+' of connected',c:'#0D47A1'},
+   {k:'comp',l:'Calls Completed',v:n('comp'),s:scPct(n('comp'),co)+' of connected',c:'#2E7D32'},
+   {k:'inc',l:'Calls Incomplete',v:n('inc'),s:scPct(n('inc'),co)+' of connected',c:'#E24B4A',risk:1},
+   {k:'busy',l:'Busy or Callback',v:n('busy'),s:scPct(n('busy'),co)+' of connected',c:'#EF9F27'}];
+  document.getElementById('sc-funnel').innerHTML=cards.map(c=>`<div class="v4-card clickable${c.risk?' risk':''}${scCard===c.k?' sc-card-on':''}" onclick="scPick('${c.k}')" title="Click to filter the calls below">
+    <div class="v4-dot" style="background:${c.c};"></div><div class="v4-card-label">${c.l}</div><div class="v4-card-val" style="color:${c.c};">${c.v}</div><div class="v4-card-sub${c.risk?' danger':''}">${c.s}</div></div>`).join('');
+  const list=scCalls();
+  document.getElementById('sc-count').textContent=`${list.length} ${list.length===1?'call':'calls'} as per the filters. Prototype with sample data.`;
+  document.getElementById('sc-rows').innerHTML=list.length?list.map(r=>`<div class="v4-trow sc-grid" onclick="scDetail('${r["Call ID"]}')">
+    <div>${scEsc(r["Call Date"].replace(/ 2026,/,','))}</div>
+    <div><div class="v4-aname">${scEsc(r["Candidate Name"])}</div><div class="v4-muted" style="font-size:11px;">${scEsc(r["Candidate Mobile Number"])}</div></div>
+    <div>${scEsc(r["Fleet Type"])}, ${scEsc(r["Circle"])}</div><div>${scEsc(r["RM Name"])}</div>
+    <div>${scStatus(r["Call Status"])}</div><div>${r["Score out of 100"]!=null?`<b style="color:${scScoreCol(r["Score out of 100"])};">${r["Score out of 100"]}</b>`:'<span class="v4-muted">Not scored</span>'}</div>
+    <div class="sc-more">View more ▸</div></div>`).join(''):'<div class="v4-empty">No calls match these filters.</div>';
+}
+function scScoreCol(s){ return s>=70?'#2E7D32':s>=40?'#E65100':'#C62828'; }
+function scStatus(s){ const m={Completed:'good',Incomplete:'bad',Busy:'mid','Callback Requested':'mid','Not Connected':'none'}; return `<span class="v4-pill sc-p-${m[s]||'none'}">${scEsc(s)}</span>`; }
+function scOpen(nav){ showV('sc',nav||document.getElementById('nav-sc')); scRender(); window.scrollTo({top:0,behavior:'instant'}); }
+function scChanged(){ scRender(); }
+function scPick(k){ scCard=(scCard===k||k==='init')?null:k; scRender(); }
+function scReset(){ document.getElementById('sc-role').value='XFE';document.getElementById('sc-start').value='2026-10-01';document.getElementById('sc-end').value='2026-10-31';document.getElementById('sc-search').value='';scCard=null;scRender();toast('Filters reset'); }
+function scBack(){ scStop(); scOpen(); }
+function scLevel(v){ if(v==null||v==='')return '<span class="v4-pill sc-p-none">Not observed</span>'; const m={High:'good',Medium:'mid',Low:'bad'}; return `<span class="v4-pill sc-p-${m[v]}">${v}</span>`; }
+function scRate(v){ if(v==null||v==='')return '<span class="v4-pill sc-p-none">Not observed</span>'; const c=v>=4?'good':v===3?'mid':'bad'; return `<span class="v4-pill sc-p-${c}">${v}/5</span>`; }
+function scList(t){ return t?`<ul class="sc-list">${t.split('\n').map(x=>`<li>${scEsc(x)}</li>`).join('')}</ul>`:'<div class="v4-muted">Not observed in this call.</div>'; }
+function scSection(r,name){
+  const q=(r._q||{})[name],b=(r._better||{})[name],note=r[name];
+  if(!note) return `<div class="v4-sub-card"><div class="v4-sub-hdr sc-sub-flex"><span>${name}</span>${scRate(null)}</div><div class="sc-body v4-muted">Not reached before the call ended.</div></div>`;
+  const ex=name==='Objection Handling'&&r._obj?`Customer: "${scEsc(r._obj)}"<br>Rep: "${scEsc(q)}"`:`"${scEsc(q)}"`;
+  return `<div class="v4-sub-card"><div class="v4-sub-hdr sc-sub-flex"><span>${name}</span>${scRate(r[name+' Rating (out of 5)'])}</div><div class="sc-body"><div class="sc-note" style="margin:0;">${scEsc(note)}</div>
+    ${q?`<div class="sc-quote"><div class="sc-quote-l">From the call</div>${ex}</div>`:''}
+    ${b?`<div class="sc-quote"><div class="sc-quote-l">Better line</div>"${scEsc(b)}"</div>`:''}</div></div>`;
+}
+function scDetail(id){
+  const r=scData().find(x=>x["Call ID"]===id); if(!r)return; scCur=r; scStop();
+  const dur=r["Call Duration Seconds"],sc=r["Score out of 100"],ini=r["Candidate Name"].split(' ').map(x=>x[0]).join('').slice(0,2);
+  const hs=[10,20,14,24,9,18,12,22,10,16,24,11,19,13,8,21,15,23,10,17,12,20,9,18,14,22,11,16,20,10,24,13,18,9,15,21,12,19,10,16];
+  const rec=r._noRec?'<div class="v4-muted" style="font-size:12px;">No recording. The call did not connect.</div>':`<div class="v4-rec">
+      <div class="v4-rec-play" id="sc-play" onclick="scPlay()">▶</div>
+      <div class="v4-rec-wave" id="sc-wave">${hs.map(h=>`<div style="width:3px;border-radius:2px;height:${h}px;background:#DDE3F0;flex-shrink:0;"></div>`).join('')}</div>
+      <div class="v4-rec-dur"><span id="sc-now">0m 00s</span> of ${Math.floor(dur/60)}m ${v4Pad(dur%60)}s</div></div>
+      <div style="display:flex;flex-wrap:wrap;gap:14px;margin-top:12px;">
+      <div><div class="v4-lbl" style="margin-bottom:3px;">Recorded on</div><div class="v4-tr-txt">${scEsc(r["Call Date"])}</div></div>
+      <div><div class="v4-lbl" style="margin-bottom:3px;">Language</div><div class="v4-tr-txt">Hinglish</div></div>
+      <div><div class="v4-lbl" style="margin-bottom:3px;">Channel</div><div class="v4-tr-txt">Outbound training call</div></div></div>`;
+  const tr=r._t.length?r._t.map(t=>`<div class="v4-tr-line"><div class="v4-tr-spk${t[0]===SC_R?' cust':''}">${t[0]===SC_R?scEsc(r["Candidate Name"]):t[0]}</div><div class="v4-tr-txt">${scEsc(t[1])}</div></div>`).join(''):'<div class="v4-muted" style="font-size:12px;">No transcript. The call did not connect.</div>';
+  const kc=r._qs.length?`<div class="v4-thead" style="grid-template-columns:.5fr 3fr 1fr;"><div>No.</div><div>Fact tested</div><div>Result</div></div>`+r._qs.map((q,i)=>`<div class="v4-trow" style="grid-template-columns:.5fr 3fr 1fr;cursor:default;"><div>Q${i+1}</div><div>${scEsc(q[0])}</div><div><span class="v4-pill sc-p-${{Correct:'good',Incomplete:'mid',Wrong:'bad'}[q[1]]}">${q[1]}</span></div></div>`).join(''):'<div class="v4-empty">No question was asked in this call.</div>';
+  const rp=r["Role Play Done"]==='Yes'?`
+    <div class="sc-steps"><div class="v4-chip">Covered: <strong>${scEsc(r["Steps Covered"]||'None')}</strong></div>${r["Steps Missed"]?`<div class="v4-chip">Missed: <strong style="color:#C62828;">${scEsc(r["Steps Missed"])}</strong></div>`:''}</div>
+    <div class="sc-full" style="padding-top:12px;"><div class="v4-sub-card"><div class="v4-sub-hdr">Growth Area</div><div class="sc-body">${scEsc(r["Growth Area"])}</div></div></div>
+    <div class="sc-two">${scSection(r,'Hook')}${scSection(r,'Probing')}</div><div class="sc-two last">${scSection(r,'Pitch')}${scSection(r,'Objection Handling')}</div>`:'<div class="v4-empty">Role play was not reached in this call.</div>';
+  const engs=[['Engagement','l'],['Attentiveness','l'],['Seriousness','l'],['Active Listening (out of 5)','r','Active Listening'],['Receptiveness','l'],['Use of Words','l']];
+  document.getElementById('sc-d').innerHTML=`
+  <div class="v4-hero"><div class="v4-hero-l"><div class="v4-hero-av" style="background:#3C4A6B;">${scEsc(ini)}</div><div><div class="v4-hero-name">${scEsc(r["Candidate Name"])}</div><div class="v4-hero-meta">${scEsc(r["Candidate Mobile Number"])} · ${scEsc(r["Fleet Type"])} · ${scEsc(r["Circle"])}</div></div></div>
+    <div class="v4-hero-score"><div class="v4-hero-score-val" style="color:${sc!=null?scScoreCol(sc):'#8A93AB'};">${sc!=null?sc+'/100':'Not scored'}</div><div class="v4-hero-score-lbl">Score</div></div></div>
+  <div class="v4-chips"><div class="v4-chip">Topic: <strong>${scEsc(r["Topic"])}</strong></div><div class="v4-chip">RM: <strong>${scEsc(r["RM Name"])}</strong></div><div class="v4-chip">Trainer: <strong>${scEsc(r._trainer)}</strong></div><div class="v4-chip">Status: <strong>${scEsc(r["Call Status"])}</strong></div>${r["Reason Not Completed"]?`<div class="v4-chip">Reason: <strong>${scEsc(r["Reason Not Completed"])}</strong></div>`:''}${r["Last Stage Reached"]?`<div class="v4-chip">Last stage: <strong>${scEsc(r["Last Stage Reached"])}</strong></div>`:''}<div class="v4-chip">Doubts: <strong>${r["Doubts Raised"]}</strong></div><div class="v4-chip">Fatal error: <strong${r["Fatal Error"]==='Yes'?' style="color:#C62828;"':''}>${r["Fatal Error"]}</strong></div></div>
+  ${r["Fatal Error"]==='Yes'?`<div class="v4-gap-hd"><div class="v4-gap-name">⚠ ${scEsc(r["Fatal Reason"])}</div></div>`:''}
+  <div class="v4-panel"><div class="v4-sec-hdr"><div class="v4-sec-title">Call Evaluation</div><div class="v4-sec-sub">What the AI found on this call</div></div>
+    <div class="sc-full"><div class="v4-sub-card"><div class="v4-sub-hdr">Call Summary</div><div class="sc-body">${scEsc(r["Call Summary"])}</div></div></div>
+    <div class="sc-two"><div class="v4-sub-card"><div class="v4-sub-hdr sc-good-hdr">👍 Strength</div><div class="sc-body">${scList(r["Strength (Overall)"])}</div></div>
+      <div class="v4-sub-card"><div class="v4-sub-hdr sc-bad-hdr">🚩 Area of Improvement</div><div class="sc-body">${scList(r["Area of Improvement"])}</div></div></div>
+    <div class="sc-two last"><div class="v4-sub-card"><div class="v4-sub-hdr">🎧 Call Recording</div><div class="v4-sub-body">${rec}</div></div>
+      <div class="v4-sub-card"><div class="v4-sub-hdr">💬 Transcript</div><div class="v4-sub-body">${tr}</div></div></div></div>
+  <div class="v4-panel"><div class="v4-sec-hdr"><div class="v4-sec-title">Knowledge Check</div><div class="v4-sec-sub">${r["Total Questions Asked"]} asked, ${r["Correct Answers"]} correct, ${r["Incomplete Answers"]} incomplete, ${r["Wrong Answers"]} wrong</div></div>${kc}</div>
+  <div class="v4-panel"><div class="v4-sec-hdr"><div class="v4-sec-title">Role Play</div><div class="v4-sec-sub">How the rep handled the customer, with real lines from the call</div></div>${rp}</div>
+  <div class="v4-panel"><div class="v4-sec-hdr sc-hdr-row"><div><div class="v4-sec-title">Engagement</div><div class="v4-sec-sub">How the rep behaved through the call</div></div><div class="sc-legend"><span class="v4-pill sc-p-good">High</span><span class="v4-pill sc-p-mid">Medium</span><span class="v4-pill sc-p-bad">Low</span></div></div>
+    <div class="sc-eng">${engs.map(e=>`<div class="sc-eng-c"><div class="sc-eng-l">${e[2]||e[0]}</div>${e[1]==='l'?scLevel(r[e[0]]):scRate(r[e[0]])}</div>`).join('')}</div></div>`;
+  showV('sc-detail',document.getElementById('nav-sc')); window.scrollTo({top:0,behavior:'instant'});
+}
+/* Prototype playback: developer connects an audio element to "Recording Link". */
+let scPos=0;
+function scStop(){ if(scTimer){clearInterval(scTimer);scTimer=null;} scPos=0; }
+function scPlay(){
+  const btn=document.getElementById('sc-play'),bars=[...document.getElementById('sc-wave').children],dur=scCur["Call Duration Seconds"];
+  if(scTimer){clearInterval(scTimer);scTimer=null;btn.textContent='▶';return;}
+  btn.textContent='⏸';toast('Sample playback. Live audio connects to the Recording Link');
+  scTimer=setInterval(()=>{ scPos=Math.min(dur,scPos+Math.ceil(dur/40));
+    bars.forEach((b,i)=>b.style.background=(i/bars.length)<(scPos/dur)?'#1976D2':'#DDE3F0');
+    document.getElementById('sc-now').textContent=Math.floor(scPos/60)+'m '+v4Pad(scPos%60)+'s';
+    if(scPos>=dur){clearInterval(scTimer);scTimer=null;scPos=0;btn.textContent='▶';} },500);
+}
+/* Excel download: same columns as the agreed report, for the calls in the current filters. No library needed. */
+function scCol(n){ let s='';n++;while(n>0){const m=(n-1)%26;s=String.fromCharCode(65+m)+s;n=(n-m-1)/26;}return s; }
+function scX(s){ return String(s).replace(/[^\x09\x0A\x0D\x20-퟿-�]/g,'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+function scSheet(rows){
+  const heads=SC_COLS.flatMap(g=>g[1]),last=scCol(heads.length-1);
+  const cell=(c,r,v,st)=>{const a=scCol(c)+r; if(v==null||v==='')return `<c r="${a}" s="${st}"/>`; if(typeof v==='number')return `<c r="${a}" s="${st}"><v>${v}</v></c>`; return `<c r="${a}" s="${st}" t="inlineStr"><is><t xml:space="preserve">${scX(v)}</t></is></c>`;};
+  let bands='',c=0,merges=[];
+  SC_COLS.forEach(g=>{ g[1].forEach((_,i)=>{bands+=cell(c+i,1,i===0?g[0]:'',2);}); if(g[1].length>1)merges.push(`<mergeCell ref="${scCol(c)}1:${scCol(c+g[1].length-1)}1"/>`); c+=g[1].length; });
+  const hdr=heads.map((h,i)=>cell(i,2,h,3)).join('');
+  const body=rows.map((r,ri)=>`<row r="${ri+3}" ht="90" customHeight="1">${heads.map((h,i)=>cell(i,ri+3,r[h],1)).join('')}</row>`).join('');
+  const wide={"Call Summary":46,"Transcript":60,"Strength (Overall)":34,"Area of Improvement":34,"Hook":30,"Probing":30,"Pitch":30,"Objection Handling":30,"Growth Area":30,"Questions Result":28,"Fatal Reason":26,"Steps Covered":24,"Steps Missed":20,"Call ID":14,"Call Date":20,"Topic":22,"Recording Link":26};
+  const cols=heads.map((h,i)=>`<col min="${i+1}" max="${i+1}" width="${wide[h]||14}" customWidth="1"/>`).join('');
+  return `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n<worksheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main"><dimension ref="A1:${last}${rows.length+2}"/><sheetViews><sheetView workbookViewId="0"><pane xSplit="5" ySplit="2" topLeftCell="F3" activePane="bottomRight" state="frozen"/><selection pane="bottomRight" activeCell="F3" sqref="F3"/></sheetView></sheetViews><sheetFormatPr defaultRowHeight="15"/><cols>${cols}</cols><sheetData><row r="1">${bands}</row><row r="2" ht="42" customHeight="1">${hdr}</row>${body}</sheetData><autoFilter ref="A2:${last}${rows.length+2}"/><mergeCells count="${merges.length}">${merges.join('')}</mergeCells></worksheet>`;
+}
+function scZip(files){
+  const T=[];for(let n=0;n<256;n++){let c=n;for(let k=0;k<8;k++)c=c&1?0xEDB88320^(c>>>1):c>>>1;T[n]=c>>>0;}
+  const crc=b=>{let c=0xFFFFFFFF;for(let i=0;i<b.length;i++)c=T[(c^b[i])&255]^(c>>>8);return (c^0xFFFFFFFF)>>>0;};
+  const enc=new TextEncoder(),parts=[],cen=[];let off=0;
+  const w=(a,v,n)=>{for(let i=0;i<n;i++)a.push((v>>>(8*i))&255);return a;};
+  files.forEach(([name,txt])=>{ const nb=enc.encode(name),d=enc.encode(txt),cr=crc(d);
+    const common=a=>{w(a,20,2);w(a,0x0800,2);w(a,0,2);w(a,0,2);w(a,0x5B21,2);w(a,cr,4);w(a,d.length,4);w(a,d.length,4);w(a,nb.length,2);w(a,0,2);return a;};
+    const lh=new Uint8Array(common(w([],0x04034b50,4)));
+    parts.push(lh,nb,d);
+    let c=w([],0x02014b50,4);w(c,20,2);common(c);w(c,0,2);w(c,0,2);w(c,0,2);w(c,0,4);w(c,off,4);
+    cen.push(new Uint8Array(c),nb); off+=lh.length+nb.length+d.length; });
+  const cs=cen.reduce((s,x)=>s+x.length,0);
+  let e=w([],0x06054b50,4);w(e,0,2);w(e,0,2);w(e,files.length,2);w(e,files.length,2);w(e,cs,4);w(e,off,4);w(e,0,2);
+  return new Blob([...parts,...cen,new Uint8Array(e)],{type:'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'});
+}
+function scDownload(){
+  const rows=scCalls(); if(!rows.length){toast('No calls to download for these filters');return;}
+  const X='<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n';
+  const blob=scZip([
+   ['[Content_Types].xml',X+'<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/><Override PartName="/xl/workbook.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml"/><Override PartName="/xl/worksheets/sheet1.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"/><Override PartName="/xl/styles.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.styles+xml"/></Types>'],
+   ['_rels/.rels',X+'<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="xl/workbook.xml"/></Relationships>'],
+   ['xl/workbook.xml',X+'<workbook xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"><sheets><sheet name="Sales Pitch Calls" sheetId="1" r:id="rId1"/></sheets><definedNames><definedName name="_xlnm._FilterDatabase" localSheetId="0" hidden="1">\'Sales Pitch Calls\'!$A$2:$'+scCol(SC_COLS.flatMap(g=>g[1]).length-1)+'$'+(rows.length+2)+'</definedName></definedNames></workbook>'],
+   ['xl/_rels/workbook.xml.rels',X+'<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet" Target="worksheets/sheet1.xml"/><Relationship Id="rId2" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles" Target="styles.xml"/></Relationships>'],
+   ['xl/styles.xml',X+'<styleSheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main"><fonts count="3"><font><sz val="10"/><name val="Arial"/></font><font><b/><sz val="10"/><name val="Arial"/></font><font><b/><sz val="10"/><color rgb="FFFFFFFF"/><name val="Arial"/></font></fonts><fills count="4"><fill><patternFill patternType="none"/></fill><fill><patternFill patternType="gray125"/></fill><fill><patternFill patternType="solid"><fgColor rgb="FFD9D9D9"/><bgColor indexed="64"/></patternFill></fill><fill><patternFill patternType="solid"><fgColor rgb="FF1F1F1F"/><bgColor indexed="64"/></patternFill></fill></fills><borders count="2"><border><left/><right/><top/><bottom/><diagonal/></border><border><left style="thin"><color rgb="FFBFBFBF"/></left><right style="thin"><color rgb="FFBFBFBF"/></right><top style="thin"><color rgb="FFBFBFBF"/></top><bottom style="thin"><color rgb="FFBFBFBF"/></bottom><diagonal/></border></borders><cellStyleXfs count="1"><xf numFmtId="0" fontId="0" fillId="0" borderId="0"/></cellStyleXfs><cellXfs count="4"><xf numFmtId="0" fontId="0" fillId="0" borderId="0" xfId="0" applyFont="1"/><xf numFmtId="0" fontId="0" fillId="0" borderId="1" xfId="0" applyFont="1" applyBorder="1" applyAlignment="1"><alignment vertical="top" wrapText="1"/></xf><xf numFmtId="0" fontId="1" fillId="2" borderId="1" xfId="0" applyFont="1" applyFill="1" applyBorder="1"/><xf numFmtId="0" fontId="2" fillId="3" borderId="1" xfId="0" applyFont="1" applyFill="1" applyBorder="1" applyAlignment="1"><alignment horizontal="center" vertical="center" wrapText="1"/></xf></cellXfs><cellStyles count="1"><cellStyle name="Normal" xfId="0" builtinId="0"/></cellStyles></styleSheet>'],
+   ['xl/worksheets/sheet1.xml',scSheet(rows)]]);
+  const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='Sales_Coach_Analytics_'+document.getElementById('sc-start').value+'_to_'+document.getElementById('sc-end').value+'.xlsx';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),4000);
+  toast(rows.length+' calls downloaded');
+}
+</script>
 </body>
 </html>
